@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sintaxis JavaScript</title>
+</head>
+<body>
+    <h1>Sintaxis JavaScript</h1>
+    <script>
+       //Declaración de variables uso de let y de const
+        
+       //Usamos 'let' cuando la variable nombre en la logica del metodo necesite cambiar de valor
+       let nombre = "Juan"; 
+       
+       //Usamos 'const' cuando no necesitemos reasignar otro valor 
+       const identificador = "Identificador";
+        
+        /*
+        A continuación se muestran los diferentes tipos de datos que existen en JavaScript
+        */
+        
+        const saludo = "Hola Mundo";  //Tipo de dato String(Texto)
+        const numero = 22;            //Tipo de dato entero
+        const numeroFlotante = 12.12; //Tipo de dato flotante
+        const esVerda = false;        //Tipo de dato boolean true/false
+        
+        const numeros = [1, 2, 3, 4]; //Tipo de dato array (colección de datos)
+        const persona = {             //Tipo de dato Objeto 
+            nombre:"Ana",
+            edad: 23,
+            sexo:"Femenino",
+            conducir:function(){
+                console.log("Conduciendo un coche");
+            }
+        };
+
+        /* Para probar cada tipo de dato, reemplazamos el nombre de la variable, 
+           ejemplo: console.log(saludo);*/
+        console.log(esVerda);
+
+        /*Si quisieramos saber el tipo de datos que es una variable podemos ocupara la palabra reservada typeof
+        como se muestra en la siguinte linea
+        */
+        console.log(typeof saludo); //Aqui en esta linea nos dira que es de tipo string
+
+        /*
+        Para poder acceder un valor de un Array lo que tenemos que hacer es acceder
+        a un espacion del array en especial como se muestras en el siguiente ejemplo :
+        */
+        console.log(numeros[0]); //esta linea nos muestra en consola el número 1
+
+        /*
+        Para poder acceder un valor de un Objeto lo que tenemos que hacer acceder
+        a un atributo de la siguiente manera como se muestras en el siguiente ejemplo :
+        */
+        console.log(persona.nombre);
+
+        /*
+        A continuación se mostraran ejemplos de Bucles
+        */
+       
+        /*
+        Bucle for  
+        */
+        //Se ejecuta un bucle que se repite 5 veces, en este caso del 0 al numero 4
+        console.log("Ejemplo de for");
+        for(let i= 0; i < 5;i++){ 
+            console.log(i);
+        }
+
+        //Un ejmplo de implementación de un bucle con un Array
+        console.log("Ejemplo de implemtación de forEach para recorrer un Array");
+        let listaNumeros = [1,2,3,4,5] ;
+        listaNumeros.forEach(num => console.log(num));
+
+
+    </script>
+</body>
+</html>
