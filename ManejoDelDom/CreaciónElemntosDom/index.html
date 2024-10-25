@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplo de Creación e Inserción de Elementos en el DOM</title>
+    <style>
+        #contenedor {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .nuevo-elemento {
+            background-color: #f0f0f0;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Ejemplo de Manipulación del DOM</h1>
+
+    <button id="crearElemento">Crear y Añadir Elemento</button>
+    <button id="insertarAntes">Insertar Antes del Primer Elemento</button>
+    
+    <div id="contenedor">
+        <p>Elemento inicial en el contenedor</p>
+    </div>
+
+    
+    
+    <h1>Ejemplo de una tabla</h1>
+
+    <button id="agregarFilaFinal">Agregar Fila al Final</button>
+    <button id="insertarFilaInicio">Insertar Fila al Inicio</button>
+    <button id="calcularSuma">Calcular Suma de Edades</button>
+
+    <table id="miTabla">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Edad</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Juan</td>
+                <td>25</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div id="resultadoSuma">Suma de edades: </div>
+
+
+    <script>
+        // Seleccionar el botón y el contenedor
+        const botonCrear = document.getElementById("crearElemento");
+        const botonInsertarAntes = document.getElementById("insertarAntes");
+        const contenedor = document.getElementById("contenedor");
+        
+
+        // Función para crear un nuevo elemento y añadirlo al final del contenedor
+        botonCrear.addEventListener("click", () => {
+            // Crear un nuevo elemento <div>
+            let nuevoDiv = document.createElement("div");
+            
+            
+            // Añadirle contenido
+            nuevoDiv.textContent = "Este es un nuevo elemento creado e insertado al final.";
+            
+            // Añadirle una clase
+            nuevoDiv.classList.add("nuevo-elemento");
+            
+            // Insertar el nuevo elemento al final del contenedor
+            contenedor.appendChild(nuevoDiv);
+            
+        });
+
+        // Función para insertar un nuevo elemento antes del primer hijo del contenedor
+        botonInsertarAntes.addEventListener("click", () => {
+            // Crear un nuevo elemento <div>
+            let nuevoDiv = document.createElement("div");
+            
+            // Añadirle contenido
+            nuevoDiv.textContent = "Este es un nuevo elemento insertado antes del primer elemento.";
+            
+            // Añadirle una clase
+            nuevoDiv.classList.add("nuevo-elemento");
+            
+            // Insertar antes del primer hijo del contenedor
+            contenedor.prepend(nuevoDiv); // También podrías usar insertBefore si tienes un nodo de referencia
+        });
+
+
+        /*
+        Ejemplo para tabla 
+        */
+        // Seleccionar los botones y la tabla
+        const botonAgregarFila = document.getElementById("agregarFilaFinal");
+        const botonInsertarFila = document.getElementById("insertarFilaInicio");
+        const tabla = document.getElementById("miTabla").getElementsByTagName("tbody")[0];
+
+        // Función para agregar una nueva fila al final de la tabla
+        botonAgregarFila.addEventListener("click", () => {
+        // Crear una nueva fila
+        let nuevaFila = document.createElement("tr");
+
+        // Crear las celdas
+        let celdaNombre = document.createElement("td");
+        let celdaEdad = document.createElement("td");
+
+        // Asignar valores a las celdas
+        celdaNombre.textContent = "Nuevo Nombre";
+        celdaEdad.textContent = "30";
+
+        // Agregar las celdas a la fila
+        nuevaFila.appendChild(celdaNombre);
+        nuevaFila.appendChild(celdaEdad);
+
+        // Insertar la nueva fila al final del cuerpo de la tabla
+        tabla.appendChild(nuevaFila);
+        });
+
+        // Función para insertar una fila al inicio del cuerpo de la tabla
+        botonInsertarFila.addEventListener("click", () => {
+            // Crear una nueva fila
+            let nuevaFila = document.createElement("tr");
+
+            // Crear las celdas
+            let celdaNombre = document.createElement("td");
+            let celdaEdad = document.createElement("td");
+
+            // Asignar valores a las celdas
+            celdaNombre.textContent = "Nombre Inicial";
+            celdaEdad.textContent = "22";
+
+            // Agregar las celdas a la fila
+            nuevaFila.appendChild(celdaNombre);
+            nuevaFila.appendChild(celdaEdad);
+
+            // Insertar la nueva fila al principio del cuerpo de la tabla
+            tabla.insertBefore(nuevaFila, tabla.firstChild);
+        });
+
+        
+        const botonCalcularSuma = document.getElementById("calcularSuma");
+        botonCalcularSuma.addEventListener("click", () => {
+            let suma = 0;
+
+            // Recorrer todas las filas del tbody
+            for (let fila of tabla.rows) {
+                let celdaEdad = fila.cells[1]; // Columna de la edad (índice 1)
+                let edad = parseInt(celdaEdad.textContent); // Convertir el texto en un número
+
+                // Sumar la edad si es un número válido
+                if (!isNaN(edad)) {
+                    suma += edad;
+                }
+            }
+
+            // Mostrar el resultado en el div
+            resultadoSuma.textContent = `Suma de edades: ${suma}`;
+        });
+
+    </script>
+
+</body>
+</html>
