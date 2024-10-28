@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarjeta Personalizada</title>
+</head>
+
+<style>
+    /* Estilo general del body */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    /* Estilo de la tarjeta */
+    .card {
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    /*Estilo del panel de personalización*/
+    .container {
+        border-radius: 8px;
+        border-color: #007bff;
+        border-width: 2px;
+        border-style: solid;
+        width: 400px;
+        height: 393px;
+        margin-right: 15px;
+        align-items: center ;
+        justify-items: center;
+    }
+
+    /* Efecto hover para la tarjeta */
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Estilo de la imagen de la tarjeta */
+    .card-img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+    }
+
+    /* Contenido de la tarjeta */
+    .card-content {
+        padding: 16px;
+    }
+
+    /* Título de la tarjeta */
+    .card-title {
+        font-size: 1.5rem;
+        margin: 0 0 10px;
+        color: #333;
+    }
+
+    /* Texto de la tarjeta */
+    .card-text {
+        font-size: 1rem;
+        color: #666;
+        margin-bottom: 20px;
+    }
+
+    .card-text-rojo{
+        
+        margin: 0 0 10px;
+        color: red;
+    }
+
+    .card-text-azul{
+        
+        margin: 0 0 10px;
+        color: blue;
+    }
+
+    .card-text-verde{
+        
+        margin: 0 0 10px;
+        color: green;
+    }
+
+    /* Botón de la tarjeta */
+    .card-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background-color 0.3s ease;
+    }
+
+    
+    /*Estilos para modificar el color del titulo de tarjeta*/
+    .verde-boton{
+        background-color: green;
+    }
+
+    .rojo-boton{
+        background-color: red;
+    }
+    
+    .azul-boton{
+        background-color: blue;
+    }
+
+    /*Estilos para modificar el tamaño de letra pequeño*/
+    .tamano-pequeno{
+        font-size: 12px;
+    }
+    
+    /*Estilos para modificar el tamaño de letra mediano*/
+    .tamano-mediano{
+        font-size: 16px;
+    }
+
+    /*Estilos para modificar el tamaño de letra grande*/
+    .tamano-grande{
+        font-size: 34px;
+    }
+    
+    /*Estilos para modificar el tipo de letra letra serif*/
+    .letra-serif {
+    font-family: 'Georgia', serif;
+    }
+
+    /*Estilos para modificar el tipo de letra letra sans-serif*/
+    .letra-sans {
+        font-family: 'Arial', sans-serif;
+    }
+
+    /*Estilos para modificar el tipo de letra letra monospace*/
+    .letra-monospace {
+        font-family: 'Courier New', monospace;
+    }
+
+</style>
+
+<body>
+   
+    <div class="container">
+        <h2>Cambio de color de titulo</h2>
+        <button class="card-btn rojo-boton">Rojo</button>
+        <button class="card-btn azul-boton">Azul</button>
+        <button class="card-btn verde-boton">Verde</button>
+        <button class="card-btn reset-boton">Reset Card</button>
+        <h2>Cambio de tamaño de la letra</h2>
+        <button class="card-btn">12px</button>
+        <button class="card-btn">16px</button>
+        <button class="card-btn">34px</button>
+        <h2>Tipo de letra</h2>
+        <button class="card-btn">Serif</button>
+        <button class="card-btn">Sans</button>
+        <button class="card-btn">Monospace</button>
+    </div>
+   
+    <div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsVoRQWGLz9zc8erhFyzfnqkWWLNRGx4JSsA&s" alt="Imagen de la tarjeta" class="card-img">
+        <div class="card-content">
+            <h2 class="card-title">Título de la Tarjeta</h2>
+            <p class="card-text">Este es un texto dentro de la tarjeta. Puedes agregar una breve descripción o información relevante aquí.</p>
+            <button class="card-btn">Leer más</button>
+        </div>
+    </div>
+
+    
+    <script>
+        // Seleccionamos el botón de la tarjeta
+        const botones    = document.querySelectorAll('.card-btn');
+        const title_card = document.querySelector('.card-title');
+        
+        // Añadimos un evento 'click' a cada uno de los elementos
+        botones.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                
+                if(index === 0){
+                    title_card.className = '';
+                    title_card.classList.add('card-text-rojo');
+                }else if(index === 1){
+                    title_card.className = '';
+                    title_card.classList.add('card-text-azul');
+                }else if(index === 2){
+                    title_card.className = '';
+                    title_card.classList.add('card-text-verde');
+                }else if(index === 3){
+                    title_card.className = '';
+                    title_card.classList.add('card-title');
+                }else if(index === 4){
+                    const clase1 = title_card.classList.contains('tamano-mediano') ;
+                    const clase2 = title_card.classList.contains('tamano-grande');
+                    if(clase1){
+                        title_card.classList.remove('tamano-mediano');
+                    }
+                    if(clase2){
+                        title_card.classList.remove('tamano-grande');
+                    }
+                    title_card.classList.toggle('tamano-pequeno');
+                }else if(index === 5){
+                    const clase1 = title_card.classList.contains('tamano-pequeno') ;
+                    const clase2 = title_card.classList.contains('tamano-grande');
+                    if(clase1){
+                        title_card.classList.remove('tamano-pequeno');
+                    }
+                    if(clase2){
+                            title_card.classList.remove('tamano-grande');
+                    }
+                    title_card.classList.toggle('tamano-mediano');
+                }else if(index === 6){
+                    const clase1 = title_card.classList.contains('tamano-pequeno') ;
+                    const clase2 = title_card.classList.contains('tamano-mediano');
+                    if(clase1){
+                        title_card.classList.remove('tamano-pequeno');
+                    }
+                    if(clase2){
+                            title_card.classList.remove('tamano-mediano');
+                    }
+                    title_card.classList.toggle('tamano-grande');
+                }else if(index === 7){
+                    const clase1 = title_card.classList.contains('letra-sans') ;
+                    const clase2 = title_card.classList.contains('letra-monospace');
+                    if(clase1){
+                        title_card.classList.remove('letra-sans');
+                    }
+                    if(clase2){
+                            title_card.classList.remove('letra-monospace');
+                    }
+                    title_card.classList.toggle('letra-serif');
+                }else if(index === 8){
+                    const clase1 = title_card.classList.contains('letra-serif') ;
+                    const clase2 = title_card.classList.contains('letra-monospace');
+                    if(clase1){
+                        title_card.classList.remove('letra-serif');
+                    }
+                    if(clase2){
+                            title_card.classList.remove('letra-monospace');
+                    }
+                    title_card.classList.toggle('letra-sans');
+                }else if(index === 9){
+                    const clase1 = title_card.classList.contains('letra-serif') ;
+                    const clase2 = title_card.classList.contains('letra-sans');
+                    if(clase1){
+                        title_card.classList.remove('letra-serif');
+                    }
+                    if(clase2){
+                            title_card.classList.remove('letra-sans');
+                    }
+                    title_card.classList.toggle('letra-monospace');
+                }
+            });
+        });
+    </script> 
+
+</body>
+</html>
