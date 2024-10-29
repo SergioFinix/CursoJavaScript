@@ -228,17 +228,14 @@
         });
 
         // Eventos del teclado
-        tecladoInput.addEventListener('keydown', () => {
-            logMessage('Tecla presionada');
+        tecladoInput.addEventListener('keydown', (event) => {
+            logMessage('Tecla presionada '+event.key);
         });
 
-        tecladoInput.addEventListener('keyup', () => {
-            logMessage('Tecla liberada');
+        tecladoInput.addEventListener('keyup', (event) => {
+            logMessage('Tecla liberada '+event.key);
         });
 
-        tecladoInput.addEventListener('keypress', () => {
-            logMessage('Tecla presionada (keypress)');
-        });
     </script>
 </body>
 </html>
