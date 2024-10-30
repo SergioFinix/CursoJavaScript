@@ -206,6 +206,10 @@
             logMessage('El campo de selección está en foco');
         });
 
+        selectElement.addEventListener('blur', () => {
+            logMessage('El campo perdio el foco');
+        });
+
         // Eventos del mouse
         hoverBox.addEventListener('click', () => {
             logMessage('Click en el área');
