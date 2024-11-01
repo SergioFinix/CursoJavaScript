@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejemplo Objeto Event</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+        body{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+        }
         #cuadro {
             width: 200px;
             height: 200px;
@@ -12,17 +20,38 @@
             margin: 20px;
             border: 2px solid blue;
         }
+        .input-text{
+            width: 300px;
+            height: 50px;
+            border-radius: 10px;
+            color: #fff;
+            background-color: black;
+            border: 2px solid #fff;
+        }
+        .text {
+            font-size: 60px;
+            line-height: calc(20px + 20vh);
+            text-shadow: 0 0 5px #ffa500, 0 0 15px #ffa500, 0 0 20px #ffa500, 0 0 40px #ffa500, 0 0 60px #ff0000, 0 0 10px #ff8d00, 0 0 98px #ff0000;
+            color: #fff;
+            font-family: "Pacifico", cursive;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-    <h1>Interacción con el Objeto Event</h1>
+    <h1 class="text">Interacción con el Objeto Event Mi Alegría</h1>
 
     <div id="cuadro">Haz clic aquí o presiona una tecla</div>
     <p id="info"></p>
 
+    <input onmouseover="cleanInput()" class="input-text" type="text" />
+
     <script>
         const cuadro = document.getElementById("cuadro");
         const info = document.getElementById("info");
+
+        const input = document.querySelector('.input-text');
+        let valueGlobal = '';
 
         // Manejar evento de clic
         cuadro.addEventListener("click", function(evento) {
@@ -37,10 +66,29 @@
         window.addEventListener("keydown", function(evento) {
             // Acceder a la tecla presionada usando el objeto Event
             const tecla = evento.key;
-            const codigoTecla = evento.code;
+
+            if(tecla === 'r' || tecla === 'R'){
+                input.value = '';
+            }else{
+                const codigoTecla = evento.code;
+                let value = input.value;
+                valueGlobal = value + tecla;
+                input.value = value + tecla;
+            }
+            
+
             info.textContent = `Tecla presionada: ${tecla} (Código: ${codigoTecla})`;
             console.log("Evento de teclado detectado:", evento);
         });
+
+        function cleanInput() {
+            input.value = '';
+        }
+
+        document.querySelector('.input-text').addEventListener('click', function(){
+            input.value = valueGlobal;
+        })
+
     </script>
 </body>
 </html>

@@ -4,15 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Objeto Event</title>
+    <style>
+        .img-button{
+            background-image: url('https://th.bing.com/th/id/OIP.VAaZekcviZYhsLtTlwmaoQHaFo?w=217&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7');
+            width: 200px;
+            height: 100px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            transition: all 0.5s ease-in;
+        }
+        .img-button:hover{
+            width: 250px;
+            height: 150px;
+        }
+    </style>
 </head>
 <body>
     <button id="miBoton">Haz clic aquí</button>
+
+    <div class="img-button"></div>
 
     <script>
         document.getElementById("miBoton").addEventListener("click", function(event) {
             console.log("Elemento que disparó el evento:", event.target);
             console.log("Tipo de evento:", event.type);
             event.preventDefault(); // Evita la acción predeterminada (si la hubiera)
+        });
+
+        document.querySelector('.img-button').addEventListener("click", function(event){
+            alert('Presionaste el conejito');
+            event.preventDefault();
         });
     </script>
 </body>
