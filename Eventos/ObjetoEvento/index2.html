@@ -20,9 +20,12 @@
     <div id="cuadro">Haz clic aquí o presiona una tecla</div>
     <p id="info"></p>
 
+    <input type="text" id="inputTexto">
+
     <script>
         const cuadro = document.getElementById("cuadro");
         const info = document.getElementById("info");
+        const inputTexto = document.getElementById('inputTexto');
 
         // Manejar evento de clic
         cuadro.addEventListener("click", function(evento) {
@@ -40,7 +43,28 @@
             const codigoTecla = evento.code;
             info.textContent = `Tecla presionada: ${tecla} (Código: ${codigoTecla})`;
             console.log("Evento de teclado detectado:", evento);
+
+            //Agregar la tecla presionada al valor del campo de texto
+            inputTexto.value += tecla;
+
+            if(tecla === 'r' || tecla === 'R'){
+                inputTexto.value = '';
+                return;
+            }
         });
+
+        //Borrar el contenido al hacer click en el campo de texto
+        inputTexto.addEventListener('click', (e) => {
+            if (e.target.value) {
+                e.target.value = '';
+                return
+            }
+            if(event.type === 'click'){
+                alert('No puedes escribir con el campo de texto seleccionado');
+                inputTexto.blur();
+                return;
+            }
+        })
     </script>
 </body>
 </html>

@@ -1,19 +1,34 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Objeto Event</title>
 </head>
+
 <body>
     <button id="miBoton">Haz clic aquí</button>
+    <button id="miBoton2">Haz clic aquí</button>
 
     <script>
-        document.getElementById("miBoton").addEventListener("click", function(event) {
+        document.getElementById("miBoton").addEventListener("click", function (event) {
             console.log("Elemento que disparó el evento:", event.target);
             console.log("Tipo de evento:", event.type);
             event.preventDefault(); // Evita la acción predeterminada (si la hubiera)
         });
+
+        document.getElementById('miBoton2').addEventListener('click', (event) => {
+            //console.log(event)
+            if (!event.altKey) {
+                alert('Tienes que tener la tecla ALT presionada')
+                return;
+            }
+            console.log(`Diste click en el elemento`, event.target);
+            console.log(`Tipo de evento`, event.type);
+            event.preventDefault();
+        })
     </script>
 </body>
+
 </html>

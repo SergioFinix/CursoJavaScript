@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,12 +13,14 @@
             width: 300px;
             position: relative;
         }
+
         .producto {
             padding: 10px;
             margin-bottom: 10px;
             background-color: #e0e0e0;
             border: 1px solid #aaa;
         }
+
         .boton {
             background-color: #ff6347;
             color: white;
@@ -27,34 +30,36 @@
         }
     </style>
 </head>
+
 <body>
 
-<div id="carrito">
-    <h3>Tu Carrito</h3>
-    <div class="producto">
-        <p>Producto 1</p>
-        <button class="boton">Eliminar producto</button>
+    <div id="carrito">
+        <h3>Tu Carrito</h3>
+        <div class="producto">
+            <p>Producto 1</p>
+            <button class="boton">Eliminar producto</button>
+        </div>
+        <div class="producto">
+            <p>Producto 2</p>
+            <button class="boton">Eliminar producto</button>
+        </div>
     </div>
-    <div class="producto">
-        <p>Producto 2</p>
-        <button class="boton">Eliminar producto</button>
-    </div>
-</div>
 
-<script>
-    // Evento para cerrar el carrito si se hace clic fuera de los botones de acción
-    const uno = document.getElementById("carrito").addEventListener("click", function() {
-        console.log("Cerrando el carrito (Fase de burbuja)");
-    });
-
-    // Evento en los botones de acción (por ejemplo, eliminar producto)
-    const dos = document.querySelectorAll(".boton").forEach(function(boton) {
-        boton.addEventListener("click", function(event) {
-            console.log("Botón de eliminar producto clicado");
-            event.stopPropagation(); // Detener la burbuja para que no cierre el carrito
+    <script>
+        // Evento para cerrar el carrito si se hace clic fuera de los botones de acción
+        const uno = document.getElementById("carrito").addEventListener("click", function () {
+            console.log("Cerrando el carrito (Fase de burbuja)");
         });
-    });
-</script>
+
+        // Evento en los botones de acción (por ejemplo, eliminar producto)
+        const dos = document.querySelectorAll(".boton").forEach(function (boton) {
+            boton.addEventListener("click", function (event) {
+                console.log("Botón de eliminar producto clicado");
+                event.stopPropagation(); // Detener la burbuja para que no cierre el carrito
+            });
+        });
+    </script>
 
 </body>
+
 </html>

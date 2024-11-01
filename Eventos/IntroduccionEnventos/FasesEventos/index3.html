@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,7 @@
             border: 2px solid #ccc;
             background-color: #f9f9f9;
         }
+
         .imagen {
             width: 100px;
             height: 100px;
@@ -23,41 +25,61 @@
         }
     </style>
 </head>
+
 <body>
 
-<div class="galeria" id="galeria">
-    <div class="imagen" id="imagen1">Imagen 1</div>
-    <div class="imagen" id="imagen2">Imagen 2</div>
-    <div class="imagen" id="imagen3">Imagen 3</div>
-</div>
+    <div class="galeria" id="galeria">
+        <div class="imagen" id="imagen1">Imagen 1</div>
+        <div class="imagen" id="imagen2">Imagen 2</div>
+        <div class="imagen" id="imagen3">Imagen 3</div>
 
-<p id="mensaje"></p>
+        <div class="imagen" id="imagen4">Imagen 4</div>
+        <div class="imagen" id="imagen5">Imagen 5</div>
+    </div>
 
-<script>
-    const galeria = document.getElementById("galeria");
-    const mensaje = document.getElementById("mensaje");
+    <p id="mensaje"></p>
 
-    // Evento en la galería completa
-    galeria.addEventListener("click", function() {
-        mensaje.textContent = "Hiciste clic en la galería, pero no en una imagen específica.";
-    });
+    <script>
+        const galeria = document.getElementById("galeria");
+        const mensaje = document.getElementById("mensaje");
 
-    // Eventos en las imágenes individuales
-    document.getElementById("imagen1").addEventListener("click", function(event) {
-        mensaje.textContent = "Seleccionaste la Imagen 1";
-        event.stopPropagation(); // Evitar que el clic burbujee hacia la galería
-    });
+        // Evento en la galería completa
+        galeria.addEventListener("click", function () {
+            mensaje.textContent = "Hiciste clic en la galería, pero no en una imagen específica.";
+            console.log('Sin propagación');
+        });
 
-    document.getElementById("imagen2").addEventListener("click", function(event) {
-        mensaje.textContent = "Seleccionaste la Imagen 2";
-        event.stopPropagation(); // Evitar que el clic burbujee hacia la galería
-    });
+        // Eventos en las imágenes individuales
+        document.getElementById("imagen1").addEventListener("click", function (event) {
+            mensaje.textContent = "Seleccionaste la Imagen 1";
+            console.log('Click en imagen 1');
+            event.stopPropagation(); // Evitar que el clic burbujee hacia la galería
+        });
 
-    document.getElementById("imagen3").addEventListener("click", function(event) {
-        mensaje.textContent = "Seleccionaste la Imagen 3";
-        event.stopPropagation(); // Evitar que el clic burbujee hacia la galería
-    });
-</script>
+        document.getElementById("imagen2").addEventListener("click", function (event) {
+            mensaje.textContent = "Seleccionaste la Imagen 2";
+            console.log('Click en imagen 2');
+            event.stopPropagation(); // Evitar que el clic burbujee hacia la galería
+        });
+
+        document.getElementById("imagen3").addEventListener("click", function (event) {
+            mensaje.textContent = "Seleccionaste la Imagen 3";
+            console.log('Click en imagen 3');
+            event.stopPropagation(); // Evitar que el clic burbujee hacia la galería
+        });
+
+        //Imagenes extras con propagación y sin propagación
+        document.getElementById("imagen4").addEventListener("click", function (event) {
+            mensaje.textContent = "Seleccionaste la Imagen 4";
+            console.log('Click en imagen 4');
+            event.stopPropagation(); // Evitar que el clic burbujee hacia la galería
+        });
+        document.getElementById("imagen5").addEventListener("click", function (event) {
+            mensaje.textContent = "Seleccionaste la Imagen 5";
+            console.log('Click en imagen 5');
+        });
+    </script>
 
 </body>
+
 </html>
