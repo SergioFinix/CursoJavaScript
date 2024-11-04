@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objeto Event</title>
+</head>
+<body>
+    <button id="miBoton">Haz clic aquí</button>
+    <hr>
+    <button id="btn2">Ahora haz click aquí</button>
+    <script>
+        document.getElementById("miBoton").addEventListener("click", function(event) {
+            console.log("Elemento que disparó el evento:", event.target);
+            console.log("Tipo de evento:", event.type);
+            event.preventDefault(); // Evita la acción predeterminada (si la hubiera)
+        });
+        document.getElementById("btn2").addEventListener("click", function(event) {
+            console.log("El elemento que disparo el evento fue: ", event.target);
+            console.log("El tipo de evento fue: ", event.type);
+            event.preventDefault();
+        })
+    </script>
+</body>
+</html>
