@@ -4,10 +4,12 @@ function fetchUsers(callback) {
       const users = [
         { id: 1, name: 'Juan Pérez' },
         { id: 2, name: 'María López' },
-        { id: 3, name: 'Carlos García' }
+        { id: 3, name: 'Carlos García' },
+        { id: 4, name: 'Cristian Alan' },
+        { id: 5, name: 'Daniela Medina' },
       ];
       callback(users); // Se llama al callback pasando los datos
-    }, 2000); // Simula una espera de 2 segundos
+    }, 5000); // Simula una espera de 2 segundos
   }
   
   // Función para mostrar los usuarios en la página
