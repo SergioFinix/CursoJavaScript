@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TABLA</title>
+
+<style>
+
+table{
+width: 50%;
+border-collapse: collapse;
+margin-top: 20px;
+}
+
+table,th,td {
+    border: 1px solid rgb(17, 17, 14);
+    
+}
+th, td {
+
+    padding: 10px;
+    text-align: left;
+}
+</style>
+
+
+
+</head>
+<body>
+    <H3>EJEMPLO DE UNA TABLA
+    </H3>
+
+
+<button id="AgregarFilaFinal">agregar fila al final</button>
+<button id="InsertarFilaInicio">insertar fila al inicio </button>
+<button id="CalcularSuma">calcular suma de edades</button>
+<button id="InsertarMuchasFilas">insertar 10 filas</button>
+
+<table id="mitabla">
+<thead>
+<tr>
+    <th>nombre</th>
+    <th>edad</th>
+</tr>
+</thead>
+<tbody>
+    <tr>
+        <td>juan</td>
+        <td>25</td>
+    </tr>
+</tbody>
+</table>
+<div id="resultadoSuma"> Suma de edades</div>
+
+
+<script>
+
+//seleccionar los botones y la tabla
+const botonAgregarFila = document.getElementById("AgregarFilaFinal");
+const botonInsertarFila = document.getElementById("InsertarFilaInicio");
+const tabla = document.getElementById("mitabla").getElementsByTagName("tbody")[0];
+
+
+botonAgregarFila.addEventListener("click",() => {
+
+let nuevaFila = document.createElement("tr");
+
+let celdaNombre = document.createElement("td");
+let celdaEdad = document.createElement("td");
+
+celdaNombre.textContent = "nuevoNombre";
+celdaEdad.textContent = "30";
+
+nuevaFila.appendChild(celdaNombre);
+nuevaFila.appendChild(celdaEdad);
+
+tabla.appendChild(nuevaFila);
+
+});
+
+const botonCalcularSuma = document.getElementById("CalcularSuma");
+botonCalcularSuma.addEventListener("click", () => {
+let suma = 0;
+
+for(let fila of tabla.rows) { 
+let celdaEdad = fila.cells[1];
+let edad = parseInt(celdaEdad.textContent);
+ 
+if (!isNaN(edad)){
+
+    suma += edad;
+}
+}
+resultadoSuma.textContent = 'Suma de edades:'+ suma;
+
+});
+
+botonAgregarMuchasFilas.addEventListener("click",() => {
+
+let nuevasFilas = document.createElement("tr");
+
+for()
+let celdaNombre = document.createElement("td");
+let celdaEdad = document.createElement("td");
+
+celdaNombre.textContent = "nuevoNombre";
+celdaEdad.textContent = "30";
+
+nuevaFila.appendChild(celdaNombre);
+nuevaFila.appendChild(celdaEdad);
+
+tabla.appendChild(nuevaFila);
+
+});
+
+</script>
+
+
+
+
+</body>
+</html>

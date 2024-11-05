@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dia 2  ejemplos de dom</title>
+    <h1></h1>
+</head>
+<body>
+<div>
+    <p>nombre</p>
+    <input type="text" id="nombre">
+<input type="button" value="mostrar nombre" onclick="getNombre()">
+
+</div>
+
+<div>
+<p id="texto"> texto a cambiar </p>
+<input type="button" value="cambiar texto" onclick="cambiarTexto()"/>
+
+</div>
+
+
+<div>
+
+    <ul id="lista"> 
+
+        <li> opcioón 1 </li>
+        <li> opcioón 2 </li>
+        <li> opcioón 3 </li>
+    </ul>
+<button onclick="agregarElement()">Agregar</button>
+
+</div>
+
+
+
+    <script>
+    
+function agregarElement(){
+
+let lista = document.getElementById("lista");
+let newElement = document.createElement("li");
+newElement.textContent = "Nuevo Elemento";
+lista.appendChild(newElement);
+
+}
+
+function getNombre(){
+
+    let nombre = document.getElementById("nombre").value;
+    console.log(nombre);}
+
+    function cambiarTexto(){
+
+        const texto = document.getElementById("texto");
+            texto.innerHTML =  "<strong> Texto </strong>";
+
+    }
+
+    </script>
+
+
+</body>
+</html>

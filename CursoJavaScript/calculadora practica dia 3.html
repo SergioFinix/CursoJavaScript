@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculadora</title>
+</head>
+<body>
+    
+    <div class="calculadora">
+        <h3>Calculadora</h3>
+
+        <input type="number" id="numero1" placeholder="Ingrese número 1" />
+        <input type="number" id="numero2" placeholder="Ingrese número 2" />
+
+        <br /><br />
+
+        <button class="boton" onclick="calcular('+')">+</button>
+        <button class="boton" onclick="calcular('-')">-</button>
+        <button class="boton" onclick="calcular('*')">*</button>
+        <button class="boton" onclick="calcular('/')">/</button>
+
+        <br />
+        <p>Resultado: <span id="resultado"></span></p>
+    </div>  
+
+    <script>
+        function calcular(operacion) {
+            let numero1 = parseFloat(document.getElementById("numero1").value);
+            let numero2 = parseFloat(document.getElementById("numero2").value);
+            let resultado;
+
+            switch (operacion) {
+                case "+":
+                    resultado = numero1 + numero2;
+                    break;
+                case "-":
+                    resultado = numero1 - numero2;
+                    break;
+                case "*":
+                    resultado = numero1 * numero2;
+                    break;
+                case "/":
+                    if (numero2 === 0) {
+                        alert("No se puede dividir");
+                        return;
+                    }
+                    resultado = numero1 / numero2;
+                    break;
+                default:
+                    alert("Operación no válida");
+                    return;
+            }
+
+            const resultado1 = document.getElementById("resultado");
+            resultado1.textContent = resultado;
+
+            // Cambiar el color del texto del nodo padre
+            resultado1.parentNode.style.color = "blue"; // Cambia "blue" por el color deseado
+        }
+    </script>
+</body>
+</html>
