@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promesa: Adivina el Número</title>
+</head>
+<body>
+  <button id="adivinar">Adivinar Número</button>
+  <p id="resultado"></p>
+
+  <script>
+    const boton = document.getElementById('adivinar');
+    const resultado = document.getElementById('resultado');
+
+    boton.addEventListener('click', () => {
+      adivinarNumero().then((numero) => {
+        resultado.textContent = `El número es ${numero}`;
+      });
+    });
+
+    function adivinarNumero() {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          const numeroAleatorio = Math.floor(Math.random() * 10) + 1;
+          resolve(numeroAleatorio);
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>
