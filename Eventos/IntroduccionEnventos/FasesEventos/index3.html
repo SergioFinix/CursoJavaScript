@@ -29,6 +29,8 @@
     <div class="imagen" id="imagen1">Imagen 1</div>
     <div class="imagen" id="imagen2">Imagen 2</div>
     <div class="imagen" id="imagen3">Imagen 3</div>
+    <div class="imagen" id="imagen4">Imagen 4</div>
+    <div class="imagen" id="imagen5">Imagen 5</div>
 </div>
 
 <p id="mensaje"></p>
@@ -56,6 +58,16 @@
     document.getElementById("imagen3").addEventListener("click", function(event) {
         mensaje.textContent = "Seleccionaste la Imagen 3";
         event.stopPropagation(); // Evitar que el clic burbujee hacia la galería
+    });
+
+    document.getElementById("imagen4").addEventListener("click", function(event) {
+        mensaje.textContent = "Seleccionaste la Imagen 4";
+        event.stopPropagation();
+    });
+
+    document.getElementById("imagen5").addEventListener("click", function(event) {
+        mensaje.textContent = "Seleccionaste la Imagen 5";
+    
     });
 </script>
 

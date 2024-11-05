@@ -19,10 +19,12 @@
 
     <div id="cuadro">Haz clic aquí o presiona una tecla</div>
     <p id="info"></p>
+    <div><input id = "input"></div>
 
     <script>
         const cuadro = document.getElementById("cuadro");
         const info = document.getElementById("info");
+        const input = document.getElementById("input");
 
         // Manejar evento de clic
         cuadro.addEventListener("click", function(evento) {
@@ -40,6 +42,13 @@
             const codigoTecla = evento.code;
             info.textContent = `Tecla presionada: ${tecla} (Código: ${codigoTecla})`;
             console.log("Evento de teclado detectado:", evento);
+
+            if(tecla === 'r' || tecla === 'R'){
+                input.value = "";
+            } else{
+                input.value = tecla;
+            }
+
         });
     </script>
 </body>
