@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería Interactiva</title>
+    <style>
+        .galeria {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            border: 2px solid #ccc;
+            background-color: #f9f9f9;
+        }
+        .imagen {
+            width: 100px;
+            height: 100px;
+            background-color: #ddd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="galeria" id="galeria">
+    <div class="imagen" id="imagen1">Imagen 1</div>
+    <div class="imagen" id="imagen2">Imagen 2</div>
+    <div class="imagen" id="imagen3">Imagen 3</div>
+</div>
+
+<p id="mensaje"></p>
+
+<script>
+    const galeria = document.getElementById("galeria");
+    const mensaje = document.getElementById("mensaje");
+
+    // Evento en la galería completa
+    galeria.addEventListener("click", function() {
+        mensaje.textContent = "Hiciste clic en la galería, pero no en una imagen específica.";
+    });
+
+    // Eventos en las imágenes individuales
+    document.getElementById("imagen1").addEventListener("click", function(event) {
+        mensaje.textContent = "Seleccionaste la Imagen 1";
+        event.stopPropagation(); // Evitar que el clic burbujee hacia la galería
+    });
+
+    document.getElementById("imagen2").addEventListener("click", function(event) {
+        mensaje.textContent = "Seleccionaste la Imagen 2";
+        event.stopPropagation(); // Evitar que el clic burbujee hacia la galería
+    });
+
+    document.getElementById("imagen3").addEventListener("click", function(event) {
+        mensaje.textContent = "Seleccionaste la Imagen 3";
+        event.stopPropagation(); // Evitar que el clic burbujee hacia la galería
+    });
+</script>
+
+</body>
+</html>

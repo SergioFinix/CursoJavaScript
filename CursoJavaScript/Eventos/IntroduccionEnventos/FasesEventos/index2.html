@@ -1,0 +1,16 @@
+<div id="padre" style="padding: 20px; background-color: lightblue;">
+    Padre
+    <button id="hijo" style="margin: 10px;">Click aquí</button>
+</div>
+
+<script>
+    // Evento en la fase de captura
+    document.getElementById("padre").addEventListener("click", function() {
+        console.log("Fase de Captura - Div Padre");
+    }, true); // El tercer parámetro 'true' indica que se escucha en la fase de captura
+
+    // Evento en la fase de burbuja
+    document.getElementById("hijo").addEventListener("click", function() {
+        console.log("Fase de Burbuja - Botón Hijo");
+    });
+</script>
