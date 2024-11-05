@@ -23,7 +23,7 @@
 <body>
     <button id="miBoton">Haz clic aquí</button>
 
-    <div class="img-button"></div>
+    <button id="miBoton1">Haz clic aquí</button>
 
     <script>
         document.getElementById("miBoton").addEventListener("click", function(event) {
@@ -32,10 +32,15 @@
             event.preventDefault(); // Evita la acción predeterminada (si la hubiera)
         });
 
-        document.querySelector('.img-button').addEventListener("click", function(event){
-            alert('Presionaste el conejito');
-            event.preventDefault();
+        document.getElementById("miBoton1").addEventListener("click", function(event) {
+            console.log("Elemento que disparó el evento:", event.target);
+            console.log("Tipo de evento:", event.type);
+            console.log(event.altKey);
+            event.preventDefault(); // Evita la acción predeterminada (si la hubiera)
         });
+
+
+
     </script>
 </body>
 </html>
