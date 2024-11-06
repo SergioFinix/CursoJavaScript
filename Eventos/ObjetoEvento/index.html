@@ -11,6 +11,8 @@
     <button id="miBoton">Haz clic aquí</button>
     <button id="miBoton2">Haz clic aquí</button>
 
+    <button id="miBoton1">Haz clic aquí</button>
+
     <script>
         document.getElementById("miBoton").addEventListener("click", function (event) {
             console.log("Elemento que disparó el evento:", event.target);
@@ -18,6 +20,7 @@
             event.preventDefault(); // Evita la acción predeterminada (si la hubiera)
         });
 
+<<<<<<< HEAD
         document.getElementById('miBoton2').addEventListener('click', (event) => {
             //console.log(event)
             if (!event.altKey) {
@@ -28,6 +31,17 @@
             console.log(`Tipo de evento`, event.type);
             event.preventDefault();
         })
+=======
+        document.getElementById("miBoton1").addEventListener("click", function(event) {
+            console.log("Elemento que disparó el evento:", event.target);
+            console.log("Tipo de evento:", event.type);
+            console.log(event.altKey);
+            event.preventDefault(); // Evita la acción predeterminada (si la hubiera)
+        });
+
+
+
+>>>>>>> 925784f0cb3b619ae9c30f8ea718bb2f725ac8d9
     </script>
 </body>
 

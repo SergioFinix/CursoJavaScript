@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Simula la obtención de datos con un callback
 function fetchUsers(callback) {
     setTimeout(() => {
@@ -10,26 +11,72 @@ function fetchUsers(callback) {
       ];
       callback(users); // Se llama al callback pasando los datos
     }, 5000); // Simula una espera de 2 segundos
+=======
+// Función para simular la obtención de datos (nombre y fecha de nacimiento)
+function fetchUserData(callbacknombre, callbackcumpleaños) {
+  const nombre = document.getElementById('userName').value;
+  const cumpleaños = document.getElementById('usercumpleaños').value;
+
+
+  // Verificar si la fecha de nacimiento está vacía
+  if (!cumpleaños) {
+    alert('Por favor, introduce tu fecha de nacimiento.');
+    return; // Si no se introduce la fecha, salir de la función
+>>>>>>> 925784f0cb3b619ae9c30f8ea718bb2f725ac8d9
   }
-  
-  // Función para mostrar los usuarios en la página
-  function displayUsers(users) {
-    const userList = document.getElementById('userList');
-    userList.innerHTML = ''; // Limpia la lista antes de agregar los usuarios
-  
-    users.forEach(user => {
-      const userDiv = document.createElement('div');
-      userDiv.className = 'user';
-      userDiv.textContent = `${user.name}`;
-      userList.appendChild(userDiv);
-    });
+
+  setTimeout(() => {
+    callbacknombre(nombre); // Llama al callback pasando el nombre
+  }, 4000); // Simula una espera de 4 segundos para el nombre
+
+  setTimeout(() => {
+    callbackcumpleaños(cumpleaños); // Llama al callback pasando la fecha de nacimiento
+  }, 6000); // Simula una espera de 6 segundos para la fecha de nacimiento
+}
+
+// Función para mostrar el nombre en la página
+function displayName(nombre) {
+  const userList = document.getElementById('userList');
+  const nombreDiv = document.createElement('div');
+  nombreDiv.className = 'user';
+  nombreDiv.textContent = `Hola, ${nombre} !`; // Muestra el nombre ingresado
+  userList.appendChild(nombreDiv);
+}
+
+// Función para calcular la edad en base a la fecha de nacimiento
+function calcularEdad(cumpleaños) {
+  const fechaCumpleaños = new Date(cumpleaños);
+  const fechaActual = new Date();
+
+  let edad = fechaActual.getFullYear() - fechaCumpleaños.getFullYear();
+  const mesActual = fechaActual.getMonth();
+  const mesCumpleaños = fechaCumpleaños.getMonth();
+  const diaActual = fechaActual.getDate();
+  const diaCumpleaños = fechaCumpleaños.getDate();
+
+  // Si el cumpleaños no ha pasado aún este año, restamos un año
+  if (mesActual < mesCumpleaños || (mesActual === mesCumpleaños && diaActual < diaCumpleaños)) {
+    edad--;
   }
+
+  return edad;
+}
+
+// Función para mostrar la edad en la página
+function displayEdad(cumpleaños) {
+  const edad = calcularEdad(cumpleaños); // Calcula la edad
+  const userList = document.getElementById('userList');
+  const edadDiv = document.createElement('div');
+  edadDiv.className = 'user';
+  edadDiv.textContent = `Tu edad es de: ${edad} años`; // Muestra la edad calculada
+  userList.appendChild(edadDiv);
+}
+
+// Evento del botón para cargar los datos
+document.getElementById('loadButton').addEventListener('click', () => {
+  const userList = document.getElementById('userList');
+  userList.innerHTML = 'Cargando...'; // Muestra el mensaje mientras espera
   
-    // Evento del botón para cargar usuarios
-    document.getElementById('loadButton').addEventListener('click', () => {
-    document.getElementById('userList').innerHTML = 'Cargando usuarios...';
-    
-    // Llama a fetchUsers y pasa displayUsers como callback
-    fetchUsers(displayUsers);
-  });
-  
+  fetchUserData(displayName, displayEdad); // Llama a fetchUserData y pasa los dos callbacks
+});
+

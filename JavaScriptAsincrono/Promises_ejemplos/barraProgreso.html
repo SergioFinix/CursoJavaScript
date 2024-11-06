@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promesa: Barra de Progreso</title>
+  <style>
+    #barra {
+      width: 0;
+      height: 20px;
+      background-color: green;
+    }
+    #contenedor {
+      width: 100%;
+      height: 20px;
+      background-color: lightgray;
+    }
+  </style>
+</head>
+<body>
+  <div id="contenedor">
+    <div id="barra"></div>
+  </div>
+  <button id="cargar">Cargar</button>
+
+  <script>
+    const barra = document.getElementById('barra');
+    const boton = document.getElementById('cargar');
+
+    boton.addEventListener('click', () => {
+      cargarProgreso().then(() => {
+        console.log('Progreso completo');
+      });
+    });
+
+    function cargarProgreso() {
+      return new Promise((resolve) => {
+        let ancho = 0;
+        const intervalo = setInterval(() => {
+          ancho += 10;
+          barra.style.width = ancho + '%';
+          if (ancho >= 100) {
+            clearInterval(intervalo);
+            resolve();
+          }
+        }, 200);
+      });
+    }
+  </script>
+</body>
+</html>
