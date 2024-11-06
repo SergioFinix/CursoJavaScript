@@ -19,14 +19,15 @@
 
     <div id="cuadro">Haz clic aquí o presiona una tecla</div>
     <p id="info"></p>
+    <input type="text" id="input" placeholder="se muestran las teclas" />
 
     <script>
         const cuadro = document.getElementById("cuadro");
         const info = document.getElementById("info");
+        const input = document.getElementById("input");
 
         // Manejar evento de clic
         cuadro.addEventListener("click", function(evento) {
-            // Usamos el objeto Event (evento) para acceder a detalles del clic
             const x = evento.clientX;
             const y = evento.clientY;
             info.textContent = `Clic detectado en las coordenadas: (${x}, ${y})`;
@@ -35,12 +36,20 @@
 
         // Manejar evento de teclado en la ventana
         window.addEventListener("keydown", function(evento) {
-            // Acceder a la tecla presionada usando el objeto Event
             const tecla = evento.key;
             const codigoTecla = evento.code;
             info.textContent = `Tecla presionada: ${tecla} (Código: ${codigoTecla})`;
             console.log("Evento de teclado detectado:", evento);
+
+
+            if (tecla === 'r' || tecla === 'R') {
+                input.value = ''; 
+            } else {
+
+                input.value += tecla;
+            }
         });
     </script>
 </body>
 </html>
+
