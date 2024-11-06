@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinite Scroll con async/await</title>
+    <style>
+        .post {
+            padding: 15px;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Publicaciones</h1>
+    <div id="contenido"></div>
+    
+    <script>
+        let pagina = 1;
+        const contenedor = document.getElementById('contenido');
+
+        async function cargarPublicaciones() {
+            try {
+                const respuesta = await fetch(`https://jsonplaceholder.typicode.com/posts?_limit=5&_page=${pagina}`);
+                const publicaciones = await respuesta.json();
+                console.log(publicaciones);
+                
+                publicaciones.forEach(post => {
+                    const div = document.createElement('div');
+                    div.className = 'post';
+                    div.innerHTML = `<h3>${post.title}</h3><p>${post.body}</p>`;
+                    contenedor.appendChild(div);
+                });
+
+                pagina++;
+            } catch (error) {
+                console.error('Error al cargar publicaciones:', error);
+            }
+        }
+
+        window.addEventListener('scroll', () => {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+                cargarPublicaciones();
+            }
+        });
+
+        cargarPublicaciones();
+    </script>
+</body>
+</html>
