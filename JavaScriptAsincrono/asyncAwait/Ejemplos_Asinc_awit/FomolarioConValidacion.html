@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Registro Asíncrono</title>
+    <style>
+        form {
+            margin-top: 20px;
+        }
+        input {
+            margin-bottom: 10px;
+            display: block;
+            padding: 8px;
+            width: 100%;
+        }
+        #mensaje {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Formulario de Registro</h1>
+    <form id="registro-form">
+        <input type="text" id="nombre" placeholder="Nombre" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <button type="submit">Registrarse</button>
+    </form>
+    <div id="mensaje"></div>
+
+    <script>
+        async function enviarFormulario(evento) {
+            evento.preventDefault();
+            const nombre = document.getElementById('nombre').value;
+            const email = document.getElementById('email').value;
+            const mensaje = document.getElementById('mensaje');
+            
+            mensaje.textContent = 'Enviando...';
+
+            try {
+                const respuesta = await fetch('https://jsonplaceholder.typicode.com/posts', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ nombre, email })
+                });
+
+                if (!respuesta.ok) {
+                    throw new Error('Error en el envío');
+                }
+
+                const resultado = await respuesta.json();
+                mensaje.textContent = `Registro exitoso. ID: ${resultado.id}`;
+            } catch (error) {
+                mensaje.textContent = `Error: ${error.message}`;
+            }
+        }
+
+        document.getElementById('registro-form').addEventListener('submit', enviarFormulario);
+    </script>
+</body>
+</html>
