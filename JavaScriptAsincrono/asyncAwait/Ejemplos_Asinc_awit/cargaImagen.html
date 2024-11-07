@@ -30,6 +30,7 @@
                 const respuesta = await fetch('https://picsum.photos/600');
                 const blob = await respuesta.blob();
                 const urlImagen = URL.createObjectURL(blob);
+                console.log(urlImagen);
                 
                 imagen.src = urlImagen;
                 imagen.style.display = 'block';
