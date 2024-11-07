@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplos de Plantillas Literales</title>
+    <style>
+        /* Estilo general para el cuerpo */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Estilo del contenedor principal */
+        h1 {
+            color: #4a90e2;
+        }
+
+        /* Estilo para las etiquetas y campos de entrada */
+        label, input {
+            display: block;
+            margin: 10px 0;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        /* Estilo para el botón */
+        button {
+            padding: 10px 20px;
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #357ab8;
+        }
+
+        /* Estilo para el área de texto */
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        /* Estilo del contenedor de formulario */
+        .formulario {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ejemplos de plantillas literales</h1>    
+    Nombre:<input type="text" id="nombre">
+    Edad: <input type="text" id="edad"> 
+    <button id="datosPersonales">Datos personales</button>
+    <textarea name="salid" id="salida"></textarea>
+    
+    
+</body>
+<script>
+    const botonDatosPersonales = document.getElementById("datosPersonales");
+    const salida =  document.getElementById('salida');
+
+    
+    function sumaAnio(anio){
+        return parseInt(anio) +1;
+    }
+
+    botonDatosPersonales.addEventListener('click',() => {
+        const nombre = document.getElementById("nombre").value;
+        const edad = document.getElementById("edad").value;
+    
+        //const datosPersonales = "Hola "+nombre+" tu tines "+edad+" años";
+        
+        const datosPersonales = `Hola ${nombre} tu tines ${edad} años, mas un año -> ${sumaAnio(edad)} una suma ${2*2}`;
+        //console.log(datosPersonales);
+        salida.innerText= datosPersonales;
+    });
+    
+</script>
+</html>

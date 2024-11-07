@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validación de Correo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input {
+            padding: 8px;
+            margin: 10px 0;
+        }
+        button {
+            padding: 8px 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .error {
+            color: red;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Validación de Correo Electrónico</h2>
+    <input type="text" id="email" placeholder="Introduce tu correo">
+    <button onclick="validarCorreo()">Validar</button>
+    <p id="mensaje"></p>
+
+    <script>
+        function validarCorreo() {
+            const email = document.getElementById('email').value;
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const mensaje = document.getElementById('mensaje');
+
+            if (regex.test(email)) {
+                mensaje.textContent = "El correo es válido.";
+                mensaje.style.color = "green";
+            } else {
+                mensaje.textContent = "El correo no es válido.";
+                mensaje.classList.add('error');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validación de Contraseña</title>
+    <style>
+        input, button {
+            padding: 8px;
+            margin: 10px 0;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .error {
+            color: red;
+        }
+        .success {
+            color: green;
+        }
+    </style>
+</head>
+<!--(mínimo 8 caracteres, incluyendo una letra mayúscula, una minúscula y un número)-->
+<body>
+
+    <h2>Validación de Contraseña</h2>
+    <input type="password" id="password" placeholder="Introduce tu contraseña">
+    <button onclick="validarPassword()">Validar</button>
+    <p id="mensaje"></p>
+
+    <script>
+        function validarPassword() {
+            const password = document.getElementById('password').value;
+            const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/;
+            const mensaje = document.getElementById('mensaje');
+
+            if (regex.test(password)) {
+                mensaje.textContent = "La contraseña es válida.";
+                mensaje.className = "success";
+            } else {
+                mensaje.textContent = "La contraseña no es válida.";
+                mensaje.className = "error";
+            }
+        }
+    </script>
+</body>
+</html>
