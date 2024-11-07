@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cargar Datos con async/await</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid rgb(43, 14, 206);
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Usuarios</h1>
+    <table id="usuarios-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Usuario</th>
+                <th>Teléfono</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        async function cargarUsuarios() {
+            try {
+                const respuesta = await fetch('https://jsonplaceholder.typicode.com/users');
+                const usuarios = await respuesta.json();
+                const tabla = document.querySelector("#usuarios-table tbody");
+                
+                usuarios.forEach(usuario => {
+                    const fila = document.createElement('tr');
+                    fila.innerHTML = `<td>${usuario.id}</td><td>${usuario.name}</td><td>${usuario.email}</td><td>${usuario.username}</td><td>${usuario.phone}</td>`;
+                    tabla.appendChild(fila);
+                });
+            } catch (error) {
+                console.error('Error al cargar los usuarios:', error);
+            }
+        }
+
+        cargarUsuarios();
+    </script>
+</body>
+</html>
