@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,15 +10,32 @@
             width: 100%;
             border-collapse: collapse;
         }
-        table, th, td {
+
+        thead {
+            background: #011d4e;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        tbody {
+            background: #d2e3ff;
+            color: #000;
+        }
+
+        table,
+        th,
+        td {
             border: 1px solid black;
         }
-        th, td {
+
+        th,
+        td {
             padding: 10px;
             text-align: left;
         }
     </style>
 </head>
+
 <body>
     <h1>Usuarios</h1>
     <table id="usuarios-table">
@@ -26,6 +44,8 @@
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Email</th>
+                <th>Phone</th>
+                <th>Username</th>
             </tr>
         </thead>
         <tbody></tbody>
@@ -37,10 +57,16 @@
                 const respuesta = await fetch('https://jsonplaceholder.typicode.com/users');
                 const usuarios = await respuesta.json();
                 const tabla = document.querySelector("#usuarios-table tbody");
-                
+
                 usuarios.forEach(usuario => {
                     const fila = document.createElement('tr');
-                    fila.innerHTML = `<td>${usuario.id}</td><td>${usuario.name}</td><td>${usuario.email}</td>`;
+                    fila.innerHTML = `
+                        <td>${usuario.id}</td>
+                        <td>${usuario.name}</td>
+                        <td>${usuario.email}</td>
+                        <td>${usuario.phone}</td>
+                        <td>${usuario.username}</td>
+                    `;
                     tabla.appendChild(fila);
                 });
             } catch (error) {
@@ -51,4 +77,5 @@
         cargarUsuarios();
     </script>
 </body>
+
 </html>
