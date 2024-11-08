@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validación de Teléfono</title>
+    <style>
+        input, button {
+            padding: 8px;
+            margin: 10px 0;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .error {
+            color: red;
+        }
+        .success {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Validación de Teléfono</h2>
+    <input type="text" id="telefono" placeholder="Introduce tu teléfono">
+    <button onclick="validarTelefono()">Validar</button>
+    <p id="mensaje"></p>
+
+    <script>
+        function validarTelefono() {
+            const telefono = document.getElementById('telefono').value;
+            const regex = /^\d{10}$/;
+            const mensaje = document.getElementById('mensaje');
+
+            if (regex.test(telefono)) {
+                mensaje.textContent = "El número de teléfono es válido.";
+                mensaje.className = "success";
+            } else {
+                mensaje.textContent = "El número de teléfono no es válido.";
+                mensaje.className = "error";
+            }
+        }
+    </script>
+</body>
+</html>
