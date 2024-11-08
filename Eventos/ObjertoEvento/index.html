@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Ejemplo de algo que no se todavía</title>
+    </head>
+    <body>
+        <p>Texto a insertar</p>
+        <input type="text" id="campotexto">
+        <script>
+            const campo = document.getElementById("campotexto");
+            var texto = "";
+            window.addEventListener("keydown",function(e){
+                if(e.ctrlKey && e.key == "r"){
+                    texto = "";
+                }else{
+                    if(e.location == 0 && (e.key != "CapsLock" || e.key != "Enter")){
+                        if(e.key == "Backspace"){
+                            texto = texto.substring(0, texto.length - 1);;
+                        }else{
+                            texto += e.key;
+                        }
+                    }
+                }
+                campo.value = texto;
+            });
+
+            campo.addEventListener("focus",function(e){
+                e.preventDefault();
+                campo.blur();
+                alert("La escritura es por fuera del campo de texto");
+            });
+        </script>
+    </body>
+</html>
