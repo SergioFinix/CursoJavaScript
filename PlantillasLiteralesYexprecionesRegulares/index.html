@@ -77,7 +77,19 @@
     <h1>Ejemplos de plantillas literales</h1>    
     Nombre:<input type="text" id="nombre">
     Edad: <input type="text" id="edad"> 
-    <button id="datosPersonales">Datos personales</button>
+   
+
+    <select id="estados">
+    <option value="Hidalgo">Hidalgo</option>
+    <option value="Puebla">Puebla</option>
+    <option value="Guanajuato">Guanajuato</option>
+</select>
+<h2>Validación de Teléfono</h2>
+    <input type="text" id="telefono" placeholder="Introduce tu teléfono">
+    
+    
+
+    <button onclick= "validarTelefono()"id+ datosPersonales">Datos personales</button>
     <textarea name="salid" id="salida"></textarea>
     
     
@@ -94,10 +106,28 @@
     botonDatosPersonales.addEventListener('click',() => {
         const nombre = document.getElementById("nombre").value;
         const edad = document.getElementById("edad").value;
+        const estados = document.getElementById("estados").value;
+
+        function validarTelefono() {
+            const telefono = document.getElementById('telefono').value;
+            const regex = /^\d{10}$/;
+            const mensaje = document.getElementById('mensaje');
+
+            if (regex.test(telefono)) {
+                mensaje.textContent = "El número de teléfono es válido.";
+                mensaje.className = "success";
+            } else {
+                mensaje.textContent = "El número de teléfono no es válido.";
+                mensaje.className = "error";
+            }
+        }
+        
+    
+    
     
         //const datosPersonales = "Hola "+nombre+" tu tines "+edad+" años";
         
-        const datosPersonales = `Hola ${nombre} tu tines ${edad} años, mas un año -> ${sumaAnio(edad)} una suma ${2*2}`;
+        const datosPersonales = `Hola ${nombre} tu tines ${edad} años, mas un año -> ${sumaAnio(edad)} una suma ${2*2}tu siudad es ${estados}una suma ${telefono}una suma ${correo}`;
         //console.log(datosPersonales);
         salida.innerText= datosPersonales;
     });

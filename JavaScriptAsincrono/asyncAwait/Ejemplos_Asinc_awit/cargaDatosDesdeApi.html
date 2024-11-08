@@ -26,6 +26,8 @@
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Email</th>
+                <th>Usernaim</th>
+                <th>Numero telefonico</th>
             </tr>
         </thead>
         <tbody></tbody>
@@ -41,7 +43,7 @@
                 
                 usuarios.forEach(usuario => {
                     const fila = document.createElement('tr');
-                    fila.innerHTML = `<td>${usuario.id}</td><td>${usuario.name}</td><td>${usuario.email}</td>`;
+                    fila.innerHTML = `<td>${usuario.id}</td><td>${usuario.name}</td><td>${usuario.email}</td><td>${usuario.username}</td></td><td>${usuario.address.zipcode}</td></td>`;
                     tabla.appendChild(fila);
                 });
             } catch (error) {
