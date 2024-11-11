@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Juego de Ahorcado</title>
+  <style>
+    /* Estilos */
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f0f0f0;
+      margin: 0;
+    }
+    .contenedor {
+      text-align: center;
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .botones-letras {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 5px;
+    }
+    .boton-letra {
+      padding: 10px;
+      font-size: 1vw; /* Se ajusta el tamaño de los botones según el tamaño de la pantalla */
+      cursor: pointer;
+      color: #000000;
+      background-color: #f3f3f3;
+      border: 1px solid #1909f3;
+      border-radius: 4px;
+    }
+    .boton-letra.correcto { background-color: green; color: white; }
+    .boton-letra.incorrecto { background-color: red; color: white; }
+    #imagen-error {
+      width: 150px;
+      margin: 10px 0;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1.2em;
+      color: white;
+      background-color: #a314db;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+      width: 100%;
+      max-width: 200px;
+    }
+
+    button:hover {
+      background-color: #59aaf7;
+      transform: translateY(-2px);
+    }
+
+    button:active {
+      background-color: #f14fb3;
+      transform: translateY(0);
+    }
+
+   
+  </style>
+</head>
+<body>
+  <div class="contenedor">
+    <h2>Juego de Ahorcado</h2>
+    <img id="imagen-error" src="imagenes/0.png" alt="Error" />
+    <p id="tiempo">Tiempo: 1:00</p>
+    <p id="palabra-oculta"></p>
+    <p id="intentos">Intentos: 0</p>
+    <div class="botones-letras" id="botones-letras"></div>
+    <p id="estado"></p>
+    <button onclick="iniciarJuego()">Iniciar Juego</button>
+  </div>
+
+  <script>
+    const letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+    let palabras = [];
+    let palabra, palabraOculta, intentos, tiempo, enJuego, intervalo;
+
+    async function obtenerPalabraAleatoria() {
+      if (palabras.length === 0) {
+        try {
+          const response = await fetch('http://187.237.240.148:4005/api/palabras');
+          const data = await response.json();
+          palabras = data.Palabras.map(p => p.palabra.toUpperCase());
+        } catch (error) {
+          console.error("Error al obtener palabras:", error);
+        }
+      }
+      return palabras[Math.floor(Math.random() * palabras.length)];
+    }
+
+    function formatearTiempo(segundos) {
+      const minutos = Math.floor(segundos / 60);
+      const segundosRestantes = segundos % 60;
+      return `${minutos}:${segundosRestantes < 10 ? '0' : ''}${segundosRestantes}`;
+    }
+
+    async function iniciarJuego() {
+      palabra = await obtenerPalabraAleatoria();
+      palabraOculta = "_ ".repeat(palabra.length).trim();
+      intentos = 0;
+      tiempo = 60; 
+      enJuego = true;
+      actualizarPantalla();
+      document.getElementById("estado").textContent = "";
+      document.getElementById("imagen-error").src = `imagenes/0.png`;
+
+      clearInterval(intervalo);
+      intervalo = setInterval(() => {
+        if (tiempo > 0 && enJuego) {
+          tiempo--;
+          document.getElementById("tiempo").textContent = `Tiempo: ${formatearTiempo(tiempo)}`;
+        } else {
+          terminarJuego(false);
+        }
+      }, 1000);
+
+      const botonesLetras = document.getElementById("botones-letras");
+      botonesLetras.innerHTML = "";
+      letras.forEach(letra => {
+        const boton = document.createElement("button");
+        boton.textContent = letra;
+        boton.className = "boton-letra";
+        boton.onclick = () => verificarLetra(letra, boton);
+        botonesLetras.appendChild(boton);
+      });
+    }
+
+    function actualizarPantalla() {
+      document.getElementById("palabra-oculta").textContent = palabraOculta;
+      document.getElementById("intentos").textContent = `Intentos: ${intentos}`;
+    }
+
+    function verificarLetra(letra, boton) {
+      if (!enJuego || palabraOculta.includes(letra)) return;
+
+      if (palabra.includes(letra)) {
+        boton.classList.add("correcto");
+        let nuevaPalabraOculta = palabraOculta.split(" ");
+        palabra.split("").forEach((char, i) => {
+          if (char === letra) nuevaPalabraOculta[i] = letra;
+        });
+        palabraOculta = nuevaPalabraOculta.join(" ");
+      } else {
+        if (!boton.classList.contains("incorrecto")) {
+          boton.classList.add("incorrecto");
+          intentos++;
+          actualizarImagenError();
+        }
+      }
+
+      if (!palabraOculta.includes("_")) terminarJuego(true);
+      else if (intentos >= 9) terminarJuego(false);
+
+      actualizarPantalla();
+    }
+
+    function actualizarImagenError() {
+      const imgElement = document.getElementById("imagen-error");
+      imgElement.src = `imagenes/${intentos}.png`;
+    }
+
+    function terminarJuego(ganado) {
+      enJuego = false;
+      clearInterval(intervalo);
+      document.getElementById("estado").textContent = ganado ? "¡Has ganado!" : "¡Has perdido!";
+      if (!ganado) {
+        document.getElementById("imagen-error").src = `imagenes/9.png`;
+      }
+    }
+  </script>
+</body>
+</html>
