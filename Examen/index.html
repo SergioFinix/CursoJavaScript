@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen de Calculadora de Gastos Mensuales</title>
+    <style>
+         .container {
+        border-radius: 8px;
+        border-color: #007bff;
+        border-width: 2px;
+        border-style: solid;
+        width: 400px;
+        height: 393px;
+        margin-right: 15px;
+        align-items: center ;
+        justify-items: center;
+    }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Iniciar Sesión</h2>
+        <input type="text" id="nombre" placeholder="Escribe tu Nombre">
+        <button onclick="Iniciarsesion()">Entrar</button>
+        <div id="error"></div>
+    </div>
+
+    <div class="container" style="display: none">
+        <h2>Calculadora de Gastos mensuales</h2>
+
+    </div>
+
+    <script>
+
+        function Iniciarsesion() {
+            const usuarios=["David", "Sergio", "Andres"];
+            const nombre=document.getElementById("nombre").value.trim();
+            const error=document.getElementById("error");
+            const regex = new RegExp(`^(${usuarios.join("|")})$`, "i");
+
+            if (regex.test(nombre)){
+                error.textContent = "Es válido el nombre";
+            }else{
+                error.textContent = "No es válido el nombre";
+            }
+        }
+
+        
+
+    </script>
+</body>
+</html>

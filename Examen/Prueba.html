@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Gastos Mensuales</title>
+  <style>
+    /* Estilos básicos */
+    .container { max-width: 500px; margin: auto; padding: 20px; }
+    #gastos { margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+<div class="container" id="login">
+  <h2>Iniciar Sesión</h2>
+  <input type="text" id="username" placeholder="Ingresa tu nombre">
+  <button onclick="checkLogin()">Entrar</button>
+  <p id="loginError" style="color:red; display:none;">Nombre no válido</p>
+</div>
+
+<div class="container" id="calculator" style="display: none;">
+  <h2>Calculadora de Gastos Mensuales</h2>
+  <input type="text" id="concepto" placeholder="Concepto del Gasto">
+  <input type="number" id="cantidad" placeholder="Cantidad del Gasto">
+  <button onclick="agregarGasto()">Agregar Gasto</button>
+
+  <div id="gastos">
+    <h3>Lista de Gastos:</h3>
+    <ul id="gastosList"></ul>
+  </div>
+</div>
+
+<script>
+  // Lista de nombres válidos
+  const nombresValidos = ["David", "Sergio", "Andres"];
+
+  // Función para validar el nombre usando una expresión regular
+  function checkLogin() {
+    const username = document.getElementById("username").value.trim();
+    const regex = new RegExp(`^(${nombresValidos.join("|")})$`, "i"); // Expresión regular
+    const loginError = document.getElementById("loginError");
+
+    if (regex.test(username)) {
+      document.getElementById("login").style.display = "none";
+      document.getElementById("calculator").style.display = "block";
+    } else {
+      loginError.style.display = "block";
+    }
+  }
+
+  // Función para agregar un gasto a la lista
+  function agregarGasto() {
+    const concepto = document.getElementById("concepto").value.trim();
+    const cantidad = parseFloat(document.getElementById("cantidad").value.trim());
+    const gastosList = document.getElementById("gastosList");
+
+    if (concepto && !isNaN(cantidad)) {
+      const item = document.createElement("li");
+      item.textContent = `${concepto}: $${cantidad.toFixed(2)}`;
+      gastosList.appendChild(item);
+      // Limpiar los inputs
+      document.getElementById("concepto").value = "";
+      document.getElementById("cantidad").value = "";
+    } else {
+      alert("Por favor, ingresa un concepto y una cantidad válida.");
+    }
+  }
+</script>
+
+</body>
+</html>
