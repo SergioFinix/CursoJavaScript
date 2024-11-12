@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplos de Plantillas Literales</title>
+    <style>
+        /* Estilo general para el cuerpo */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Estilo del contenedor principal */
+        h1 {
+            color: #4a90e2;
+        }
+
+        /* Estilo para las etiquetas y campos de entrada */
+        label, input {
+            display: block;
+            margin: 10px 0;
+        }
+
+        input[type="text"], select {
+            padding: 10px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        /* Estilo para el botón */
+        button {
+            padding: 10px 20px;
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #357ab8;
+        }
+
+        /* Estilo para el área de texto */
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        /* Estilo del contenedor de formulario */
+        .formulario {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        /* Estilos para mensajes de validación */
+        .error {
+            color: red;
+        }
+
+        .success {
+            color: green;
+        }
+
+        /* Estilo para el botón desactivado */
+        button:disabled {
+            background-color: #ddd;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ejemplos de plantillas literales</h1>    
+
+    <!-- Contenedor de formulario -->
+    <div class="formulario">
+        <!-- Campos de entrada -->
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" placeholder="Introduce tu nombre">
+
+        <label for="edad">Edad:</label>
+        <input type="text" id="edad" placeholder="Introduce tu edad">
+
+        <label for="telefono">Telefono:</label>
+        <input type="text" id="telefono" placeholder="Introduce tu teléfono">
+        <p id="mensajeTelefono"></p>
+
+        <label for="email">Correo:</label>
+        <input type="text" id="email" placeholder="Introduce tu correo">
+        <p id="mensajeCorreo"></p>
+
+        <!-- Dropdown para seleccionar una ciudad -->
+        <label for="ciudadSeleccionado">Selecciona una ciudad:</label>
+        <select id="ciudadSeleccionado">
+            <option value="Pachuca">Pachuca</option>
+            <option value="México">México</option>
+            <option value="Monterrey">Monterrey</option>
+        </select>
+        <br>
+
+        <!-- Botón para mostrar los datos -->
+        <button id="datosPersonales" disabled>Mostrar Datos Personales</button>
+        
+        <!-- Área de texto para mostrar el resultado -->
+        <textarea name="salida" id="salida" readonly></textarea>
+    </div>
+
+    <script>
+        const botonDatosPersonales = document.getElementById("datosPersonales");
+        const salida = document.getElementById('salida');
+        const mensajeCorreo = document.getElementById('mensajeCorreo');
+        const mensajeTelefono = document.getElementById('mensajeTelefono');
+
+        // Función para sumar un año a la edad
+        function sumaAnio(anio) {
+            return parseInt(anio) + 1;
+        }
+
+        // Función para validar el correo
+        function validarCorreo(correo) {
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return regex.test(correo);
+        }
+
+        // Función para validar el teléfono
+        function validarTelefonoNumero(telefono) {
+            const regex = /^\d{10}$/;
+            return regex.test(telefono);
+        }
+
+        // Función para activar o desactivar el botón según la validez
+        function validarFormulario() {
+            const nombre = document.getElementById("nombre").value;
+            const edad = document.getElementById("edad").value;
+            const correo = document.getElementById("email").value;
+            const telefono = document.getElementById("telefono").value;
+
+            const esCorreoValido = validarCorreo(correo);
+            const esTelefonoValido = validarTelefonoNumero(telefono);
+
+            // Mostrar el mensaje de validación para el correo
+            if (!esCorreoValido) {
+                mensajeCorreo.textContent = "El correo no es válido.";
+                mensajeCorreo.classList.add('error');
+            } else {
+                mensajeCorreo.textContent = "El correo es válido.";
+                mensajeCorreo.classList.remove('error');
+                mensajeCorreo.classList.add('success');
+            }
+
+            // Mostrar el mensaje de validación para el teléfono
+            if (!esTelefonoValido) {
+                mensajeTelefono.textContent = "El número de teléfono no es válido.";
+                mensajeTelefono.classList.add('error');
+            } else {
+                mensajeTelefono.textContent = "El número de teléfono es válido.";
+                mensajeTelefono.classList.remove('error');
+                mensajeTelefono.classList.add('success');
+            }
+
+            // El botón solo se habilita si todo es válido
+            if (nombre && edad && esCorreoValido && esTelefonoValido) {
+                botonDatosPersonales.disabled = false;
+            } else {
+                botonDatosPersonales.disabled = true;
+            }
+        }
+
+        // Escuchar los cambios en los campos de entrada para validar en tiempo real
+        document.getElementById("nombre").addEventListener("input", validarFormulario);
+        document.getElementById("edad").addEventListener("input", validarFormulario);
+        document.getElementById("email").addEventListener("input", validarFormulario);
+        document.getElementById("telefono").addEventListener("input", validarFormulario);
+
+        // Escuchar el clic en el botón
+        botonDatosPersonales.addEventListener('click', () => {
+            const nombre = document.getElementById("nombre").value;
+            const edad = document.getElementById("edad").value;
+            const ciudadSeleccionado = document.getElementById("ciudadSeleccionado").value;
+            const correo = document.getElementById("email").value;
+            const telefono = document.getElementById("telefono").value;
+
+            // Usando plantillas literales para mostrar los datos
+            const datosPersonales = `Hola ${nombre}, tienes ${edad} años. En un año tendrás ${sumaAnio(edad)} años. Además, has seleccionado como ciudad natal ${ciudadSeleccionado}. Tu correo es: ${correo} y tu número es: ${telefono}`;
+
+            // Mostrar el resultado en el textarea
+            salida.innerText = datosPersonales;
+        });
+    </script>
+</body>
+</html>

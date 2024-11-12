@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahorcado</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .game-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .palabra {
+            font-size: 30px;
+            letter-spacing: 5px;
+            margin-bottom: 20px;
+        }
+
+        .intentos {
+            margin-bottom: 20px;
+        }
+
+        .mensaje {
+            font-weight: bold;
+        }
+
+        #iniciogame {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #iniciogame:disabled {
+            background-color: #ccc;
+        }
+
+        .letras {
+            margin-top: 20px;
+        }
+
+        .letras button {
+            margin: 5px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .correcta {
+            background-color: green;
+            color: white;
+        }
+
+        .incorrecta {
+            background-color: red;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="game-container">
+        <h1>Ahorcado</h1>
+        <div class="palabra" id="palabra"></div>
+        <div class="intentos">
+            <span>Intentos restantes: <span id="intentos">6</span></span>
+        </div>
+        <div class="mensaje" id="mensaje"></div>
+        <div class="letras" id="letras"></div>
+        <button id="iniciogame">Iniciar Juego</button>
+    </div>
+
+    <script>
+    
+        const palabras = ["perro", "gato", "leon", "iguana", "cactus"];
+        let selectedPalabra = '';
+        let LetraAdivinada = [];
+        let intentos = 6;
+
+        const palabraElement = document.getElementById('palabra');
+        const intentosElement = document.getElementById('intentos');
+        const mensajeElement = document.getElementById('mensaje');
+        const letrasElement = document.getElementById('letras');
+        const inicioButton = document.getElementById('iniciogame');
+
+    
+        function iniciar() {
+            selectedPalabra = palabras[Math.floor(Math.random() * palabras.length)];
+            LetraAdivinada = [];
+            intentos = 6;
+            updateWordDisplay();
+            intentosElement.textContent = intentos;
+            mensajeElement.textContent = '';
+            letrasElement.innerHTML = '';
+            inicioButton.disabled = true;
+            enableLetterButtons();
+        }
+
+        function updateWordDisplay() {
+            let display = '';
+            for (let letras of selectedPalabra) {
+                if (LetraAdivinada.includes(letras)) {
+                    display += letras + ' ';
+                } else {
+                    display += '_ ';
+                }
+            }
+            palabraElement.textContent = display.trim();
+        }
+
+        function guessLetter(letras, button) {
+            if (LetraAdivinada.includes(letras)) {
+                return;
+            }
+
+            LetraAdivinada.push(letras);
+            if (selectedPalabra.includes(letras)) {
+                button.classList.add('correcta');
+                updateWordDisplay();
+                checkGameStatus();
+            } else {
+                button.classList.add('incorrecta');
+                intentos--;
+                intentosElement.textContent = intentos;
+                if (intentos === 0) {
+                    mensajeElement.textContent = `¡Perdiste! La palabra era: ${selectedPalabra}`;
+                    disableLetterButtons();
+                }
+            }
+        }
+
+        function checkGameStatus() {
+            const wordDisplay = palabraElement.textContent.replace(/\s/g, '');
+            if (wordDisplay === selectedPalabra) {
+                mensajeElement.textContent = '¡Correcto, la has adivinado!';
+                disableLetterButtons();
+            }
+        }
+
+        function enableLetterButtons() {
+            const letters = 'abcdefghijklmnopqrstuvwxyz'.split('');
+            letters.forEach(letras => {
+                const button = document.createElement('button');
+                button.textContent = letras;
+                button.addEventListener('click', () => guessLetter(letras, button));
+                letrasElement.appendChild(button);
+            });
+        }
+
+        function disableLetterButtons() {
+            const buttons = letrasElement.querySelectorAll('button');
+            buttons.forEach(button => {
+                button.disabled = true;
+            });
+        }
+
+        inicioButton.addEventListener('click', iniciar);
+
+        window.onload = function() {
+            inicioButton.disabled = false;
+        };
+    </script>
+
+</body>
+</html>
