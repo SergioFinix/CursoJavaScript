@@ -1,0 +1,78 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    background-color: #f4f4f9;
+}
+
+#container{
+    display: flex;
+    width: 80%;
+    margin-top: 20%;
+}
+
+#lista-usuarios{
+    width: 25%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#lista-usuarios h2{
+    text-align: center;
+}
+
+#lista-usuarios ul{
+    list-style: none;
+    padding: 0;
+}
+
+#lista-usuarios li{
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+}
+
+#lista-usuarios li:hover{
+    background-color: #f0f0f0;
+}
+
+#vista-tarjeta{
+    width: 75%;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#tarjeta-container{
+    width: 100%;
+    max-width: 500px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+#tarjeta-container img{
+    /* Para Despues */
+}
+
+#tarjeta-container h3{
+    /* Para Despues */
+}
+
+#tarjeta-container p{
+    /* Para Despues */
+}
+
+#tarjeta-info{
+    /* Para Despues */
+}
