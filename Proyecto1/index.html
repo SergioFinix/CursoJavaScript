@@ -4,9 +4,65 @@
      <meta charset="UTF-8">
      <meta http-equiv="X-UA-Compatible" content="IE=edge">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="css/estilos.css">     
      <title>Tareas</title>
+
 </head>
 <body>
-     
+     <div class="contenedor">
+          <div class="mostrar" id="agregarTarea">
+               <p>Nueva tarea</p>
+               <table id="nuevaTarea">
+                    <tr>
+                         <td>
+                              <select name="nombre" id="nom">
+                                   <option value="Clementine Bauch">Clementine Bauch</option>
+                                   <option value="Ervin Howell">Ervin Howell</option>
+                              </select>
+                         </td>
+                         <td>
+                              <select name="estado" id="edo">
+                                   <option value="Creado">Creado</option>
+                                   <option value="En proceso">En proceso</option>
+                                   <option value="Pausada">Pausada</option>
+                              </select>
+                         </td>
+                         <td>
+                              Tarea:<input type="text" id="tarea1">
+                              <button id="botonGuardar">Guardar</button>
+                         </td>
+                    </tr>
+               </table>
+          </div>
+          <div class="listadoTareas" id="listadoTareas">Listado de tareas</div>
+          <div class="encabezado listadoTareas">
+               <table id="listado">
+                  <thead>
+                         <tr id="tituloTabla">
+                              <th id="id">ID</th>
+                              <th id="usuario">Usuarios</th>
+                              <th id="tarea" colspan="3">Tareas <button id="botonAgregarTarea" class="agregar">Agregar</button></th>
+                         </tr>
+                  </thead>
+                  <tbody>
+                         <tr >
+                              <td class="id">1</td>
+                              <td class="usuario">Leanne Graham</td>
+                              <td class="nombreTarea">Presentar Informe</td>
+                              <td class="estado">En progreso</td>
+                              <td class="editar"><button class="editar">Editar</button><button class="eliminar">Eliminar</button></td>
+                         </tr>
+                         <tr>
+                              <td class="id">2</td>
+                              <td class="usuario">Clementine Bauch</td>
+                              <td class="nombreTarea">Hacer presentación</td>
+                              <td class="estado">Creada</td>
+                              <td class="editar"><button class="editar">Editar</button><button class="eliminar">Eliminar</button></td>
+                         </tr>                         
+                    </tbody>                    
+               </table>
+          </div>
+     </div> 
+     <script src="javascript/script.js"></script>
 </body>
 </html>
