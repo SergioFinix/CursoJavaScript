@@ -1,0 +1,267 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>AHORCADO - CURSO JAVASCRIPT</title>
+
+    <style>
+        body {
+            width: 100%;
+            display: flex;
+            font-family: roboto, sans-serif;
+            background-color: lightgray;
+            box-shadow: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            font-family: roboto, sans-serif;
+        }
+
+        #contenedor {
+            background-color: white;
+            width: 950px;
+            height: 650px;
+            margin: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        #palabra {
+            font-size: 30px;
+            letter-spacing: 5px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        #intentos {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+
+        #letrasUsadas {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        #reset {
+            background-color: lightblue;
+            margin-top: 30px;
+            width: 150px;
+            height: 40px;
+            border-radius: 10px;
+            color: darkblue;
+            cursor: pointer;
+        }
+
+            #reset:hover {
+                width: 155px;
+                height: 45px;
+                transition: .2s;
+                box-shadow: initial;
+                color: darkblue;
+            }
+
+        #inputLetter {
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 20px;
+        }
+
+        /* Estilo del dibujo del ahorcado */
+        #ahorcado {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin-top: 20px;
+            border: 2px solid black;
+        }
+
+        .parte {
+            position: absolute;
+            background-color: black;
+        }
+
+        #poste {
+            width: 10px;
+            height: 150px;
+            left: 80px;
+            top: 10px;
+        }
+
+        #cuerda {
+            width: 2px;
+            height: 50px;
+            left: 90px;
+            top: 40px;
+        }
+
+        #cabeza {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            top: 90px;
+            left: 70px;
+        }
+
+        #cuerpo {
+            width: 10px;
+            height: 50px;
+            top: 140px;
+            left: 90px;
+        }
+
+        #brazos {
+            width: 40px;
+            height: 10px;
+            top: 150px;
+            left: 60px;
+        }
+
+        #piernas {
+            width: 40px;
+            height: 10px;
+            top: 190px;
+            left: 60px;
+        }
+    </style>
+</head>
+<body>
+    <div id="contenedor">
+        <h1>AHORCADO - JAVASCRIPT</h1>
+
+        <div id="ahorcado">
+            <div id="poste" class="parte"></div>
+            <div id="cuerda" class="parte"></div>
+            <div id="cabeza" class="parte" style="display: none;"></div>
+            <div id="cuerpo" class="parte" style="display: none;"></div>
+            <div id="brazos" class="parte" style="display: none;"></div>
+            <div id="piernas" class="parte" style="display: none;"></div>
+        </div>
+
+        <div id="panel"></div>
+
+        <div id="cargarPalabra"></div>
+
+
+
+        <div id="palabra">Encuentra la palabra</div>
+        <div id="intentos">Intentos restantes: 6</div>
+        <div id="letrasUsadas"></div>
+        <div id="resultado"></div>
+
+
+        <button id="reset" onclick="cargarPalabra()">cargar</button>
+
+        <input type="text" id="inputLetter" maxlength="1" oninput="verificarLetra()">
+        <button id="reset" onclick="reiniciarJuego()">Reiniciar Juego</button>
+    </div>
+
+
+    <script>
+
+        let palabraSecreta = '';
+        let palabraOculta = [];
+        let intentosRestantes = 6;
+        let letrasUsadas = [];
+
+        async function cargarPalabra() {
+
+            try {
+
+                const respuesta = await fetch('http://187.237.240.148:4005/api/palabras');
+                const datos = await respuesta.json();
+
+                const palabras = datos.Palabras.map(p => p.palabra);
+                const palabraAleatoria = palabras[Math.floor(Math.random() * palabras.length)];
+
+
+                document.getElementById("palabra").innerText = `Palabra: ${palabraAleatoria}`;
+            } catch (error) {
+                console.error('Error al cargar la palabra:', error);
+            }
+
+            console.log(palabra);
+        }
+
+        //function actualizarInterfaz() {
+           
+            document.getElementById('palabra').innerText = palabraOculta.join(' ');
+            document.getElementById('intentos').innerText = `Intentos restantes: ${intentosRestantes}`;
+            document.getElementById('letrasUsadas').innerText = `Letras usadas: ${letrasUsadas.join(', ')}`;
+        }
+
+        function verificarLetra() {
+            const input = document.getElementById('inputLetter');
+            const letra = input.value();
+
+            if (letra && !letrasUsadas.includes(letra)) {
+                letrasUsadas.push(letra);
+
+                if (palabraSecreta.includes(letra)) {
+                    
+                    for (let i = 0; i < palabraSecreta.length; i++) {
+                        if (palabraSecreta[i] === letra) {
+                            palabraOculta[i] = letra;
+                        }
+                    }
+                } else {
+                    
+                    intentosRestantes--;
+                    actualizarDibujo();
+                }
+                        
+                input.value = '';
+
+                
+                actualizarInterfaz();
+                              
+                if (intentosRestantes === 0) {
+                    alert('¡Perdiste! La palabra era: ' + palabraSecreta);
+                    reiniciarJuego();
+                } else if (!palabraOculta.includes('_')) {
+                    alert('¡Ganaste! Has adivinado la palabra.');
+                    reiniciarJuego();
+                }
+            }
+        }
+
+        // Función para reiniciar el juego
+        function reiniciarJuego() {
+            cargarPalabra();
+            document.getElementById('inputLetter').value = '';
+        }
+
+        // Función para mostrar el dibujo del ahorcado paso a paso
+        function actualizarDibujo() {
+            if (intentosRestantes === 5) {
+                document.getElementById('cabeza').style.display = 'block';
+            } else if (intentosRestantes === 4) {
+                document.getElementById('cuerpo').style.display = 'block';
+            } else if (intentosRestantes === 3) {
+                document.getElementById('brazos').style.display = 'block';
+            } else if (intentosRestantes === 2) {
+                document.getElementById('piernas').style.display = 'block';
+            }
+        }
+
+        // Función para reiniciar el dibujo
+        function resetDibujo() {
+            document.getElementById('cabeza').style.display = 'none';
+            document.getElementById('cuerpo').style.display = 'none';
+            document.getElementById('brazos').style.display = 'none';
+            document.getElementById('piernas').style.display = 'none';
+        }
+
+        // Cargar una palabra cuando la página se carga
+        window.onload = cargarPalabra;
+
+   
+
+    </script>
+</body>
+</html>
