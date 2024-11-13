@@ -140,7 +140,6 @@
             letrasElement.innerHTML = '';
             inicioButton.disabled = true;
             enableLetterButtons();
-            // Mostrar la imagen correspondiente a los 6 intentos
             updateImage();
         }
 
@@ -170,7 +169,6 @@
                 button.classList.add('incorrecta');
                 intentos--;
                 intentosElement.textContent = intentos;
-                // Actualizar la imagen en función de los intentos restantes
                 updateImage();
                 if (intentos === 0) {
                     mensajeElement.textContent = `¡Perdiste! La palabra era: ${selectedPalabra}`;
