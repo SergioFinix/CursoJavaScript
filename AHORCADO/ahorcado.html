@@ -77,11 +77,26 @@
             background-color: red;
             color: white;
         }
+
+        /* Estilo para la imagen */
+        #inicioImagen {
+            display: block;
+            margin: 0 auto 20px;
+            width: 200px;
+            height: 200px;
+            background-image: url('img/ahorcado_6.png'); /* Imagen inicial */
+            background-size: cover;
+            background-position: center;
+        }
+
     </style>
 </head>
 <body>
 
     <div class="game-container">
+        <!-- Imagen que se actualiza -->
+        <div id="inicioImagen"></div>
+
         <h1>Ahorcado</h1>
         <div class="palabra" id="palabra"></div>
         <div class="intentos">
@@ -93,8 +108,7 @@
     </div>
 
     <script>
-    
-        const palabras = ["perro", "gato", "leon", "iguana", "cactus"];
+        const palabras = ["perro", "gato", "leon", "iguana", "cactus","ferrocarril","victoria"];
         let selectedPalabra = '';
         let LetraAdivinada = [];
         let intentos = 6;
@@ -104,8 +118,18 @@
         const mensajeElement = document.getElementById('mensaje');
         const letrasElement = document.getElementById('letras');
         const inicioButton = document.getElementById('iniciogame');
+        const inicioImagen = document.getElementById('inicioImagen');
 
-    
+        const imagenesAhorcado = [
+            'img/ahorcado_0.png',
+            'img/ahorcado_1.png',
+            'img/ahorcado_2.png',
+            'img/ahorcado_3.png',
+            'img/ahorcado_4.png',
+            'img/ahorcado_5.png',
+            'img/ahorcado_6.png' 
+        ];
+
         function iniciar() {
             selectedPalabra = palabras[Math.floor(Math.random() * palabras.length)];
             LetraAdivinada = [];
@@ -116,6 +140,8 @@
             letrasElement.innerHTML = '';
             inicioButton.disabled = true;
             enableLetterButtons();
+            // Mostrar la imagen correspondiente a los 6 intentos
+            updateImage();
         }
 
         function updateWordDisplay() {
@@ -144,6 +170,8 @@
                 button.classList.add('incorrecta');
                 intentos--;
                 intentosElement.textContent = intentos;
+                // Actualizar la imagen en función de los intentos restantes
+                updateImage();
                 if (intentos === 0) {
                     mensajeElement.textContent = `¡Perdiste! La palabra era: ${selectedPalabra}`;
                     disableLetterButtons();
@@ -174,6 +202,10 @@
             buttons.forEach(button => {
                 button.disabled = true;
             });
+        }
+
+        function updateImage() {
+            inicioImagen.style.backgroundImage = `url(${imagenesAhorcado[intentos]})`;
         }
 
         inicioButton.addEventListener('click', iniciar);
