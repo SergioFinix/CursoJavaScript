@@ -41,18 +41,18 @@
             font-weight: bold;
         }
 
-        #iniciogame {
+        #iniciogame, #reiniciar {
             margin-top: 20px;
             padding: 10px 20px;
             font-size: 16px;
-            background-color: #4CAF50;
+            background-color: #f143c2;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
         }
 
-        #iniciogame:disabled {
+        #iniciogame:disabled, #reiniciar:disabled {
             background-color: #ccc;
         }
 
@@ -78,7 +78,6 @@
             color: white;
         }
 
-        /* Estilo para la imagen */
         #inicioImagen {
             display: block;
             margin: 0 auto 20px;
@@ -89,12 +88,24 @@
             background-position: center;
         }
 
+        .tiempo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #ed560f;
+        }
+
+        .puntaje {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
     </style>
 </head>
 <body>
 
     <div class="game-container">
-        <!-- Imagen que se actualiza -->
         <div id="inicioImagen"></div>
 
         <h1>Ahorcado</h1>
@@ -102,23 +113,32 @@
         <div class="intentos">
             <span>Intentos restantes: <span id="intentos">6</span></span>
         </div>
+        <div class="tiempo" id="tiempo">Tiempo restante: 00:60</div>
         <div class="mensaje" id="mensaje"></div>
         <div class="letras" id="letras"></div>
+        <div class="puntaje" id="puntaje">Puntaje: 0</div>
         <button id="iniciogame">Iniciar Juego</button>
+        <button id="reiniciar" disabled>Reiniciar Juego</button> 
     </div>
 
     <script>
-        const palabras = ["perro", "gato", "leon", "iguana", "cactus","ferrocarril","victoria"];
+        const palabras = ["perro", "gato", "leon", "iguana", "cactus", "ferrocarril", "victoria"];
         let selectedPalabra = '';
         let LetraAdivinada = [];
         let intentos = 6;
+        let tiempo;
+        let tiempoRestante = 60;
+        let puntaje = 0;
 
         const palabraElement = document.getElementById('palabra');
         const intentosElement = document.getElementById('intentos');
         const mensajeElement = document.getElementById('mensaje');
         const letrasElement = document.getElementById('letras');
         const inicioButton = document.getElementById('iniciogame');
+        const reiniciarButton = document.getElementById('reiniciar');
         const inicioImagen = document.getElementById('inicioImagen');
+        const tiempoElement = document.getElementById('tiempo');
+        const puntajeElement = document.getElementById('puntaje');
 
         const imagenesAhorcado = [
             'img/ahorcado_0.png',
@@ -127,20 +147,25 @@
             'img/ahorcado_3.png',
             'img/ahorcado_4.png',
             'img/ahorcado_5.png',
-            'img/ahorcado_6.png' 
+            'img/ahorcado_6.png'
         ];
 
         function iniciar() {
             selectedPalabra = palabras[Math.floor(Math.random() * palabras.length)];
             LetraAdivinada = [];
             intentos = 6;
+            tiempoRestante = 60;
             updateWordDisplay();
             intentosElement.textContent = intentos;
             mensajeElement.textContent = '';
             letrasElement.innerHTML = '';
+            tiempoElement.textContent = "Tiempo restante: 00:60";
+            puntajeElement.textContent = `Puntaje: ${puntaje}`;
             inicioButton.disabled = true;
+            reiniciarButton.disabled = true;
             enableLetterButtons();
             updateImage();
+            inicioTiempo();
         }
 
         function updateWordDisplay() {
@@ -155,33 +180,80 @@
             palabraElement.textContent = display.trim();
         }
 
-        function guessLetter(letras, button) {
-            if (LetraAdivinada.includes(letras)) {
-                return;
-            }
+            function guessLetter(letras, button) {
+    if (LetraAdivinada.includes(letras)) {
+        return;
+    }
 
-            LetraAdivinada.push(letras);
-            if (selectedPalabra.includes(letras)) {
-                button.classList.add('correcta');
-                updateWordDisplay();
-                checkGameStatus();
-            } else {
-                button.classList.add('incorrecta');
-                intentos--;
-                intentosElement.textContent = intentos;
-                updateImage();
-                if (intentos === 0) {
-                    mensajeElement.textContent = `¡Perdiste! La palabra era: ${selectedPalabra}`;
-                    disableLetterButtons();
-                }
-            }
+    LetraAdivinada.push(letras);
+    if (selectedPalabra.includes(letras)) {
+        button.classList.add('correcta');
+        updateWordDisplay();
+        checkGameStatus();
+    } else {
+        button.classList.add('incorrecta');
+        intentos--;
+        intentosElement.textContent = intentos;
+        updateImage();
+        if (intentos === 0) {
+            mensajeElement.textContent = `¡Perdiste! La palabra era: ${selectedPalabra}`;
+            disableLetterButtons();
+            clearInterval(tiempo);
+            reiniciarButton.disabled = false;
         }
+    }
+}
+
+function checkGameStatus() {
+    const wordDisplay = palabraElement.textContent.replace(/\s/g, '');
+    if (wordDisplay === selectedPalabra) {
+        mensajeElement.textContent = '¡Correcto, la has adivinado!';
+        puntaje++;
+        puntajeElement.textContent = `Puntaje: ${puntaje}`;
+        disableLetterButtons();
+        clearInterval(tiempo);
+        reiniciarButton.disabled = false;
+    }
+}
+
+function inicioTiempo() {
+    tiempo = setInterval(() => {
+        if (tiempoRestante > 0) {
+            tiempoRestante--;
+            const minutos = Math.floor(tiempoRestante / 60);
+            const segundos = tiempoRestante % 60;
+            tiempoElement.textContent = `Tiempo restante: ${minutos < 10 ? '0' : ''}${minutos}:${segundos < 10 ? '0' : ''}${segundos}`;
+        } else {
+            mensajeElement.textContent = "¡Se acabó el tiempo!";
+            disableLetterButtons();
+            clearInterval(tiempo);
+            reiniciarButton.disabled = false;
+        }
+    }, 1000);
+}
+
+function reiniciarJuego() {
+    puntaje = 0;
+    puntajeElement.textContent = `Puntaje: ${puntaje}`;
+    inicioButton.disabled = false;
+    reiniciarButton.disabled = true;
+    mensajeElement.textContent = '';
+    letrasElement.innerHTML = '';
+    inicioImagen.style.backgroundImage = `url(${imagenesAhorcado[6]})`; // Imagen inicial
+    tiempoRestante = 60;
+    tiempoElement.textContent = "Tiempo restante: 00:60";
+}
+
 
         function checkGameStatus() {
             const wordDisplay = palabraElement.textContent.replace(/\s/g, '');
             if (wordDisplay === selectedPalabra) {
                 mensajeElement.textContent = '¡Correcto, la has adivinado!';
+                puntaje++;
+                puntajeElement.textContent = `Puntaje: ${puntaje}`;
                 disableLetterButtons();
+                clearInterval(tiempo);
+                reiniciarButton.disabled = false;
             }
         }
 
@@ -206,7 +278,34 @@
             inicioImagen.style.backgroundImage = `url(${imagenesAhorcado[intentos]})`;
         }
 
+        function inicioTiempo() {
+            tiempo = setInterval(() => {
+                if (tiempoRestante > 0) {
+                    tiempoRestante--;
+                    const minutos = Math.floor(tiempoRestante / 60);
+                    const segundos = tiempoRestante % 60;
+                    tiempoElement.textContent = `Tiempo restante: ${minutos < 10 ? '0' : ''}${minutos}:${segundos < 10 ? '0' : ''}${segundos}`;
+                } else {
+                    mensajeElement.textContent = "¡Se acabó el tiempo!";
+                    disableLetterButtons();
+                    clearInterval(tiempo);
+                    reiniciarButton.disabled = false;
+                }
+            }, 1000);
+        }
+
+        function reiniciarJuego() {
+            inicioButton.disabled = false;
+            reiniciarButton.disabled = true;
+            mensajeElement.textContent = '';
+            letrasElement.innerHTML = '';
+            inicioImagen.style.backgroundImage = `url(${imagenesAhorcado[6]})`;
+            tiempoRestante = 60;
+            tiempoElement.textContent = "Tiempo restante: 00:60";
+        }
+
         inicioButton.addEventListener('click', iniciar);
+        reiniciarButton.addEventListener('click', reiniciarJuego);
 
         window.onload = function() {
             inicioButton.disabled = false;
