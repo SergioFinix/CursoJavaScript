@@ -33,7 +33,8 @@
     <script>
         function validarTelefono() {
             const telefono = document.getElementById('telefono').value;
-            const regex = /^\d{10}$/;
+            //const regex = /^\d{10}$/;//
+        const regex = /\+\d{2,3}\s\d{3}-\d{3}-\d{3}-\d{1}/;
             const mensaje = document.getElementById('mensaje');
 
             if (regex.test(telefono)) {
@@ -44,6 +45,7 @@
                 mensaje.className = "error";
             }
         }
+        
     </script>
 </body>
 </html>

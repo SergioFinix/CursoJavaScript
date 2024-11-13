@@ -76,10 +76,53 @@
 <body>
     <h1>Ejemplos de plantillas literales</h1>    
     Nombre:<input type="text" id="nombre">
-    Edad: <input type="text" id="edad"> 
-    <button id="datosPersonales">Datos personales</button>
+    Edad: <input type="text" id="edad">
+    <select id="estados" name="estados">  
+        <option value="HIDALGO">HIDALGO</option>  
+        <option value="QUERETARO">QUERETARO</option>  
+        <option value="CDMX" selected>CDMX</option>    
+    </select>
+    Correo Electrónico:<input type="text" id="email">
+    Telefono:<input type="text" id="telefono">
+    <p id="mensaje"></p>
+    <p id="mensaje1"></p>
+    <button id="datosPersonales" onclick="validarCorreo(),validarTelefono()">Datos personales</button> <!-- Onclick -> llama a la funcion java scrip pafra validar numero -->
     <textarea name="salid" id="salida"></textarea>
     
+    <script>
+        function validarTelefono() {
+            const telefono = document.getElementById('telefono').value;
+            //const regex = /^\d{10}$/;//
+            const regex = /\+\d{2,3}\s\d{3}-\d{3}-\d{3}-\d{1}/;
+            const mensaje = document.getElementById('mensaje');
+
+            if (regex.test(telefono)) {
+                mensaje.textContent = "El número de teléfono es válido.";
+                mensaje.className = "success";
+            } else {
+                mensaje.textContent = "El número de teléfono no es válido.";
+                mensaje.className = "error";
+            }
+        }
+    </script>
+
+<script>
+    function validarCorreo() {
+        const email = document.getElementById('email').value;
+        const regex1 = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const mensaje1 = document.getElementById('mensaje1');
+
+        if (regex1.test(email)) {
+            mensaje1.textContent = "El correo es válido.";
+            mensaje1.style.color = "green";
+        } else {
+            mensaje1.textContent = "El correo no es válido.";
+            mensaje1.classList.add('error');
+        }
+    }
+</script>
+
+
     
 </body>
 <script>
@@ -94,10 +137,13 @@
     botonDatosPersonales.addEventListener('click',() => {
         const nombre = document.getElementById("nombre").value;
         const edad = document.getElementById("edad").value;
+        const estados = document.getElementById("estados").value;
+        const email = document.getElementById("email").value;
+        const telefono = document.getElementById("telefono").value;
     
         //const datosPersonales = "Hola "+nombre+" tu tines "+edad+" años";
         
-        const datosPersonales = `Hola ${nombre} tu tines ${edad} años, mas un año -> ${sumaAnio(edad)} una suma ${2*2}`;
+        const datosPersonales = `Hola ${nombre} tu tines ${edad} años, mas un año -> ${sumaAnio(edad)} una suma ${2*2} este es el seleccionado we ${estados} tel: ${telefono} email: ${email}`;
         //console.log(datosPersonales);
         salida.innerText= datosPersonales;
     });
