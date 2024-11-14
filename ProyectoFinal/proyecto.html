@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simulador de Encuestas</title>
     <style>
+        h2 {
+            text-align: center;
+            font-weight: lighter;
+        }
         table {
             width: fit-content;
             border-radius: collapse;
@@ -36,10 +40,11 @@
         }
         .form-container {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             gap: 5px;
             margin-left: 20px;
             margin-right: 20px;
+            margin-top: 20px;
         }
         button {
             cursor: pointer;
@@ -65,9 +70,9 @@
 
         <!-- Contenedor de Formularios -->
         <div class="form-container">
-            <h2>Encuesta de Satisfacción 1</h2>
             <!-- Formulario de Encuesta 1-->
             <form id="surveyForm1">
+                <h2>Encuesta 1</h2>
                 <div class="form-group">
                     <label for="serviceRating">¿Cómo calificaría nuestro servicio? (1 a 5)</label>
                     <input type="number" id="serviceRating" min="1" max="5" required>
@@ -107,9 +112,9 @@
                 </div>
             </form>
 
-            <h2>Encuesta de Satisfacción 2</h2>
             <!-- Formulario de Encuesta 2-->
             <form id="surveyForm2">
+                <h2>Encuesta 2</h2>
                 <div class="form-group">
                     <label for="serviceRating">¿Qué tan satisfecho(a) estás con la atención al cliente que recibiste durante tu visita? (1 a 5)</label>
                     <input type="number" id="serviceRating" min="1" max="5" required>
@@ -150,9 +155,9 @@
 
             </form>
 
-            <h2>Encuesta de Satisfacción 3</h2>
             <!-- Formulario de Encuesta 3-->
             <form id="surveyForm2">
+                <h2>Encuesta 3</h2>
                 <div class="form-group">
                     <label for="serviceRating">¿Qué tan satisfecho(a) estás con la calidad de los alimentos que consumiste? (1 a 5)</label>
                     <input type="number" id="serviceRating" min="1" max="5" required>
