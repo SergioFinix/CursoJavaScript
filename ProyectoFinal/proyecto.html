@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Encuestas</title>
+    <style>
+        table {
+            width: fit-content;
+            border-radius: collapse;
+            margin-top: 10px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 5px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+            cursor: pointer;
+        }
+        .form-group {
+            background-color: darkgray;
+            margin-bottom: 15px;
+        }
+        .container {
+            display: flex;
+        }
+        .centrar {
+            text-align: center;
+        }
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+        button {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="centrar">
+        <h1>Usuarios para aplicar encuesta</h1>
+        <input type="text" id="nombreUsuario" placeholder="Selecciona un usuario" readonly>
+    </div>
+    <div class="container">
+        <!--<input type="text" id="nombreUsuario" placeholder="Selecciona un usuario" readonly> -->
+        <table id="tablaUsuarios">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <!-- Contenedor de Formularios -->
+        <div class="form-container">
+            <h2>Encuesta de Satisfacción 1</h2>
+            <!-- Formulario de Encuesta 1-->
+            <form id="surveyForm1">
+                <div class="form-group">
+                    <label for="serviceRating">¿Cómo calificaría nuestro servicio? (1 a 5)</label>
+                    <input type="number" id="serviceRating" min="1" max="5" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="recommend">¿Recomendaría nuestro producto a otros?</label>
+                    <select id="recommend" required>
+                        <option value="">Seleccione una opción</option>
+                        <option value="Sí">Sí</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="recommend">¿En que color le gusta el producto?</label>
+                    <select id="recommend" required>
+                        <option value="">Seleccione una opción</option>
+                        <option value="Blanco">Blanco</option>
+                        <option value="Negro">Negro</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="satisfaction">¿Qué tan satisfecho está con la atención al cliente? (1 a 5)</label>
+                    <input type="number" id="satisfaction" min="1" max="5" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="frequency">¿Con qué frecuencia usa nuestro producto?</label>
+                    <select id="frequency" required>
+                        <option value="">Seleccione una opción</option>
+                        <option value="Diario">Diario</option>
+                        <option value="Semanal">Semanal</option>
+                        <option value="Mensual">Mensual</option>
+                        <option value="Rara vez">Rara vez</option>
+                    </select>
+                </div>
+            </form>
+
+            <h2>Encuesta de Satisfacción 2</h2>
+            <!-- Formulario de Encuesta 2-->
+            <form id="surveyForm2">
+                <div class="form-group">
+                    <label for="serviceRating">¿Qué tan satisfecho(a) estás con la atención al cliente que recibiste durante tu visita? (1 a 5)</label>
+                    <input type="number" id="serviceRating" min="1" max="5" required>
+                </div>
+                <div class="form-group">
+                    <label for="frequency">¿Cómo calificarías la limpieza y organización de la tienda?</label>
+                    <select id="frequency" required>
+                        <option value="">Seleccione una opción</option>
+                        <option value="Excelente">Excelente</option>
+                        <option value="Buena">Buena</option>
+                        <option value="Regular">Regular</option>
+                        <option value="Mala">Mala</option>
+                        <option value="Muy Mala">Muy Mala</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="recommend">¿Recomendaría nuestro producto a otros?</label>
+                    <select id="recommend" required>
+                        <option value="">Seleccione una opción</option>
+                        <option value="Sí">Sí</option>
+                        <option value="Solo">Solo algunos productos</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="satisfaction">¿Qué tan satisfecho(a) estás con la relación calidad-precio de los productos que compraste? (1 a 5)</label>
+                    <input type="number" id="satisfaction" min="1" max="5" required>
+                </div>
+                <div class="form-group">
+                    <label for="recommend">¿Volverías a comprar en esta tienda?</label>
+                    <select id="recommend" required>
+                        <option value="">Seleccione una opción</option>
+                        <option value="Sí">Sí</option>
+                        <option value="Solo">No estoy seguro</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+            </form>
+
+            <h2>Encuesta de Satisfacción 3</h2>
+            <!-- Formulario de Encuesta 3-->
+            <form id="surveyForm2">
+                <div class="form-group">
+                    <label for="serviceRating">¿Qué tan satisfecho(a) estás con la calidad de los alimentos que consumiste? (1 a 5)</label>
+                    <input type="number" id="serviceRating" min="1" max="5" required>
+                </div>
+                <div class="form-group">
+                    <label for="frequency">¿Cómo calificarías la atención que recibiste por parte del personal?</label>
+                    <select id="frequency" required>
+                        <option value="">Seleccione una opción</option>
+                        <option value="Excelente">Excelente</option>
+                        <option value="Buena">Buena</option>
+                        <option value="Regular">Regular</option>
+                        <option value="Mala">Mala</option>
+                        <option value="Muy Mala">Muy Mala</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="recommend">¿El tiempo de espera para recibir tu pedido fue adecuado?</label>
+                    <select id="recommend" required>
+                        <option value="">Seleccione una opción</option>
+                        <option value="Sí">Sí</option>
+                        <option value="Solo">No, fue un poco lento</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="satisfaction">¿Qué tan satisfecho(a) estás con la relación calidad-precio de tu experiencia en el restaurante? (1 a 5)</label>
+                    <input type="number" id="satisfaction" min="1" max="5" required>
+                </div>
+                <div class="form-group">
+                    <label for="recommend">¿Recomendarías este restaurante a familiares y amigos?</label>
+                    <select id="recommend" required>
+                        <option value="">Seleccione una opción</option>
+                        <option value="Sí">Sí</option>
+                        <option value="Solo">No estoy seguro</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+            </form>
+
+        </div>
+        
+    </div>
+    <button type="button" onclick="enviarRespuestas()">Enviar Encuestas</button>
+
+    <script>
+        // Función para obtener usuarios de la API
+        async function obtenerUsuarios() {
+            try {
+                const respuesta = await fetch('https://jsonplaceholder.typicode.com/users');
+                const usuarios = await respuesta.json();
+                verUsuarios(usuarios);
+            } catch (error) {
+                console.error('Error al obtener los usuarios:', error);
+            }
+        }
+
+        // Función para visualizar los usuarios en una tabla
+        function verUsuarios(usuarios) {
+            const tablaCuerpo = document.querySelector('#tablaUsuarios tbody');
+            tablaCuerpo.innerHTML = ''; // Limpiar tabla antes de llenarla
+
+            usuarios.forEach(usuario => {
+                const fila = document.createElement('tr');
+
+                fila.innerHTML = `
+                    <td>${usuario.id}</td>
+                    <td class="nombre">${usuario.name}</td>
+                `;
+
+                // Evento click en la fila del nombre
+                fila.querySelector('.nombre').addEventListener('click', () => {
+                    document.getElementById('nombreUsuario').value = usuario.name;
+                });
+
+                tablaCuerpo.appendChild(fila);
+            });
+        }
+
+        // Llamar a la función para cargar usuarios al iniciar la página
+        obtenerUsuarios();
+    </script>
+</body>
+</html>
