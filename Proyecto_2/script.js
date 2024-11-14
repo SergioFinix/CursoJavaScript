@@ -51,15 +51,10 @@ function showProfileCard(user) {
                     <p>Compañía: ${user.company.name} - ${user.company.catchPhrase}</p>  
                 </ul>
             </section>
-            <section>
-                <p>Selecciona el tema</p>
-                <button class="btn primary" onclick="changeStyle('style1')">Tema 1</button>  
-                <button class="btn success" onclick="changeStyle('style2')">Tema 2</button>  
-                <button class="btn warning" onclick="changeStyle('style3')">Tema 3</button>
-            </section>
+           
             <footer>
                 <p>Perfil de ${user.name}</p>
-        
+       
             </footer>
         </main>
         
