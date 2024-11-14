@@ -1,6 +1,36 @@
-body{
-     text-align: center;
-}
+/* Estilo general para el cuerpo */
+body {
+     font-family: Arial, sans-serif;
+     background-color: #f4f4f9;
+     color: #333;
+     margin: 0;
+     padding: 20px;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+ }
+ /* Estilo para el botón */
+ button {
+     padding: 5px 10px;
+     background-color: #4a90e2;
+     color: white;
+     border:none;
+     border-radius: 5px;
+     cursor: pointer;
+     font-size: 14px;
+ }
+
+ button:hover {
+     background-color: #357ab8;
+ }
+ 
+ input[type="text"], select {
+     padding: 5px;
+     width: 200px;
+     border: 1px solid #ccc;
+     border-radius: 5px;
+     font-size: 16px;
+ }
 table,th,td{
      margin-left: auto;
      margin-right: auto;
@@ -15,3 +45,6 @@ table,th,td{
 .mostrar{      
      display: initial;
 }
+.error {
+     color: red;
+ }
