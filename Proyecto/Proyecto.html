@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: white;
+        }
+
+        .cinta {
+            object-fit: cover;
+            width: 100%;
+            height: auto;
+        }
+
+        .titulo h1 {
+            font-size: 3em;
+            font-weight: bold;
+            color: #691B31;
+            text-align: center;
+            margin-top: 2%;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5%;
+        }
+
+        /* Estilo para la tabla */
+        .table {
+            width: 100% !important;
+            margin-left: 5%;
+            border-radius: 10px;
+            overflow: hidden; 
+            border: 2px solid #691B31;
+        }
+
+        .table-wrapper {
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        thead th {
+            background: #691B31 !important;
+            color: white;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f4f4f4;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: white;
+        }
+
+        /* Estilo para el botón */
+        .boton {
+            font-size: 1em;
+            font-weight: normal;
+            background: #BC955B;
+            color: white;
+            padding: 0px 30px;
+            border: 2px solid #BC955B;
+            border-radius: 20px;
+        }
+
+        .boton:hover {
+            background: transparent;
+            color: #BC955B;        
+        }
+
+        /* Estilo para la tarjeta  */
+        .card-conteiner {
+            border: 2px solid black;
+            border-radius: 20px;
+            width: 40%;
+            margin-left: 5%;
+            height: 450px;
+        }
+
+        .card-conteiner.tema1 {
+            border: 2px solid #A02142;
+            background-color: white;
+        }
+
+        .card-conteiner.tema2 {
+            border: 2px solid #BC955B;
+            background-color: #f4f4f4;
+        }
+
+        .card-conteiner.tamano1 {
+            height: 500px;
+            width: 45%;
+        }
+        
+        .card-conteiner.tamano2 {
+            height: 550px;
+            width: 50%;
+        }
+
+        .cabeza {
+            height: 180px;
+            padding: 20px 0 0 0;
+        }
+        .cabeza.tema1 {
+            background-image: url(Frame\ 20.svg);
+            border-radius: 20px 20px 0 0;
+            padding: none;
+        }
+        .cabeza.tema2 {
+            background-color: #BC955B;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .cuerpo {
+            border-top: 2px solid black;
+            height: auto;
+            padding: 30px;
+        }
+
+        .cuerpo.tema1 {
+            border-top: 10px solid #BC955B;
+        }
+        .cuerpo.tema2 {
+            border-top: 2px solid white;
+        }
+
+        .image {
+            display: flex;
+            justify-content: center;
+        }
+
+        .user {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid black;
+        }
+        .user.tema1{
+            border: 2px solid white;
+            background-color: white;
+        }
+        .user.tema2{
+            border: 2px solid white;
+            background-image: url(Frame\ 20.svg);
+        }
+        .texto-head h1 {
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: center;
+            color: #691B31;
+            margin-top: 2%;
+        }
+        .texto-head h1.tema1{
+            color:white;
+        }
+        .texto-head h1.tema2{
+            color:white;
+        }
+        .texto-head h1.tamano1{
+            font-size: 1.3em;
+        }
+        .texto-head h1.tamano2{
+            font-size: 1.4em;
+        }
+        .texto-head h1.fuente1{
+            font-family: "Times New Roman",serif;
+        }
+        .texto-head h1.fuente2{
+            font-family: "Courier New",serif;
+        }
+        .texto-descripcion {
+            font-size: 1em;
+            font-weight: normal;
+            text-align: justify;
+            color: black;
+            margin-top: 2%;
+            width: 80%;
+            margin-left: 10%;
+        }
+        .texto-descripcion p.tamano1 {
+            font-size: 1.3em;
+        }
+        .texto-descripcion p.tamano2 {
+            font-size: 1.4em;
+        }
+        .texto-descripcion p.fuente1{
+            font-family: "Times New Roman",serif;
+        }
+        .texto-descripcion p.fuente2{
+            font-family: "Courier New",serif;
+        }
+        .texto-descripcion p strong.tema1 {
+            color:#691B31;
+        }
+
+        .container-columnas {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .columna {
+            flex: 1;
+            padding: 10px;
+        }
+        .columna p strong.tema1{
+            color: #691B31;
+        }
+
+        .columna p.tamano1{
+            font-size: 1.3em;
+        }
+        .columna p.tamano2{
+            font-size: 1.4em;
+        }
+        .columna p.fuente1{
+            font-family: "Times New Roman",serif;
+        }
+        .columna p.fuente2{
+            font-family: "Courier New",serif;
+        }
+        .agregar-usuario {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .agregar-usuario select {
+            border: 2px solid blue; 
+            font-size: 0.8em;     
+            margin-right: 30px;
+        }
+        .temas select{
+            border: 2px solid blue;      
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+    <img src="Frame 20.svg" class="cinta" alt="head" >
+    <div class="titulo">
+        <h1>Generador de Tarjetas de Perfil</h1>
+    </div>
+    <div class="container">
+        <div class="temas">
+            <!-- Select para cambiar el tema -->
+            <h6>Seleciona alguna opción para cabiar el tema </h6>
+            <select id="theme-select" class="form-select" style="width: 200px;">
+                <option value="default"> Tema Predeterminado</option>
+                <option value="tema1">Tema 1</option>
+                <option value="tema2">Tema 2</option>
+            </select>
+        </div>
+        <div>
+            <h6>Seleciona alguna opción para cabiar el tamño y fuentes del texo.</h6>
+            <div class="agregar-usuario">
+                <select id="theme-select2" class="form-select" style="width: 200px;">
+                    <option value="default">Predeterminado Tamaño</option>
+                    <option value="tamano1">1.3em</option>
+                    <option value="tamano2">2em</option>
+                </select>
+
+                <select id="theme-select3" class="form-select" style="width: 200px;">
+                    <option value="default">Predeterminado Fuente</option>
+                    <option value="fuente1">times-new-roman</option>
+                    <option value="fuente2">sans-serif</option>
+                </select>
+                
+            </div>  
+        </div>
+        
+    </div>
+    <div class="container">
+        <div>
+            <h6>Presiona el botón de ver para que se muestre la card</h6>
+            <div class="table-wrapper">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Tarjeta</th>
+                        </tr>
+                    </thead>
+                    <tbody id="user-table-body">
+                        <!-- Aqui se crean las filas con el scrip -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- formato para la tarjeta de usuario  -->
+        <div class="card-conteiner" id="user-card" style="display: none;">
+            <div class="cabeza" id="cabeza">
+                <div class="image">
+                    <img src="" class="user" alt="Foto de usuario" id="card-image">
+                </div>
+                <div class="texto-head">
+                    <h1 id="card-name"></h1>
+                </div>
+            </div>
+            <div class="cuerpo" id="cuerpo">
+                <div class="texto-descripcion" >
+                    <p id="puesto1"><strong id="puesto">Puesto:</strong> <span id="card-puesto"></span></p>
+                </div>
+                <div class="container-columnas">
+                    <div class="columna">
+                        <p id="usuario1"><strong id="usuario">Usuario:</strong> <span id="card-username"></span></p>
+                    </div>
+                    <div class="columna">
+                        <p id="correo1"><strong id="correo">Correo:</strong> <span id="card-email"></span></p>
+                    </div>
+                </div>
+                <div class="container-columnas">
+                    <div class="columna">
+                        <p id="telefono1"><strong id="telefono">Telefono:</strong> <span id="card-phone"></span></p>
+                    </div>
+                    <div class="columna">
+                        <p id="compania1"><strong id="compania">Compañía:</strong> <span id="card-company"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+// Cambiar el estilo de la tarjeta basado en la selección del tema
+        document.getElementById('theme-select').addEventListener('change', (event) => {
+            const cardContainer = document.getElementById('user-card');
+            const cardCabeza = document.getElementById('cabeza');
+            const cardImage = document.getElementById('card-image');
+            const cardCuerpo = document.getElementById('cuerpo');
+            const cardName = document.getElementById('card-name');
+            const cardPuesto = document.getElementById('puesto');
+            const cardUsuario = document.getElementById('usuario');
+            const cardTelefono = document.getElementById('telefono');
+            const cardCorreo = document.getElementById('correo');
+            const cardCompania = document.getElementById('compania');
+
+            // borrar las clases existentes  
+            cardContainer.classList.remove('tema1', 'tema2');
+            cardCabeza.classList.remove('tema1', 'tema2');
+            cardImage.classList.remove('tema1', 'tema2');
+            cardCuerpo.classList.remove('tema1', 'tema2');
+            cardName.classList.remove('tema1', 'tema2');
+            cardPuesto.classList.remove('tema1', 'tema2');
+            cardUsuario.classList.remove('tema1', 'tema2');
+            cardTelefono.classList.remove('tema1', 'tema2');
+            cardCorreo.classList.remove('tema1', 'tema2');
+            cardCompania.classList.remove('tema1', 'tema2');
+
+            
+            // Añadimos todas clasees
+            if (event.target.value !== 'default') {
+                cardContainer.classList.add(event.target.value);
+                cardCabeza.classList.add(event.target.value);
+                cardImage.classList.add(event.target.value);
+                cardCuerpo.classList.add(event.target.value);
+                cardName.classList.add(event.target.value);
+                cardPuesto.classList.add(event.target.value);
+                cardUsuario.classList.add(event.target.value);
+                cardTelefono.classList.add(event.target.value);
+                cardCorreo.classList.add(event.target.value);
+                cardCompania.classList.add(event.target.value);
+            }
+        });
+//TAMAÑO LETRA
+        document.getElementById('theme-select2').addEventListener('change', (event) => {
+            const cardContainer = document.getElementById('user-card');
+            const cardName = document.getElementById('card-name');
+            const cardPuesto = document.getElementById('puesto1');
+            const cardUsuario = document.getElementById('usuario1');
+            const cardTelefono = document.getElementById('telefono1');
+            const cardCorreo = document.getElementById('correo1');
+            const cardCompania = document.getElementById('compania1');
+
+            cardContainer.classList.remove('tamano1', 'tamano2'); 
+            cardName.classList.remove('tamano1', 'tamano2');
+            cardPuesto.classList.remove('tamano1', 'tamano2');
+            cardUsuario.classList.remove('tamano1', 'tamano2');
+            cardTelefono.classList.remove('tamano1', 'tamano2');
+            cardCorreo.classList.remove('tamano1', 'tamano2');
+            cardCompania.classList.remove('tamano1', 'tamano2');
+
+            if (event.target.value !== 'default') {
+                cardContainer.classList.add(event.target.value);
+                cardName.classList.add(event.target.value);
+                cardPuesto.classList.add(event.target.value);
+                cardUsuario.classList.add(event.target.value);
+                cardTelefono.classList.add(event.target.value);
+                cardCorreo.classList.add(event.target.value);
+                cardCompania.classList.add(event.target.value);
+            }
+        });
+// FUENTES
+        document.getElementById('theme-select3').addEventListener('change', (event) => {
+            const cardName = document.getElementById('card-name');
+            const cardPuesto = document.getElementById('puesto1');
+            const cardUsuario = document.getElementById('usuario1');
+            const cardTelefono = document.getElementById('telefono1');
+            const cardCorreo = document.getElementById('correo1');
+            const cardCompania = document.getElementById('compania1');
+
+            cardName.classList.remove('fuente1', 'fuente2');
+            cardPuesto.classList.remove('fuente1', 'fuente2');
+            cardUsuario.classList.remove('fuente1', 'fuente2');
+            cardTelefono.classList.remove('fuente1', 'fuente2');
+            cardCorreo.classList.remove('fuente1', 'fuente2');
+            cardCompania.classList.remove('fuente1', 'fuente2');
+
+            if (event.target.value !== 'default') {
+                cardName.classList.add(event.target.value);
+                cardPuesto.classList.add(event.target.value);
+                cardUsuario.classList.add(event.target.value);
+                cardTelefono.classList.add(event.target.value);
+                cardCorreo.classList.add(event.target.value);
+                cardCompania.classList.add(event.target.value);
+            }
+        });
+
+// Función para obtener datos de la API 
+        fetch('https://jsonplaceholder.typicode.com/users')
+            .then(response => response.json())
+            .then(users => {
+                // Referencia al tbody donde se agregarán las filas
+                const tableBody = document.getElementById('user-table-body');
+                
+               
+                users.forEach(user => {
+                    const row = document.createElement('tr');
+
+                    // Creamos las celdas para id, name y el botón
+                    const cellId = document.createElement('th');
+                    cellId.scope = 'row';
+                    cellId.textContent = user.id;
+
+                    const cellName = document.createElement('td');
+                    cellName.textContent = user.name;
+
+                    const cellButton = document.createElement('td');
+                    const button = document.createElement('button');
+                    button.textContent = 'Ver';
+                    button.classList.add('boton');
+                    button.addEventListener('click', () => showCard(user));
+
+                    // añade las celdas a la fila
+                    cellButton.appendChild(button);
+                    row.appendChild(cellId);
+                    row.appendChild(cellName);
+                    row.appendChild(cellButton);
+
+                    // agregamos la fila al cuerpo de la tabla
+                    tableBody.appendChild(row);
+                });
+            })
+            .catch(error => console.error('Error fetching the data:', error));
+
+        // Función para la mostrar tarjeta 
+        function showCard(user) {
+            document.getElementById('user-card').style.display = 'block';
+
+            document.getElementById('card-puesto').textContent = user.company.catchPhrase;
+            document.getElementById('card-name').textContent = user.name;
+            document.getElementById('card-username').textContent = user.username;
+            document.getElementById('card-email').textContent = user.email;
+            document.getElementById('card-phone').textContent = user.phone;
+            document.getElementById('card-company').textContent = user.company.name;
+             // Imagen generada dinámica debido a que no contamos imagen de usuario
+            document.getElementById('card-image').src = `https://robohash.org/${user.id}?set=set1`;
+        }
+
+    </script>
+</body>
+</html>
