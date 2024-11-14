@@ -46,14 +46,13 @@ body{
 #vista-tarjeta{
     width: 75%;
     padding: 20px;
-    display: flex;
     align-items: center;
     justify-content: center;
 }
 
 #tarjeta-container{
     width: 100%;
-    max-width: 500px;
+    max-width: auto;
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
@@ -62,7 +61,9 @@ body{
 }
 
 #tarjeta-container img{
-    /* Para Despues */
+    width: 100px;
+    border-radius: 50px;
+
 }
 
 #tarjeta-container h3{
