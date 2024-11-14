@@ -13,7 +13,9 @@ body{
 
 #lista-usuarios{
     width: 25%;
-    background-color: #fff;
+    height: auto;
+    background-color: #722F37;
+    color: #ddd;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -36,16 +38,18 @@ body{
     cursor: pointer;
     text-align: center;
     font-weight: bold;
-    color: #333;
+    color: #fff;
 }
 
 #lista-usuarios li:hover{
     background-color: #f0f0f0;
+    color: #722F37;
+    
 }
 
 #vista-tarjeta{
     width: 75%;
-    padding: 20px;
+    padding: 0 20px;
     align-items: center;
     justify-content: center;
 }
@@ -53,27 +57,42 @@ body{
 #tarjeta-container{
     width: 100%;
     max-width: auto;
-    background-color: #fff;
+    background-color: #722F37;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
+    align-items: center;
+}
+#panel-personalizacion{
+    width: 100%;
+    max-width: auto;
+    background-color: transparent;
+    padding: 20px;
+    text-align: center;
 }
 
 #tarjeta-container img{
-    width: 100px;
+    width: 110px;
     border-radius: 50px;
 
 }
 
-#tarjeta-container h3{
+
+.div-foto{
+    justify-content: left;
+    justify-items: left;
+    align-items: flex-start;
+}
+.informacion{
     /* Para Despues */
+    text-align: left;
 }
 
-#tarjeta-container p{
-    /* Para Despues */
-}
-
-#tarjeta-info{
-    /* Para Despues */
+.box{
+    display: inline-block;
+    width: 350px;
+    height: 200px;
+    margin: 10px 0;
+    justify-content: center;
 }

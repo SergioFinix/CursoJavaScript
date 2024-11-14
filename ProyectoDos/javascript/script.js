@@ -138,25 +138,32 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
 
-  //Funcion para crear tarjeta de usuario
   function mostrarTarjeta(usuario) {
-    //Limpiamos el contenedor antes de cargar otra tarjeta
-    tarjetaContenedor.innerHTML = "";
+    // Limpiar contenedor y restablecer estilos antes de cargar otra tarjeta
+    tarjetaContenedor.innerHTML = ""; 
+    tarjetaContenedor.style.backgroundColor = "#722F37";
+    tarjetaContenedor.style.color = "#000000";
+    tarjetaContenedor.style.fontFamily = "Arial";
+    tarjetaContenedor.style.fontSize = "16px";
 
-    //Creamos la tarjeta
+    // Crear la tarjeta
     const tarjeta = document.createElement("div");
     tarjeta.classList.add("tarjeta");
 
-    //Foto
+    // Foto
+    const fotoDiv = document.createElement("div");
+    fotoDiv.classList.add("div-foto");
+    fotoDiv.classList.add("box");
     const foto = document.createElement("img");
     foto.src = usuario.urlfotoperil;
-    foto.alt = 'Foto de perfil de ${usuario.nombre}';
+    foto.alt = `Foto de perfil de ${usuario.nombre}`;
     foto.className = 'foto-1';
     foto.classList.add("foto-perfil");
 
     // Información del usuario
     const info = document.createElement("div");
     info.classList.add("informacion");
+    info.classList.add("box");
 
     const nombre = document.createElement("h3");
     nombre.textContent = usuario.nombre;
@@ -177,14 +184,15 @@ document.addEventListener("DOMContentLoaded", () => {
     compania.textContent = `Compañía: ${usuario.compania}`;
 
     // Agregar todo a la tarjeta
-    info.appendChild(nombre);
+    
+    info.appendChild(edad);
     info.appendChild(email);
     info.appendChild(telefono);
     info.appendChild(direccion);
-    info.appendChild(edad);
     info.appendChild(compania);
-
-    tarjeta.appendChild(foto);
+    fotoDiv.appendChild(foto);
+    fotoDiv.appendChild(nombre);
+    tarjeta.appendChild(fotoDiv);   
     tarjeta.appendChild(info);
 
     tarjetaContenedor.appendChild(tarjeta);
@@ -192,6 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Mostrar el panel de personalización
     mostrarPanelPersonalizacion();
   }
+
   // Función que muestra el panel de personalización
   function mostrarPanelPersonalizacion() {
     // Limpiar panel
@@ -202,24 +211,25 @@ document.addEventListener("DOMContentLoaded", () => {
     titulo.textContent = "Personalizar Tarjeta";
 
     // Selector de color de fondo
-    const colorFondoLabel = document.createElement("label");
+    const colorFondoLabel = document.createElement("h4");
     colorFondoLabel.textContent = "Color de fondo:";
     const colorFondoInput = document.createElement("input");
     colorFondoInput.type = "color";
-    colorFondoInput.value = "#ffffff"; // valor predeterminado
-
+    colorFondoInput.value = "#722F37"; // valor predeterminado
+    
+    
     // Selector de color de texto
-    const colorTextoLabel = document.createElement("label");
+    const colorTextoLabel = document.createElement("h4");
     colorTextoLabel.textContent = "Color de texto:";
     const colorTextoInput = document.createElement("input");
     colorTextoInput.type = "color";
-    colorTextoInput.value = "#000000"; // valor predeterminado
+    colorTextoInput.value = "#ffffff"; // valor predeterminado
 
     // Selector de tamaño de texto
-    const tamanoTextoLabel = document.createElement("label");
+    const tamanoTextoLabel = document.createElement("h4");
     tamanoTextoLabel.textContent = "Tamaño de Fuente:";
     const tamanoTextoSelect = document.createElement("select");
-    const tamanos = ["8px","12px", "16px", "20px", "24px"];
+    const tamanos = ["16px", "8px", "12px", "20px", "24px"];
     tamanos.forEach((tamano) => {
       const option = document.createElement("option");
       option.value = tamano;
@@ -227,10 +237,8 @@ document.addEventListener("DOMContentLoaded", () => {
       tamanoTextoSelect.appendChild(option);
     });
 
-
-
     // Selector de tipo de fuente
-    const fuenteLabel = document.createElement("label");
+    const fuenteLabel = document.createElement("h4");
     fuenteLabel.textContent = "Tipo de fuente:";
     const fuenteSelect = document.createElement("select");
     const fuentes = ["Arial", "Verdana", "Helvetica", "Times New Roman", "Georgia"];
