@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <title>proyecto final curso de java</title>
+    <link rel="stylesheet" href="estilo-ahoracado.css">
+  </head>
+  <style>
+    
+* {
+  box-sizing: border-box;
+}
+.main-container {
+  max-width: 800px;
+  margin: auto;
+}
+h1.titulo {
+  margin: 50px auto 80px auto;
+  text-align: center;
+  font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+}
+h1#msg-final {
+  text-align: center;
+  color: crimson;
+  transition: all .5s ease;
+  transform: scale(0);
+  min-height: 50px;
+  margin-bottom: 0;
+}
+.zoom-in {
+  transform: scale(1) !important;
+}
+#acierto {
+  text-align: center;
+  min-height: 24px;
+  transform: scale(0);
+}
+.acierto {
+  animation: zoomInOut 1s ease;
+}
+.rojo {
+  color: red;
+}
+.verde {
+  color: green;
+}
+@keyframes zoomInOut {
+  0% { transform: scale(0); }
+  50% { transform: scale(1); }
+  70% { transform: scale(1); }
+  100% { transform: scale(0); }
+}
+h2.palabra {
+  margin: 0 auto 25px auto;
+  text-align: center;
+  color: royalblue;
+  text-transform: uppercase;
+  letter-spacing: 6px;
+}
+.flex-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 10px auto; 
+}
+.no-wrap {
+  flex-wrap: nowrap !important;
+}
+.col {
+  width: 50%;
+  text-align: center;
+}
+.col span {
+  
+}
+#turnos h3 {
+  margin: auto;
+}
+h3 span {
+   color: orangered;
+}
+.letra:disabled {
+  color:rgba(255, 0, 0, 0.5);
+}
+picture {
+  position: relative;
+}
+picture img {
+  position: absolute;
+  top: -203px;
+  left: -205px;
+  height: 225px;
+}
+#image5, #image4, #image3,
+#image2, #image1, #image0 {
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+.fade-in {
+  opacity: 1 !important;
+}
+.encuadre {
+  border: 2px dashed crimson;
+  padding: 3px 2px 2px 6px;
+}
+.fondo{
+  background-image: url(imag/fondo.jfif);
+  background-size: cover;
+  background-repeat: no repeat;
+  background-position: center center;
+
+}
+  </style>
+  <body class="fondo">
+      <div class="main-container">
+
+        <h1 class="titulo">Juego del ahorcado  proyecto 4</h1>
+        <h1 id="msg-final"></h1>
+        <h3 id="acierto"></h3>
+        <div class="flex-row no-wrap">
+          <h2 class="palabra" id="palabra"></h2>
+          <picture>
+            <img src="imag/ahorcado_6.png" alt="" id="image6">
+            <img src="imag/ahorcado_5.png" alt="" id="image5">
+            <img src="imag/ahorcado_4.png" alt="" id="image4">
+            <img src="imag/ahorcado_3.png" alt="" id="image3">
+            <img src="imag/ahorcado_2.png" alt="" id="image2">
+            <img src="imag/ahorcado_1.png" alt="" id="image1">
+            <img src="imag/ahorcado_0.png" alt="" id="image0">
+          </picture>
+        </div>
+        <div class="flex-row" id="turnos">
+          <div class="col">
+            <h3>Intentos restantes: <span id="intentos">6</span></h3>
+          </div>
+          <div class="col">
+            <button onclick="inicio()" id="reset">Elegir otra palabra</button>
+            <button onclick="pista()" id="pista">Dame una pista!</button>
+            <span id="hueco-pista"></span>
+          </div>
+          </div>
+
+
+        <div class="flex-row">
+          <div class="col">
+            <div class="flex-row" id="abcdario">
+            </div>
+          </div>
+          <div class="col"></div>
+        </div>
+        <div class="flex-row" id="turnos">
+          <div class="col">
+            <select>
+              <option value="C:\Users\Lenovo Yoga 11e\Desktop\juego ahorcado\nombres.js">nombres</option>
+
+              <option value="id1"></option>
+              <option value="id2"></option>
+              <option value="id3"></option>
+              <option value="id4"></option>
+            </select>
+          </div>
+          <div class="col">
+            <div class="contenedor-puntaje-bueno"></div>
+            <div class="contenedor-puntaje-bueno">
+              buenas: 0
+          </div>
+            <div class="contenedor-puntaje-malo"></div>
+            <div class="contenedor-puntaje-malo">
+              malas: 0
+          </div>
+            <span id="hueco-pista"></span>
+          </div>
+          </div>
+
+          <div class="col">
+            <audio controls>
+              <source src="C:\Users\Lenovo Yoga 11e\Desktop\juego ahorcado\musica\v.mp3"  type="audio/mp3"  />
+              
+             
+            </audio>
+          </div>
+  
+
+         
+
+      </div>
+    <script>
+      
+// Array de palabras
+var palabras = [["paste", "comida tradicional de pachuca"], ["moto", "veiculo de dos ruedas"], ["Nadidad", "Festividad en invierno"], ["parque", "Espacio público"], ["computadora", "Gran invento"], ["manzana", "Una fruta"], ["merlin", "Mago famoso"], ["deadpool", "super heroe  de traje rojo"], ["garfiel", "gato flojo"], ["coraje", "perro miedoso"], ["coco", "pelicula de disney basada en mexico"], ["mexico", "Un país donde se come chile"], ["argentina", "Un país de donde es mesi"], ["animada", "que genero es la pelicula pinocho"], ["acamparr", "Actividad en la naturaleza"], ["rosca", "pan que se come el 5 de enero"], ["pastel", "postre echo con arina"], ["colegio", "Lugar para estudiar"], ["luchas", "deporte patimonio nacional"], ["gomitas", "dulces estirable"]];
+// Palabra a averiguar
+var palabra = "";
+// Nº aleatorio
+var rand;
+// Palabra oculta
+var oculta = [];
+// Elemento html de la palabra
+var hueco = document.getElementById("palabra");
+// Contador de intentos
+var cont = 6;
+// Botones de letras
+var buttons = document.getElementsByClassName('letra');
+// Boton de reset
+var btnInicio = document.getElementById("reset");
+
+
+// ### FUNCIONES ###
+
+// Escoger palabra al azar
+function generaPalabra() {
+  rand = (Math.random() * 19).toFixed(0);
+  palabra = palabras[rand][0].toUpperCase();
+  console.log(palabra);
+}
+
+// Funcion para pintar los guiones de la palabra
+function pintarGuiones(num) {
+  for (var i = 0; i < num; i++) {
+    oculta[i] = "_";
+  }
+  hueco.innerHTML = oculta.join("");
+}
+
+//Generar abecedario
+function generaABC (a,z) {
+  document.getElementById("abcdario").innerHTML = "";
+  var i = a.charCodeAt(0), j = z.charCodeAt(0);
+  var letra = "";
+  for( ; i<=j; i++) {
+    letra = String.fromCharCode(i).toUpperCase();
+    document.getElementById("abcdario").innerHTML += "<button value='" + letra + "' onclick='intento(\"" + letra + "\")' class='letra' id='"+letra+"'>" + letra + "</button>";
+    if(i==110) {
+      document.getElementById("abcdario").innerHTML += "<button value='Ñ' onclick='intento(\"Ñ\")' class='letra' id='"+letra+"'>Ñ</button>";
+    }
+  }
+}
+
+// Chequear intento
+function intento(letra) {
+  document.getElementById(letra).disabled = true;
+  if(palabra.indexOf(letra) != -1) {
+    for(var i=0; i<palabra.length; i++) {
+      if(palabra[i]==letra) oculta[i] = letra;
+    }
+    hueco.innerHTML = oculta.join("");
+    document.getElementById("acierto").innerHTML = "sigue asi!";
+    document.getElementById("acierto").className += "acierto verde";
+    
+  }else{
+    cont--;
+    document.getElementById("intentos").innerHTML = cont;
+    document.getElementById("acierto").innerHTML = "Muy mal!";
+    document.getElementById("acierto").className += "acierto rojo";
+    document.getElementById("image"+cont).className += "fade-in";
+    
+  }
+  compruebaFin();
+  setTimeout(function () { 
+    document.getElementById("acierto").className = ""; 
+  }, 800);
+}
+
+// Obtener pista
+function pista() {
+  document.getElementById("hueco-pista").innerHTML = palabras[rand][1];
+}
+
+// Compruba si ha finalizado
+function compruebaFin() {
+  if( oculta.indexOf("_") == -1 ) {
+    document.getElementById("msg-final").innerHTML = "Felicidades me has salvado!!";
+    document.getElementById("msg-final").className += "zoom-in";
+    document.getElementById("palabra").className += " encuadre";
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].disabled = true;
+    }
+    document.getElementById("reset").innerHTML = "Empezar";
+    btnInicio.onclick = function() { location.reload() };
+  }else if( cont == 0 ) {
+    document.getElementById("msg-final").innerHTML = "ya perdiste";
+    document.getElementById("msg-final").className += "zoom-in";
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].disabled = true;
+    }
+    document.getElementById("reset").innerHTML = "iniciar";
+    btnInicio.onclick = function () { location.reload() };
+  }
+}
+
+// Restablecer juego
+function inicio() {
+  generaPalabra();
+  pintarGuiones(palabra.length);
+  generaABC("a","z");
+  cont = 6;
+  document.getElementById("intentos").innerHTML=cont;
+}
+
+// Iniciar
+window.onload = inicio();
+
+
+
+    </script>
+  </body>
+</html>

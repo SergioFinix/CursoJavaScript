@@ -77,6 +77,7 @@
     <h1>Ejemplos de plantillas literales</h1>    
     Nombre:<input type="text" id="nombre">
     Edad: <input type="text" id="edad"> 
+<<<<<<< HEAD
    
 
     <select id="estados">
@@ -90,6 +91,16 @@
     
 
     <button onclick= "validarTelefono()"id+ datosPersonales">Datos personales</button>
+=======
+    Estado: <select id="estado">
+        <option value="">Seleccione un estado</option>
+        <option value="Hidalgo">Estado de Hidalgo</option>
+        <option value="México">Estado de México</option>
+        <option value="Morelos">Estado de Morelos</option>
+        <option value="Querétaro">Estado de Querétaro</option>
+    </select>
+    <button id="datosPersonales">Datos personales</button>
+>>>>>>> 7edc5e5b3b8855332efb62d831dc4284479575e0
     <textarea name="salid" id="salida"></textarea>
     
     
@@ -106,6 +117,7 @@
     botonDatosPersonales.addEventListener('click',() => {
         const nombre = document.getElementById("nombre").value;
         const edad = document.getElementById("edad").value;
+<<<<<<< HEAD
         const estados = document.getElementById("estados").value;
 
         function validarTelefono() {
@@ -128,6 +140,13 @@
         //const datosPersonales = "Hola "+nombre+" tu tines "+edad+" años";
         
         const datosPersonales = `Hola ${nombre} tu tines ${edad} años, mas un año -> ${sumaAnio(edad)} una suma ${2*2}tu siudad es ${estados}una suma ${telefono}una suma ${correo}`;
+=======
+        const estado = document.getElementById("estado").value;
+    
+        //const datosPersonales = "Hola "+nombre+" tu tines "+edad+" años";
+        
+        const datosPersonales = `Hola ${nombre}, tienes ${edad} años (mas un año -> ${sumaAnio(edad)} una multiplicación de 3*2 = ${3*2}) y es del Estado de ${estado} `;
+>>>>>>> 7edc5e5b3b8855332efb62d831dc4284479575e0
         //console.log(datosPersonales);
         salida.innerText= datosPersonales;
     });
