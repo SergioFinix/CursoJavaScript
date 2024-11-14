@@ -8,6 +8,9 @@
             body{
                 padding-top: 30px;
             }
+            #nombres ul li{
+                cursor:pointer;
+            }
         </style>
     </head>
     <body>
@@ -16,15 +19,60 @@
                 <div class="col-12">
                     <h1 class="text-center">Proyecto Final Equipo 2</h1>
                 </div>
-                <div class="col-3 mt-5">
-                    <div class="card">
+                <div class="col-4 mt-5">
+                    <div class="card" id="nombres">
                         <div class="card-header">
                             <h4 class="text-center">Personas</h4>
                         </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Marcos Javier Islas</li>
+                            <li class="list-group-item">Monserrat Gomez Delgado</li>
+                            <li class="list-group-item">Aldo Aguilar Vallejo</li>
+                        </ul>  
+                        <div class="card-footer">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNuevo">
+                                Agregar persona
+                            </button>                              
+                        </div>                      
+                    </div>
+                </div>
+                <div class="col-4 mt-5"><div class="card" id="nombres">
+                    <div class="card-header">
+                        <p class="text-center mt-3">
+                            <img width="80" src="icons/p1.png">
+                        </p>
+                        <p class="text-center">Marcos Javier Islas Sánchez</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <p class="text-center">Guapo, poderoso, asombroso, muy hermoso, soy precioso, armonioso, un buen socio, misterioso, buena gente, etc</p>
+                            </div>
+                        </div>
+                    </div>                  
+                </div>
+                <div class="col-4 mt-5"></div>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="modalNuevo" tabindex="-1" aria-labelledby="modalNuevoLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalNuevoLabel">Agregar persona</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        En construcción
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary">Agregar</button>
                     </div>
                 </div>
             </div>
         </div>
+  
         <script src="bootstrap/js/bootstrap.bundle.js"></script>
     </body>
 </html>
