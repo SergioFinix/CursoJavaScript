@@ -77,13 +77,6 @@
     <h1>Ejemplos de plantillas literales</h1>    
     Nombre:<input type="text" id="nombre">
     Edad: <input type="text" id="edad"> 
-    Estado: <select id="estado">
-        <option value="">Seleccione un estado</option>
-        <option value="Hidalgo">Estado de Hidalgo</option>
-        <option value="México">Estado de México</option>
-        <option value="Morelos">Estado de Morelos</option>
-        <option value="Querétaro">Estado de Querétaro</option>
-    </select>
     <button id="datosPersonales">Datos personales</button>
     <textarea name="salid" id="salida"></textarea>
     
@@ -101,7 +94,6 @@
     botonDatosPersonales.addEventListener('click',() => {
         const nombre = document.getElementById("nombre").value;
         const edad = document.getElementById("edad").value;
-        const estado = document.getElementById("estado").value;
     
         //const datosPersonales = "Hola "+nombre+" tu tines "+edad+" años";
         
