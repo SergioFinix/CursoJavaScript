@@ -7,11 +7,19 @@
 </head>
 <body>
     <button id="miBoton">Haz clic aquí</button>
+    <button id="mBoton">clic aquí</button>
 
     <script>
         document.getElementById("miBoton").addEventListener("click", function(event) {
             console.log("Elemento que disparó el evento:", event.target);
             console.log("Tipo de evento:", event.type);
+            event.preventDefault(); // Evita la acción predeterminada (si la hubiera)
+        });
+    </script>
+     <script>
+        document.getElementById("mBoton").addEventListener("click", function(event) {
+            console.log("Elemento disparó el evento:", event.target);
+            console.log("Tipo evento:", event.type);
             event.preventDefault(); // Evita la acción predeterminada (si la hubiera)
         });
     </script>

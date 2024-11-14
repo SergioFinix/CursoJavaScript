@@ -11,11 +11,27 @@
             padding: 20px;
             border: 2px solid #ccc;
             background-color: #f9f9f9;
+        } 
+        .galeriap {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            border: 2px solid #d18787;
+            background-color: #5dad71;
         }
         .imagen {
             width: 100px;
             height: 100px;
             background-color: #ddd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        .imagenp {
+            width: 100px;
+            height: 100px;
+            background-color: grey;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -29,6 +45,17 @@
     <div class="imagen" id="imagen1">Imagen 1</div>
     <div class="imagen" id="imagen2">Imagen 2</div>
     <div class="imagen" id="imagen3">Imagen 3</div>
+    <div class="imagen" id="imagen4">Imagen 4</div>
+    <div class="imagen" id="imagen5">Imagen 5</div>
+
+</div>
+
+<div class="galeriap" id="galeriap">
+    <div class="imagen" id="imagen1">Imagen 1</div>
+    <div class="imagen" id="imagen2">Imagen 2</div>
+    <div class="imagen" id="imagen3">Imagen 3</div>
+    
+
 </div>
 
 <p id="mensaje"></p>
@@ -41,6 +68,9 @@
     galeria.addEventListener("click", function() {
         mensaje.textContent = "Hiciste clic en la galería, pero no en una imagen específica.";
     });
+
+
+    
 
     // Eventos en las imágenes individuales
     document.getElementById("imagen1").addEventListener("click", function(event) {
@@ -57,6 +87,17 @@
         mensaje.textContent = "Seleccionaste la Imagen 3";
         event.stopPropagation(); // Evitar que el clic burbujee hacia la galería
     });
+
+    document.getElementById("imagen4").addEventListener("click", function(event) {
+        mensaje.textContent = "Seleccionaste la Imagen 4";
+        event.stopPropagation(); // Evitar que el clic burbujee hacia la galería
+    });
+
+    document.getElementById("imagen5").addEventListener("click", function(event) {
+        mensaje.textContent = "Seleccionaste la Imagen 5";
+        //event.stopPropagation(); // Evitar que el clic burbujee hacia la galería
+    });
+
 </script>
 
 </body>
