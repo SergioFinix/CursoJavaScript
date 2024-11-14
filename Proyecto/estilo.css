@@ -1,0 +1,20 @@
+body
+{
+    text-align: center;
+    padding: 3px;
+    background-color: gainsboro;
+}
+
+table
+{
+    border-top: unset;
+    text-align: center;
+}
+
+.conteiner
+{
+    font-size: 15px;
+    padding: 5px;
+    margin: center;
+    
+}
