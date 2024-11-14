@@ -1,0 +1,173 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+    background-color: #f3f4f6;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+}
+
+.sidebar {
+    width: 25%;
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.sidebar h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #34495e;
+}
+
+.sidebar li:hover {
+    background-color: #34495e;
+}
+
+.main {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.main h2 {
+    font-size: 24px;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.poll-card {
+    border: 1px solid #bdc3c7;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #ecf0f1;
+}
+
+.results {
+    margin-top: 20px;
+}
+
+.results h2 {
+    font-size: 20px;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+/* Estilos para el formulario de creación de encuestas */
+#pollForm {
+    border: 1px solid #bdc3c7;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#pollForm h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #34495e;
+}
+
+/* Estilos para los inputs */
+#pollForm input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+#pollForm input[type="text"]:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+}
+
+/* Estilos para los botones */
+#pollForm button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-right: 10px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #3498db;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+#pollForm button:hover {
+    background-color: #2980b9;
+}
+
+#pollForm button:active {
+    transform: scale(0.95);
+}
+
+#pollForm button:last-child {
+    background-color: #2ecc71;
+}
+
+#pollForm button:last-child:hover {
+    background-color: #27ae60;
+}
+
+#pollForm button:last-child:active {
+    transform: scale(0.95);
+}
+
+/* Estilos para el contenedor de opciones */
+#optionsContainer {
+    margin-top: 10px;
+}
+
+.optionInput {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.optionInput:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+}
+
+/* Estilos para los gráficos */
+.chart-container {
+    margin-top: 15px;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+canvas {
+    width: 100% !important;
+    height: auto !important;
+}

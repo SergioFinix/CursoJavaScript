@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicación de Votación en Tiempo Real</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Usuarios</h2>
+            <ul id="users"></ul>
+        </div>
+        
+        <div class="main">
+            <h2>Encuestas</h2>
+            <div id="pollForm">
+                <h3>Crear Nueva Encuesta</h3>
+                <input type="text" id="questionInput" placeholder="Ingrese la pregunta de la encuesta" required>
+                
+                <div id="optionsContainer">
+                    <input type="text" class="optionInput" placeholder="Opción 1" required>
+                    <input type="text" class="optionInput" placeholder="Opción 2" required>
+                </div>
+                
+                <button type="button" onclick="addOption()">Añadir Opción</button>
+                <button type="button" onclick="createPoll()">Crear Encuesta</button>
+            </div>
+            
+            <div id="pollsContainer"></div>
+            
+            <div class="results">
+                <h2>Resultados de Votación</h2>
+                <div id="resultsContainer"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
