@@ -1,0 +1,141 @@
+:root {
+    --primaryColor: #154360;
+    --secondaryColor: #1f618d;
+    --thirdColor: #2980b9;
+    --fourthColor: #5499c7;
+    --textColorPrimary: #fff;
+    --textGray: #8a8a8a;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    /* 1rem = 10px */
+    font-size: 62.5%;
+}
+
+body {
+    font-size: 1.6rem;
+}
+
+header {
+    width: 100%;
+    min-height: 15vh;
+    background: var(--primaryColor);
+    display: grid;
+    place-items: center;
+    margin-bottom: 5rem;
+}
+
+header h1 {
+    font-size: 4rem;
+    color: var(--textColorPrimary);
+    font-family: Roboto-Bold;
+    font-weight: 900;
+    text-align: center;
+    text-shadow: 2px 3px var(--textGray);
+}
+
+.container {
+    display: grid;
+    place-items: center;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.users-container {
+    width: 50rem;
+    height: 50rem;
+    /* background: red; */
+}
+
+.list-users {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    background: var(--secondaryColor);
+    border-radius: 2rem;
+    padding: 2rem;
+}
+
+.list-users h2 {
+    font-size: 3rem;
+    font-family: Roboto-Bold;
+    color: var(--textColorPrimary);
+    text-shadow: 2px 3px var(--textGray);
+}
+
+.btn-user {
+    width: 30rem;
+    height: 4rem;
+    font-size: 2rem;
+    background: #fff;
+    color: var(--fourthColor);
+    font-family: Roboto-Medium;
+    border-radius: 1rem;
+    border: .1rem solid #fff;
+}
+
+.btn-user:hover {
+    border: .1rem solid var(--fourthColor);
+    background: var(--fourthColor);
+    color: #fff;
+    transform: scale(1.2);
+    transition: .5s;
+}
+
+.info-user {
+    width: 60rem;
+    height: 50rem;
+    display: grid;
+    place-items: center;
+}
+
+.info-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr 1fr 1fr;
+    background: var(--secondaryColor);
+    border-radius: 2rem;
+    padding: 2rem;
+    gap: 3rem;
+    text-align: center;
+
+}
+
+.info-container h2 {
+    grid-column: 1 / -1;
+    /* Hace que el <h2> ocupe ambas columnas */
+    font-size: 3rem;
+    font-family: Roboto-Bold;
+    color: var(--textColorPrimary);
+    text-shadow: 2px 3px var(--textGray);
+}
+
+.info-container .info-item:last-child{
+    grid-column: 1 / -1;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.info-label {
+    font-size: 2rem;
+    font-family: Roboto-Bold;
+    color: var(--textColorPrimary);
+    text-shadow: 2px 3px var(--textGray);
+}
+
+.info-value {
+    font-size: 2rem;
+    font-family: Roboto;
+    color: var(--textColorPrimary);
+}
