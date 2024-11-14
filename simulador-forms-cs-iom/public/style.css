@@ -1,0 +1,25 @@
+body {
+  font-family: Arial;
+}
+
+h2,
+body {
+  margin: 0;
+}
+
+.content-navbar,
+.content-app {
+  display: flex;
+  justify-content: center;
+}
+
+.content-navbar {
+  margin: 1rem 0 1rem 0;
+}
+
+#navbar,
+#app {
+  display: block;
+  width: 90%;
+  padding: .1px;
+}
