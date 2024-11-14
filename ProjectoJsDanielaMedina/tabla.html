@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Tareas</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- Tabla de Usuarios y Tareas -->
+        <table class="table table-bordered" id="userTable">
+            <thead class="table">
+                <tr>
+                    <th scope="col" class="d-flex justify-content-end" >Tareas
+                        <button type="button" class="btn btn-primary ms-3" data-bs-toggle="modal" data-bs-target="#exampleModal">Agregar Tarea</button>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <table class="table mb-0">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Usuarios</th>
+                                    <th>Nombre</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="CuerpoTabla"></tbody>
+                        </table>
+                    </th>
+                </tr>
+            </thead>
+            <tfoot id="EstadoActividades">
+             <th> Estado de Actividades</th> 
+            </tfoot>
+        </table>
+
+        <!-- Modal para Agregar Tareas -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Agregar Tarea</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="userSelect">Asignar a Usuario:</label>
+                        <select id="userSelect" class="form-select mb-3"></select>
+
+                        <label for="statusSelect">Estado de la Tarea:</label>
+                        <select id="statusSelect" class="form-select mb-3">
+                            <option value="Creada">Creada</option>
+                            <option value="En progreso">En progreso</option>
+                            <option value="Terminada">Terminada</option>
+                            <option value="Pausada">Pausada</option>
+                        </select>
+
+                        <label for="taskInput">Nombre de la Tarea:</label>
+                        <input type="text" id="taskInput" class="form-control" maxlength="25" placeholder="Máximo 25 caracteres">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" id="GuardarTarea" data-bs-dismiss="modal">Guardar Cambios</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal para Editar Tareas -->
+        <div id="editTaskModal" class="modal fade" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Editar Tarea</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="editTaskInput">Nombre de la Tarea:</label>
+                        <input type="text" id="editTaskInput" class="form-control" maxlength="25">
+                        <label for="editStatusSelect" class="mt-3">Estado:</label>
+                        <select id="editStatusSelect" class="form-select">
+                            <option value="Creada">Creada</option>
+                            <option value="En progreso">En progreso</option>
+                            <option value="Terminada">Terminada</option>
+                            <option value="Pausada">Pausada</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="updateTaskBtn" class="btn btn-primary" data-bs-dismiss="modal">Actualizar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -26,6 +26,8 @@
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Email</th>
+                <th>Phone</th>
+                <th>User</th>
             </tr>
         </thead>
         <tbody></tbody>
@@ -36,12 +38,11 @@
             try {
                 const respuesta = await fetch('https://jsonplaceholder.typicode.com/users');
                 const usuarios = await respuesta.json();
-                console.log(usuarios);
                 const tabla = document.querySelector("#usuarios-table tbody");
                 
                 usuarios.forEach(usuario => {
                     const fila = document.createElement('tr');
-                    fila.innerHTML = `<td>${usuario.id}</td><td>${usuario.name}</td><td>${usuario.email}</td>`;
+                    fila.innerHTML = `<td>${usuario.id}</td><td>${usuario.name}</td><td>${usuario.email}</td><td>${usuario.phone}</td><td>${usuario.username}</td>`;
                     tabla.appendChild(fila);
                 });
             } catch (error) {
