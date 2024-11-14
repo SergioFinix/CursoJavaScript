@@ -1,5 +1,4 @@
 ﻿<!DOCTYPE html>
-
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
@@ -11,7 +10,7 @@
             display: flex;
             font-family: roboto, sans-serif;
             background-color: lightgray;
-            box-shadow: 30px;
+            
         }
 
         h1 {
@@ -21,14 +20,15 @@
 
         #contenedor {
             background-color: white;
-            width: 950px;
-            height: 650px;
-            margin: 10px;
+            width: 950%;
+            height: 750px;
+            margin: 30px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px;
-            border-radius: 5px;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 30px;
         }
 
         #palabra {
@@ -49,12 +49,12 @@
         }
 
         #reset {
-            background-color: lightblue;
+            background-color: green;
             margin-top: 30px;
             width: 150px;
             height: 40px;
             border-radius: 10px;
-            color: darkblue;
+            color: white;
             cursor: pointer;
         }
 
@@ -72,11 +72,10 @@
             font-size: 20px;
         }
 
-        /* Estilo del dibujo del ahorcado */
         #ahorcado {
             position: relative;
-            width: 200px;
-            height: 200px;
+            width: 300px;
+            height: 300px;
             margin-top: 20px;
             border: 2px solid black;
         }
@@ -88,46 +87,93 @@
 
         #poste {
             width: 10px;
-            height: 150px;
-            left: 80px;
+            height: 240px;
+            left: 70px;
             top: 10px;
+        }
+
+        #poste1 {
+            width: 85px;
+            height: 10px;
+            top: 10px;
+            left: 70px;
         }
 
         #cuerda {
             width: 2px;
-            height: 50px;
-            left: 90px;
-            top: 40px;
+            height: 30px;
+            left: 120px;
+            top: 20px;
         }
 
         #cabeza {
-            width: 40px;
-            height: 40px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
-            top: 90px;
-            left: 70px;
+            top: 50px;
+            left: 105px;
+            
         }
 
         #cuerpo {
-            width: 10px;
-            height: 50px;
-            top: 140px;
-            left: 90px;
+            width: 6px;
+            height: 70px;
+            top: 70px;
+            left: 120px;
+            
         }
 
         #brazos {
             width: 40px;
             height: 10px;
-            top: 150px;
-            left: 60px;
+            top: 95px;
+            left: 105px;
+            
         }
 
         #piernas {
             width: 40px;
             height: 10px;
-            top: 190px;
-            left: 60px;
+            top: 130px;
+            left: 105px;
+            
         }
+
+
+      
+        #teclado {
+            display: inline-grid;
+            grid-template-columns: repeat(10, 50px);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .key {
+            padding: 15px;
+            font-size: 20px;
+            text-align: center;
+            background-color: forestgreen;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            border-radius: 5px;
+            
+        }
+
+        .key:hover {
+            padding: 10px;
+            font-size: 20px;
+            text-align: center;
+            background-color: darkblue;
+            border: 2px solid #ccc;
+            cursor: pointer;
+            border-radius: 5px;
+            color:white;
+        }
+
+            .key:disabled {
+                background-color: #ddd;
+                cursor: not-allowed;
+            }
     </style>
 </head>
 <body>
@@ -136,18 +182,13 @@
 
         <div id="ahorcado">
             <div id="poste" class="parte"></div>
-            <div id="cuerda" class="parte"></div>
+            <div id="poste1" class="parte" style="display: none "></div>
+            <div id="cuerda" class="parte" style="display: none"></div>
             <div id="cabeza" class="parte" style="display: none;"></div>
             <div id="cuerpo" class="parte" style="display: none;"></div>
             <div id="brazos" class="parte" style="display: none;"></div>
             <div id="piernas" class="parte" style="display: none;"></div>
         </div>
-
-        <div id="panel"></div>
-
-        <div id="cargarPalabra"></div>
-
-
 
         <div id="palabra">Encuentra la palabra</div>
         <div id="intentos">Intentos restantes: 6</div>
@@ -155,112 +196,133 @@
         <div id="resultado"></div>
 
 
-        <button id="reset" onclick="cargarPalabra()">cargar</button>
 
-        <input type="text" id="inputLetter" maxlength="1" oninput="verificarLetra()">
+        <div id="teclado"></div>
+
+        <div id="timer"><span></span></div>
+
         <button id="reset" onclick="reiniciarJuego()">Reiniciar Juego</button>
     </div>
 
-
     <script>
-
         let palabraSecreta = '';
         let palabraOculta = [];
         let intentosRestantes = 6;
         let letrasUsadas = [];
+       
 
         async function cargarPalabra() {
-
             try {
-
                 const respuesta = await fetch('http://187.237.240.148:4005/api/palabras');
                 const datos = await respuesta.json();
 
                 const palabras = datos.Palabras.map(p => p.palabra);
-                const palabraAleatoria = palabras[Math.floor(Math.random() * palabras.length)];
+                palabraSecreta = palabras[Math.floor(Math.random() * palabras.length)].toLowerCase();
 
-
-                document.getElementById("palabra").innerText = `Palabra: ${palabraAleatoria}`;
+                palabraOculta = Array(palabraSecreta.length).fill('_');
+                actualizarInterfaz();
             } catch (error) {
                 console.error('Error al cargar la palabra:', error);
             }
-
-            console.log(palabra);
         }
 
-        //function actualizarInterfaz() {
-           
+        function actualizarInterfaz() {
             document.getElementById('palabra').innerText = palabraOculta.join(' ');
             document.getElementById('intentos').innerText = `Intentos restantes: ${intentosRestantes}`;
             document.getElementById('letrasUsadas').innerText = `Letras usadas: ${letrasUsadas.join(', ')}`;
         }
 
-        function verificarLetra() {
-            const input = document.getElementById('inputLetter');
-            const letra = input.value();
+        function verificarLetra(letra) {
+            if (letrasUsadas.includes(letra)) return;
 
-            if (letra && !letrasUsadas.includes(letra)) {
-                letrasUsadas.push(letra);
+            letrasUsadas.push(letra);
 
-                if (palabraSecreta.includes(letra)) {
-                    
-                    for (let i = 0; i < palabraSecreta.length; i++) {
-                        if (palabraSecreta[i] === letra) {
-                            palabraOculta[i] = letra;
-                        }
+            if (palabraSecreta.includes(letra)) {
+                for (let i = 0; i < palabraSecreta.length; i++) {
+                    if (palabraSecreta[i] === letra) {
+                        palabraOculta[i] = letra;
                     }
-                } else {
-                    
-                    intentosRestantes--;
-                    actualizarDibujo();
                 }
-                        
-                input.value = '';
+            } else {
+                intentosRestantes--;
+                actualizarDibujo();
+            }
 
-                
-                actualizarInterfaz();
-                              
-                if (intentosRestantes === 0) {
-                    alert('¡Perdiste! La palabra era: ' + palabraSecreta);
-                    reiniciarJuego();
-                } else if (!palabraOculta.includes('_')) {
-                    alert('¡Ganaste! Has adivinado la palabra.');
-                    reiniciarJuego();
-                }
+            document.getElementById(letra).disabled = true;
+
+            actualizarInterfaz();
+
+            if (intentosRestantes === 0) {
+                alert('¡Perdiste! La palabra era: ' + palabraSecreta);
+                reiniciarJuego();
+            } else if (!palabraOculta.includes('_')) {
+                alert('¡Ganaste! Has adivinado la palabra.');
+                reiniciarJuego();
             }
         }
 
-        // Función para reiniciar el juego
         function reiniciarJuego() {
+            palabraSecreta = '';
+            palabraOculta = [];
+            intentosRestantes = 6;
+            letrasUsadas = [];
+            resetDibujo();
             cargarPalabra();
-            document.getElementById('inputLetter').value = '';
+            crearTeclado();
         }
 
-        // Función para mostrar el dibujo del ahorcado paso a paso
         function actualizarDibujo() {
-            if (intentosRestantes === 5) {
-                document.getElementById('cabeza').style.display = 'block';
+            if (intentosRestantes === 6) {
+                document.getElementById('poste1').style.display = 'block';
+            } else if (intentosRestantes === 5) {
+                document.getElementById('cuerda').style.display = 'block';
             } else if (intentosRestantes === 4) {
-                document.getElementById('cuerpo').style.display = 'block';
+                document.getElementById('cabeza').style.display = 'block';
             } else if (intentosRestantes === 3) {
-                document.getElementById('brazos').style.display = 'block';
+                document.getElementById('cuerpo').style.display = 'block';
             } else if (intentosRestantes === 2) {
+                document.getElementById('brazos').style.display = 'block';
+            } else if (intentosRestantes === 1) {
                 document.getElementById('piernas').style.display = 'block';
             }
         }
 
-        // Función para reiniciar el dibujo
         function resetDibujo() {
+            document.getElementById('poste1').style.display = 'none';
+            document.getElementById('cuerda').style.display = 'none';
             document.getElementById('cabeza').style.display = 'none';
             document.getElementById('cuerpo').style.display = 'none';
             document.getElementById('brazos').style.display = 'none';
             document.getElementById('piernas').style.display = 'none';
         }
 
-        // Cargar una palabra cuando la página se carga
-        window.onload = cargarPalabra;
+        // Crear el teclado QWERTY
+        function crearTeclado() {
+            const teclado = document.getElementById('teclado');
+            const letras = 'qwertyuiopasdfghjklñzxcvbnm'.split('');
+            teclado.innerHTML = ''; // Limpiar teclado si ya existe
 
-   
+            letras.forEach(letra => {
+                const boton = document.createElement('button');
+                boton.className = 'key';
+                boton.id = letra;
+                boton.innerText = letra.toUpperCase();
+                boton.onclick = () => verificarLetra(letra);
+                teclado.appendChild(boton);
+            });
+
+           
+        }
+
+        window.onload = function () {
+            cargarPalabra();
+            crearTeclado();
+        }
+
+        function tiempo() {
+
+            const timer = documentGetById('timer'); 
+        }
 
     </script>
 </body>
