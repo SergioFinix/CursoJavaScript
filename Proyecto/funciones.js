@@ -23,12 +23,30 @@ function personas(){
 
 }
 
-//Muestra funciones de la Calculadora de la Primera Persona
+//Muestra para mostrar la tabla de productos y agregar mas de la Primera Persona
 function cal1(){
     console.log("llega aqui")
-    let calculo =4+2;
-    document.getElementById("cambio")
-    
+    let calculo =20+20+45+26;
+    let tabla="";
+    console.log("calculo "+calculo)
+    tabla+=`<tr> <td> TOTAL </td>       <td>----</td>       <td>---</td><td> ${calculo}</td> </tr>`
+    tabla+=`<tr> <td> SOPA </td>        <td> 10 </td>       <td> 2 </td><td> 20 </td> </tr>`
+    tabla+=`<tr> <td> SOPA </td>        <td> 10 </td>       <td> 2 </td><td> 20 </td> </tr>`
+    tabla+=`<tr> <td> AZUCAR </td>      <td> 45 </td>       <td> 1 </td><td> 45 </td> </tr>`
+    tabla+=`<tr> <td> LECHE </td>       <td> 23 </td>       <td> 2 </td><td> 26 </td> </tr>`
 
+    document.getElementById("mes1").innerHTML = tabla
+}
+
+
+//Muestra para mostrar la tabla de productos y agregar mas de la Segunda Persona
+function cal2(){
+    console.log("llega aqui")
+    let calculo =4+2;
+    let tabla="";
+    console.log("calculo "+calculo)
+    tabla+=`<tr> <td>  </td> <td>  </td> <td>  </td><td>  </td> </tr>`
+
+    document.getElementById("mes1").innerHTML = tabla
 }
 

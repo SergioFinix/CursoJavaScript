@@ -5,16 +5,17 @@ body
     background-color: gainsboro;
 }
 
-table
-{
-    border-top: unset;
-    text-align: center;
-}
-
 .conteiner
 {
     font-size: 15px;
     padding: 5px;
     margin: center;
     
+}
+
+.estruc
+{
+    align-content: center;
+    padding: 6%;
+
 }
