@@ -7,7 +7,7 @@ let hiddenWord = [];
 async function startGame() {
   attemptsLeft = 6;
   guessedLetters = [];
-  wordToGuess = await fetchWord();
+  wordToGuess = await getWord();
   hiddenWord = Array(wordToGuess.length).fill("_");
   updateDisplay();
   document.getElementById("message").textContent = "¡Empieza el juego!";
@@ -18,15 +18,25 @@ async function startGame() {
   resetHangman();
 }
 
-function fetchWord() {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const words = ["javascript"];
-      const randomWord = words[Math.floor(Math.random() * words.length)];
-      resolve(randomWord);
-    }, 500);
+// Fetch a API de palabra random en ingles
+function getWord() {
+  return new Promise(async (resolve) => {
+    const response = await fetch('https://random-word-api.herokuapp.com/word');
+    const data = await response.json();
+    console.log('data', data);
+    resolve(data[0]);
   });
 }
+
+// function fetchWord() {
+//   return new Promise((resolve) => {
+//     setTimeout(() => {
+//       const words = ["javascript"];
+//       const randomWord = words[Math.floor(Math.random() * words.length)];
+//       resolve(randomWord);
+//     }, 500);
+//   });
+// }
 
 function validateLetterInput(event) {
   const input = event.target;

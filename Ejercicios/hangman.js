@@ -1,9 +1,9 @@
 
 // Variables y estado inicial del juego
-let wordToGuess = "";        // Palabra secreta
-let guessedLetters = [];     // Letras adivinadas correctamente
-let attemptsLeft = 6;        // Intentos restantes
-let hiddenWord = [];         // Estado actual de la palabra adivinada
+let wordToGuess = "";
+let guessedLetters = [];
+let attemptsLeft = 6;
+let hiddenWord = [];
 
 // Función para iniciar el juego
 async function startGame() {
@@ -39,7 +39,6 @@ function getWord() {
 // }
 
 // Simula una llamada asincrónica para obtener la palabra a adivinar
-
 function fetchWord() {
   return new Promise((resolve) => {
     setTimeout(() => {
