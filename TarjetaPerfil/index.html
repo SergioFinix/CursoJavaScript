@@ -4,30 +4,73 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tarjeta de Presentacíon </title>
-  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    table, th, td {
+        border: 1px solid black;
+    }
+    th, td {
+        padding: 10px;
+        text-align: left;
+    }
+    .container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    float: left;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+  }
+</style>
 </head>
 <body>
-  <div class="container" >
-    <div id="userList" class="user-list">
-    <h1>Tarjeta de Perfiles de Usuarios</h1>
-    <input type="text" id="userName" placeholder="Escribe tu nombre">
-    <input type="text" id="userName" placeholder="Escribe tu edad">
-    <input type="text" id="userName" placeholder="Nacionalidad">
-    <input type="text" id="userName" placeholder="Correo">
-    <input type="text" id="userName" placeholder="Telefono">
-    <input type="text" id="userName" placeholder="Puesto laboral">    
-    <input type="text" id="userName" placeholder="CURP">
-    <input type="text" id="userName" placeholder="RFC"> 
-<button id="loadButton">Cargar Datos</button>
-<button id="loadButton">Enviar</button>
+<h1 align="center">Tarjetas Perfil de Usuarios</h1>
+<DIV class="container">
+<table id="usuarios-table">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+<hr>
 
+<button id="loadButton">Cargar Datos
+</button>                                                                                                                                                                                                                                                                                                                                          
     <div id="userList" class="user-list">
     </div>
-
+  </div>
       <!-- Aquí se cargarán los usuarios -->
     </div>
   </div>
+  <script>
+  async function cargarUsuarios() {
+    try {
+        var  respuesta = await fetch('https://jsonplaceholder.typicode.com/users');
+        let usuarios = await respuesta.json();
+         //let ciudad0 = usuarios[0].address.city;
+        // console.log(ciudad);
+        console.log(usuarios);
+        const tabla = document.querySelector("#usuarios-table tbody");
+        
+        usuarios.forEach(usuario => {
+            const fila = document.createElement('tr');
+            fila.innerHTML = `<td>${usuario.name}</td>`;
+            tabla.appendChild(fila);
+        });
+    } catch (error) {
+        console.error('Error al cargar los usuarios:', error);
+    }
+}
 
-  <script src="javascript/script.js"></script>
+cargarUsuarios();
+
+</script>
+  <!--<script src="javascript/script.js"></script> -->
 </body>
 </html>
