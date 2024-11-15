@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/toastify-js"
+    ></script>
+    <title>Juego del Ahorcado</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>Juego del Ahorcado</h1>
+    <div class="instructions">
+      <p>
+        Adivina la palabra oculta antes de que se te acaben los intentos.
+        <br />
+        Ingresa una letra y presiona el botón "Adivinar".
+      </p>
+    </div>
+    <div class="containerRow">
+      <div class="containerColumn">
+        <div class="message">
+          Intentos restantes:
+          <span id="attemptsLeft"> 6</span>
+        </div>
+        <div id="hangmanContainer">
+          <div id="gallows">
+            <div class="post"></div>
+            <div class="beam"></div>
+            <div class="rope"></div>
+            <div class="part head"></div>
+            <div class="part body"></div>
+            <div class="part left-arm"></div>
+            <div class="part right-arm"></div>
+            <div class="part left-leg"></div>
+            <div class="part right-leg"></div>
+          </div>
+        </div>
+      </div>
+      <div class="containerColumn">
+        <div id="message" class="message"></div>
+        <div class="containerColumn2">
+          <div id="wordDisplay" class="words">_ _ _ _</div>
+          <input
+            type="text"
+            id="guessInput"
+            maxlength="1"
+            class="input"
+            placeholder="Ingresa una letra"
+            oninput="validateLetterInput(event)"
+          />
+          <div class="containerRow">
+            <button onclick="startGame()" class="button2">
+              <img
+                src="https://api.iconify.design/mdi:restart.svg"
+                alt="Reiniciar"
+                class="icon"
+              />
+              Reiniciar
+            </button>
+            <button onclick="guessLetter()" class="button1">Adivinar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="hangman.js"></script>
+  </body>
+</html>
