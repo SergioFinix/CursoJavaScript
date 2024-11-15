@@ -6,18 +6,16 @@
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <link rel="stylesheet" href="css/estilos.css">     
      <title>Tareas</title>
-
 </head>
 <body>
      <div class="contenedor">
-          <div class="mostrar" id="agregarTarea">
+          <div class="ocultar" id="agregarTarea">
                <p>Nueva tarea</p>
                <table id="nuevaTarea">
                     <tr>
                          <td>
-                              <select name="nombre" id="nom">
-                                   <option value="Clementine Bauch">Clementine Bauch</option>
-                                   <option value="Ervin Howell">Ervin Howell</option>
+                              <select name="nombre" id="listadoUsuarios">
+                                   
                               </select>
                          </td>
                          <td>
@@ -34,6 +32,7 @@
                     </tr>
                </table>
           </div>
+          <div id="resultado"></div>
           <div class="mensajeError"> <p class="error" id="mensajeError"></p> </div>
           <div class="listadoTareas" id="listadoTareas">Listado de tareas</div>
           <div class="encabezado listadoTareas">
@@ -52,14 +51,7 @@
                               <td class="nombreTarea">Presentar Informe</td>
                               <td class="estado">En progreso</td>
                               <td class="editar"><button class="editar">Editar</button><button class="eliminar">Eliminar</button></td>
-                         </tr>
-                         <tr>
-                              <td class="id">2</td>
-                              <td class="usuario">Clementine Bauch</td>
-                              <td class="nombreTarea">Hacer presentación</td>
-                              <td class="estado">Creada</td>
-                              <td class="editar"><button class="editar">Editar</button><button class="eliminar">Eliminar</button></td>
-                         </tr>                         
+                         </tr>                                                  
                     </tbody>                    
                </table>
           </div>

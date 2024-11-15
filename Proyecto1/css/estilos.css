@@ -48,3 +48,13 @@ table,th,td{
 .error {
      color: red;
  }
+ #resultado {
+     margin-top: 20px;
+     font-size: 18px;
+   }
+   .exito {
+     color: green;
+   }
+   .fracaso {
+     color: red;
+   }

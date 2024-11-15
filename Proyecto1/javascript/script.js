@@ -1,20 +1,79 @@
 
 const botonAgregarFila = document.getElementById("botonGuardar");
+
 const tabla = document.getElementById("listado").getElementsByTagName("tbody")[0];
 let mensajeError= document.getElementById("mensajeError");
+const divAgregarTarea = document.getElementById("agregarTarea");
 //Array de usuarios,tareas y estatus 
 let tareas=[];
+const botonAgregarTarea = document.getElementById("botonAgregarTarea");
+
+const resultado = document.getElementById('resultado');
+const usuarios1 = document.getElementById("listadoUsuarios");
 
 tareas[0]={id: "1", nombre:"Clementine Bauch",tarea:"Hacer informe",estatus:"En proceso"};
-tareas[1]={id: "2", nombre:"Alex",tarea:"Hacer informe",estatus:"En proceso"};
+
+//mostrar el div de agregar tarea
+botonAgregarTarea.addEventListener("click",()=>{divAgregarTarea.className="";divAgregarTarea.className="mostrar";});
+
+//llamada a la API y uso de promesas
+for(num=1;num<=10;num++){
+     listar(num);
+   }
+
+   function listar(num){
+     let  numberValue = 0;
+     numberValue=num;
+
+     if (isNaN(numberValue) || numberValue > 10 || numberValue < 1) {
+       alert('Por favor, introduce un número válido entre 1 y 10.');
+       return; // Salir de la función si el número no es válido o es mayor que 10
+     }
+
+     // Si el número es válido, hacemos la llamada a la API
+     hacerLlamadaApi(numberValue)
+       .then((data) => {
+         // Mostrar resultado exitoso si la API devuelve datos
+         mostrarResultado(`${data.name}`, true);
+       })
+       .catch((error) => {
+         // Mostrar mensaje de error si la llamada a la API falla
+         mostrarResultado(`Error de consulta: ${error.message}`, false);
+       });
+   };
+
+   function hacerLlamadaApi(userId) {
+     return new Promise((resolve, reject) => {
+       // Usamos el ID introducido por el usuario para hacer la llamada a la API
+       fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
+         .then((response) => {
+           if (response.ok) {
+             return response.json(); // Si la respuesta es exitosa, convertirla a JSON
+           } else {
+             reject(new Error('Usuario no encontrado.'));
+           }
+         })
+         .then((data) => resolve(data)) // Resolver la promesa con los datos obtenidos
+         .catch(() => reject(new Error('No se pudo conectar con la API.'))); // Error en la conexión
+     });
+   }
+
+   function mostrarResultado(mensaje, exito) {
+    
+           
+     let option1=document.createElement("option");
+     option1.value=mensaje;
+     option1.textContent=mensaje;
+     usuarios1.appendChild(option1);      
+     resultado.className = exito ? 'exito' : 'fracaso';
+   }
 
 // Función para agregar una nueva fila al final de la lista
-
 botonAgregarFila.addEventListener("click", () => {
      
      //Obtener valores seleccionados
      let id = tareas.length +1;
-     let usuario = document.getElementById("nom").value;
+     let usuario = document.getElementById("listadoUsuarios").value;
      let estado = document.getElementById("edo").value;
      let tarea1= document.getElementById("tarea1").value;
      //console.log(`${id} usuario:${usuario} edo:${estado} tarea:${tarea1}  `);
@@ -56,12 +115,15 @@ botonAgregarFila.addEventListener("click", () => {
 
      // Insertar la nueva fila al final del cuerpo de la tabla
      tabla.appendChild(nuevaFila);
-     //despues de agragar inicializo elementos
+     //despues de agregar inicializo elementos
      document.getElementById("tarea1").value="";
-     document.getElementById("nom").value="Clementine Bauch";
+     document.getElementById("listadoUsuarios").value="Clementine Bauch";
      document.getElementById("edo").value="Creado";
      //borrar mensajes de error de captura
      mensajeError.innerHTML= "";
+     //ocultar div de captura
+     divAgregarTarea.className="";
+     divAgregarTarea.className="ocultar";
      //
      tareas.push({id:`${id}`, nombre:`${usuario}`,tarea:`${tarea1}`,estatus:`${estado}`});
      console.log(tareas);
