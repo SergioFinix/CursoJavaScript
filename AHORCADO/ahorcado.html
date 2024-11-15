@@ -83,7 +83,7 @@
             margin: 0 auto 20px;
             width: 200px;
             height: 200px;
-            background-image: url('img/ahorcado_6.png'); /* Imagen inicial */
+            background-image: url('img/ahorcado_6.png');
             background-size: cover;
             background-position: center;
         }
@@ -99,6 +99,24 @@
             font-size: 20px;
             font-weight: bold;
             margin-top: 20px;
+        }
+
+        .ranking {
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .ranking h2 {
+            margin-bottom: 10px;
+        }
+
+        .ranking ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .ranking li {
+            margin-bottom: 5px;
         }
 
     </style>
@@ -118,17 +136,30 @@
         <div class="letras" id="letras"></div>
         <div class="puntaje" id="puntaje">Puntaje: 0</div>
         <button id="iniciogame">Iniciar Juego</button>
-        <button id="reiniciar" disabled>Reiniciar Juego</button> 
+        <button id="reiniciar" disabled>Reiniciar Juego</button>
+        
+        <div class="ranking">
+            <h2>Ranking</h2>
+            <ul id="rankingList"></ul>
+        </div>
     </div>
 
     <script>
-        const palabras = ["perro", "gato", "leon", "iguana", "cactus", "ferrocarril", "victoria"];
+
+
+
+
+        let palabras = ["perro", "gato", "leon", "iguana", "cactus", "ferrocarril", "victoria"];
         let selectedPalabra = '';
         let LetraAdivinada = [];
         let intentos = 6;
         let tiempo;
         let tiempoRestante = 60;
         let puntaje = 0;
+
+
+
+
 
         const palabraElement = document.getElementById('palabra');
         const intentosElement = document.getElementById('intentos');
@@ -139,6 +170,7 @@
         const inicioImagen = document.getElementById('inicioImagen');
         const tiempoElement = document.getElementById('tiempo');
         const puntajeElement = document.getElementById('puntaje');
+        const rankingList = document.getElementById('rankingList');
 
         const imagenesAhorcado = [
             'img/ahorcado_0.png',
@@ -150,8 +182,43 @@
             'img/ahorcado_6.png'
         ];
 
-        function iniciar() {
-            selectedPalabra = palabras[Math.floor(Math.random() * palabras.length)];
+        async function cargarpalabras() {
+            try {
+                const respuesta = await fetch('http://187.237.240.148:4005/api/palabras');
+                 palabras = await respuesta.json();
+
+                 palabras = palabras.Palabras.map(palabrita=>palabrita.palabra)
+                 
+            } catch (error) {
+                console.error('Error al cargar los usuarios:', error);
+            }
+        }
+
+
+        let ranking = JSON.parse(localStorage.getItem('ranking')) || [];
+
+        function mostrarRanking() {
+            rankingList.innerHTML = '';
+            ranking.sort((a, b) => b.puntaje - a.puntaje); // Ordenar de mayor a menor
+            ranking.forEach((player, index) => {
+                const li = document.createElement('li');
+                li.textContent = `${index + 1}. ${player.nombre}: ${player.puntaje}`;
+                rankingList.appendChild(li);
+            });
+        }
+
+
+
+
+
+
+
+
+
+       async function iniciar() {
+        await cargarpalabras();
+          console.log(palabras);
+          selectedPalabra = palabras[Math.floor(Math.random() * palabras.length)];
             LetraAdivinada = [];
             intentos = 6;
             tiempoRestante = 60;
@@ -180,70 +247,30 @@
             palabraElement.textContent = display.trim();
         }
 
-            function guessLetter(letras, button) {
-    if (LetraAdivinada.includes(letras)) {
-        return;
-    }
+        function guessLetter(letras, button) {
+            if (LetraAdivinada.includes(letras)) {
+                return;
+            }
 
-    LetraAdivinada.push(letras);
-    if (selectedPalabra.includes(letras)) {
-        button.classList.add('correcta');
-        updateWordDisplay();
-        checkGameStatus();
-    } else {
-        button.classList.add('incorrecta');
-        intentos--;
-        intentosElement.textContent = intentos;
-        updateImage();
-        if (intentos === 0) {
-            mensajeElement.textContent = `¡Perdiste! La palabra era: ${selectedPalabra}`;
-            disableLetterButtons();
-            clearInterval(tiempo);
-            reiniciarButton.disabled = false;
+            LetraAdivinada.push(letras);
+            if (selectedPalabra.includes(letras)) {
+                button.classList.add('correcta');
+                updateWordDisplay();
+                checkGameStatus();
+            } else {
+                button.classList.add('incorrecta');
+                intentos--;
+                intentosElement.textContent = intentos;
+                updateImage();
+                if (intentos === 0) {
+                    mensajeElement.textContent = `¡Perdiste! La palabra era: ${selectedPalabra}`;
+                    disableLetterButtons();
+                    clearInterval(tiempo);
+                    reiniciarButton.disabled = false;
+                    guardarPuntaje();
+                }
+            }
         }
-    }
-}
-
-function checkGameStatus() {
-    const wordDisplay = palabraElement.textContent.replace(/\s/g, '');
-    if (wordDisplay === selectedPalabra) {
-        mensajeElement.textContent = '¡Correcto, la has adivinado!';
-        puntaje++;
-        puntajeElement.textContent = `Puntaje: ${puntaje}`;
-        disableLetterButtons();
-        clearInterval(tiempo);
-        reiniciarButton.disabled = false;
-    }
-}
-
-function inicioTiempo() {
-    tiempo = setInterval(() => {
-        if (tiempoRestante > 0) {
-            tiempoRestante--;
-            const minutos = Math.floor(tiempoRestante / 60);
-            const segundos = tiempoRestante % 60;
-            tiempoElement.textContent = `Tiempo restante: ${minutos < 10 ? '0' : ''}${minutos}:${segundos < 10 ? '0' : ''}${segundos}`;
-        } else {
-            mensajeElement.textContent = "¡Se acabó el tiempo!";
-            disableLetterButtons();
-            clearInterval(tiempo);
-            reiniciarButton.disabled = false;
-        }
-    }, 1000);
-}
-
-function reiniciarJuego() {
-    puntaje = 0;
-    puntajeElement.textContent = `Puntaje: ${puntaje}`;
-    inicioButton.disabled = false;
-    reiniciarButton.disabled = true;
-    mensajeElement.textContent = '';
-    letrasElement.innerHTML = '';
-    inicioImagen.style.backgroundImage = `url(${imagenesAhorcado[6]})`; // Imagen inicial
-    tiempoRestante = 60;
-    tiempoElement.textContent = "Tiempo restante: 00:60";
-}
-
 
         function checkGameStatus() {
             const wordDisplay = palabraElement.textContent.replace(/\s/g, '');
@@ -254,11 +281,51 @@ function reiniciarJuego() {
                 disableLetterButtons();
                 clearInterval(tiempo);
                 reiniciarButton.disabled = false;
+                guardarPuntaje();
             }
         }
 
+
+        function guardarPuntaje() {
+            const nombre = prompt("Ingresa tu nombre para el ranking:");
+            if (nombre) {
+                ranking.push({ nombre, puntaje });
+                localStorage.setItem('ranking', JSON.stringify(ranking));
+                mostrarRanking();
+            }
+        }
+
+        function inicioTiempo() {
+            tiempo = setInterval(() => {
+                if (tiempoRestante > 0) {
+                    tiempoRestante--;
+                    const minutos = Math.floor(tiempoRestante / 60);
+                    const segundos = tiempoRestante % 60;
+                    tiempoElement.textContent = `Tiempo restante: ${minutos < 10 ? '0' : ''}${minutos}:${segundos < 10 ? '0' : ''}${segundos}`;
+                } else {
+                    mensajeElement.textContent = "¡Se acabó el tiempo!";
+                    disableLetterButtons();
+                    clearInterval(tiempo);
+                    reiniciarButton.disabled = false;
+                    guardarPuntaje();
+                }
+            }, 1000);
+        }
+
+        function reiniciarJuego() {
+            puntaje = 0;
+            puntajeElement.textContent = `Puntaje: ${puntaje}`;
+            inicioButton.disabled = false;
+            reiniciarButton.disabled = true;
+            mensajeElement.textContent = '';
+            letrasElement.innerHTML = '';
+            inicioImagen.style.backgroundImage = `url(${imagenesAhorcado[6]})`;
+            tiempoRestante = 60;
+            tiempoElement.textContent = "Tiempo restante: 00:60";
+        }
+
         function enableLetterButtons() {
-            const letters = 'abcdefghijklmnopqrstuvwxyz'.split('');
+            const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
             letters.forEach(letras => {
                 const button = document.createElement('button');
                 button.textContent = letras;
@@ -278,37 +345,12 @@ function reiniciarJuego() {
             inicioImagen.style.backgroundImage = `url(${imagenesAhorcado[intentos]})`;
         }
 
-        function inicioTiempo() {
-            tiempo = setInterval(() => {
-                if (tiempoRestante > 0) {
-                    tiempoRestante--;
-                    const minutos = Math.floor(tiempoRestante / 60);
-                    const segundos = tiempoRestante % 60;
-                    tiempoElement.textContent = `Tiempo restante: ${minutos < 10 ? '0' : ''}${minutos}:${segundos < 10 ? '0' : ''}${segundos}`;
-                } else {
-                    mensajeElement.textContent = "¡Se acabó el tiempo!";
-                    disableLetterButtons();
-                    clearInterval(tiempo);
-                    reiniciarButton.disabled = false;
-                }
-            }, 1000);
-        }
-
-        function reiniciarJuego() {
-            inicioButton.disabled = false;
-            reiniciarButton.disabled = true;
-            mensajeElement.textContent = '';
-            letrasElement.innerHTML = '';
-            inicioImagen.style.backgroundImage = `url(${imagenesAhorcado[6]})`;
-            tiempoRestante = 60;
-            tiempoElement.textContent = "Tiempo restante: 00:60";
-        }
-
         inicioButton.addEventListener('click', iniciar);
         reiniciarButton.addEventListener('click', reiniciarJuego);
 
         window.onload = function() {
             inicioButton.disabled = false;
+            mostrarRanking();
         };
     </script>
 
