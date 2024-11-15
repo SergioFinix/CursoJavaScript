@@ -142,13 +142,14 @@ document.addEventListener("DOMContentLoaded", () => {
     // Limpiar contenedor y restablecer estilos antes de cargar otra tarjeta
     tarjetaContenedor.innerHTML = ""; 
     tarjetaContenedor.style.backgroundColor = "#722F37";
-    tarjetaContenedor.style.color = "#000000";
+    tarjetaContenedor.style.color = "#ffffff";
     tarjetaContenedor.style.fontFamily = "Arial";
     tarjetaContenedor.style.fontSize = "16px";
 
     // Crear la tarjeta
     const tarjeta = document.createElement("div");
     tarjeta.classList.add("tarjeta");
+    tarjeta.classList.add("tarjeta-container2");
 
     // Foto
     const fotoDiv = document.createElement("div");
@@ -168,6 +169,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const nombre = document.createElement("h3");
     nombre.textContent = usuario.nombre;
 
+    const nacionalidad = document.createElement("p");
+    nacionalidad.textContent = `Nacionalidad: ${usuario.nacionalidad}`;
+
+    const website = document.createElement("p");
+    website.textContent = `Sitio web: ${usuario.website}`;
+
     const email = document.createElement("p");
     email.textContent = `Email: ${usuario.email}`;
 
@@ -185,13 +192,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Agregar todo a la tarjeta
     
-    info.appendChild(edad);
+    info.appendChild(nacionalidad);
     info.appendChild(email);
     info.appendChild(telefono);
     info.appendChild(direccion);
+    info.appendChild(website);
     info.appendChild(compania);
     fotoDiv.appendChild(foto);
     fotoDiv.appendChild(nombre);
+    fotoDiv.appendChild(edad);
     tarjeta.appendChild(fotoDiv);   
     tarjeta.appendChild(info);
 
@@ -223,14 +232,14 @@ document.addEventListener("DOMContentLoaded", () => {
     colorTextoLabel.textContent = "Color de texto:";
     const colorTextoInput = document.createElement("input");
     colorTextoInput.type = "color";
-    colorTextoInput.value = "#ffffff"; // valor predeterminado
+    colorTextoInput.value = "#ffffff "; // valor predeterminado
 
     // Selector de tamaño de texto
     const tamanoTextoLabel = document.createElement("h4");
     tamanoTextoLabel.textContent = "Tamaño de Fuente:";
     const tamanoTextoSelect = document.createElement("select");
     const tamanos = ["16px", "8px", "12px", "20px", "24px"];
-    tamanos.forEach((tamano) => {
+    tamanos.forEach((tamano ="16 px") => {
       const option = document.createElement("option");
       option.value = tamano;
       option.textContent = tamano;

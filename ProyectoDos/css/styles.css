@@ -32,6 +32,7 @@ body{
 
 #lista-usuarios li{
     padding: 10px;
+    height: auto;
     margin: 5px 0;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -55,6 +56,15 @@ body{
 }
 
 #tarjeta-container{
+    width: 100%;
+    max-width: auto;
+    background-color: transparent;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    align-items: center;
+}
+#tarjeta-container2{
     width: 100%;
     max-width: auto;
     background-color: #722F37;
@@ -86,7 +96,7 @@ body{
 }
 .informacion{
     /* Para Despues */
-    text-align: left;
+    text-align: center;
 }
 
 .box{
@@ -95,4 +105,5 @@ body{
     height: 200px;
     margin: 10px 0;
     justify-content: center;
+    border-color: #000000;
 }
