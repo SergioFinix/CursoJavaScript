@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guardar datos en JSON</title>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+h1, h2 {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+pre {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 4px;
+    white-space: pre-wrap;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Formulario de Usuario</h1>
+        <form id="userForm">
+            <label for="name">Nombre:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="email">Correo Electrónico:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="age">Edad:</label>
+            <input type="number" id="age" name="age" required>
+            
+            <button type="submit">Guardar</button>
+        </form>
+
+        <h2>Datos Guardados</h2>
+        <pre id="jsonOutput"></pre>
+    </div>
+
+    <script>
+        // Inicializamos el array donde se guardarán los datos
+let userData = [];
+
+    // Función para manejar el envío del formulario
+    document.getElementById('userForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Evitar el envío del formulario
+
+    // Obtener los valores del formulario
+    let name = document.getElementById('name').value;
+    let email = document.getElementById('email').value;
+    let age = document.getElementById('age').value;
+
+    // Crear un objeto con los datos del formulario
+    let user = {
+        name: name,
+        email: email,
+        age: age
+    };
+
+    // Agregar el objeto al array
+    userData.push(user);
+
+    
+    userData.forEach((item) => {
+        console.log(item.name);
+    })
+      
+
+    // Mostrar el array JSON en pantalla
+    document.getElementById('jsonOutput').textContent = JSON.stringify(userData, null, 2);
+    
+
+    // Limpiar el formulario
+    document.getElementById('userForm').reset();
+});
+
+    </script>
+</body>
+</html>
