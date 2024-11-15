@@ -15,11 +15,35 @@
         <h1>Generador de Tarjetas de Perfil</h1>
     </header>
     <div class="container">
-        <select id="tema-info">
-            <option value=""></option>
-        </select>
         <div id="users-container" class="users-container"></div>
         <div id="info-user" class="info-user"></div>
+        <div id="style-container" class="style-container ocultar">
+            <h2>Personalizar Tarjeta</h2>
+            <div class="tipo-container">
+                <label for="estiloTarjeta">Estilo de tarjeta</label>
+                <select id="estiloTarjeta">
+                    <option value="1">Predeterminado</option>
+                    <option value="2">Estilo 1</option>
+                    <option value="3">Estilo 2</option>
+                </select>
+            </div>
+            <div class="tipo-container">
+                <label for="letraTarjeta">Tipo de letra</label>
+                <select id="letraTarjeta">
+                    <option value="1">Predeterminado</option>
+                    <option value="2">Estilo 1</option>
+                    <option value="3">Estilo 2</option>
+                </select>
+            </div>
+            <div class="tipo-container">
+                <label for="tamanoTarjeta">Tamaño de letra</label>
+                <select id="tamanoTarjeta">
+                    <option value="1">Predeterminado</option>
+                    <option value="2">Estilo 1</option>
+                    <option value="3">Estilo 2</option>
+                </select>
+            </div>
+        </div>
     </div>
     <script src="js/index.js"></script>
 </body>

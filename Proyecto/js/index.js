@@ -1,8 +1,12 @@
 window.addEventListener('DOMContentLoaded', () => {
     const API_URL = 'https://jsonplaceholder.typicode.com';
+    const API_IMAGES = 'https://rickandmortyapi.com/api/character'
 
     let usersContainer = document.getElementById('users-container');
     let infoUser = document.getElementById('info-user');
+
+    let styleContainer = document.getElementById('style-container');
+
 
     const getAndShowUsers = async () => {
         try {
@@ -52,7 +56,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
     const getUserInfo = async (id) => {
         try {
+
+            styleContainer.classList.add('ocultar');
+
             let div = document.createElement('div');
+            div.id = 'info-container';
             div.classList.add('info-container');
             let fragmentUser = document.createDocumentFragment();
 
@@ -62,21 +70,28 @@ window.addEventListener('DOMContentLoaded', () => {
                 throw Error('Parámetro inválido');
             }
 
-            const response = await fetch(`${API_URL}/users/${id}`, {
-                method: 'GET'
-            });
+            const responses = await Promise.all([
+                fetch(`${API_URL}/users/${id}`, {
+                    method: 'GET'
+                }),
+                fetch(`${API_IMAGES}/${id}`, {
+                    method: 'GET'
+                })
+            ]);
 
-            if (!response.ok) {
-                throw Error('Error al obtener la información del usuario');
-            }
+            const [dataUser, dataAvatar] = await Promise.all(responses.map(response => response.json()));
 
-            const data = await response.json();
-            if (typeof data !== 'object' || Object.keys(data).length === 0) {
-                throw Error('No se puede procesar la información');
-            }
+            let divImage = document.createElement('div');
+            divImage.classList.add('avatar-container');
+
+            let image = document.createElement('img');
+            image.src = dataAvatar.image;
+            image.classList.add('avatar');
+            divImage.append(image);
+            div.append(divImage);
 
             let h2 = document.createElement('h2');
-            h2.textContent = data.name;
+            h2.textContent = dataUser.name;
             div.append(h2);
 
             const createDiv = (labelText, valueText) => {
@@ -97,18 +112,35 @@ window.addEventListener('DOMContentLoaded', () => {
                 return infoDiv;
             };
 
-            div.append(createDiv('Nombre:', data.name));
-            div.append(createDiv('Username:', data.username));
-            div.append(createDiv('Email:', data.email));
-            div.append(createDiv('Dirección:', `${data.address.street} ${data.address.suite}, ${data.address.city}`));
-            div.append(createDiv('Teléfono:', data.phone));
-            div.append(createDiv('Sitio Web:', data.website));
-            div.append(createDiv('Compañía:', data.company.name));
+            //div.append(createDiv('Nombre:', dataUser.name));
+            div.append(createDiv('Username:', dataUser.username));
+            div.append(createDiv('Email:', dataUser.email));
+            div.append(createDiv('Dirección:', `${dataUser.address.street} ${dataUser.address.suite}, ${dataUser.address.city}`));
+            div.append(createDiv('Teléfono:', dataUser.phone));
+            div.append(createDiv('Sitio Web:', dataUser.website));
+            div.append(createDiv('Compañía:', dataUser.company.name));
 
             fragmentUser.append(div);
             infoUser.append(fragmentUser);
+
+            styleContainer.classList.remove('ocultar');
+
         } catch (error) {
             alert(error.message);
         }
     }
+
+    //Evento para cambiar el estilo de la tarjeta
+    document.getElementById('estiloTarjeta').addEventListener('change', (e) => {
+        let value = parseInt(e.target.value);
+
+        let infoContainer = document.getElementById('info-container');
+
+        //Tema 1
+        if (value === 2) {
+            infoContainer.classList.add('tema1');
+         }
+        //Tema 2
+        else if (value === 3) { }
+    })
 });
