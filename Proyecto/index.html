@@ -55,7 +55,7 @@
 
             <br>
 
-            <div id="mes2">
+            <div>
                 <table border="solid">
                     <thead>
                         <tr> 
@@ -65,15 +65,15 @@
                             <th>Total</th>
                         </tr> 
                     </thead>
-                    <tbody id="nom">
+                    <tbody id="mes2">
                     </tbody>
                 </table>
             </div>
 
             <br>
             
-            <div id="mes3">
-                <table border="solid">
+            <div >
+                <table border="solid" id="mes3">
                     <thead>
                         <tr> 
                             <th>Nombre del producto</th> 
@@ -82,7 +82,13 @@
                             <th>Total</th>
                         </tr> 
                     </thead>
-                    <tbody id="nom">
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -92,9 +98,14 @@
         <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 
         <td>
-            <form action="guardar()">
-
-                <input type="text" value="Producto">
+            <form>
+                <p>Nombre del Producto: </p>
+                <input type="text" value="Producto" id="nombre"> <br>
+                <p>Precio: </p>
+                <input type="number" value="0.00" id="precio"> <br>
+                <p>Cantidad: </p>
+                <input type="number" value="0" id="cantidad"> <br>
+                <button onclick="agregar()" type="submit">Agregar</button>
             </form>
         </td>
     </table>
