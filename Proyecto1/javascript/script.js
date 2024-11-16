@@ -1,20 +1,30 @@
 
 const botonAgregarFila = document.getElementById("botonGuardar");
-
+const botonEditar=document.getElementById("botonGuardar2");
 const tabla = document.getElementById("listado").getElementsByTagName("tbody")[0];
 let mensajeError= document.getElementById("mensajeError");
 const divAgregarTarea = document.getElementById("agregarTarea");
+const divEditarElemento = document.getElementById("editarTarea");
+let idTarea =20241100;
 //Array de usuarios,tareas y estatus 
 let tareas=[];
 const botonAgregarTarea = document.getElementById("botonAgregarTarea");
 
 const resultado = document.getElementById('resultado');
 const usuarios1 = document.getElementById("listadoUsuarios");
+const usuarios2 = document.getElementById("listadoUsuarios2");
+const logDiv = document.getElementById('log');
 
-tareas[0]={id: "1", nombre:"Clementine Bauch",tarea:"Hacer informe",estatus:"En proceso"};
+//tareas[0]={id: "1", nombre:"Clementine Bauch",tarea:"Hacer informe",estatus:"En proceso"};
 
 //mostrar el div de agregar tarea
-botonAgregarTarea.addEventListener("click",()=>{divAgregarTarea.className="";divAgregarTarea.className="mostrar";});
+botonAgregarTarea.addEventListener("click",()=>{
+  divAgregarTarea.className="";
+  divAgregarTarea.className="mostrar";
+  divEditarElemento.className="";
+  divEditarElemento.className="ocultar";
+
+});
 
 //llamada a la API y uso de promesas
 for(num=1;num<=10;num++){
@@ -58,21 +68,25 @@ for(num=1;num<=10;num++){
      });
    }
 
-   function mostrarResultado(mensaje, exito) {
-    
+   function mostrarResultado(mensaje, exito) {    
            
      let option1=document.createElement("option");
+     let option2=document.createElement("option");
      option1.value=mensaje;
      option1.textContent=mensaje;
-     usuarios1.appendChild(option1);      
+     option2.value=mensaje;
+     option2.textContent=mensaje;
+     usuarios1.appendChild(option1);
+     usuarios2.appendChild(option2);      
      resultado.className = exito ? 'exito' : 'fracaso';
    }
 
 // Función para agregar una nueva fila al final de la lista
 botonAgregarFila.addEventListener("click", () => {
-     
+     //incremento id de tarea
+     idTarea++;
      //Obtener valores seleccionados
-     let id = tareas.length +1;
+     let id = idTarea;
      let usuario = document.getElementById("listadoUsuarios").value;
      let estado = document.getElementById("edo").value;
      let tarea1= document.getElementById("tarea1").value;
@@ -105,6 +119,9 @@ botonAgregarFila.addEventListener("click", () => {
      botonEliminar.addEventListener('click',()=>{
           eliminarElemento(nuevaFila.rowIndex-1);
      });
+     botonEditar.addEventListener('click',()=>{
+          editarElemento(nuevaFila.rowIndex-1);
+     });
      // Agregar las celdas a la fila
      nuevaFila.appendChild(celdaId);
      nuevaFila.appendChild(celdaUsuario);
@@ -127,6 +144,7 @@ botonAgregarFila.addEventListener("click", () => {
      //
      tareas.push({id:`${id}`, nombre:`${usuario}`,tarea:`${tarea1}`,estatus:`${estado}`});
      console.log(tareas);
+     logMessage(`Se agrego tarea "${tarea1}" con el id "${id}" a nombre de "${usuario}" con el staus de "${estado}"`);
 
      }// fin de if
           else{ //error de captura
@@ -137,16 +155,77 @@ botonAgregarFila.addEventListener("click", () => {
      //eliminar elementos
      function eliminarElemento(fila) {
           const elementoLista = document.getElementById("listado");
+          const idEliminiado =elementoLista.rows[fila+1].cells[0].textContent;
           elementoLista.deleteRow(fila+1); // Elimina el elemento seleccionado
           tareas.splice(fila,1);
+
+          logMessage(`Se elimino tarea con el id "${idEliminiado}" `);
+          //ocultar editar y nuevo si estan visibles
+          divEditarElemento.className="";
+          divEditarElemento.className="ocultar";
+          divAgregarTarea.className="";
+          divAgregarTarea.className="ocultar";
           //console.log(tareas);
       }
       function editarElemento(fila) {
-          //const elementoLista = document.getElementById("listado");
-          let datos ="";
-          //elementoLista.deleteRow(fila+1); // Modifica el elemento seleccionado
-          tareas.splice(fila+1,0)=datos; // Modifica el elemento de la lista
-          //console.log(tareas);
+        const elementoLista = document.getElementById("listado");
+        const usuarioEditar=document.getElementById("listadoUsuarios2");
+        const tareaEditar=document.getElementById("tarea2");
+        const estadoEditar=document.getElementById("edo2");
+        const filaEditar=document.getElementById("numeroFila");
+        
+        divEditarElemento.className="";
+        divEditarElemento.className="mostrar";
+        divAgregarTarea.className="";
+        divAgregarTarea.className="ocultar";
+
+          usuarioEditar.value=elementoLista.rows[fila+1].cells[1].textContent;
+          tareaEditar.value=elementoLista.rows[fila+1].cells[2].textContent;
+          estadoEditar.value=elementoLista.rows[fila+1].cells[3].textContent;
+          filaEditar.innerHTML = fila+1;
+          //const noFila=fila;
+         //editarFila(noFila);
+         //console.log(noFila);
       }
+
+      botonEditar.addEventListener("click",()=>{
+        const filaEditar= parseInt(document.getElementById("numeroFila").innerHTML-1);        
+        divEditarElemento.className="";
+        divEditarElemento.className="ocultar";
+        //console.log(filaEditar);
+        editarFila(filaEditar);
+      });
+      function editarFila(fila){
+        const elementoLista = document.getElementById("listado");
+        const usuarioEditar=document.getElementById("listadoUsuarios2");
+        const tareaEditar=document.getElementById("tarea2");
+        const estadoEditar=document.getElementById("edo2");
+        //const filaEditar=document.getElementById("numeroFila");
+        const divEditarElemento = document.getElementById("editarTarea");
+        const idElemento = elementoLista.rows[fila+1].cells[0].textContent;
+
+        divEditarElemento.className="";
+        divEditarElemento.className="ocultar";
+        
+        
+        elementoLista.rows[fila+1].cells[1].textContent = usuarioEditar.value;
+        elementoLista.rows[fila+1].cells[2].textContent =tareaEditar.value;
+        elementoLista.rows[fila+1].cells[3].textContent = estadoEditar.value;
+        logMessage(`Se modifico la tarea con el id "${idElemento}"-> nombre:"${usuarioEditar.value}",status:"${estadoEditar.value},tarea:${tareaEditar.value}"`);
+        
+        //elementoLista.deleteRow(fila+1); // Modifica el elemento seleccionado
+        //elementoLista.rows[fila+1].cells[1].textContent=datos;
+        //tareas.splice(fila+1,0)=datos; // Modifica el elemento de la lista
+        //console.log(fila);
+
+      }
+
+      // Función para registrar mensajes en el log
+      function logMessage(message) {
+        const newLog = document.createElement('p');
+        newLog.textContent = message;
+        logDiv.appendChild(newLog);
+        logDiv.scrollTop = logDiv.scrollHeight; // Desplazar hacia el final del log
+    }
 
       

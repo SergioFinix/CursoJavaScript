@@ -10,7 +10,7 @@
 <body>
      <div class="contenedor">
           <div class="ocultar" id="agregarTarea">
-               <p>Nueva tarea</p>
+               <h3>Nueva tarea</h3>
                <table id="nuevaTarea">
                     <tr>
                          <td>
@@ -23,6 +23,7 @@
                                    <option value="Creado">Creado</option>
                                    <option value="En proceso">En proceso</option>
                                    <option value="Pausada">Pausada</option>
+                                   <option value="Terminada">Terminada</option>
                               </select>
                          </td>
                          <td>
@@ -32,9 +33,34 @@
                     </tr>
                </table>
           </div>
+          <div class="ocultar" id="editarTarea">
+               <h3>Editar tarea</h3>
+               <table id="editarTarea">
+                    <tr>
+                         <td>Fila: <label id="numeroFila"></label></td>
+                         <td>
+                              <select name="nombre1" id="listadoUsuarios2">
+                                   
+                              </select>
+                         </td>
+                         <td>
+                              <select name="estado2" id="edo2">
+                                   <option value="Creado">Creado</option>
+                                   <option value="En proceso">En proceso</option>
+                                   <option value="Pausada">Pausada</option>
+                                   <option value="Terminada">Terminada</option>
+                              </select>
+                         </td>
+                         <td>
+                              Tarea:<input type="text" id="tarea2">
+                              <button id="botonGuardar2">Guardar cambios</button>
+                         </td>
+                    </tr>
+               </table>
+          </div>
           <div id="resultado"></div>
           <div class="mensajeError"> <p class="error" id="mensajeError"></p> </div>
-          <div class="listadoTareas" id="listadoTareas">Listado de tareas</div>
+          <div class="listadoTareas" id="listadoTareas"><h3>Listado de tareas</h3></div>
           <div class="encabezado listadoTareas">
                <table id="listado">
                   <thead>
@@ -45,16 +71,23 @@
                          </tr>
                   </thead>
                   <tbody>
+                         <!--
                          <tr >
                               <td class="id">1</td>
                               <td class="usuario">Leanne Graham</td>
                               <td class="nombreTarea">Presentar Informe</td>
                               <td class="estado">En progreso</td>
                               <td class="editar"><button class="editar">Editar</button><button class="eliminar">Eliminar</button></td>
-                         </tr>                                                  
+                         </tr>
+                         -->                                                  
                     </tbody>                    
                </table>
           </div>
+          <!-- Sección del log -->
+        <div class="log-section">
+          <h3>Registro de eventos</h3>
+          <div id="log" class="log"></div>
+      </div>
      </div> 
      <script src="javascript/script.js"></script>
 </body>
