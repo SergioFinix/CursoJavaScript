@@ -183,17 +183,20 @@ botonAgregarFila.addEventListener("click", () => {
           tareaEditar.value=elementoLista.rows[fila+1].cells[2].textContent;
           estadoEditar.value=elementoLista.rows[fila+1].cells[3].textContent;
           filaEditar.innerHTML = fila+1;
-          //const noFila=fila;
-         //editarFila(noFila);
-         //console.log(noFila);
+          
       }
 
       botonEditar.addEventListener("click",()=>{
-        const filaEditar= parseInt(document.getElementById("numeroFila").innerHTML-1);        
+        const filaEditar= parseInt(document.getElementById("numeroFila").innerHTML-1);
+        const tareaEditar= document.getElementById("tarea2").innerHTML;        
         divEditarElemento.className="";
         divEditarElemento.className="ocultar";
         //console.log(filaEditar);
+        const regex = /^[A-Za-z0-9 ]{1,25}$/;
+     //validarTarea();
+     if(tareaEditar!="" && regex.test(tareaEditar)){  
         editarFila(filaEditar);
+     }
       });
       function editarFila(fila){
         const elementoLista = document.getElementById("listado");
