@@ -1,0 +1,97 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 600px;
+    margin: 50px auto;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+input {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background: #5cb85c;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #4cae4c;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    padding: 10px;
+    background: #f9f9f9;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+li span {
+    flex-grow: 1;
+}
+
+li button {
+    margin-left: 10px;
+    background: #d9534f;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+li button:hover {
+    background: #c9302c;
+}
+
+.status {
+    margin-left: 10px;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+.status.creada {
+    background: #5bc0de;
+    color: #fff;
+}
+
+.status.en-progreso {
+    background: #f0ad4e;
+    color: #fff;
+}
+
+.status.terminada {
+    background: #5cb85c;
+    color: #fff;
+}
+
+.status.pausada {
+    background: #d9534f;
+    color: #fff;
+}
+
+.selected {
+    background: #d9edf7;
+}
