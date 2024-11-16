@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3</title>
+    <link rel="stylesheet" href="css/styles.css">
+    
+</head>
+<body>
+    <center><h1>Calculadora gastos de Gastos mensuales</h1></center>
+    
+    <br><br>
+    <div>
+        <div id="errordelistaclientes"></div>
+        <label>Cliente</label>
+        <select class="" name="Listacliente" id="Listacliente" onchange="mostrarventadetallecliente(this)"></select>
+        <label>Presupuesto Mensual</label>
+        <input type="text" name="presupuestomensual" id="presupuestomensual">
+        <p id="mensaje" style="background-color: red;"></p>
+        <br><br>
+        <label>Mes de venta</label>
+        <select class="" name="ListaMesdeventa" id="ListaMesdeventa" onchange="mostrarventadetalle(this)"></select>        
+        <label>producto</label>
+        <input type="text" name="producto" id="producto">
+        <label>Costo</label>
+        <input type="text" name="costo" id="costo">
+        <button name="agregarproducto" id="agregarproducto"> Agregar producto</button>
+    </div>
+    <br>
+    <div>
+        <table id="miTabla">
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Cliente</th>
+                    <th>producto</th>
+                    <th>Costo</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <br>
+        <div id="sumaventa" style="text-align: right;">Total por mes $-: </div>
+        <div id="sumatotalcliente">Total general del Cliente: $0</div>
+        <div id="productomasadquirido">Producto mas comprado: </div>        
+    </div>
+    <script src="javascript/script.js"></script>
+    
+</body>
+</html>
