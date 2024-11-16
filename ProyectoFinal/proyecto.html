@@ -36,6 +36,7 @@
             display: flex;
         }
         .centrar {
+            padding-bottom: 10px;
             text-align: center;
         }
         .form-container {
@@ -74,12 +75,11 @@
             <form id="surveyForm1">
                 <h2>Encuesta 1</h2>
                 <div class="form-group">
-                    <label for="serviceRating">¿Cómo calificaría nuestro servicio? (1 a 5)</label>
+                    <label>¿Cómo calificaría nuestro servicio? (1 a 5)</label>
                     <input type="number" id="serviceRating" min="1" max="5" required>
                 </div>
-
                 <div class="form-group">
-                    <label for="recommend">¿Recomendaría nuestro producto a otros?</label>
+                    <label>¿Recomendaría nuestro producto a otros?</label>
                     <select id="recommend" required>
                         <option value="">Seleccione una opción</option>
                         <option value="Sí">Sí</option>
@@ -87,21 +87,19 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="recommend">¿En que color le gusta el producto?</label>
-                    <select id="recommend" required>
+                    <label>¿En que color le gusta el producto?</label>
+                    <select id="color" required>
                         <option value="">Seleccione una opción</option>
                         <option value="Blanco">Blanco</option>
                         <option value="Negro">Negro</option>
                     </select>
                 </div>
-
                 <div class="form-group">
-                    <label for="satisfaction">¿Qué tan satisfecho está con la atención al cliente? (1 a 5)</label>
+                    <label>¿Qué tan satisfecho está con la atención al cliente? (1 a 5)</label>
                     <input type="number" id="satisfaction" min="1" max="5" required>
                 </div>
-
                 <div class="form-group">
-                    <label for="frequency">¿Con qué frecuencia usa nuestro producto?</label>
+                    <label>¿Con qué frecuencia usa nuestro producto?</label>
                     <select id="frequency" required>
                         <option value="">Seleccione una opción</option>
                         <option value="Diario">Diario</option>
@@ -116,12 +114,12 @@
             <form id="surveyForm2">
                 <h2>Encuesta 2</h2>
                 <div class="form-group">
-                    <label for="serviceRating">¿Qué tan satisfecho(a) estás con la atención al cliente que recibiste durante tu visita? (1 a 5)</label>
-                    <input type="number" id="serviceRating" min="1" max="5" required>
+                    <label>¿Qué tan satisfecho(a) estás con la atención al cliente que recibiste durante tu visita? (1 a 5)</label>
+                    <input type="number" id="serviceRating2" min="1" max="5" required>
                 </div>
                 <div class="form-group">
-                    <label for="frequency">¿Cómo calificarías la limpieza y organización de la tienda?</label>
-                    <select id="frequency" required>
+                    <label>¿Cómo calificarías la limpieza y organización de la tienda?</label>
+                    <select id="frequency2" required>
                         <option value="">Seleccione una opción</option>
                         <option value="Excelente">Excelente</option>
                         <option value="Buena">Buena</option>
@@ -131,8 +129,8 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="recommend">¿Recomendaría nuestro producto a otros?</label>
-                    <select id="recommend" required>
+                    <label>¿Recomendaría nuestro producto a otros?</label>
+                    <select id="recommend2" required>
                         <option value="">Seleccione una opción</option>
                         <option value="Sí">Sí</option>
                         <option value="Solo">Solo algunos productos</option>
@@ -140,31 +138,30 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="satisfaction">¿Qué tan satisfecho(a) estás con la relación calidad-precio de los productos que compraste? (1 a 5)</label>
-                    <input type="number" id="satisfaction" min="1" max="5" required>
+                    <label>¿Qué tan satisfecho(a) estás con la relación calidad-precio de los productos que compraste? (1 a 5)</label>
+                    <input type="number" id="satisfaction2" min="1" max="5" required>
                 </div>
                 <div class="form-group">
-                    <label for="recommend">¿Volverías a comprar en esta tienda?</label>
-                    <select id="recommend" required>
+                    <label>¿Volverías a comprar en esta tienda?</label>
+                    <select id="volver2" required>
                         <option value="">Seleccione una opción</option>
                         <option value="Sí">Sí</option>
                         <option value="Solo">No estoy seguro</option>
                         <option value="No">No</option>
                     </select>
                 </div>
-
             </form>
 
             <!-- Formulario de Encuesta 3-->
-            <form id="surveyForm2">
+            <form id="surveyForm3">
                 <h2>Encuesta 3</h2>
                 <div class="form-group">
-                    <label for="serviceRating">¿Qué tan satisfecho(a) estás con la calidad de los alimentos que consumiste? (1 a 5)</label>
-                    <input type="number" id="serviceRating" min="1" max="5" required>
+                    <label>¿Qué tan satisfecho(a) estás con la calidad de los alimentos que consumiste? (1 a 5)</label>
+                    <input type="number" id="serviceRating3" min="1" max="5" required>
                 </div>
                 <div class="form-group">
-                    <label for="frequency">¿Cómo calificarías la atención que recibiste por parte del personal?</label>
-                    <select id="frequency" required>
+                    <label>¿Cómo calificarías la atención que recibiste por parte del personal?</label>
+                    <select id="frequency3" required>
                         <option value="">Seleccione una opción</option>
                         <option value="Excelente">Excelente</option>
                         <option value="Buena">Buena</option>
@@ -174,8 +171,8 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="recommend">¿El tiempo de espera para recibir tu pedido fue adecuado?</label>
-                    <select id="recommend" required>
+                    <label>¿El tiempo de espera para recibir tu pedido fue adecuado?</label>
+                    <select id="recommend3" required>
                         <option value="">Seleccione una opción</option>
                         <option value="Sí">Sí</option>
                         <option value="Solo">No, fue un poco lento</option>
@@ -183,12 +180,12 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="satisfaction">¿Qué tan satisfecho(a) estás con la relación calidad-precio de tu experiencia en el restaurante? (1 a 5)</label>
-                    <input type="number" id="satisfaction" min="1" max="5" required>
+                    <label>¿Qué tan satisfecho(a) estás con la relación calidad-precio de tu experiencia en el restaurante? (1 a 5)</label>
+                    <input type="number" id="satisfaction3" min="1" max="5" required>
                 </div>
                 <div class="form-group">
-                    <label for="recommend">¿Recomendarías este restaurante a familiares y amigos?</label>
-                    <select id="recommend" required>
+                    <label>¿Recomendarías este restaurante a familiares y amigos?</label>
+                    <select id="volver3" required>
                         <option value="">Seleccione una opción</option>
                         <option value="Sí">Sí</option>
                         <option value="Solo">No estoy seguro</option>
@@ -196,13 +193,24 @@
                     </select>
                 </div>
             </form>
-
         </div>
+    </div>
+    <div class="centrar">
+        <button type="button" onclick="enviarRespuestas()">Enviar Encuestas</button>
         
     </div>
-    <button type="button" onclick="enviarRespuestas()">Enviar Encuestas</button>
+    <div class="centrar">
+        <label>Selecciona un usuario para mostrar la estadística</label>
+        <select id="useR">
+            <option value="">Selecciona uno</option>
+        </select>
+    </div>
+    
 
     <script>
+        // Definiciónn de la matriz para almacenar respuestas de usuarios
+        const matrizRespuestas = [];
+        
         // Función para obtener usuarios de la API
         async function obtenerUsuarios() {
             try {
@@ -235,6 +243,86 @@
                 tablaCuerpo.appendChild(fila);
             });
         }
+        // Función para validar las respuestas en las encuestas
+        function validarEncuestas(encuestaId) {
+            const form = document.getElementById(encuestaId);
+            const inputs = form.querySelectorAll('input, select');
+
+            for (let input of inputs) {
+                if (!input.value) {
+                    alert(`Por favor, responde todas las preguntas en la ${form.querySelector('h2').innerText}.`);
+                    return false;
+                }
+            }
+            return true;
+
+        }
+        
+        // Función para validar y guardar respuestas en la matriz
+        function enviarRespuestas() {
+            const nombreUsuario = document.getElementById('nombreUsuario').value;        
+
+            //Validar que se elija un nombre de usuario
+            if (!nombreUsuario) {
+                alert("Por favor, elije un nombre de Usuario de la lista");
+                return;
+            }
+
+            // Validar uqe las encuestas tengan un valor
+            if (!validarEncuestas('surveyForm1') || !validarEncuestas('surveyForm2') || !validarEncuestas('surveyForm3')) {
+                return;
+            }
+            
+
+            // Crear un objeto con las respuestas del usuario
+            const respuestas = {
+                nombreUsuario: nombreUsuario,
+                encuesta1: {
+                    serviceRating: document.getElementById('serviceRating').value,
+                    recommend: document.getElementById('recommend').value,
+                    color: document.getElementById('color').value,
+                    satisfaction: document.getElementById('satisfaction'),
+                    frequency: document.getElementById('frequency')
+                },
+                encuesta2: {
+                    serviceRating2: document.getElementById('serviceRating2').value,
+                    frequency2: document.getElementById('frequency2').value,
+                    recommend2 : document.getElementById('recommend2').value,
+                    satisfaction2: document.getElementById('satisfaction2').value,
+                    volver2: document.getElementById('volver2').value
+                },
+                encuesta3: {
+                    serviceRating3: document.getElementById('serviceRating3').value,
+                    frequency3: document.getElementById('frequency3').value,
+                    recommend3 : document.getElementById('recommend3').value,
+                    satisfaction3: document.getElementById('satisfaction3').value,
+                    volver3: document.getElementById('volver3').value
+                }
+                
+            };
+
+            // Almacenar la respuesta en el arreglo
+            matrizRespuestas.push(respuestas);
+            console.log(matrizRespuestas);
+
+            // Limpiar las encuestas y el input con nombre de usuario
+            document.querySelectorAll('form').forEach(form=>form.reset());
+            
+            // Mostrar agradecimiento
+            alert("Gracias por completar las encuestas.");
+        }
+        // Actualizar el selector con los nombres de usuarios que realizaron encuestas
+        function actualizarSelector() {
+            const useR = document.getElementById('useR');
+            matrizRespuestas.forEach((nombreUsuario, index) => {
+                const option = document.createElement('option');
+                option.value=index;
+                option.textContent = nombreUsuario;
+                useR.appendChild('option');
+            }
+            )};
+        }
+
 
         // Llamar a la función para cargar usuarios al iniciar la página
         obtenerUsuarios();
