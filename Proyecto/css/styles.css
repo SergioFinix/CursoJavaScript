@@ -5,7 +5,7 @@
     --fourthColor: #5499c7;
     --textColorPrimary: #fff;
     --textGray: #8a8a8a;
-    
+
     --backgroundEstilo1: #7d3c98;
     --backgroundEstilo2: #ba4a00;
 }
@@ -194,15 +194,61 @@ label[for] {
     text-shadow: 2px 3px var(--textGray);
 }
 
-.ocultar{
+.ocultar {
     display: none;
 }
 
 /* Estilos tarjeta */
-.tema1{
+.tema1 {
+    background: #000 !important;
+}
+
+.tema2 {
     background: var(--backgroundEstilo1) !important;
 }
 
-.tema2{
-    background: var(--backgroundEstilo2) !important;
+.tipografia1 {
+    font-size: 2rem;
+    font-family: EduAustralia-Regular !important;
+}
+
+.tipografia2 {
+    font-size: 2rem;
+    font-family: Inconsolata-Regular !important;
+}
+
+.letra-mediana {
+    font-size: 2.2rem !important;
+}
+
+.letra-grande {
+    font-size: 2.4rem !important;
+}
+
+.avatar-background1 {
+    background-image: url(../images/image1.jpg);
+    background-size: 100% auto; 
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 2rem;
+}
+
+.avatar-background2 {
+    background-image: url(../images/image2.jpg);
+    background-size: 100% auto; 
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 2rem;
+}
+
+.select-style{
+    background: var(--fourthColor);
+    border: .1rem solid #fff;
+    border-radius: 1rem;
+    color: #fff;
+    padding: .5rem;
+    width: 15rem;
+    font-size: 1.5rem;
+    text-align: center;
+    font-family: Roboto-Bold;
 }

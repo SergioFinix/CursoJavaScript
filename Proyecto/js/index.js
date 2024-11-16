@@ -83,6 +83,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
             let divImage = document.createElement('div');
             divImage.classList.add('avatar-container');
+            divImage.id = 'avatar-container';
 
             let image = document.createElement('img');
             image.src = dataAvatar.image;
@@ -100,9 +101,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
                 let label = document.createElement('span');
                 label.classList.add('info-label');
+                label.classList.add('info');
                 label.textContent = labelText;
 
                 let value = document.createElement('span');
+                value.classList.add('info');
                 value.classList.add('info-value');
                 value.textContent = valueText;
 
@@ -135,12 +138,66 @@ window.addEventListener('DOMContentLoaded', () => {
         let value = parseInt(e.target.value);
 
         let infoContainer = document.getElementById('info-container');
+        let avatarContainer = document.getElementById('avatar-container');
 
         //Tema 1
-        if (value === 2) {
+        if (value === 1) {
+            infoContainer.classList.remove('tema2');
+            infoContainer.classList.remove('tema1');
+
+            avatarContainer.classList.remove('avatar-background1');
+            avatarContainer.classList.remove('avatar-background2');
+        }
+        else if (value === 2) {
             infoContainer.classList.add('tema1');
-         }
+            infoContainer.classList.remove('tema2');
+
+            avatarContainer.classList.add('avatar-background1');
+            avatarContainer.classList.remove('avatar-background2');
+        }
         //Tema 2
-        else if (value === 3) { }
-    })
+        else if (value === 3) {
+            infoContainer.classList.add('tema2');
+            infoContainer.classList.remove('tema1');
+
+            avatarContainer.classList.remove('avatar-background1');
+            avatarContainer.classList.add('avatar-background2');
+        }
+    });
+
+    document.getElementById('letraTarjeta').addEventListener('change', (e) => {
+        let value = parseInt(e.target.value);
+
+        let infoValues = document.getElementsByClassName('info');
+
+        for (let infoValue of infoValues) {
+            if (value === 1) {
+                infoValue.classList.remove('tipografia1', 'tipografia2');
+            } else if (value === 2) {
+                infoValue.classList.add('tipografia1');
+                infoValue.classList.remove('tipografia2');
+            } else if (value === 3) {
+                infoValue.classList.add('tipografia2');
+                infoValue.classList.remove('tipografia1');
+            }
+        }
+    });
+
+    document.getElementById('tamanoTarjeta').addEventListener('change', (e) => {
+        let value = parseInt(e.target.value);
+
+        let infoValues = document.getElementsByClassName('info');
+
+        for (let infoItem of infoValues) {
+            if (value === 1) {
+                infoItem.classList.remove('letra-mediana', 'letra-grande');
+            } else if (value === 2) {
+                infoItem.classList.add('letra-mediana');
+                infoItem.classList.remove('letra-grande');
+            } else if (value === 3) {
+                infoItem.classList.add('letra-grande');
+                infoItem.classList.remove('letra-mediana');
+            }
+        }
+    });
 });

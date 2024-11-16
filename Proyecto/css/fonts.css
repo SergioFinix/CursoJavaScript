@@ -12,3 +12,33 @@
     font-family: Roboto-Bold;
     src: url(../fonts/Roboto/RobotoCondensed-Bold.ttf);
 }
+
+@font-face {
+    font-family: EduAustralia-Regular;
+    src: url(../fonts/EduAustralia/EduAUVICWANTPre-Regular.ttf);
+}
+
+@font-face {
+    font-family: EduAustralia-Medium;
+    src: url(../fonts/EduAustralia/EduAUVICWANTPre-Medium.ttf);
+}
+
+@font-face {
+    font-family: EduAustralia-Bold;
+    src: url(../fonts/EduAustralia/EduAUVICWANTPre-Bold.ttf);
+}
+
+@font-face {
+    font-family: Inconsolata-Regular;
+    src: url(../fonts/Inconsolata/Inconsolata-Regular.ttf);
+}
+
+@font-face {
+    font-family: Inconsolata-Medium;
+    src: url(../fonts/Inconsolata/Inconsolata-Medium.ttf);
+}
+
+@font-face {
+    font-family: Inconsolata-Bold;
+    src: url(../fonts/Inconsolata/Inconsolata-Bold.ttf);
+}
