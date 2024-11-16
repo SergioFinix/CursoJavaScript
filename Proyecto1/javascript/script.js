@@ -188,15 +188,15 @@ botonAgregarFila.addEventListener("click", () => {
 
       botonEditar.addEventListener("click",()=>{
         const filaEditar= parseInt(document.getElementById("numeroFila").innerHTML-1);
-        const tareaEditar= document.getElementById("tarea2").innerHTML;        
+        //const tareaEditar= document.getElementById("tarea2").innerHTML;        
         divEditarElemento.className="";
         divEditarElemento.className="ocultar";
         //console.log(filaEditar);
-        const regex = /^[A-Za-z0-9 ]{1,25}$/;
+        //const regex = /^[A-Za-z0-9 ]{1,25}$/;
      //validarTarea();
-     if(tareaEditar!="" && regex.test(tareaEditar)){  
+     //if(tareaEditar!="" && regex.test(tareaEditar)){  
         editarFila(filaEditar);
-     }
+     //}
       });
       function editarFila(fila){
         const elementoLista = document.getElementById("listado");
