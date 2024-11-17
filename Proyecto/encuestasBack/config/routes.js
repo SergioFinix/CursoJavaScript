@@ -21,7 +21,12 @@ module.exports.routes = {
 
   '/': { view: 'pages/homepage' },
 
+  'POST /api/users' : {action: 'ManagerUsers/Users/create'},
 
+  'POST /api/encuesta' : { action: 'ManagerEncuestas/Encuestas/create' },
+  'GET /api/encuesta' : { action: 'ManagerEncuestas/Encuestas/get' },
+
+  'POST /api/respuesta' : { action: 'ManagerRespuestas/Respuestas/create'}
   /***************************************************************************
   *                                                                          *
   * More custom routes here...                                               *
@@ -31,7 +36,7 @@ module.exports.routes = {
   * is matched against "shadow routes" (e.g. blueprint routes).  If it does  *
   * not match any of those, it is matched against static assets.             *
   *                                                                          *
-  ***************************************************************************/
+  ***************************************************************************/  
 
 
 };

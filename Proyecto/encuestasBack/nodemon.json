@@ -1,0 +1,12 @@
+{
+    "watch": [
+        "api",
+        "config"
+    ],
+    "ext": "js,json",
+    "ignore": [
+        "node_modules",
+        "tmp"
+    ],
+    "exec": "sails lift"
+}
