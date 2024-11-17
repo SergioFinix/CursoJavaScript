@@ -26,7 +26,8 @@ module.exports.routes = {
   'POST /api/encuesta' : { action: 'ManagerEncuestas/Encuestas/create' },
   'GET /api/encuesta' : { action: 'ManagerEncuestas/Encuestas/get' },
 
-  'POST /api/respuesta' : { action: 'ManagerRespuestas/Respuestas/create'}
+  'POST /api/respuesta' : { action: 'ManagerRespuestas/Respuestas/create'},
+  'GET /api/respuesta/:id' : { action: 'ManagerRespuestas/Respuestas/getStatics'},
   /***************************************************************************
   *                                                                          *
   * More custom routes here...                                               *

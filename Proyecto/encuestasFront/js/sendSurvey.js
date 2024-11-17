@@ -33,7 +33,7 @@ buttonSuccess.addEventListener('click', function(e){
 function sendRequest(){
     const request = {
         user: user,
-        respuestas: respuestas  // No es necesario hacer JSON.stringify aquí, se hará dentro de fetch
+        respuestas: respuestas
     };
     var response = PostSurveys(request);
 }
