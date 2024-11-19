@@ -10,6 +10,8 @@ const botonagregarproducto = document.getElementById('agregarproducto');//btn
 const Errordelistaclientes = document.getElementById('errordelistaclientes');//div
 const Sumatotalcliente = document.getElementById('sumatotalcliente');//div
 const Productomasadquirido = document.getElementById('productomasadquirido');//div
+const datocliente = document.getElementById('datocliente');//div
+
 const tabla = document.getElementById("miTabla").getElementsByTagName("tbody")[0];//tabla
 
 // Inicio de cargar combos
@@ -21,7 +23,8 @@ hacerLlamadaApi()
         const opcion = document.createElement('option');
         opcion.innerHTML = `<option value="${data[i].id}">${data[i].name}</option>`;
         SelectListacliente.appendChild(opcion);                              
-    };          
+    };     
+    datocliente.innerHTML = `<h1>Cliente: ${SelectListacliente.value}</h1>`;
 })
 .catch((error) => {
     // Mostrar mensaje de error si la llamada a la API falla          
@@ -32,17 +35,20 @@ cargarmeses();
 
 function hacerLlamadaApi() {
     return new Promise((resolve, reject) => {
-        // Consulta de usuarios para hacer la llamada a la API y mostrar en un select
-        fetch(`https://jsonplaceholder.typicode.com/users`)
-        .then((response) => {
-            if (response.ok) {                        
-                return response.json(); // Si la respuesta es exitosa, convertirla a formato JSON
-            } else {
-                reject(new Error('Usuarios encontrados.'));
-            }
-        })
-        .then((data) => resolve(data)) // Resolver la promesa con los datos obtenidos
-        .catch(() => reject(new Error('No se pudo conectar con la API.'))); // Error en la conexión
+        // temporizador
+      setTimeout(() => {
+            // Consulta de usuarios para hacer la llamada a la API y mostrar en un select
+            fetch(`https://jsonplaceholder.typicode.com/users`)
+            .then((response) => {
+                if (response.ok) {                        
+                    return response.json(); // Si la respuesta es exitosa, convertirla a formato JSON
+                } else {
+                    reject(new Error('Usuarios encontrados.'));
+                }
+            })
+            .then((data) => resolve(data)) // Resolver la promesa con los datos obtenidos
+            .catch(() => reject(new Error('No se pudo conectar con la API.'))); // Error en la conexión
+        }, 1000); // Simulamos un retraso de 2 segundos
     });
 }
 
@@ -146,11 +152,9 @@ function mostrarventadetalle(mes){
         if(clientecombo == dato.cliente){
             totalgeneralcliente = totalgeneralcliente + parseInt(dato.costo);
             contador[dato.producto] = (contador[dato.producto] || 0) + 1;
-        }
-
+        }       
         
-        
-        console.log(totalgeneralcliente);
+        //console.log(totalgeneralcliente);
         // const row = tabla.insertRow();
         // row.insertCell(0).textContent = dato.mesdeVenta;
         // row.insertCell(1).textContent = dato.cliente;
@@ -203,7 +207,9 @@ function limpiarcajas(){
     cajacosto.value = "";
 }
 //Reiniciar desde cliente la tabla
-function mostrarventadetallecliente(cliente){
+function mostrarventadetallecliente(cliente){   
+    //mostrar el cliente actual 
+    datocliente.innerHTML = `<h1>Cliente: ${SelectListacliente.value}</h1>`;
     
     //recargar meses
     cargarmeses();

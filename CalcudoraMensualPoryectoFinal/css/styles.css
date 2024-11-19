@@ -19,3 +19,42 @@ th, td {
     padding: 10px;
     text-align: left;
 }
+
+button {
+    padding: 10px 15px;
+    background-color: #0bbb72;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+.input-container {
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    padding: 5px;
+    width: 200px;
+    border: 1px solid #5f6166;
+    border-radius: 5px;
+    outline: none;
+}
+
+select {
+    padding: 5px;
+    width: 200px;
+    border: 1px solid #5f6166;
+    border-radius: 5px;
+    outline: none;
+}
+
+.formulariogeneral{
+    border: 2px solid #7da2ac;
+    padding: 10px;
+    border-radius: 5px;
+}
