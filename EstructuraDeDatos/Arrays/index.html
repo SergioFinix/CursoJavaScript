@@ -10,15 +10,16 @@
 
 <body>
     <section>
-        <h1>Manipulación de Arreglos</h1>
         <div class="container">
             <div class="listUser"></div>
             <div class="formContainer">
-                <div>
+                <div class="controlContainer">
                     <h3 id="nameTitle"></h3>
-                    <button onclick="mostrarForm(numFormulario-1)"> < </button>
-                    <span id="labelNumberForm">1</span>
-                    <button onclick="mostrarForm(numFormulario+1)"> > </button>
+                    <div>
+                        <button onclick="mostrarForm(numFormulario-1)"> < </button>
+                        <span id="labelNumberForm">1</span>
+                        <button onclick="mostrarForm(numFormulario+1)"> > </button>
+                    </div>
                 </div>
                 <div class="formElement" id="form1">
                     <h2>Perros o Gatos?</h2>
@@ -96,7 +97,7 @@
             </div>
         </div>
     </section>
-
+    <hr>
     <section>
         <h2>Resultados</h2>
         <div class="resultContainer"></div>

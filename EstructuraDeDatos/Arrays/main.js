@@ -149,14 +149,13 @@ saveForm.addEventListener('click', () => {
             dos++
         }
         i++
-
     })
     respuestasForm2 = [
         ['Introvertido o Extrovertido', 'Puntos',],
         ['Extrovertido', uno],
         ['Introvertido', dos],
     ]
-    uno, dos, i = 0
+    uno = dos = i = 0
 
     document.querySelectorAll("#form3 div select").forEach(item => {
         opcion = item.options[item.selectedIndex].text
@@ -167,7 +166,7 @@ saveForm.addEventListener('click', () => {
             dos++
         }
         i++
-
+        console.log(uno,dos)
     })
     respuestasForm3 = [
         ['Frío o calor', 'Puntos',],
@@ -235,8 +234,7 @@ function renderGraficas(vacio){
         ['Extrovertido', uno],
         ['Introvertido', dos],
     ]
-    uno, dos, i = 0
-
+    uno = dos = i = 0
     document.querySelectorAll("#form3 div select").forEach(item => {
         if(item.value == 1) {
             uno++
@@ -251,7 +249,8 @@ function renderGraficas(vacio){
         ['Frío', uno],
         ['Calor', dos],
     ]
-    uno, dos, i = 0
+    console.log(uno,dos)
+    uno = dos = i = 0
     drawBasic()
 }
 
@@ -295,15 +294,18 @@ function drawBasic() {
 
     var options1 = {
         title: 'Gatos o Perros',
-        chartArea: { width: '50%' }
+        chartArea: { width: '50%' },
+        colors: ['#b972d4'] 
     };
     var options2 = {
         title: 'Introvertido p Extrovertido',
-        chartArea: { width: '50%' }
+        chartArea: { width: '50%' },
+        colors: ['#b972d4'] 
     };
     var options3 = {
         title: 'Dulce o Amargo',
-        chartArea: { width: '50%' }
+        chartArea: { width: '50%' },
+        colors: ['#b972d4'] 
     };
 
     var chart = new google.visualization.BarChart(grafica1);
