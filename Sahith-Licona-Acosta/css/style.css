@@ -1,0 +1,370 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary: rgb(33, 135, 219);
+  --secon: rgb(0,0,0);
+  --red: rgb(247, 11, 62);
+  --white: rgb(250,250,250);
+}
+
+
+.Principal{
+
+  width: 100%;
+  height: 100vh;
+  background-color: rgb(16, 17, 20);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+}
+.Conboton{
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+ 
+}
+.Conboton h1{
+
+  font-size: 90px;
+  color: var(--white);
+  font-weight: 600;
+  margin-bottom: 50px;
+  font-family: "Pixelify Sans", sans-serif;
+}
+.Conboton button{
+
+  width: 300px;
+  height: 100px;
+  font-weight: 600;
+  font-size: 35px;
+  background: rgb(131,58,180);
+  background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+  color: var(--white);
+  border: 3px solid #ffffff27;
+  outline: none;
+  cursor: pointer;
+  overflow: hidden;
+
+ 
+  position: relative;
+  transition: all .5s;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+ 
+}
+
+button span{
+  position: absolute;
+  display: block;
+}
+button span:nth-child(1){
+  height: 3px;
+  width:300px;
+  top:0px;
+  left:-200px;
+  background: linear-gradient(to right, rgba(0,0,0,0), #f6e58d);
+  border-top-right-radius: 1px;
+  border-bottom-right-radius: 1px;
+  animation: span1 2s linear infinite;
+  animation-delay: 1s;
+}
+
+@keyframes span1{
+  0%{
+      left:-300px
+  }
+  100%{
+      left:300px;
+  }
+}
+button span:nth-child(2){
+  height: 100px;
+  width: 3px;
+  top:-100px;
+  right:0px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0), #f6e58d);
+  border-bottom-left-radius: 1px;
+  border-bottom-right-radius: 1px;
+  animation: span2 2s linear infinite;
+  animation-delay: 2s;
+}
+@keyframes span2{
+  0%{
+      top:-100px;
+  }
+  100%{
+      top:100px;
+  }
+}
+button span:nth-child(3){
+  height:3px;
+  width:300px;
+  right:-300px;
+  bottom: 0px;
+  background: linear-gradient(to left, rgba(0,0,0,0), #f6e58d);
+  border-top-left-radius: 1px;
+  border-bottom-left-radius: 1px;
+  animation: span3 2s linear infinite;
+  animation-delay: 3s;
+}
+@keyframes span3{
+  0%{
+      right:-300px;
+  }
+  100%{
+      right: 300px;
+  }
+}
+
+button span:nth-child(4){
+  height:100px;
+  width:3px;
+  bottom:-100px;
+  left:0px;
+  background: linear-gradient(to top, rgba(0,0,0,0), #f6e58d);
+  border-top-right-radius: 1px;
+  border-top-left-radius: 1px;
+  animation: span4 2s linear infinite;
+  animation-delay: 4s;
+}
+@keyframes span4{
+  0%{
+      bottom: -100px;
+  }
+  100%{
+      bottom:100px;
+  }
+}
+
+button:hover{
+  transition: all .5s;
+  box-shadow: 0px 3px 5px rgba(0,0,0,.4);
+}
+button:hover span{
+  animation-play-state: paused;
+}
+
+.ContJuego{
+
+  
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  background-color: blue;
+ 
+}
+
+.conthorcado{
+
+  position: relative;
+  width: 100%;
+  height: 600px;
+ 
+}
+.conthorcado2{
+
+ 
+  width: 100%;
+  height: 316px;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+  background-color: var(--primary);
+}
+.conthorcado2 .palabra{
+
+  color: var(--white);
+  font-size: 50px;
+  margin-bottom: 50px;
+}
+.conthorcado2 .palabra{
+
+  color: var(--white);
+  font-size: 50px;
+  margin-bottom: 50px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+}
+.conthorcado2 .letra{
+
+  width: 300px;
+  height: 30px;
+  border-radius: 15px;
+  border: none;
+  padding: 15px;
+}
+.conthorcado2 .enviar{
+
+  width: 200px;
+  height: 30px;
+  background-color: var(--primary);
+  color: var(--white);
+  font-size: 18px;
+
+  border: 2px solid;
+  outline: none;
+  cursor: pointer;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  padding: 3px;
+}
+.enviar:hover{
+  background-color: var(--white);
+  color: var(--primary);
+  transition: all .5s;
+  box-shadow: 0px 3px 5px rgba(0,0,0,.4);
+}
+.muñeco{
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 400px;
+  height: 400px;
+  
+
+}
+.misLetras{
+
+  background-color: rgb(228, 63, 12);
+}
+.nuevoizquierdo{
+
+  flex-basis: 50%;
+  width: 100%;
+  height: 100vh;
+  background: var(--primary);
+  position: relative;
+  flex-direction: column;
+
+}
+.nuevoderecho{
+
+  flex-basis: 50%;
+  width: 100%;
+  height: 100vh;
+  background: var(--red);
+  flex-direction: column;
+  position: relative;
+ 
+
+}
+.subderecho1{
+
+  width: 100%;
+  height: 458px;
+  position: relative;
+
+  
+  
+}
+.subderecho1 .resultado{
+  font-family: "Pixelify Sans", sans-serif;
+  font-size: 60px;
+  color: var(--white);
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+}
+.subderecho2{
+  
+  width: 100%;
+  height: 458px;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  background-color: #f3cc09;
+
+}
+.subdscore{
+
+  width: 375px;
+  height: 458px;
+  position: relative;
+
+}
+.subdscore .vvaj{
+
+  width: 150px;
+  height: 200px;
+  background-color: #f3cc09;
+  color: var(--white);
+  font-size: 30px;
+
+  border: 2px solid;
+  outline: none;
+  cursor: pointer;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  padding: 3px;
+
+  
+  position: absolute;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  display: none;
+}
+
+.vvaj:hover{
+  background-color: var(--white);
+  color:#f3cc09;
+  transition: all .5s;
+  box-shadow: 0px 3px 5px rgba(0,0,0,.4);
+}
+.button{
+
+  width: 100px;
+  height: 70px;
+  background-color: var(--white);
+
+}
+.subsvidas{
+
+  width: 375px;
+  height: 458px;
+  
+  position: relative;
+
+
+}
+.subsvidas label{
+
+  font-size: 50px;
+  font-weight: 600;
+  font-family: Arial, Helvetica, sans-serif;
+
+  text-align: center;
+  align-items: center;
+  color: var(--white);
+
+  position: absolute;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+
+.vidas{
+
+  background-color: var(--white);
+  border-radius: 15px;
+  color: #f6e58d;
+  font-family: "Pixelify Sans", sans-serif;
+  font-size: 70px;
+}

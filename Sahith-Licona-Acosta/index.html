@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="css/style.css">
+      <title>RuDeJueGos</title>
+   </head>
+   
+   <body>
+   
+      <div class="Principal" id="Principal">
+   
+         <audio src="/sound/mario-bros game over.mp3" type="audio" id="sonido-perder"></audio>
+         <audio src="/sound/bites-ta-da-winner.mp3" type="audio" id="sonido-ganar"></audio>
+         <div class="Conboton">
+            <h1>Juego del Ahorcado</h1>
+            <button class="Inicio" id="Inicio">
+               <span></span>
+               <span></span>
+               <span></span>
+               <span></span>
+               INICIAR JUEGO
+            </button>
+         </div>
+   
+   
+   
+      </div>
+      <div class="ContJuego" id="ContJuego">
+   
+         <div class="nuevoderecho">
+            <div class="subderecho1">
+               <p id="resultado" class="resultado"></p>
+            </div>
+            <div class="subderecho2">
+               <div class="subdscore" id="subdscore">
+                  <button id="vvaj" class="vvaj"> VOLVER A JUGAR</button>
+               </div>
+               <div class="subsvidas">
+                  <label form="vidas">VIDAS<p id="vidas" class="vidas"></p></label>
+               </div>
+   
+            </div>
+         </div>
+   
+         <div class="nuevoizquierdo">
+            <div class="conthorcado">
+               <canvas id="muñeco" class="muñeco"></canvas>
+            </div>
+            <div class="conthorcado2">
+               <p id="palabra" class="palabra">_ _ _ _ _ _</p>
+               <input  id="letra" class="letra" type="text" maxlength="1" placeholder="Ingresa Letra"><br><br>
+               <button id="enviar" class="enviar">PROVAR LETRA</button>
+            </div>
+   
+         </div>
+   
+      </div>
+   
+   
+   
+   
+    <script src="js/main.js"></script>
+     
+         
+   </body>
+</html>
