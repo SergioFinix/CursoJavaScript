@@ -141,16 +141,13 @@ document.addEventListener("DOMContentLoaded", () => {
   function mostrarTarjeta(usuario) {
     // Limpiar contenedor y restablecer estilos antes de cargar otra tarjeta
     tarjetaContenedor.innerHTML = ""; 
-    tarjetaContenedor.style.backgroundColor = "#722F37";
-    tarjetaContenedor.style.color = "#ffffff";
-    tarjetaContenedor.style.fontFamily = "Arial";
-    tarjetaContenedor.style.fontSize = "16px";
+    tarjetaContenedor.classList.add("tarjeta-container2");
 
     // Crear la tarjeta
     const tarjeta = document.createElement("div");
     tarjeta.classList.add("tarjeta");
     tarjeta.classList.add("tarjeta-container2");
-
+    tarjetaContenedor.classList.add("tarjeta-container2");
     // Foto
     const fotoDiv = document.createElement("div");
     fotoDiv.classList.add("div-foto");
@@ -210,83 +207,118 @@ document.addEventListener("DOMContentLoaded", () => {
     mostrarPanelPersonalizacion();
   }
 
+  function cambiarEstiloTarjeta(estilo) {
+    // Limpiar las clases anteriores
+    tarjetaContenedor.classList.remove("tarjeta-container2", "moderno", "minimalista");
+
+    switch (estilo) {
+        case "Predeterminado":
+            tarjetaContenedor.classList.add("tarjeta-container2");
+            break;
+        case "Moderno":
+            tarjetaContenedor.classList.add("moderno");
+            break;
+        case "Minimalista":
+            tarjetaContenedor.classList.add("minimalista");
+            break;
+    }
+}
+
   // Función que muestra el panel de personalización
   function mostrarPanelPersonalizacion() {
-    // Limpiar panel
-    panelPersonalizacion.innerHTML = "";
-
-    // Crear controles de personalización
-    const titulo = document.createElement("h3");
-    titulo.textContent = "Personalizar Tarjeta";
-
-    // Selector de color de fondo
-    const colorFondoLabel = document.createElement("h4");
-    colorFondoLabel.textContent = "Color de fondo:";
-    const colorFondoInput = document.createElement("input");
-    colorFondoInput.type = "color";
-    colorFondoInput.value = "#722F37"; // valor predeterminado
-    
-    
-    // Selector de color de texto
-    const colorTextoLabel = document.createElement("h4");
-    colorTextoLabel.textContent = "Color de texto:";
-    const colorTextoInput = document.createElement("input");
-    colorTextoInput.type = "color";
-    colorTextoInput.value = "#ffffff "; // valor predeterminado
-
-    // Selector de tamaño de texto
-    const tamanoTextoLabel = document.createElement("h4");
-    tamanoTextoLabel.textContent = "Tamaño de Fuente:";
-    const tamanoTextoSelect = document.createElement("select");
-    const tamanos = ["16px", "8px", "12px", "20px", "24px"];
-    tamanos.forEach((tamano ="16 px") => {
-      const option = document.createElement("option");
-      option.value = tamano;
-      option.textContent = tamano;
-      tamanoTextoSelect.appendChild(option);
-    });
-
-    // Selector de tipo de fuente
-    const fuenteLabel = document.createElement("h4");
-    fuenteLabel.textContent = "Tipo de fuente:";
-    const fuenteSelect = document.createElement("select");
-    const fuentes = ["Arial", "Verdana", "Helvetica", "Times New Roman", "Georgia"];
-    fuentes.forEach((fuente) => {
-      const option = document.createElement("option");
-      option.value = fuente;
-      option.textContent = fuente;
-      fuenteSelect.appendChild(option);
-    });
-
-    // Cambiar los estilos
-    colorFondoInput.addEventListener("input", (e) => {
-      tarjetaContenedor.style.backgroundColor = e.target.value;
-    });
-
-    colorTextoInput.addEventListener("input", (e) => {
-      tarjetaContenedor.style.color = e.target.value;
-    });
-
-    fuenteSelect.addEventListener("change", (e) => {
-      tarjetaContenedor.style.fontFamily = e.target.value;
-    });
-
-    tamanoTextoSelect.addEventListener("change", (e) => {
-      tarjetaContenedor.style.fontSize = e.target.value;
-    });
-
-    // Agregar los controles al panel (Dar formato)
-    panelPersonalizacion.appendChild(titulo);
-    panelPersonalizacion.appendChild(colorFondoLabel);
-    panelPersonalizacion.appendChild(colorFondoInput);
-    panelPersonalizacion.appendChild(colorTextoLabel);
-    panelPersonalizacion.appendChild(colorTextoInput);
-    panelPersonalizacion.appendChild(tamanoTextoLabel);
-    panelPersonalizacion.appendChild(tamanoTextoSelect);
-    panelPersonalizacion.appendChild(fuenteLabel);
-    panelPersonalizacion.appendChild(fuenteSelect);
+      // Limpiar panel
+      panelPersonalizacion.innerHTML = "";
+  
+      // Crear controles de personalización
+      const titulo = document.createElement("h3");
+      titulo.textContent = "Personalizar Tarjeta";
+  
+      // Selector de estilo de tarjeta
+      const estiloTarjetaLabel = document.createElement("h4");
+      estiloTarjetaLabel.textContent = "Estilo de Tarjeta:";
+      const estiloTarjetaSelect = document.createElement("select");
+      const estilos = ["Predeterminado", "Moderno", "Minimalista"];
+      estilos.forEach((estilo) => {
+        const option = document.createElement("option");
+        option.value = estilo;
+        option.textContent = estilo;
+        estiloTarjetaSelect.appendChild(option);
+      });
+  
+      // Agregar evento para cambiar la presentación de la tarjeta
+      estiloTarjetaSelect.addEventListener("change", (e) => {
+        cambiarEstiloTarjeta(e.target.value);
+      });
+  
+      // Selector de color de fondo
+      const colorFondoLabel = document.createElement("h4");
+      colorFondoLabel.textContent = "Color de fondo:";
+      const colorFondoInput = document.createElement("input");
+      colorFondoInput.type = "color";
+       // valor predeterminado
+      
+      // Selector de color de texto
+      const colorTextoLabel = document.createElement("h4");
+      colorTextoLabel.textContent = "Color de texto:";
+      const colorTextoInput = document.createElement("input");
+      colorTextoInput.type = "color";
+       // valor predeterminado
+  
+      // Selector de tamaño de texto
+      const tamanoTextoLabel = document.createElement("h4");
+      tamanoTextoLabel.textContent = "Tamaño de Fuente:";
+      const tamanoTextoSelect = document.createElement("select");
+      const tamanos = ["16px", "8px", "12px", "20px", "24px"];
+      tamanos.forEach((tamano) => {
+        const option = document.createElement("option");
+        option.value = tamano;
+        option.textContent = tamano;
+        tamanoTextoSelect.appendChild(option);
+      });
+  
+      // Selector de tipo de fuente
+      const fuenteLabel = document.createElement("h4");
+      fuenteLabel.textContent = "Tipo de fuente:";
+      const fuenteSelect = document.createElement("select");
+      const fuentes = ["Arial", "Verdana", "Helvetica", "Times New Roman", "Georgia"];
+      fuentes.forEach((fuente) => {
+        const option = document.createElement("option");
+        option.value = fuente;
+        option.textContent = fuente;
+        fuenteSelect.appendChild(option);
+      });
+  
+      // Cambiar los estilos
+      colorFondoInput.addEventListener("input", (e) => {
+        tarjetaContenedor.style.backgroundColor = e.target.value;
+      });
+  
+      colorTextoInput.addEventListener("input", (e) => {
+        tarjetaContenedor.style.color = e.target.value;
+      });
+  
+      fuenteSelect.addEventListener("change", (e) => {
+        tarjetaContenedor.style.fontFamily = e.target.value;
+      });
+  
+      tamanoTextoSelect.addEventListener("change", (e) => {
+        tarjetaContenedor.style.fontSize = e.target.value;
+      });
+  
+      // Agregar los controles al panel (Dar formato)
+      panelPersonalizacion.appendChild(titulo);
+      panelPersonalizacion.appendChild(estiloTarjetaLabel);
+      panelPersonalizacion.appendChild(estiloTarjetaSelect);
+      panelPersonalizacion.appendChild(colorFondoLabel);
+      panelPersonalizacion.appendChild(colorFondoInput);
+      panelPersonalizacion.appendChild(colorTextoLabel);
+      panelPersonalizacion.appendChild(colorTextoInput);
+      panelPersonalizacion.appendChild(tamanoTextoLabel);
+      panelPersonalizacion.appendChild(tamanoTextoSelect);
+      panelPersonalizacion.appendChild(fuenteLabel);
+      panelPersonalizacion.appendChild(fuenteSelect);
   }
-
+  
   // Función para crear la lista de usuarios
   usuarios.forEach((usuario) => {
     const li = document.createElement("li");
