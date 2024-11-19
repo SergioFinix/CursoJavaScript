@@ -9,43 +9,105 @@
 </head>
 
 <body>
-    <h1>Ejemplo de Manipulación de Arreglos</h1>
-
-    <!-- Formulario para agregar frutas -->
-    <div class="input-container">
-        <input type="text" id="usuarioInput" placeholder="Agrega un nombre de Usuario">
-        <button id="agregarUsuario">Agregar</button>
-        <button id="eliminarUsuario">Eliminar el Ultimo</button>
-    </div>
-
-    <!-- Botones para eliminar frutas -->
-    <div class="input-container">
-        <button id="aplicarFormularios">Aplicar Formularios</button>
-    </div>
-
-    <div>
-        <select id="selectForm">
-            <option value="1">Form 1</option>
-            <option value="2">Form 2</option>
-            <option value="3">Form 3</option>
-        </select>
-        <button id="agregarPregunta">Agregar Pregunta</button>
-    </div>
-
-    <!-- Lista de frutas -->
-    <div>
-        <div>
-            <div id="formularioLista" class="list">
-                <h2>Lista de Formularios:</h2>
-                
+    <section>
+        <h1>Manipulación de Arreglos</h1>
+        <div class="container">
+            <div class="listUser"></div>
+            <div class="formContainer">
+                <div>
+                    <h3 id="nameTitle"></h3>
+                    <button onclick="mostrarForm(numFormulario-1)"> < </button>
+                    <span id="labelNumberForm">1</span>
+                    <button onclick="mostrarForm(numFormulario+1)"> > </button>
+                </div>
+                <div class="formElement" id="form1">
+                    <h2>Perros o Gatos?</h2>
+                    <div class="tarjetForm" id="form1">
+                        <label for="" class="questionForm">¿Te gusta salir a caminar al aire libre?</label>
+                        <select name="" class="selectForm">
+                            <option value="1">Si</option>
+                            <option value="2">No</option>
+                        </select>
+                    </div>
+                    <div class="tarjetForm">
+                        <label for="" class="questionForm">¿Prefieres pasar tiempo relajado en casa viendo series o películas?</label>
+                        <select name="" class="selectForm">
+                            <option value="2">Si</option>
+                            <option value="1">No</option>
+                        </select>
+                    </div>
+                    <div class="tarjetForm">
+                        <label for="" class="questionForm">¿Disfrutas de la compañía activa y juguetona de una mascota?</label>
+                        <select name="" class="selectForm">
+                            <option value="1">Si</option>
+                            <option value="2">No</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="formElement" id="form2">
+                    <h2>Introvertido o Extrovertido?</h2>
+                    <div class="tarjetForm">
+                        <label for="" class="questionForm">¿Te sientes energizado después de pasar tiempo con un grupo de amigos?</label>
+                        <select name="" class="selectForm">
+                            <option value="1">Si</option>
+                            <option value="2">No</option>
+                        </select>
+                    </div>
+                    <div class="tarjetForm">
+                        <label for="" class="questionForm">¿Prefieres un fin de semana tranquilo en casa en lugar de salir a una fiesta?</label>
+                        <select name="" class="selectForm">
+                            <option value="2">Si</option>
+                            <option value="1">No</option>
+                        </select>
+                    </div>
+                    <div class="tarjetForm">
+                        <label for="" class="questionForm">¿Te gusta iniciar conversaciones con extraños en eventos sociales?</label>
+                        <select name="" class="selectForm">
+                            <option value="1">Si</option>
+                            <option value="2">No</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="formElement" id="form3">
+                    <h2>Frío o Calor</h2>
+                    <div class="tarjetForm">
+                        <label for="" class="questionForm">¿Prefieres abrigarte con mantas en invierno en lugar de estar en la playa bajo el sol?</label>
+                        <select name="" class="selectForm">
+                            <option value="1">Si</option>
+                            <option value="2">No</option>
+                        </select>
+                    </div>
+                    <div class="tarjetForm">
+                        <label for="" class="questionForm">¿Te gusta más el clima cálido y soleado para salir a caminar o hacer actividades al aire libre?</label>
+                        <select name="" class="selectForm">
+                            <option value="2">Si</option>
+                            <option value="1">No</option>
+                        </select>
+                    </div>
+                    <div class="tarjetForm">
+                        <label for="" class="questionForm">¿Disfrutas más de las bebidas calientes como el chocolate caliente o café que de las bebidas frías como limonada o frappé?</label>
+                        <select name="" class="selectForm">
+                            <option value="1">Si</option>
+                            <option value="2">No</option>
+                        </select>
+                    </div>
+                </div>
+                <button id="saveForm">Guardar</button>
             </div>
         </div>
-        <div>
-            <h2>Lista de Usuarios:</h2>
-            <ul id="usuariosLista"></ul>
-        </div>
-    </div>
+    </section>
 
+    <section>
+        <h2>Resultados</h2>
+        <div class="resultContainer"></div>
+        <div class="graficContainer">
+            <div id="chart_div1" style="width: 33%;"></div>
+            <div id="chart_div2" style="width: 33%;"></div>
+            <div id="chart_div3" style="width: 33%;"></div>
+        </div>
+    </section>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="./main.js"></script>
 </body>
 

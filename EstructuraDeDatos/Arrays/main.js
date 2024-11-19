@@ -1,161 +1,329 @@
-const agregarUsuario = document.getElementById("agregarUsuario")
-const eliminarUsuario = document.getElementById("eliminarUsuario")
-const usuarioInput = document.getElementById("usuarioInput")
-const usuariosLista = document.getElementById("usuariosLista")
-const aplicarFormulario = document.getElementById("aplicarFormularios")
-const agregarPregunta = document.getElementById("agregarPregunta")
-const selectForm = document.getElementById("selectForm")
-const formularioLista = document.getElementById("formularioLista")
-// Variables de selección
+const listUser = document.querySelector(".listUser")
+const form1 = document.getElementById("form1")
+const form2 = document.getElementById("form2")
+const form3 = document.getElementById("form3")
+const labelNumberForm = document.getElementById("labelNumberForm")
+const saveForm = document.getElementById("saveForm")
+const grafica1 = document.getElementById("chart_div1")
+const grafica2 = document.getElementById("chart_div2")
+const grafica3 = document.getElementById("chart_div3")
+const nameTitle = document.getElementById("nameTitle")
 
-let formulario = [ // Formularios creados 3
-    {
-        idForm: 1,
-        preguntas: []
-    },
-    {
-        idForm: 2,
-        preguntas: []
-    },
-    {
-        idForm: 3,
-        preguntas: []
-    }
+let numFormulario = 1;
+let usuarioSelect = 1;
+let respuestasUsuario = []
+
+let respuestasForm1 = [
+    ['Gatos o Perros', 'Total',],
+    [0,0]
+]
+let respuestasForm2 = [
+    ['Introvertido o Extrovertido', 'Total',],
+    [0,0]
+]
+let respuestasForm3 = [
+    ['Frío o calor', 'Total',],
+    [0,0]
 ]
 
-let pregunta = [] // Preguntas creadas
-
-let usuarios = [] // Usuarios agregados
-
-let respuestas = [ //
-    {
-        idUsuario: 1,
-        idPregunta: 1,
-        idOpcion: 1
-    }
-]
-
-function agregarUsuarios(nombre) { // Agrega un nuevo usuario
-    if(!nombre.trim()) return
-    const idArray = usuarios.length + 1
-    usuarios.push({ "id": idArray, "nombre": nombre })
-}
-function eliminarUsuarios() { // Elimina el ultimo usuario
-    usuarios.pop()
-}
-function respuestaAleatoria(idPregunta) { // genera una respuesta int según el num de opciones
-    const elemento = pregunta.find(item => item.idPregunta == idPregunta)
-    const num = elemento.opcion.length
-    return Math.floor((Math.random() * num)) + 1
-}
-function aplicarFormularios() { // Recorre todos los formularios para calcular
-    console.log("-------------")
-    formulario.forEach(form => { // Todos los formularios
-        console.log("formulario: " + form.idForm)
-        form.preguntas.forEach(elementPregunta => { // Preguntas
-            usuarios.forEach(usu => {
-                console.log(form.idForm + "- " + usu.nombre + ": " + respuestaAleatoria(elementPregunta))
-                // Guardar las respuestas aquí
-            })
-
+async function peticionUsuario() {
+    const url = "https://jsonplaceholder.typicode.com/users"
+    try {
+        const response = await fetch(url, {
+            method: "GET"
         })
-    })
-}
-
-function agregarPreguntas(numFormulario, preguntaData) { // Agrega una nueva pregunta
-    let bodyText = ""
-    formulario.forEach(item => {
-        if (item.idForm == numFormulario) {
-            item.preguntas.push(pregunta.length + 1)
-            id = item.preguntas.length
+        const data = await response.json()
+        if (data) {
+            return data
+        } else {
+            alert("Datos vacios")
+            return null
         }
-    })
-
-
-    const obj = // Remplaza el objData
-    {
-        idPregunta: pregunta.length + 1,
-        texto: "terminado?",
-        opcion: [
-            {
-                idOpcion: 1,
-                texto: "si"
-            },
-            {
-                idOpcion: 2,
-                texto: "no"
-            }
-            ,
-            {
-                idOpcion: 3,
-                texto: "tal vez"
-            }
-        ]
+    } catch (error) {
+        console.error(error)
+        alert("No se han podido acceder a los datos de usuario")
     }
 
-    bodyText += `<h2>${obj.texto}</h2><select>`
-    obj.opcion.forEach(item =>{
-        bodyText += `<option>${item.texto}</option>`
-    })
-    bodyText += `</select>`
-    formularioLista.innerHTML += bodyText
-    pregunta.push(obj)
+}
+function seleccionarUsuario(id, name) {
+    usuarioSelect = id
+    nameTitle.innerText = name
+    renderRespuestas(id)
+}
+
+function renderRespuestas() {
+    const res = respuestasUsuario.find(item => item.idUsuario === usuarioSelect)
+    const formSelect1 = document.querySelectorAll("#form1 .selectForm")
+    const formSelect2 = document.querySelectorAll("#form2 .selectForm")
+    const formSelect3 = document.querySelectorAll("#form3 .selectForm")
+
+    if (Array.isArray(res.respuestas) && res.respuestas.length > 0) {
+        for (let i = 0; i < formSelect1.length; i++) {
+            formSelect1[i].value = res.respuestas[0].formulario[i].option
+            formSelect2[i].value = res.respuestas[1].formulario[i].option
+            formSelect3[i].value = res.respuestas[2].formulario[i].option
+        }
+        renderGraficas()
+    } else {
+        const valorSelect = [1,2,1,1,2,1,1,2,1]
+        for (let i = 0; i < formSelect1.length; i++) {
+            formSelect1[i].value = valorSelect[i]
+            formSelect2[i].value = valorSelect[i]
+            formSelect3[i].value = valorSelect[i]
+        }
+        renderGraficas(1)
+    }
 
 }
 
-function renderizarFormulario(id) { // Agrega los elementos de Form a la lista
-    formularioLista.innerHTML = ""
-    const form = formulario.find(item => item.idForm == id)
-    let aux
-    let bodyText = ""
-    form.preguntas.forEach(formPregunta => {
-        aux = pregunta.find(item => item.idPregunta == formPregunta)
-        bodyText += `<h2>${aux.texto}</h2><ul>`
-        aux.opcion.forEach(opcion => {
-            bodyText += `
-                    <li>
-                        ${opcion.texto}
-                    </li>
-                `
+function renderUsarios(data) {
+    let bodyComponent = ""
+    nameTitle.innerText = data[0].username
+    data.forEach((user) => {
+        bodyComponent += `<button onclick='seleccionarUsuario(${user.id}, "${user.username}")'>${user.username}</button>`
+    })
+    bodyComponent += ""
+    listUser.innerHTML = bodyComponent
+}
 
+async function init() {
+    const data = await peticionUsuario()
+    renderUsarios(data)
+    data.forEach(item => {
+        respuestasUsuario.push({
+            idUsuario: item.id,
+            respuestas: {}
         })
-        bodyText += "</ul>"
-        formularioLista.innerHTML = bodyText
-    })
-
-
-
-
-}
-
-// Disparadores de los botones
-agregarUsuario.addEventListener('click', () => {
-    const nombre = usuarioInput.value
-    agregarUsuarios(nombre)
-    renderizarUsuario()
-})
-
-eliminarUsuario.addEventListener('click', () => {
-    eliminarUsuarios()
-    renderizarUsuario()
-})
-
-aplicarFormulario.addEventListener('click', () => {
-    aplicarFormularios()
-})
-
-agregarPregunta.addEventListener('click', () => {
-    agregarPreguntas(selectForm.value)
-})
-
-selectForm.addEventListener('change', () => {
-    renderizarFormulario(selectForm.value)
-})
-
-function renderizarUsuario() {
-    usuariosLista.innerHTML = ""
-    usuarios.forEach(usu => {
-        usuariosLista.innerHTML += `<li>${usu.nombre}</li>`
     })
 }
 
+saveForm.addEventListener('click', () => {
+    let i = 1
+    let opcion = ""
+    let respuestas = [
+        {
+            id: 1,
+            formulario: [
+                // respuesta
+            ]
+        },
+        {
+            id: 2,
+            formulario: [
+                // respuesta
+            ]
+        },
+        {
+            id: 3,
+            formulario: [
+                // respuesta
+            ]
+        }
+    ]
+    let uno = 0
+    let dos = 0
+    const preguntasFormText = document.querySelectorAll(".questionForm")
+    document.querySelectorAll("#form1 div select").forEach(item => {
+        opcion = item.options[item.selectedIndex].text
+        respuestas[0].formulario.push(resForm(i, opcion, preguntasFormText[i].textContent, item.value))
+        if(item.value == 1) {
+            uno++
+        } else{
+            dos++
+        }
+        i++
+    })
+    respuestasForm1 = [
+        ['Gatos o Perros', 'Puntos',],
+        ['Perros', uno],
+        ['Gatos', dos],
+    ]
+    uno = dos = i = 0
+
+    document.querySelectorAll("#form2 div select").forEach(item => {
+        opcion = item.options[item.selectedIndex].text
+        respuestas[1].formulario.push(resForm(i, opcion, preguntasFormText[i].textContent, item.value))
+        if(item.value == 1) {
+            uno++
+        } else{
+            dos++
+        }
+        i++
+
+    })
+    respuestasForm2 = [
+        ['Introvertido o Extrovertido', 'Puntos',],
+        ['Extrovertido', uno],
+        ['Introvertido', dos],
+    ]
+    uno, dos, i = 0
+
+    document.querySelectorAll("#form3 div select").forEach(item => {
+        opcion = item.options[item.selectedIndex].text
+        respuestas[2].formulario.push(resForm(i, opcion, preguntasFormText[i].textContent, item.value))
+        if(item.value == 1) {
+            uno++
+        } else{
+            dos++
+        }
+        i++
+
+    })
+    respuestasForm3 = [
+        ['Frío o calor', 'Puntos',],
+        ['Frío', uno],
+        ['Calor', dos],
+    ]
+    uno, dos, i = 0
+    const itemFind = respuestasUsuario.find(item => item.idUsuario === usuarioSelect)
+    itemFind.respuestas = respuestas
+    drawBasic()
+    //alert("Se han guardado los tres formulario")
+})
+
+function renderGraficas(vacio){
+    let i = 1
+    let uno = 0
+    let dos = 0
+
+    if(vacio) {
+        respuestasForm1 = [
+            ['Gatos o Perros', 'Puntos',],
+            ['Perros', uno],
+            ['Gatos', dos],
+        ]
+        respuestasForm2 = [
+            ['Introvertido o Extrovertido', 'Puntos',],
+            ['Extrovertido', uno],
+            ['Introvertido', dos],
+        ]
+        respuestasForm3 = [
+            ['Frío o calor', 'Puntos',],
+            ['Frío', uno],
+            ['Calor', dos],
+        ]
+        drawBasic()
+        return;
+    }
+
+    document.querySelectorAll("#form1 div select").forEach(item => {
+        if(item.value == 1) {
+            uno++
+        } else{
+            dos++
+        }
+        i++
+    })
+    respuestasForm1 = [
+        ['Gatos o Perros', 'Puntos',],
+        ['Perros', uno],
+        ['Gatos', dos],
+    ]
+    uno = dos = i = 0
+
+    document.querySelectorAll("#form2 div select").forEach(item => {
+        if(item.value == 1) {
+            uno++
+        } else{
+            dos++
+        }
+        i++
+
+    })
+    respuestasForm2 = [
+        ['Introvertido o Extrovertido', 'Puntos',],
+        ['Extrovertido', uno],
+        ['Introvertido', dos],
+    ]
+    uno, dos, i = 0
+
+    document.querySelectorAll("#form3 div select").forEach(item => {
+        if(item.value == 1) {
+            uno++
+        } else{
+            dos++
+        }
+        i++
+
+    })
+    respuestasForm3 = [
+        ['Frío o calor', 'Puntos',],
+        ['Frío', uno],
+        ['Calor', dos],
+    ]
+    uno, dos, i = 0
+    drawBasic()
+}
+
+
+function mostrarForm(key) {
+    if (key <= 0 || key > 3) return
+    numFormulario = key
+    switch (key) {
+        case 1:
+            form1.style.display = 'grid'
+            form2.style.display = 'none'
+            form3.style.display = 'none'
+            labelNumberForm.innerText = numFormulario
+            break;
+        case 2:
+            form1.style.display = 'none'
+            form2.style.display = 'grid'
+            form3.style.display = 'none'
+            labelNumberForm.innerText = numFormulario
+            break;
+        case 3:
+            form1.style.display = 'none'
+            form2.style.display = 'none'
+            form3.style.display = 'grid'
+            labelNumberForm.innerText = numFormulario
+            break;
+        default:
+            break;
+    }
+}
+
+google.charts.load('current', { packages: ['corechart', 'bar'] });
+google.charts.setOnLoadCallback(drawBasic);
+
+
+function drawBasic() {
+
+    var data1 = google.visualization.arrayToDataTable(respuestasForm1);
+    var data2 = google.visualization.arrayToDataTable(respuestasForm2);
+    var data3 = google.visualization.arrayToDataTable(respuestasForm3);
+
+    var options1 = {
+        title: 'Gatos o Perros',
+        chartArea: { width: '50%' }
+    };
+    var options2 = {
+        title: 'Introvertido p Extrovertido',
+        chartArea: { width: '50%' }
+    };
+    var options3 = {
+        title: 'Dulce o Amargo',
+        chartArea: { width: '50%' }
+    };
+
+    var chart = new google.visualization.BarChart(grafica1);
+    chart.draw(data1, options1);
+    chart = new google.visualization.BarChart(grafica2);
+    chart.draw(data2, options2);
+    chart = new google.visualization.BarChart(grafica3);
+    chart.draw(data3, options3);
+}
+
+function resForm(id, pregunta, opcion, valor) {
+    return {
+        idQuestion: id,
+        text: pregunta,
+        optionText: opcion,
+        option: valor
+    }
+}
+
+window.addEventListener('load', () => {
+    init()
+    mostrarForm(1)
+})
