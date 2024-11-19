@@ -2,35 +2,30 @@
 <html lang="es">  
 <head>  
     <meta charset="UTF-8">  
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">  
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
     <title>Usuarios</title>  
     <link rel="stylesheet" href="styles.css">  
 </head>  
 <body>  
-    <div class="container">
-        <h1>Lista de Usuarios</h1>  
-        <table id="userTable"  >  
+    <div class="container">  
+       <h1>USUARIOS</h1>  
+        <table id="userTable">  
             <thead>  
                 <tr>  
                     <th>ID</th>  
-                    <th>Nombre</th>   
+                    <th>Nombre</th>  
                 </tr>  
             </thead>  
             <tbody></tbody>  
-        </table> 
-    </div>
-   
+        </table>  
+        <div id="errorMessage" style="display: none; color: red;">Error al cargar los usuarios.</div>  
+    
+        <div id="profileCard" style="display: none;"></div>  
+        <div id="profileCard_2" style="display: none;"></div> 
+    </div>  
 
 
-    <div id="profileCard" style="display: none;"></div>  
-    <!--<section>
-        <p>Selecciona el tema</p>
-        <button class="btn primary" onclick="changeStyle('style1')">Tema 1</button>  
-        <button class="btn success" onclick="changeStyle('style2')">Tema 2</button>  
-        <button class="btn warning" onclick="changeStyle('style3')">Tema 3</button>
-    </section>-->
     <script src="script.js"></script>  
-</body> 
-
+</body>  
 </html>
