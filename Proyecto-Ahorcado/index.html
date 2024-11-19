@@ -240,9 +240,9 @@
             <div id="poste1" class="parte" style="position: absolute; width: 100px; height: 10px; left: 50px; top: 20px; display: none;"></div>
             <div id="cuerda" class="parte" style="position: absolute; width: 2px; height: 30px; left: 100px; top: 30px; display: none;"></div>
             <div id="cabeza" class="parte" style="position: absolute; width: 30px; height: 30px; border-radius: 50%; left: 85px; top: 60px; display: none;"></div>
-            <div id="cuerpo" class="parte" style="position: absolute; width: 10px; height: 55px; left: 95px; top: 85px; display: none;"></div>
-            <div id="brazos" class="parte" style="position: absolute; width: 60px; height: 10px; left: 70px; top: 120px; display: none;"></div>
-            <div id="piernas" class="parte" style="position: absolute; width: 60px; height: 10px; left: 70px; top: 150px; display: none;"></div>
+            <div id="cuerpo" class="parte" style="position: absolute; width: 5px; height: 55px; left: 95px; top: 85px; display: none;"></div>
+            <div id="brazos" class="parte" style="position: absolute; width: 60px; height: 5px; left: 70px; top: 100px; display: none;"></div>
+            <div id="piernas" class="parte" style="position: absolute; width: 60px; height: 5px; left: 70px; top: 140px; display: none;"></div>
         </div>
 
         <div id="palabra">Encuentra la palabra</div>
@@ -307,14 +307,18 @@
                         palabraOculta[i] = letra;
                     }
                 }
-                boton.classList.add('correcto'); 
+                boton.classList.add('correcto');
             } else {
                 intentosRestantes--;
-                actualizarDibujo();
-                boton.classList.add('incorrecto'); 
+                if (intentosRestantes === 0) {
+                    actualizarDibujo(true); 
+                } else {
+                    actualizarDibujo(false);
+                }
+                boton.classList.add('incorrecto');
             }
 
-            setTimeout(() => boton.classList.remove('correcto', 'incorrecto'), 500); 
+            setTimeout(() => boton.classList.remove('correcto', 'incorrecto'), 1000); 
             boton.disabled = true;
 
             actualizarInterfaz();
@@ -322,12 +326,12 @@
             if (!palabraOculta.includes('_')) {
                 puntuacion += 10;
                 mostrarResultado(`Adivinaste la palabra: ${palabraSecreta}`);
-                cargarNuevaPalabra();
+                setTimeout(cargarNuevaPalabra, 1000);
             }
 
             if (intentosRestantes === 0) {
                 mostrarResultado(`No adivinaste la palabra: ${palabraSecreta}`);
-                cargarNuevaPalabra();
+                setTimeout(cargarNuevaPalabra, 1000);
             }
         }
 
