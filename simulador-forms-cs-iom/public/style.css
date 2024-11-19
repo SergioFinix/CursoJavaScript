@@ -1,8 +1,19 @@
+:root {
+  --primary: #0A0927;
+  --secondary: #C7132B;
+  --third: #FDC52C;
+  --background: #154181;
+  --white: #ffffff;
+}
+
 body {
   font-family: Arial;
 }
 
+p,
+h1,
 h2,
+h3,
 body {
   margin: 0;
 }
@@ -14,7 +25,9 @@ body {
 }
 
 .content-navbar {
-  margin: 1rem 0 1rem 0;
+  padding: 1rem 0 1rem 0;
+  position: sticky;
+  top: 0;
 }
 
 #navbar,
@@ -22,4 +35,239 @@ body {
   display: block;
   width: 90%;
   padding: .1px;
+  box-sizing: border-box;
+}
+
+#navbar.none {
+  display: none;
+}
+
+#navbar {
+  background-color: var(--primary);
+  color: var(--white);
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+#navbar .divStart,
+#navbar .divEnd {
+  flex: 1;
+}
+
+#navbar .divCenter {
+  flex: 2;
+  display: flex;
+  gap: .5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+#navbar .divEnd {
+  display: flex;
+  gap: .5rem;
+  justify-content: end;
+  align-items: center;
+}
+
+#navbar .namePlatform {
+  font-size: larger;
+  font-weight: bolder;
+}
+
+#navbar .linkMenu {
+  font-size: large;
+  text-decoration: none;
+  color: var(--white);
+}
+
+.answerForm .btnSubmit button,
+#navbar .btnLogOut {
+  background-color: var(--secondary);
+  color: var(--white);
+  border: solid 2px var(--third);
+  padding: .3rem 1rem;
+  font-size: smaller;
+  border-radius: .5rem;
+  cursor: pointer;
+}
+
+#app {
+  min-height: 100vh;
+}
+
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login .content {
+  margin-top: 5rem;
+  width: 40%;
+  background-color: var(--background);
+  border-radius: .5rem;
+  box-sizing: border-box;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login #loginForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.login .title {
+  color: var(--third);
+  margin-bottom: 1rem;
+  font-size: x-large;
+}
+
+.adminUsers .user label,
+.login label {
+  color: var(--white);
+  margin-bottom: .3rem;
+  font-size: large;
+  font-weight: bold;
+}
+
+.adminUsers .user input,
+.login input {
+  margin-bottom: 1rem;
+  font-size: large;
+  padding: .5rem 1rem;
+  border-radius: .5rem;
+}
+
+.login .button {
+  display: flex;
+  justify-content: center;
+}
+
+.adminUserForms .form button,
+.adminUsers .user button,
+.login .button button {
+  background-color: var(--secondary);
+  color: var(--third);
+  font-size: large;
+  font-weight: bold;
+  padding: .5rem 2rem;
+  border: none;
+  border-radius: .5rem;
+}
+
+.adminUserForms .title,
+.adminUsers .title,
+.statsForm .title,
+.allForms .title,
+.answerForm .title,
+.formByUser .title,
+.userForms .title {
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.adminUserForms .forms,
+.adminUsers .users,
+.statsForm .questions,
+.allForms .forms,
+.answerForm .form,
+.formByUser .form,
+.userForms .forms {
+  background-color: var(--background);
+  border-radius: .5rem;
+  padding: 2rem 3rem;
+  border: solid 4px var(--secondary);
+}
+
+.adminUserForms .form,
+.adminUsers .user,
+.statsForm .question,
+.allForms .nameForm,
+.userForms .nameForm {
+  margin-bottom: 1rem;
+}
+
+.adminUserForms .form:last-child,
+.adminUsers .user:last-child,
+.statsForm .question:last-child,
+.allForms .nameForm:last-child,
+.userForms .nameForm:last-child {
+  margin-bottom: 0;
+}
+
+.adminUserForms .form p,
+.adminUsers .user a,
+.statsForm .question h3,
+.allForms .nameForm a,
+.allForms .forms .success,
+.formByUser .form .success,
+.userForms .nameForm p,
+.userForms .nameForm a {
+  color: var(--white);
+  text-decoration: none;
+  font-size: large;
+  font-weight: bold;
+}
+
+.adminUserForms .form p.formsNone,
+.allForms .forms .success,
+.formByUser .form .success,
+.userForms .nameForm p {
+  text-align: center;
+}
+
+.answerForm .btnSubmit {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.answerForm .btnSubmit button {
+  font-size: large;
+  font-weight: bold;
+  padding: .5rem 2rem;
+  border-color: var(--secondary);
+}
+
+.answerForm .question {
+  margin-bottom: 1.5rem;
+}
+
+.answerForm .question:last-child {
+  margin-bottom: 0;
+}
+
+.answerForm .question .textQuestion {
+  display: block;
+  color: var(--white);
+  font-size: large;
+  font-weight: bold;
+  margin-bottom: .4rem;
+}
+
+.adminUserForms .form .select,
+.answerForm .question .select,
+.answerForm .question .number {
+  display: block;
+  width: 100%;
+  font-size: large;
+  padding: .5rem 1rem;
+  border-radius: .5rem;
+  box-sizing: border-box;
+}
+
+.adminUserForms .form .select {
+  width: auto;
+  display: inline-block;
+}
+
+.answerForm .question .check {
+  font-size: large;
+  color: var(--white);
+  display: block;
 }
