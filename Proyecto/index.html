@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicación de Votación en Tiempo Real</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <h2>Usuarios</h2>
+            <ul id="users"></ul>
+        </aside>
+
+        <main class="main-content">
+            <section class="poll-section">
+                <h2>Encuestas</h2>
+                <div id="pollForm" class="poll-form">
+                    <h3>Crear Nueva Encuesta</h3>
+                    <input type="text" id="questionInput" class="input-field" placeholder="Ingrese la pregunta de la encuesta" required>
+                    
+                    <div id="optionsContainer">
+                        <input type="text" class="optionInput input-field" placeholder="Opción 1" required>
+                        <input type="text" class="optionInput input-field" placeholder="Opción 2" required>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button type="button" class="btn" onclick="addOption()">Añadir Opción</button>
+                        <button type="button" class="btn btn-primary" onclick="createPoll()">Crear Encuesta</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="pollsContainer" class="polls-container">
+                <h3>Encuestas Activas</h3>
+                <!-- Las encuestas se renderizarán aquí -->
+            </section>
+
+            <section class="results">
+                <h2>Resultados de Votación</h2>
+                <div id="resultsContainer"></div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
