@@ -1,0 +1,35 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+  }
+  .user-card {
+    width: 300px;
+    padding: 20px;
+    background-color: #5e0c0c;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  .user-card img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+  }
+  .user-card h3 {
+    margin: 10px 0;
+  }
+  select {
+    margin-bottom: 20px;
+    padding: 5px;
+    font-size: 16px;
+  }
+  .card img {
+    width: 150px;  
+    height: 150px; 
+    object-fit: cover; 
+}
