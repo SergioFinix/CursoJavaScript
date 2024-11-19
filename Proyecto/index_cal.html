@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" href="estilo.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <script src="funciones.js"></script>
+
+    <div class="conteiner">
+        <h1> Gastos Mensuales</h1>
+        <label for="presupuesto">Presupuesto:</label>
+        <input type="text" id="presu">
+        <button id="ingreso">IIngresar</button>
+
+    <table id="estruc">
+        <td>
+
+            <div id="nombre">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Calculadora</th>
+                        </tr>
+                    </thead>
+                    <tbody id="nom">
+                    </tbody>
+                </table>
+            </div>
+        </td>
+
+        <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+        <td>
+
+            <div>
+                <table border="solid">
+    
+                    <thead> 
+                        <tr> 
+                            <th>Nombre del producto</th> 
+                            <th>Precio</th> 
+                            <th>Cantidad</th>
+                            <th>Total</th>
+                        </tr> 
+                    </thead>
+                    <tbody id="mes1">
+                    </tbody>
+                </table>
+            </div>
+
+            <br>
+
+            <div>
+                <table border="solid">
+                    <thead>
+                        <tr> 
+                            <th>Nombre del producto</th> 
+                            <th>Precio</th> 
+                            <th>Cantidad</th>
+                            <th>Total</th>
+                        </tr> 
+                    </thead>
+                    <tbody id="mes2">
+                    </tbody>
+                </table>
+            </div>
+
+            <br>
+            
+            <div >
+                <table border="solid" id="mes3">
+                    <thead>
+                        <tr> 
+                            <th>Nombre del producto</th> 
+                            <th>Precio</th> 
+                            <th>Cantidad</th>
+                            <th>Total</th>
+                        </tr> 
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Total Neto</td>
+                            <td>----</td>
+                            <td>----</td>
+                            <td id="toaln"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </td>
+
+        <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+        <td>
+            <form>
+                <p>Nombre del Producto: </p>
+                <input type="text" id="produc"> <br>
+                <p>Precio: </p>
+                <input type="number" value="0.00" id="precio"> <br>
+                <p>Cantidad: </p>
+                <input type="number" value="0" id="cantidad"> <br>
+                <button onclick="agregar()" type="submit">Agregar</button>
+            </form>
+        </td>
+    </table>
+
+    </div>
+        
+</body>
+
+</html>

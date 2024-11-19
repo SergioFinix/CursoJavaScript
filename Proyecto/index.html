@@ -1,115 +1,63 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-    <link rel="stylesheet" href="estilo.css">
+
+    <style>
+        button{
+            text-align: center;
+            padding: 9px;
+            border-radius: 6px;
+            background-color: antiquewhite;
+            color: red;
+            margin-left:40%;
+            margin-right: 50%;
+            margin-top: 15%;
+            font-size: 30px;
+            height: 60px;
+            width: 140px;
+        }
+        button:hover
+        {
+            color: white;
+            background-color: thistle;
+            height: 80px;
+            width: 160px;
+        }
+    </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyecto</title>
-    <link rel="stylesheet" href="estilo.css">
+    <title>Document</title>
 </head>
 <body>
-    <script src="funciones.js"></script>
 
-    <div class="conteiner">
-        <h1> Calculadora Mensual</h1>
-
-    </div>
-
-    <table id="estruc">
-        <td>
-
-            <div id="nombre">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Nombre</th>
-                            <th>Calculadora</th>
-                        </tr>
-                    </thead>
-                    <tbody id="nom">
-                    </tbody>
-                </table>
-            </div>
-        </td>
-
-        <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-
-        <td>
-
-            <div>
-                <table border="solid">
+    <button id="contador"> Ingresar </button>
     
-                    <thead> 
-                        <tr> 
-                            <th>Nombre del producto</th> 
-                            <th>Precio</th> 
-                            <th>Cantidad</th>
-                            <th>Total</th>
-                        </tr> 
-                    </thead>
-                    <tbody id="mes1">
-                    </tbody>
-                </table>
-            </div>
-
-            <br>
-
-            <div>
-                <table border="solid">
-                    <thead>
-                        <tr> 
-                            <th>Nombre del producto</th> 
-                            <th>Precio</th> 
-                            <th>Cantidad</th>
-                            <th>Total</th>
-                        </tr> 
-                    </thead>
-                    <tbody id="mes2">
-                    </tbody>
-                </table>
-            </div>
-
-            <br>
-            
-            <div >
-                <table border="solid" id="mes3">
-                    <thead>
-                        <tr> 
-                            <th>Nombre del producto</th> 
-                            <th>Precio</th> 
-                            <th>Cantidad</th>
-                            <th>Total</th>
-                        </tr> 
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-        </td>
-
-        <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-
-        <td>
-            <form>
-                <p>Nombre del Producto: </p>
-                <input type="text" value="Producto" id="nombre"> <br>
-                <p>Precio: </p>
-                <input type="number" value="0.00" id="precio"> <br>
-                <p>Cantidad: </p>
-                <input type="number" value="0" id="cantidad"> <br>
-                <button onclick="agregar()" type="submit">Agregar</button>
-            </form>
-        </td>
-    </table>
-        
 </body>
 
+<script>
+
+    //contador el cual una vez que termina manda de manera automatica a la paguina de la calculadora
+    const contador = document.getElementById('contador');
+
+contador.addEventListener('click', () => {
+  cuentaRegresiva(5).then(() => {
+    contador.textContent = '¡Lanzado!';
+  });
+});
+
+function cuentaRegresiva(segundos) {
+  return new Promise((resolve) => {
+    const intervalo = setInterval(() => {
+      contador.textContent = `Ingresando en ${segundos}`;
+      segundos--;
+      if (segundos < 0) {
+        clearInterval(intervalo);
+        resolve();
+        console.log("listo")
+        window.location.href = "index_cal.html";
+      }
+    }, 1000);
+  });
+}
+</script>
 </html>
