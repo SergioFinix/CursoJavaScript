@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Gastos</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Control de gastos</h1>
+        <form id="FormaGastos">
+        <div>
+            <label for="Usuario">Selecciona el usuario:</label>
+            <select name="UsuarioApi" id="UsuarioApi" class="input_form">
+            <option value="-">Selecciona un usuario</option>
+            </select>
+        </div>
+   
+        <form id="PresupuestoForm">
+            <div class="form-group">
+                <label for="Presupuesto">Introduce el presupuesto:</label>
+                <input id="Presupuesto" name="Presupuesto" type="text"></div>
+            <form id="MesForm">
+            <div class="form-group">
+                <label for="Mes">Introduce el Mes:</label>
+            <select id="Mes">
+                <option value="">Selecciona el mes</option>
+                <option value="Enero">Enero</option>
+                <option value="Febrero">Febrero</option>
+                <option value="Marzo">Marzo</option>
+                <option value="Abril">Abril</option>
+                <option value="Mayo">Mayo</option>
+                <option value="Junio">Junio</option>
+            </select>
+        </div>
+        <form id="ProductoForm">
+            <div class="form-group">
+                <label for="Producto">Introduce el Producto:</label>
+                <input id="Producto" name="Producto" type="text" style="text-transform:uppercase;" value=""  onkeyup="javascript:this.value=this.value.toUpperCase();"> </input>
+                <span id="ProductoError" class="error"></span>
+            </div>
+        <form id="GastoForm">
+            <div class="form-group">
+                <label for="Gasto">Introduce el gasto:</label>  
+                <input id="Gasto" name="Gasto" type="text" > </input>
+                <span id="GastoError" class="error"></span>
+            </div>
+        </form>
+    </div>
+    <div><button id="AgregarGasto">Agregar gasto</button></div>
+    <div><button id="SumarGastos">Sumar gastos</button></div>
+    <div id="ResultadoGastos" >Gasto total:</div>
+    <div id="ResultadoPresupuesto" >Resta de tu presupuesto:</div>
+
+
+    </div>
+    <div>
+    <table id="TablaGastos">
+        <thead>
+        <tr>
+        <th>Usuario</th>
+        <th>Presupuesto</th>   
+        <th>Mes</th>
+        <th>Producto</th>
+        <th>Cantidad</th>
+        </tr>
+        <tbody>
+        </thead>
+    </table>
+    </div>
+
+<style>
+    h1 {
+        text-align: left;
+    }
+    .TablaGastos table{
+        margin:0 auto;
+    }
+    .container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 600px;
+    text-align: center;
+    }
+    th{
+        border:solid black 2px;
+        padding: 10px;
+    }
+    td{
+        border: solid black 2px;
+        padding: 10px;
+    }
+    div{
+        padding: 10px; 
+    }
+    form{
+        text-align: left;
+    }
+</style>
+
+<script>
+    let ArregloDatos=[];
+
+    const BotonAgregaGasto = document.getElementById("AgregarGasto");
+    const tabla = document.getElementById("TablaGastos").getElementsByTagName("tbody")[0];
+
+    const GastoRegex = /^[0-9,$]*$/;
+    const ProductoRegex = /^[A-Za-zÑñ]*$/;
+    const ProductoInput = document.getElementById("Producto");
+    const ProductoError = document.getElementById("ProductoError");
+    const GastoInput = document.getElementById("Gasto");
+    const GastoError = document.getElementById("GastoError");
+
+    function validarProducto(Producto) {
+        return ProductoRegex.test(Producto.value);
+    }
+
+    function validarGasto(Gasto) {
+        return GastoRegex.test(Gasto.value);
+    }
+
+    document.getElementById("Producto").onblur = function() {errorProducto()};
+    
+    function errorProducto() {
+        //alert(ProductoInput.value+" "+ProductoInput.value.length);
+        if (ProductoInput.value.length <= 15) {  
+             
+            if (validarProducto(ProductoInput)) {
+                ProductoError.textContent = "";
+                logMessage("Producto válido ingresado");
+            } else {
+                ProductoError.textContent = "Producto no válido";
+                logMessage("Producto no válido");
+            }
+        } else {
+        alert(ProductoError.textContent = "El producto no debe exceder un máximo de 15 letras");
+        console.log("salio mal ");
+        }
+    }
+    
+
+    document.getElementById("Gasto").onblur = function() {errorCosto()};
+    function errorCosto() {
+    //alert(GastoInput.value+" "+GastoInput.value.length);
+        if (GastoInput.value.length <= 6) {  
+             
+            if (validarGasto(GastoInput)) {
+                GastoError.textContent = "";
+                logMessage("Gasto válido ingresado");
+            } else {
+                GastoError.textContent = "Gasto no válido";
+                logMessage("Gasto no válido");
+            }
+        } else {
+        alert(GastoError.textContent = "El gasto no debe ser tan costoso");
+        console.log("salio mal ");
+        }
+    }
+
+    BotonAgregaGasto.addEventListener("click", () => {
+        let crearFila = document.createElement("tr");
+        let CeldaUsuario = document.createElement("td");
+        let CeldaPresupuesto = document.createElement("td");
+        let CeldaMes = document.createElement("td");
+        let CeldaProducto = document.createElement("td");
+        let CeldaGasto = document.createElement("td");
+        let datos = {
+            CeldaUsuario:CeldaUsuario,
+            CeldaPresupuesto:CeldaPresupuesto,
+            CeldaMes:CeldaMes,
+            CeldaProducto:CeldaProducto,
+            CeldaGasto:CeldaGasto,
+        };
+        CeldaUsuario.textContent = document.getElementById("UsuarioApi").value;
+        CeldaPresupuesto.textContent = document.getElementById("Presupuesto").value;
+        CeldaMes.textContent = document.getElementById("Mes").value;
+        CeldaProducto.textContent = document.getElementById("Producto").value;
+        CeldaGasto.textContent = document.getElementById("Gasto").value;
+    
+        crearFila.appendChild(CeldaUsuario);
+        crearFila.appendChild(CeldaPresupuesto);
+        crearFila.appendChild(CeldaMes);
+        crearFila.appendChild(CeldaProducto);
+        crearFila.appendChild(CeldaGasto);
+
+        tabla.insertBefore(crearFila, tabla.firstChild);
+
+        UsuarioApi.value = '-';
+        Presupuesto.value = '';
+        Mes.value = '';
+        Producto.value = '';
+        Gasto.value = '';
+
+        });
+
+    const botonGastoTotal = document.getElementById("SumarGastos");
+    botonGastoTotal.addEventListener("click", () => {
+        let gasto=0;
+        
+
+        for (let fila of tabla.rows) {
+            let CeldaGasto = fila.cells[4];
+            let cantidad = parseInt(CeldaGasto.textContent);
+
+            if (!isNaN(cantidad)) {
+                gasto += cantidad;
+            }
+        }
+        ResultadoGastos.textContent = `Suma de gastos: ${gasto}`;
+        
+        for (let fila of tabla.rows) {
+            let CeldaPresupuesto = fila.cells[1];
+            let cantidad2 = parseInt(CeldaPresupuesto.textContent);
+
+            if (!isNaN(cantidad2)) {
+                cantidad2 -= cantidad;
+            }
+        }
+        ResultadoPresupuesto.textContent = `Resta del presupuesto: ${cantidad2}`;
+    }) 
+
+    const select = document.querySelector("#UsuarioApi");
+    fetch("https://jsonplaceholder.typicode.com/users", {
+        method: 'GET',
+        })
+    .then(res => res.json())
+    .then(lista_de_usuarios => {
+    for (let categoria of lista_de_usuarios) {
+    let NuevoUsuario = document.createElement("option");
+    NuevoUsuario.text = categoria.name;
+    select.add(NuevoUsuario);
+    }
+    })
+
+</script>
+</body>
