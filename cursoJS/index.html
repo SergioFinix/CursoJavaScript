@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="estilos/normalize.css">
+    <link rel="stylesheet" href="estilos/index.css">
+</head>
+<body>
+    <main>
+      <h1>Curso de Java Script</h1>
+      <form id="formulario" class="formulario">
+        <fieldset class="fieldset">
+          <legend class="titulo">Lenguajes de programacion</legend>
+          <div class="campo">
+            <label for="lenguaje">¿A que lenguaje de programacion pertenece las siglas JS?</label>
+            <input id="lenguaje" name="lenguaje" type="text" placeholder="Ejemplo: Java,Flutter, etc">
+          </div>
+        </fieldset>
+        <fieldset class="fieldset">
+          <legend class="titulo">Linea de tiempo</legend>
+          <div class="campo">
+            <label for="anio">¿En que fecha se creo JS?</label>
+            <input id="anio" name="anio" type="number" placeholder="Ejemplo: 2023">
+          </div>
+        </fieldset>
+             
+        
+        
+        <fieldset class="fieldset">
+          <legend class="titulo">¿El origen javascript surge a partir de un navegador que actualmente no existe?</legend>
+          <div class="campo">
+            <label class="label--navegador" for="netscape"><input id="netscape" type="radio" name="navegador">NetScape</label>
+            <label class="label--navegador" for="chrome"><input id="chrome" type="radio" name="navegador">Chrome</label>
+            <label class="label--navegador" for="egde"><input id="egde" type="radio" name="navegador">Egde</label>
+          </div>
+        </fieldset>
+        <fieldset class="fieldset">
+         
+          <div class="campo">
+            <label for="answer">¿JavaScript es un lenguaje de  programación crossplatform, se puede usar en S.O. como:  Windows, Unix, Linux?</label>
+            <select name="decision" id="answer">
+              <option value="" selected>-- Seleccione --</option>
+              <option value="cierto">Cierto</option>
+              <option value="falso">Falso</option>
+           
+            </select>
+          </div>
+        </fieldset>
+        
+        <input class="btn--enviar" type="submit">
+      </form>
+    </main>
+    <aside id="modal" class="modal">
+      <div class="modal--contenedor">
+        <h2>Resultados</h2>
+        <p id="promedio"></p>
+        <div id="preguntaUno"></div>
+        <div id="preguntaDos"></div>
+        <div id="preguntaTres"></div>
+        <div id="preguntaCuatro"></div>
+        <button id="finalizar" class="finalizar" type="button">Finalizar</button>
+      </div>
+    </aside>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
