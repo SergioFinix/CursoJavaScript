@@ -43,6 +43,15 @@ function loadUsers(data){
         let p = document.createElement('p');
         p.innerHTML = element.name;
         p.onclick = function() {
+            const allParagraphs = document.querySelectorAll('.content-users p');
+            allParagraphs.forEach(paragraph => {
+                paragraph.classList.remove('active');
+            });
+
+            // Agrega la clase al elemento actual
+            p.classList.add('active');
+
+            // Llama a la función con los datos del usuario
             GetUser(element.id, element.name);
         };
 

@@ -27,8 +27,20 @@ buttonSuccess.addEventListener('click', function(e){
         });
     });
 
+    if(user === ''){
+        ShowAlert('Por Favor Seleccione un usuario antes de enviar las respuestas', 'error');
+        return;
+    }
+
     sendRequest();
 });
+
+function ShowAlert(message, icon){
+    Swal.fire({
+        text: message,
+        icon: icon
+      });
+}
 
 function sendRequest(){
     const request = {
@@ -50,7 +62,7 @@ function PostSurveys(request) {
         })
             .then((response) => {
                 if (response.ok) {
-                    alert('Datos almacenados correctamente');
+                    ShowAlert('Respustas almacenadas correctamente', 'success');
                 } else {
                     reject(new Error('Error al obtener encuestas'));
                 }
