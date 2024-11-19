@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Gastos Mensuales</title>
+    <link rel="stylesheet" href="gastos.css">
+</head>
+<body>
+
+    <div class="usuarios-container">
+        <h2>Usuarios</h2>
+        <button onclick="seleccionarUsuario('Carlos')">Carlos</button>
+        <button onclick="seleccionarUsuario('Ana')">Ana</button>
+        <button onclick="seleccionarUsuario('Luis')">Luis</button>
+        <button onclick="seleccionarUsuario('María')">María</button>
+        <button onclick="seleccionarUsuario('José')">José</button>
+        <button onclick="seleccionarUsuario('Laura')">Laura</button>
+        <button onclick="seleccionarUsuario('Pedro')">Pedro</button>
+        <button onclick="seleccionarUsuario('Carmen')">Carmen</button>
+        <button onclick="seleccionarUsuario('Javier')">Javier</button>
+        <button onclick="seleccionarUsuario('Isabel')">Isabel</button>
+    </div>
+
+    <div class="content-container">
+        <h1>Calculadora de Gastos Mensuales</h1>
+
+        <div class="container">
+            <h3>Seleccionado: <span id="usuarioSeleccionadoNombre">Carlos</span></h3>
+        </div>
+
+        <div class="container">
+            <button onclick="abrirModal()">Agregar Compra</button>
+        </div>
+
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="cerrarModal()">&times;</span>
+                <h3>Agregar Compra</h3>
+                <label for="mes">Mes:</label>
+                <select id="mes">
+                    <option value="Enero">Enero</option>
+                    <option value="Febrero">Febrero</option>
+                    <option value="Marzo">Marzo</option>
+                </select>
+                <br>
+                <label for="producto">Producto:</label>
+                <input type="text" id="producto" placeholder="Nombre del Producto">
+                <br>
+                <label for="precio">Precio:</label>
+                <input type="number" id="precio" placeholder="Precio del Producto" step="0.01">
+                <br><br>
+                <button onclick="agregarCompra()">Agregar Compra</button>
+            </div>
+        </div>
+
+        <div class="container">
+            <h3>Establecer Presupuesto</h3>
+            <label for="presupuesto">Presupuesto:</label>
+            <input type="number" id="presupuesto" placeholder="Establecer Presupuesto" step="0.01" onchange="actualizarPresupuesto()">
+        </div>
+
+        <div class="container boton-resultados">
+            <button onclick="mostrarResultados()">Mostrar Resultados Generales</button>
+        </div>
+
+        <div class="resultados" id="resultadosGenerales" style="display: none;">
+            <p id="totalGeneral"></p>
+            <p id="productoMasVendido"></p>
+        </div>
+
+        <div class="table-container" id="tablas"></div>
+    </div>
+    <script src="gastos.js"></script>
+</body>
+</html>
