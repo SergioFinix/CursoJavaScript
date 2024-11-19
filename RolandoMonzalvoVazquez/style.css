@@ -1,0 +1,77 @@
+/* styles.css */
+body {
+  font-family: Arial, sans-serif;
+}
+
+form {
+  margin-bottom: 20px;
+}
+
+button {
+  max-width: 200px;
+  background-color: #008d00;
+  color: #ffffff;
+  border-radius: 18px;
+  padding: 8px;
+}
+
+.resultados {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-around;
+  gap: 1rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-around;
+  gap: 1rem;
+}
+
+#formulario1,
+#formulario2,
+#formulario3 {
+  display: flex;
+  flex-direction: column;
+  max-width: 40%;
+  gap: 10px;
+  background-color: #dedede;
+  padding: 15px;
+  border-radius: 10px;
+  height: 450px;
+}
+
+canvas {
+  display: block;
+  box-sizing: border-box;
+  height: 200px !important;
+  width: 400px !important;
+}
+
+table {
+  background-color: #89b1fabf;
+
+}
+
+.listaUsuarios {
+  display: flex;
+  flex-direction: column;
+
+  background-color: #cbd7e2;
+  height: 550px;
+}
+
+.listaUsuarios>span {
+  border: solid 1px black;
+  cursor: pointer;
+  padding: 10px;
+}
+
+#usuarioSelected {
+  font-size: 1rem;
+  font-family: serif;
+  font-weight: bold;
+}

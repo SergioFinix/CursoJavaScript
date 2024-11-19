@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Formularios con Resultados</title>
+</head>
+
+<body>
+
+    <h1>Bienvenidos al sistemas de encuestas</h1>
+
+    <span>Seleccione un usuario para realizar la encuesta</span>
+    <span id="usuarioSelected"></span>
+
+    <div class="container">
+        <div class="listaUsuarios">
+            <h3>Listado de Usuario</h3>
+
+            <div class="listaUsuarios" id="listado">
+
+            </div>
+        </div>
+        <form id="formulario1" formulario="1">
+            <h1>Formulario 1: Información Personal</h1>
+            <label for="nombre">¿Cuál es tu nombre?</label>
+            <input type="text" id="nombre" name="nombre" required pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ ]+">
+
+            <label for="edad">¿Cuántos años tienes?</label>
+            <input type="number" id="edad" name="edad" required>
+
+            <label for="estudios">¿Cuál es tu nivel máximo de estudios?</label>
+            <select id="estudios" name="estudios" required>
+                <option value="1">1- Primaria</option>
+                <option value="2">2- Secundaria</option>
+                <option value="3">3- Bachillerato</option>
+                <option value="4">4- Licenciatura</option>
+                <option value="0">5- Ninguna de las anteriores</option>
+            </select>
+
+            <label for="deporte">¿Has practicado algún deporte?</label>
+            <select id="deporte" name="deporte" required>
+                <option value="1">1- Sí</option>
+                <option value="0">2- No</option>
+            </select>
+
+            <button type="submit">Enviar Respuestas</button>
+        </form>
+
+        <form id="formulario2"  formulario="2">
+            <h1>Formulario 2: Mascotas</h1>
+            <label for="mascotas">¿Te gustan las mascotas?</label>
+            <input type="text" id="mascotas" name="mascotas" required>
+
+            <label for="animal">¿Tienes alguna mascota?</label>
+            <select id="animal" name="animal">
+                <option value="1">1- Sí</option>
+                <option value="0">2- No</option>
+            </select>
+
+            <label for="mascotaselect">¿Qué mascota tienes?</label>
+            <select id="mascotaselect" name="mascotaselect" required>
+                <option value="1">1- Perro</option>
+                <option value="2">2- Gato</option>
+                <option value="3">3- Ave</option>
+                <option value="0">4- Otro</option>
+            </select>
+
+            <label for="exotica">¿Qué mascota exótica te gustaría tener?</label>
+            <input type="text" id="exotica" name="exotica" required>
+
+            <button type="submit">Enviar Respuestas</button>
+        </form>
+
+        <form id="formulario3" formulario="3">
+            <h1>Formulario 3: Trabajo</h1>
+            <label for="relacion">¿Cómo calificarías tu relación con tus compañeros de trabajo?</label>
+            <select id="relacion" name="relacion" required>
+                <option value="1">1- Muy malo</option>
+                <option value="2">2- Malo</option>
+                <option value="3">3- Regular</option>
+                <option value="4">4- Bueno</option>
+                <option value="5">5- Muy bueno</option>
+            </select>
+
+            <label for="jefe">¿Cómo es la relación con tu jefe(a) inmediato(a) / directora(o)?</label>
+            <select id="jefe" name="jefe" required>
+                <option value="1">1- Mala</option>
+                <option value="2">2- Regular</option>
+                <option value="3">3- Buena</option>
+            </select>
+
+            <label for="oficina">¿Cómo es el ambiente laboral en tu oficina?</label>
+            <select id="oficina" name="oficina" required>
+                <option value="1">1- Malo</option>
+                <option value="2">2- Regular</option>
+                <option value="3">3- Bueno</option>
+            </select>
+
+            <button type="submit">Enviar Respuestas</button>
+        </form>
+    </div>
+
+    <h2>Resultados</h2>
+    <div class="resultados" id="resultados">
+        <div id="resultados1"></div>
+        <div id="resultados2"></div>
+        <div id="resultados3"></div>
+    </div>
+
+    <div class="container" id="graficas">
+
+    </div>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script defer src="./formulariojs.js"></script>
+
+</body>
+
+</html>
