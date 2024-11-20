@@ -24,14 +24,30 @@ h1 {
 label, input {
     display: block;
     margin: 10px 0;
+    align-items: center;
 }
 
-input[type="text"] {
+select,[type="text"] {
     padding: 10px;
     width: 300px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
+}
+
+/* Estilo para el botón */
+button {
+    padding: 10px 20px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+button:hover {
+    background-color: #357ab8;
 }
 
 .half {
@@ -44,21 +60,6 @@ input[type="text"] {
     width: 95%;
     display: flex;
     height: 100vh;
-}
-
-/* Estilo para el botón */
-button {
-    padding: 10px 20px;
-    background-color: #4a90e2;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-button:hover {
-    background-color: #357ab8;
 }
 
 /* Estilo para el área de texto */
@@ -91,4 +92,12 @@ table, th, td, tr {
     border: 1px solid black;
     text-align: center;
     padding: 10px;
+}
+
+.no-visible {
+    display: none;
+}
+
+.edit-no-visible {
+    display: none;
 }

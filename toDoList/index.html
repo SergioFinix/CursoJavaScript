@@ -8,7 +8,42 @@
      <link rel="stylesheet" href="css/css.css">
 </head>
 <body>
-    <h1>TAREAS ASIGANADAS.</h1>
+    <h1>TO DO LIST.</h1>
+    <div class="no-visible">
+        <div class="">
+            <table id="asigtareas">
+                <thead>
+                    <tr>
+                        <th>USUARIO</th>
+                        <th>ESTADO</th>
+                        <th>TAREA</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <td>
+                        <select class="users" id="users">
+                        </select>
+                    </td>
+                    <td>
+                        <select id="Sestado">
+                            <option value="CREADA">CREADA</option>
+                            <option value="EN PROGRESO">EN PROGRESO</option>
+                            <option value="PAUSADA">PAUSADA</option>
+                            <option value="TERMINADA">TERMINADA</option>
+                        </select> 
+                    </td>
+                    <td>
+                        <input required minlength="2" maxlength="25" onKeyUp="cMayuscula(this);" type="text" id="ntarea">
+                    </td>
+                    <td>
+                        <button class="btn-tareas" type="submit" id="guardarTar">GUARDAR</button>
+                    </td>
+                </tbody>
+            </table>
+            <p id="mensaje"></p>
+        </div>
+    </div>
     <div class="container" >
         <div class="half">
             <table id="usuarios-table">
@@ -23,31 +58,55 @@
             </table>
         </div>
         <div class="half">
-            <table id="deberes-table">
-                <thead>
-                    <tr >
-                        <th colspan="3"> TAREAS</th>
-                    </tr>
-                    <tr>
-                        <th>TAREA</th>
-                        <th>ESTADO</th>
-                        <th>ACCIÓN</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-    
+            <div class="quitartarea">
+                <table id="deberes-table">
+                    <thead>
+                        <tr >
+                            <th colspan="2"> TAREAS</th>
+                            <th colspan="1"> <button class="btn-tareas" type="button" id="btntarea">NUEVA TAREA</button></th>
+                        </tr>
+                        <tr>
+                            <th>TAREA</th>
+                            <th>ESTADO</th>
+                            <th>ACCIÓN</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        <div class="edit-no-visible">
+                <table id="deberes-table">
+                    <thead>
+                        <tr >
+                            <th>EDITAR TAREA <button onclick="volver()">VOLVER</button></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <td>
+                            <center><label>TAREA</label>
+                            <input required minlength="2" maxlength="25" onKeyUp="cMayuscula(this);" type="text" id="edittarea"/>
+                            </center>
+                            <input id="idte" type="text" style="display: none"/><input id="idue" type="text" style="display: none"/>
+                            <br>
+                            <label >ESTADO</label>
+                            <select id="SestadoE">
+                                <option value="CREADA">CREADA</option>
+                                <option value="EN PROGRESO">EN PROGRESO</option>
+                                <option value="PAUSADA">PAUSADA</option>
+                                <option value="TERMINADA">TERMINADA</option>
+                            </select> <br>
+
+                            <button onclick="GuardarEdit()" type="submit" id="guardarTar">GUARDAR</button>
+                        </td>
+                    </tbody>
+                </table>
         </div>
+        
     </div>
-
-    
-    
-    
-
+    </div>
 
     <!-- js -->
     <script src="javascript/script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
