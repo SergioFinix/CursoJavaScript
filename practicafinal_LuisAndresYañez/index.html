@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario en HTML</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="row">
+        <button id="lightModeBtn" class="light-mode-btn">Modo Claro</button>
+        <button id="darkModeBtn" class="dark-mode-btn">Modo Oscuro</button>
+        <h1>Bienvenid@s a tus encuestas.com</h1>
+        
+        <div class="container">
+            <form id="generalesForm">
+                <div class="form-section">
+                    <h2>Validación de datos</h2>
+                    <div class="form-group">
+                        <label for="Nombre">Introduce tu nombre:</label>
+                        <input type="text" id="Nombre" name="Nombre" placeholder="Escribe tu nombre" maxlength="15" required>
+                        <span id="nombreError" class="error"></span>
+                        <p></p>
+
+                        <label for="apellidos">Introduce tus apellidos:</label>
+                        <input type="text" id="apellidos" name="apellidos" placeholder="Escribe tus apellidos" maxlength="25" required>
+                        <span id="apellidosError" class="error"></span>
+                    </div>
+                </div>
+
+                <div class="form-section encuestas-row">
+                    <div class="encuesta">
+                        <h2>Encuesta 1</h2>
+                        <div class="form-group">
+                            <label for="e1p1">¿Qué tan fan eres de Marvel?</label>
+                            <select name="e1p1" id="e1p1" required>
+                                <option value="" disabled selected>Selecciona tu respuesta</option>
+                            </select>
+                            <label for="e1p2">¿Qué tan fan eres de los cómics de Marvel?</label>
+                            <select name="e1p2" id="e1p2" required>
+                                <option value="" disabled selected>Selecciona tu respuesta</option>
+                            </select>
+                            <label for="e1p3">¿Qué tan fan eres de las películas de Marvel?</label>
+                            <select name="e1p3" id="e1p3" required>
+                                <option value="" disabled selected>Selecciona tu respuesta</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="encuesta">
+                        <h2>Encuesta 2</h2>
+                        <div class="form-group">
+                            <label for="e2p1">¿Qué tan fan eres de DC?</label>
+                            <select name="e2p1" id="e2p1" required>
+                                <option value="" disabled selected>Selecciona tu respuesta</option>
+                            </select>
+                            <label for="e2p2">¿Qué tan fan eres de los cómics de DC?</label>
+                            <select name="e2p2" id="e2p2" required>
+                                <option value="" disabled selected>Selecciona tu respuesta</option>
+                            </select>
+                            <label for="e2p3">¿Qué tan fan eres de las películas de DC?</label>
+                            <select name="e2p3" id="e2p3" required>
+                                <option value="" disabled selected>Selecciona tu respuesta</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="encuesta">
+                        <h2>Encuesta 3</h2>
+                        <div class="form-group">
+                            <label for="e3p1">¿Qué tan fan eres de The Boys?</label>
+                            <select name="e3p1" id="e3p1" required>
+                                <option value="" disabled selected>Selecciona tu respuesta</option>
+                            </select>
+                            <label for="e3p2">¿Qué tan fan eres de los cómics de The Boys?</label>
+                            <select name="e3p2" id="e3p2" required>
+                                <option value="" disabled selected>Selecciona tu respuesta</option>
+                            </select>
+                            <label for="e3p3">¿Qué tan fan eres de la serie de The Boys?</label>
+                            <select name="e3p3" id="e3p3" required>
+                                <option value="" disabled selected>Selecciona tu respuesta</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit">Validar y Enviar</button>
+            </form>
+        </div>
+            <P></P>
+            <BR></BR>
+
+
+            
+            <div class="container">
+            <div class="chart-container">
+                <div class="chart-box">
+                    <h2>Encuesta 1</h2>
+                    <canvas id="chartEncuesta1"></canvas>
+                </div>
+                <p></p>
+                <div class="chart-box">
+                    <h2>Encuesta 2</h2>
+                    <canvas id="chartEncuesta2"></canvas>
+                </div>
+            <p></p>
+                <div class="chart-box">
+                    <h2>Encuesta 3</h2>
+                    <canvas id="chartEncuesta3"></canvas>
+                </div>
+            </div>
+            </div>
+            <p></p>
+            <br>
+            <div class="container">
+                <h2>Resultados Individuales</h2>
+                <div id="resultados">
+                    
+                
+                <table id="apiTable">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Apellidos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table> 
+                <div id="encuestaTContainer">
+                   <canvas id="chartEncuestaT"></canvas>
+                </div>
+            </div>
+            </div>
+        </div>
+<p></p>
+<br> 
+</div>
+<p></p>
+<br>
+
+    <script src="javascript/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>
