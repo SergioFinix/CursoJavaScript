@@ -11,6 +11,9 @@
             #nombres ul li{
                 cursor:pointer;
             }
+            #estilos ul li{
+                cursor:pointer;
+            }
         </style>
     </head>
     <body>
@@ -19,52 +22,46 @@
                 <div class="col-12">
                     <h1 class="text-center">Proyecto Final Equipo 2</h1>
                 </div>
-                <div class="col-4 mt-5">
+                <div class="col-12 col-md-3 mt-5">
                     <div class="card" id="nombres">
                         <div class="card-header">
                             <h4 class="text-center">Personas</h4>
                         </div>
                         <ul class="list-group list-group-flush" id="ulNombres">
-                        </ul>  
-                        <div class="card-footer">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNuevo">
-                                Agregar persona
-                            </button>                              
-                        </div>                      
+                        </ul>                  
                     </div>
                 </div>
-                <div class="col-4 mt-5"><div class="card" id="nombres">
-                    <div class="card-header">
-                        <p class="text-center mt-3">
-                            <img width="80" src="icons/p1.png">
-                        </p>
-                        <p class="text-center">Marcos Javier Islas Sánchez</p>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-12">
-                                <p class="text-center">Guapo, poderoso, asombroso, muy hermoso, soy precioso, armonioso, un buen socio, misterioso, buena gente, etc</p>
-                            </div>
+                <div class="col-12 col-md-6 mt-5" id="tarjeta"></div>
+                <div class="col-12 col-md-3 mt-5">
+                    <div class="card" id="tipos">
+                        <div class="card-header">
+                            <h4 class="text-center">Tipos de tarjeta</h4>
                         </div>
-                    </div>                  
-                </div>
-                <div class="col-4 mt-5"></div>
-            </div>
-        </div>
-        <!-- Modal -->
-        <div class="modal fade" id="modalNuevo" tabindex="-1" aria-labelledby="modalNuevoLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="modalNuevoLabel">Agregar persona</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" onclick="tipoTarjeta(1)">Tipo 1</li>
+                            <li class="list-group-item" onclick="tipoTarjeta(2)">Tipo 2</li>
+                            <li class="list-group-item" onclick="tipoTarjeta(3)">Tipo 3</li>
+                        </ul>
                     </div>
-                    <div class="modal-body">
-                        En construcción
+                    <div class="card mt-3" id="estilos">
+                        <div class="card-header">
+                            <h4 class="text-center">Estilos de elementos</h4>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Nombre de la persona:<br><br><button class="btn btn-sm btn-outline-secondary" onclick="eTipoNombre('font-style: normal;')">Normal</button> <button class="btn btn-sm btn-outline-secondary" onclick="eTipoNombre('font-weight: bold;')">Negrita</button> <button class="btn btn-sm btn-outline-secondary" onclick="eTipoNombre('font-style: italic;')">Itálica</button></li>
+                            <li class="list-group-item">Encabezados:<br><br><button class="btn btn-sm btn-outline-secondary" onclick="eTipoTitulo('font-style: normal;')">Normal</button> <button class="btn btn-sm btn-outline-secondary" onclick="eTipoTitulo('font-weight: bold;')">Negrita</button> <button class="btn btn-sm btn-outline-secondary" onclick="eTipoTitulo('font-style: italic;')">Itálica</button></li>
+                            <li class="list-group-item">Textos:<br><br><button class="btn btn-sm btn-outline-secondary" onclick="eTipoTexto('font-style: normal;')">Normal</button> <button class="btn btn-sm btn-outline-secondary" onclick="eTipoTexto('font-weight: bold;')">Negrita</button> <button class="btn btn-sm btn-outline-secondary" onclick="eTipoTexto('font-style: italic;')">Itálica</button></li>
+                        </ul>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary" onclick="">Agregar</button>
+                    <div class="card mt-3" id="colores">
+                        <div class="card-header">
+                            <h4 class="text-center">Colores de elementos</h4>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Nombre de la persona:<br><br><button class="btn btn-sm" style="background-color: brown;">&nbsp;</button> <button class="btn btn-sm" style="background-color: blue;">&nbsp;</button> <button class="btn btn-sm" style="background-color: green;">&nbsp;</button> <button class="btn btn-sm" style="background-color: red;">&nbsp;</button> <button class="btn btn-sm" style="background-color: black;">&nbsp;</button></li>
+                            <li class="list-group-item">Encabezados:<br><br><button class="btn btn-sm" style="background-color: brown;">&nbsp;</button> <button class="btn btn-sm" style="background-color: blue;">&nbsp;</button> <button class="btn btn-sm" style="background-color: green;">&nbsp;</button> <button class="btn btn-sm" style="background-color: red;">&nbsp;</button> <button class="btn btn-sm" style="background-color: black;">&nbsp;</button></li>
+                            <li class="list-group-item">Textos:<br><br><button class="btn btn-sm" style="background-color: brown;">&nbsp;</button> <button class="btn btn-sm" style="background-color: blue;">&nbsp;</button> <button class="btn btn-sm" style="background-color: green;">&nbsp;</button> <button class="btn btn-sm" style="background-color: red;">&nbsp;</button> <button class="btn btn-sm" style="background-color: black;">&nbsp;</button></li>
+                        </ul>
                     </div>
                 </div>
             </div>
