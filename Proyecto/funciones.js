@@ -119,7 +119,6 @@ function cal3(){
     document.getElementById("mes1").innerHTML = tabla1
 
     console.log("mes numero 2")
-    console.log("tama: " + productoscom1p1[2][2])
     let calculo2 =45+20+35+40;
     let tabla2="";
     console.log("calculo "+calculo2)
@@ -176,52 +175,73 @@ let totalneto=0;
     function agregar(){
 
         let presupuesto = document.getElementById('presu').value;
-
-        //if(presupuesto>=totalneto){
-
-            let tama;
-
-        const tabla = document.getElementById("mes3").getElementsByTagName("tbody")[0];
-        
-        event.preventDefault();
+        let presu = totalneto;
 
         let nom = document.getElementById("produc").value;
         let nombre = nom.toUpperCase();
         let pre = document.getElementById("precio").value;
         let canti = document.getElementById("cantidad").value;
         let total = pre*canti;
-        tama=  `[${nombre},${pre},${canti},${total}]`;
-        totalneto+=total;
-        productoscom3p1.push(tama);
-        document.getElementById("toaln").innerHTML = totalneto;
 
-        console.log(nom);
-        console.log(nombre);
-        console.log(pre);
-        console.log(canti);
+        if((nom!="")&&(pre!="")&&(canti!="")){
+            if((presupuesto>=presu)){
+
+                let tama;
+
+            const tabla = document.getElementById("mes3").getElementsByTagName("tbody")[0];
             
-        let filanu = document.createElement("tr");
-        let productoing = document.createElement("td");
-        let precioing = document.createElement("td");
-        let cantidading = document.createElement("td");
-        let totaling = document.createElement("td");
+            event.preventDefault();
+            tama=  `[${nombre},${pre},${canti},${total}]`;
+            totalneto+=total;
+            productoscom3p1.push(tama);
+            document.getElementById("toaln").innerHTML = totalneto;
 
-        productoing.textContent = `${nombre}`;
-        precioing.textContent = `${pre}`;
-        cantidading.textContent = `${canti}`;
-        totaling.textContent = `${total}`;
+            console.log(nom);
+            console.log(nombre);
+            console.log(pre);
+            console.log(canti);
+                
+            let filanu = document.createElement("tr");
+            let productoing = document.createElement("td");
+            let precioing = document.createElement("td");
+            let cantidading = document.createElement("td");
+            let totaling = document.createElement("td");
 
-        filanu.appendChild(productoing);
-        filanu.appendChild(precioing);
-        filanu.appendChild(cantidading);
-        filanu.appendChild(totaling);
+            productoing.textContent = `${nombre}`;
+            precioing.textContent = `${pre}`;
+            cantidading.textContent = `${canti}`;
+            totaling.textContent = `${total}`;
 
-        tabla.appendChild(filanu);
-        console.log(productoscom3p1)
+            filanu.appendChild(productoing);
+            filanu.appendChild(precioing);
+            filanu.appendChild(cantidading);
+            filanu.appendChild(totaling);
 
-        //}
-        //else{
-        //    window.alert("El Total Es Mayor Al Presupuesto")
-        //}
+            tabla.appendChild(filanu);
+            console.log(productoscom3p1)
+            console.log("tama: " + productoscom3p1.length)
+
+
+            }
+            else{
+                window.alert("El Total Es Mayor Al Presupuesto")
+            }}
+
+            else{window.alert("Hay un dato vacio en los datos de los productos a ingresar")}
         
+    }
+
+    //funcion para imprimir el producto mas compreado
+    function procom(){
+        let procomprado = document.getElementById("masComprado")
+
+        let repite=0;
+        let tamanio=productoscom3p1.length;
+        
+        for(let x=0; x<tamanio; x++){
+
+            repite++;
+        }
+
+          
     }

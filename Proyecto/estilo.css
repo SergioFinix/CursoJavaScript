@@ -1,7 +1,8 @@
 body
 {
     display: flex;
-    border-right: 25%;
+    border-right: 20px;
+    border-left: 30px;
     text-align: center;
     padding: 3px;
     background-color: gainsboro;
