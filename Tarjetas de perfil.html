@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Tarjetas de Perfil con Fondo y Agregar Usuario</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin-top: 30px;
+        }
+
+        #userList {
+            width: 30%;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow-y: auto;
+        }
+
+        #userList h2 {
+            margin-bottom: 20px;
+        }
+
+        #userList ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #userList li {
+            padding: 10px;
+            background-color: #e0e0e0;
+            margin: 5px 0;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #userList li:hover {
+            background-color: #c0c0c0;
+        }
+
+        #profileCard {
+            width: 40%;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-size: cover; /* Fondo con tamaño adecuado */
+        }
+
+        #profileCard h2 {
+            margin-top: 0;
+        }
+
+        .profileData {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+
+        .profileData span {
+            font-weight: bold;
+        }
+
+        #profileCard input {
+            margin-top: 10px;
+            padding: 8px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 80%;
+            max-width: 300px;
+        }
+
+        #profileCard button {
+            margin-top: 15px;
+            padding: 8px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        #profileCard button:hover {
+            background-color: #45a049;
+        }
+
+        /* Estilo para las imágenes de fondo */
+        #backgroundOptions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        #backgroundOptions img {
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            border-radius: 5px;
+            border: 2px solid transparent;
+            transition: border-color 0.3s;
+        }
+
+        #backgroundOptions img:hover {
+            border-color: #4CAF50;
+        }
+
+        /* Estilo para el formulario de agregar usuario */
+        #addUserForm {
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        #addUserForm input {
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 12px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Lista de Usuarios -->
+        <div id="userList">
+            <h2>Usuarios</h2>
+            <ul id="userListUl">
+                <!-- Lista dinámica de usuarios -->
+            </ul>
+            <!-- Botón para agregar usuario -->
+            <button onclick="toggleAddUserForm()">Agregar Usuario</button>
+        </div>
+
+        <!-- Tarjeta de Perfil -->
+        <div id="profileCard">
+            <h2>Perfil</h2>
+            <div id="profileDetails">
+                <p class="profileData"><span>Nombre:</span> <span id="profileName">--</span></p>
+                <p class="profileData"><span>Teléfono:</span> <span id="profilePhone">--</span></p>
+                <p class="profileData"><span>Correo:</span> <span id="profileEmail">--</span></p>
+                <p class="profileData"><span>Username:</span> <span id="profileUsername">--</span></p>
+            </div>
+            <input type="text" id="editName" placeholder="Editar Nombre">
+            <input type="text" id="editPhone" placeholder="Editar Teléfono">
+            <input type="email" id="editEmail" placeholder="Editar Correo">
+            <input type="text" id="editUsername" placeholder="Editar Username">
+            <button onclick="updateProfile()">Actualizar Perfil</button>
+
+            <!-- Opciones para elegir fondo -->
+            <div id="backgroundOptions">
+                <img src="https://via.placeholder.com/100x100/ffcccb/000000?text=Fondo+1" alt="Fondo 1" onclick="changeBackground('https://via.placeholder.com/100x100/ffcccb/000000?text=Fondo+1')">
+                <img src="https://via.placeholder.com/100x100/ccccff/000000?text=Fondo+2" alt="Fondo 2" onclick="changeBackground('https://via.placeholder.com/100x100/ccccff/000000?text=Fondo+2')">
+                <img src="https://via.placeholder.com/100x100/ccffcc/000000?text=Fondo+3" alt="Fondo 3" onclick="changeBackground('https://via.placeholder.com/100x100/ccffcc/000000?text=Fondo+3')">
+                <img src="https://via.placeholder.com/100x100/ffeb3b/000000?text=Fondo+4" alt="Fondo 4" onclick="changeBackground('https://via.placeholder.com/100x100/ffeb3b/000000?text=Fondo+4')">
+            </div>
+        </div>
+    </div>
+
+    <!-- Formulario para agregar un nuevo usuario -->
+    <div id="addUserForm">
+        <input type="text" id="newName" placeholder="Nombre del Usuario">
+        <input type="text" id="newPhone" placeholder="Teléfono del Usuario">
+        <input type="email" id="newEmail" placeholder="Correo del Usuario">
+        <input type="text" id="newUsername" placeholder="Username del Usuario">
+        <button onclick="addUser()">Agregar Usuario</button>
+        <button onclick="toggleAddUserForm()">Cancelar</button>
+
+        <!-- Mensajes de error -->
+        <p id="errorMessages" class="error-message"></p>
+    </div>
+
+    <script>
+        // Datos de ejemplo
+        const users = [
+            { id: 1, name: 'Juan Pérez', phone: '123456789', email: 'juan@email.com', username: 'juanp' },
+            { id: 2, name: 'Ana Gómez', phone: '987654321', email: 'ana@email.com', username: 'anag' },
+            { id: 3, name: 'Carlos Díaz', phone: '555123456', email: 'carlos@email.com', username: 'carlosd' }
+        ];
+
+        // Cargar lista de usuarios
+        function loadUserList() {
+            const userListUl = document.getElementById('userListUl');
+            userListUl.innerHTML = ''; // Limpiar lista antes de cargarla
+            users.forEach(user => {
+                const li = document.createElement('li');
+                li.textContent = user.name;
+                li.onclick = () => loadProfile(user);
+                userListUl.appendChild(li);
+            });
+        }
+
+        // Cargar tarjeta de perfil
+        function loadProfile(user) {
+            document.getElementById('profileName').textContent = user.name;
+            document.getElementById('profilePhone').textContent = user.phone;
+            document.getElementById('profileEmail').textContent = user.email;
+            document.getElementById('profileUsername').textContent = user.username;
+            
+            // Llenar los campos de edición
+            document.getElementById('editName').value = user.name;
+            document.getElementById('editPhone').value = user.phone;
+            document.getElementById('editEmail').value = user.email;
+            document.getElementById('editUsername').value = user.username;
+        }
+
+        // Actualizar datos del perfil
+        function updateProfile() {
+            const updatedName = document.getElementById('editName').value;
+            const updatedPhone = document.getElementById('editPhone').value;
+            const updatedEmail = document.getElementById('editEmail').value;
+            const updatedUsername = document.getElementById('editUsername').value;
+
+            // Buscar el usuario actual
+            const currentUser = users.find(user => user.name === document.getElementById('profileName').textContent);
+
+            // Actualizar los datos del usuario
+            if (currentUser) {
+                currentUser.name = updatedName;
+                currentUser.phone = updatedPhone;
+                currentUser.email = updatedEmail;
+                currentUser.username = updatedUsername;
+                
+                // Recargar la lista de usuarios para reflejar el cambio
+                loadUserList();
+                loadProfile(currentUser);
+            }
+        }
+
+        // Cambiar el fondo de la tarjeta de perfil
+        function changeBackground(imageUrl) {
+            const profileCard = document.getElementById('profileCard');
+            profileCard.style.backgroundImage = `url(${imageUrl})`;
+        }
+
+        // Mostrar u ocultar el formulario para agregar un nuevo usuario
+        function toggleAddUserForm() {
+            const form = document.getElementById('addUserForm');
+            form.style.display = form.style.display === 'none' || form.style.display === '' ? 'flex' : 'none';
+            document.getElementById('errorMessages').textContent = ''; // Limpiar los mensajes de error
+        }
+
+        // Validar correo electrónico
+        function validateEmail(email) {
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            return emailPattern.test(email);
+        }
+
+        // Validar teléfono (debe ser de 10 dígitos)
+        function validatePhone(phone) {
+            const phonePattern = /^\d{10}$/;
+            return phonePattern.test(phone);
+        }
+
+        // Agregar un nuevo usuario
+        function addUser() {
+            const newName = document.getElementById('newName').value;
+            const newPhone = document.getElementById('newPhone').value;
+            const newEmail = document.getElementById('newEmail').value;
+            const newUsername = document.getElementById('newUsername').value;
+            const errorMessages = document.getElementById('errorMessages');
+            
+            // Validar el correo y teléfono
+            if (!validateEmail(newEmail)) {
+                errorMessages.textContent = 'El correo electrónico no tiene un formato válido.';
+                return;
+            }
+
+            if (!validatePhone(newPhone)) {
+                errorMessages.textContent = 'El teléfono debe tener 10 dígitos.';
+                return;
+            }
+
+            // Crear nuevo usuario y agregarlo a la lista
+            const newUser = {
+                id: users.length + 1,
+                name: newName,
+                phone: newPhone,
+                email: newEmail,
+                username: newUsername
+            };
+
+            users.push(newUser);
+            loadUserList();  // Recargar la lista de usuarios
+
+            // Limpiar los campos del formulario y ocultarlo
+            document.getElementById('newName').value = '';
+            document.getElementById('newPhone').value = '';
+            document.getElementById('newEmail').value = '';
+            document.getElementById('newUsername').value = '';
+            toggleAddUserForm();  // Ocultar el formulario
+        }
+
+        // Cargar la lista de usuarios cuando se carga la página
+        window.onload = loadUserList;
+    </script>
+
+</body>
+</html>
