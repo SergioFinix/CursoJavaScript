@@ -18,6 +18,7 @@ async function startGame() {
   resetHangman();
 }
 
+
 // Fetch a API de palabra random en ingles
 function getWord() {
   return new Promise(async (resolve) => {

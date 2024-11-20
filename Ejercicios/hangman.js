@@ -27,17 +27,6 @@ function getWord() {
   });
 }
 
-// async function getWord() {
-//   try {
-//     const response = await fetch('https://random-word-api.herokuapp.com/word');
-//     const data = response.json()
-//     console.log('data', data)
-//   } catch (error) {
-//     console.error('Error al traer la palabra');
-//     alert('Error al traer la palabra')
-//   }
-// }
-
 // Simula una llamada asincrónica para obtener la palabra a adivinar
 function fetchWord() {
   return new Promise((resolve) => {
