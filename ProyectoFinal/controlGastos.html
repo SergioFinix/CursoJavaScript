@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Gastos</title>
+    <style>
+        body {
+            background-color: #2c3e50;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1, h2 {
+            color: #15b144;
+        }
+
+        .input-container {
+            margin-bottom: 20px;
+        }
+
+        #Contenedor {
+            width: 800px;
+            background-color: rgb(214, 247, 236);
+            padding: 25px;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 15px #ecf0f1;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 160px;
+            border: 2px solid #3498db;
+            border-radius: 5px;
+            font-size: 14px;
+            color: darkgreen;
+            outline: none;
+        }
+
+        input[type="text"]:focus {
+            box-shadow: 0 0 15px #0a83a1;
+        }
+
+    select {
+        padding: 10px;
+        width: 184px;
+        font-size: 14px;
+        color: darkgreen;
+        border: 2px solid #3498db;
+        border-radius: 5px;
+        outline: none;
+    }
+
+    select:focus{
+        box-shadow: 0 0 15px #0a83a1;
+    }
+
+    label {
+        font-size: 12px;
+    }
+
+    button {
+        width: 184px;
+        padding: 10px 15px;
+        background-color: #3498db;
+        color: white;
+        font-size: 14px;;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #2980b9;
+    }
+
+    #tablaDatos {
+        width: 500px;
+        background-color: #d7e0e9;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+
+    </style>
+</head>
+<body>
+    <div id="Contenedor">
+            <h1>Proyecto: Control de Gastos</h1>
+            <hr />
+            <table style="margin: auto">
+                <tr>
+                    <td><label>Consumidor:</label></td>
+                    <td><label>E-mail:</label></td>
+                    <td><label>Teléfono:</label></td>
+                    <td><label>Presupuesto:</label></td>
+                </tr>
+                <tr>
+                    <td>
+                        <select id="catConsumidor" onchange="mostrarDatos(this);" tabindex="1">
+                            <option value="0">Seleccione</option>
+                        </select>
+                    </td>
+                    <td><div id="datosLista" class="user-list"></div><div id="errorMessage" class="error-message"></div><div id="lblemail"></div></td>
+                    <td><div id="lbltelefono"></div></td>
+                    <td><input type="text" id="txtPresupuesto" placeholder="Ingrese el monto en pesos" tabindex="2"></td>
+                </tr>
+                <tr>
+                    <td><label>Mes:</label></td>
+                    <td><label>Producto:</label></td>
+                    <td><label>Precio:</label></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>
+                        <select id="catMes" tabindex="3">
+                            <option value="0">Seleccione</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </td>
+                    <td><input type="text" id="txtProducto" placeholder="Ingrese el producto" tabindex="4"></td>
+                    <td><input type="text" id="txtPrecio" tabindex="5" placeholder="Ingrese el monto en pesos"></td>
+                    <td><button id="btnGuardar">Guardar registro</button></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><button id="btnEliminar">Eliminar registro</button></td>
+                </tr>
+            </table>
+            <table>
+                <thead>
+                    <tr><td colspan="4"><hr /></td></tr>
+                    <tr>
+                        <th>Consumidor</th>
+                        <th>Mes</th>
+                        <th>Producto</th>
+                        <th>Precio</th>
+                    </tr>
+                    <tr><td colspan="4"><hr /></td></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="4"><div id="DivtablaDatos">
+                            <table id="tablaDatos"></table>
+                        </div></td>
+                        <td colspan="4"><div id="DivtablaDatosGlobales">
+                            <table id="tablaDatosGlobales"></table>
+                        </div></td>
+                    </tr>
+                    <tr><td colspan="4"><hr /></td></tr>
+                </tbody>
+            </table>
+            <table>
+                <tr>
+                    <td>
+                       <button id="btnTotal" type="submit">Consultar Total</button>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>
+                        <button id="btnProductoMayor" type="submit">Producto mas comprado</button>
+                    </td>
+                </tr>
+                <tr><td colspan="3"><hr /></td></tr>
+            </table>
+            <script>
+                //Declaración del Arreglo
+                let TablaDatos=[];
+                //let DatosUsuario=[];
+
+                 // Acceso a los elementos del DOM
+                const consumidor=document.getElementById('catConsumidor');
+                const mes=document.getElementById('catMes');
+                const presupuesto = document.getElementById('txtPresupuesto');
+                const producto = document.getElementById('txtProducto');
+                const precio = document.getElementById('txtPrecio');
+                const botonGuardar = document.getElementById('btnGuardar');
+                const botonEliminar = document.getElementById('btnEliminar');
+                const TablaDeDatos = document.getElementById('tablaDatos');
+                const TablaDatosGlobales = document.getElementById('tablaDatosGlobales');
+
+                cargarUsuarios();
+
+                    async function cargarUsuarios() {
+                        try {
+                            const respuesta = await fetch('https://jsonplaceholder.typicode.com/users');
+                            const usuarios = await respuesta.json();
+                            const catalogo = document.querySelector("#catConsumidor");
+                            
+                            usuarios.forEach(usuario => {
+                                const opcion = document.createElement('option');
+                                opcion.innerHTML = `<option value="${usuario.id}">${usuario.name}</option>`;
+                                catalogo.appendChild(opcion);
+                            }); 
+                        } catch (error) {
+                            console.error('Error al cargar los usuarios:', error);
+                        }
+
+                        //DatosUsuario.push(`${usuario.email}`, `${usuario.phone}`);
+                      //  console.log(DatosUsuario);
+                    }
+
+                    // Simular la obtención de datos de usuarios con una Promise
+                    function fetchUsers() {
+                        return new Promise((resolve, reject) => {
+                            // Simulamos una operación asíncrona con setTimeout
+                            setTimeout(() => {
+                            const success = true; // Cambia a false para simular un error
+                            if (success) {
+                                resolve([
+                                { email: `${usuario.email}`, phone: `${usuario.phone}` }
+                                ]);
+                            } else {
+                                reject('Error al cargar los usuarios');
+                            }
+                            }, 2000); // Simulamos un retraso de 2 segundos
+                        });
+                    }
+
+                    // Función para mostrar los datos de email y telefono
+                    function mostrarDatos(usuario) {
+                            //datoEmail.innerHTML = ''; // Limpia el div antes de agregar el dato
+                            //datoTelefono.innerHTML = ''; // Limpia el div antes de agregar el dato
+                            const datoEmail = document.getElementById('lblemail').value;
+                            const datoTelefono = document.getElementById('lbltelefono').value;
+                            const opcionSeleccionada=document.getElementById('catConsumidor');
+
+                            opcionSeleccionada.addEventListener('change', (cargarDatosUsuario) => {
+                                datoEmail.textContent = `${userio.email}`;
+                                datoTelefono.textContent = `${userio.phone}`;
+                            });
+                    }
+
+                    // Función asíncrona para cargar los datos del usuarios
+                    async function cargarDatosUsuario() {
+                    // Limpia los mensajes anteriores
+                    document.getElementById('datosLista').innerHTML = 'Cargando datos...';
+                    document.getElementById('errorMessage').textContent = '';
+
+                    try {
+                        const usuario = await fetchUsers(); // Espera a que se resuelva la Promise
+                        mostrarDatos(usuario); // Muestra los datos si la Promise se resuelve
+                        //Limpia el formulario
+                        presupuesto='';
+                        mes.value = 1;
+                        producto.value = '';
+                        precio.value= '';
+                    } catch (error) {
+                        showError(error); // Muestra el error si la Promise es rechazada
+                    }
+                    }
+
+                    // Evento del botón para cargar usuarios
+                    document.getElementById('catConsumidor').addEventListener('change', cargarDatosUsuario);
+
+                    // Manejar evento de teclado en la ventana
+                   /* producto.addEventListener("keydown", function(evento) {
+                        const tecla = evento.key;
+                        const codigoTecla = evento.code;
+                        const regex = /^[a-z, A-Z]*$/;
+
+                        if (regex.test(tecla)) {
+                            producto.value += tecla; 
+                        } else {
+                            alert('Teclee sólo letras');
+                            producto.value = '';
+                        }
+                    }); */
+
+                    // Manejar evento de teclado en la ventana
+                   /* precio.addEventListener("keydown", function(evento) {
+                        const tecla = evento.key;
+                        const codigoTecla = evento.code;
+                        const regex = /^[0-9]*$/;
+
+                        if (regex.test(tecla)) {
+                            precio.value += tecla; 
+                        } else {
+                            alert('Teclee sólo números');
+                            precio.textContent = '';
+                        }
+                    });*/
+
+                    precio.addEventListener('blur', () => {
+                        const valorPrecio = parseInt(precio.value);
+                        const valorPresupuesto = parseInt(presupuesto.value);
+                        if(valorPrecio > valorPresupuesto)
+                        { alert('Precio fuera de presupuesto'); }
+                    });
+
+                    // Agregar un registro al arreglo
+                    botonGuardar.addEventListener('click', () => {
+                        let valorConsumidor = consumidor.value;
+                        let valorPresupuesto = presupuesto.value;
+                        let valorMes = mes.value;
+                        const valorProducto = producto.value.trim();
+                        const valorPrecio =  parseInt(precio.value.trim()) ;
+                        let datos = {
+                            valorConsumidor:valorConsumidor,
+                            valorPresupuesto:valorPresupuesto,
+                            valorMes:valorMes,
+                            valorProducto:valorProducto,
+                            valorPrecio:valorPrecio
+                        };
+                            TablaDatos.push(datos); // Agregar al final
+                            mostrarRegistros();
+                            sumaCantidades();
+                        
+                        // Limpiar los campos de entrada
+                        producto.value = '';
+                        precio.value= '';
+                    });
+
+                    // Función para mostrar los registros
+                    function mostrarRegistros() {
+                        // Limpiar la Tabla antes de actualizar
+                        TablaDeDatos.innerHTML = '';
+                        
+                        // Recorrer el arreglo y agregar cada registro al DOM
+                        TablaDatos.forEach((registro, index) => {
+                            const fila = document.createElement('tr');
+                            fila.innerHTML = `<td>${registro.valorConsumidor}</td><td>${registro.valorMes}</td><td>${registro.valorProducto}</td><td>${registro.valorPrecio}</td>`;
+                            TablaDeDatos.appendChild(fila);
+                        });
+                    }
+
+                    // Función para sumar las cantidades acorde al comprador
+                   function sumaCantidades() {
+                        // Limpiar la Tabla antes de actualizar
+                        TablaDatosGlobales.innerHTML = '';
+                        
+                        let Total=0;
+                        // Recorrer el arreglo y sumar el indice 4 de cada registro
+                        const fila = document.createElement('tr');
+
+                        TablaDatos.forEach((registro, index) => {
+                            
+                            Total += registro.valorPrecio; 
+                            
+                        });
+                            fila.innerHTML = `<td>` + Total + `</td>`;
+                            TablaDatosGlobales.appendChild(fila);
+
+                            console.log(Total);
+                        
+                    } 
+
+                    // Eliminar el ultimo registro ingresado
+                    botonEliminar.addEventListener('click', () => {
+                        TablaDatos.pop(); // Eliminar del final
+                        mostrarRegistros();
+                        sumaCantidades();
+                        
+                    });
+
+                   
+            </script>
+    </div>
+</body>
+</html>
