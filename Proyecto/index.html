@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List con Bootstrap</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <!-- Sección de Usuarios -->
+        <div id="user-section" class="mb-5">
+            <h2 class="text-center mb-4">Usuarios</h2>
+            <table class="table table-hover table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                    </tr>
+                </thead>
+                <tbody id="user-list"></tbody>
+            </table>
+        </div>
+
+        <!-- Sección de Tareas -->
+        <div id="task-section" class="d-none">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 id="user-name"></h2>
+                <button id="back-button" class="btn btn-secondary">Volver</button>
+            </div>
+            <table class="table table-hover table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Tarea</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="task-list"></tbody>
+            </table>
+            <button id="add-task" class="btn btn-primary">Agregar Tarea</button>
+        </div>
+    </div>
+
+    <!-- Modal para Agregar Tarea -->
+    <div id="task-modal" class="modal fade" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Agregar Tarea</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="task-form">
+                        <div class="mb-3">
+                            <label for="task-name" class="form-label">Nombre de la tarea:</label>
+                            <input type="text" id="task-name" class="form-control" maxlength="25" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="task-status" class="form-label">Estado:</label>
+                            <select id="task-status" class="form-select">
+                                <option value="Creada">Creada</option>
+                                <option value="En progreso">En progreso</option>
+                                <option value="Terminada">Terminada</option>
+                                <option value="Pausada">Pausada</option>
+                            </select>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-success me-2">Guardar</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
