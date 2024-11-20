@@ -11,7 +11,7 @@
         }
         table {
             width: fit-content;
-            border-radius: collapse;
+            border-collapse: collapse;
             margin-top: 10px;
         }
         table, th, td {
@@ -35,9 +35,18 @@
         .container {
             display: flex;
         }
-        .centrar {
-            padding-bottom: 10px;
+        .containerGraph {
             text-align: center;
+            border-color: black;
+            width: 250px;
+            margin-top: 15px;
+        }
+        .centrar {
+            text-align: center;
+        }
+        .formGraph {
+            flex-direction: row;
+            margin-left: 5px;
         }
         .form-container {
             display: flex;
@@ -50,12 +59,16 @@
         button {
             cursor: pointer;
         }
+        .input-error {
+            border: 2px solid red;
+            background-color: #ffe6e6;
+        }
     </style>
 </head>
 <body>
     <div class="centrar">
         <h1>Usuarios para aplicar encuesta</h1>
-        <input type="text" id="nombreUsuario" placeholder="Selecciona un usuario" readonly>
+        <input type="text" id="nombreUsuario" placeholder="Selecciona un usuario">
     </div>
     <div class="container">
         <!--<input type="text" id="nombreUsuario" placeholder="Selecciona un usuario" readonly> -->
@@ -195,17 +208,42 @@
             </form>
         </div>
     </div>
+
     <div class="centrar">
+        <h2>Guardar las repuestas del Usuario</h2>
         <button type="button" onclick="enviarRespuestas()">Enviar Encuestas</button>
-        
     </div>
+
     <div class="centrar">
-        <label>Selecciona un usuario para mostrar la estadística</label>
-        <select id="useR">
-            <option value="">Selecciona uno</option>
+        <h2>Generar Gráfica por Usuario</h2>
+        <select id="usuarioSelector">
+            <option value="">Seleccione un usuario</option>
         </select>
+        <button onclick="generarGraficas()">Generar Gráficas</button>
     </div>
-    
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <div class="container">
+        <form class="formGraph">
+            <div class="containerGraph">
+                <label>Gráfica de Encuesta 1</label>
+                <canvas id="graficaEncuesta1"></canvas>
+            </div>
+        </form>
+        <form class="formGraph">
+            <div class="containerGraph">
+                <label>Gráfica de Encuesta 2</label>
+                <canvas id="graficaEncuesta2"></canvas>
+            </div>
+        </form>
+        <form class="formGraph"></form>
+            <div class="containerGraph">
+                <label>Gráfica de Encuesta 3</label>
+                <canvas id="graficaEncuesta3"></canvas>
+            </div>
+        </form>
+    </div>
+
 
     <script>
         // Definiciónn de la matriz para almacenar respuestas de usuarios
@@ -243,6 +281,25 @@
                 tablaCuerpo.appendChild(fila);
             });
         }
+        
+        // Valida que el numero ingresado sea entre 1 y 5
+        function validarNumero(input) {
+            const regex = /^[1-5]$/;
+            if (!regex.test(input.value)) {
+                // Mostrar mensaje de error o resaltar el campo
+                input.classList.add("input-error");
+                alert(`El valor ingresado "${input.value}" no es válido. Ingresa un número entre 1 y 5.`);
+                return;
+                input.focus(); // Devuelve el foco al input si no es válido
+            } else {
+                input.classList.remove("input-error"); // Limpia el error si es válido
+            }
+        }
+        // Asigna el evento "blur" a los inputs de tipo "number"
+         document.querySelectorAll('input[type="number"]').forEach(input => {
+            input.addEventListener('blur', () => validarNumero(input));
+        });
+
         // Función para validar las respuestas en las encuestas
         function validarEncuestas(encuestaId) {
             const form = document.getElementById(encuestaId);
@@ -257,8 +314,8 @@
             return true;
 
         }
-        
-        // Función para validar y guardar respuestas en la matriz
+
+        // Función para enviar validar y guardar respuestas en la matriz
         function enviarRespuestas() {
             const nombreUsuario = document.getElementById('nombreUsuario').value;        
 
@@ -281,8 +338,8 @@
                     serviceRating: document.getElementById('serviceRating').value,
                     recommend: document.getElementById('recommend').value,
                     color: document.getElementById('color').value,
-                    satisfaction: document.getElementById('satisfaction'),
-                    frequency: document.getElementById('frequency')
+                    satisfaction: document.getElementById('satisfaction').value,
+                    frequency: document.getElementById('frequency').value
                 },
                 encuesta2: {
                     serviceRating2: document.getElementById('serviceRating2').value,
@@ -305,25 +362,92 @@
             matrizRespuestas.push(respuestas);
             console.log(matrizRespuestas);
 
-            // Limpiar las encuestas y el input con nombre de usuario
+            // Limpiar las encuestas
             document.querySelectorAll('form').forEach(form=>form.reset());
-            
-            // Mostrar agradecimiento
+
+            // Mostrar agradecimiento y estadísticas
             alert("Gracias por completar las encuestas.");
+
+            // Agregar nombres al selector
+            const usuarioSelector = document.getElementById('usuarioSelector');
+            const option = document.createElement('option');
+            option.value = nombreUsuario;
+            option.textContent = nombreUsuario;
+            usuarioSelector.appendChild(option);
+            document.getElementById('nombreUsuario').value = "";
         }
-        // Actualizar el selector con los nombres de usuarios que realizaron encuestas
-        function actualizarSelector() {
-            const useR = document.getElementById('useR');
-            matrizRespuestas.forEach((nombreUsuario, index) => {
-                const option = document.createElement('option');
-                option.value=index;
-                option.textContent = nombreUsuario;
-                useR.appendChild('option');
+
+        function generarGraficas() {
+            const usuarioSeleccionado = document.getElementById('usuarioSelector').value;
+
+            if (!usuarioSeleccionado) {
+                alert("Por favor, seleccione un usuario para generar las gráficas.");
+                return;
             }
-            )};
+
+            // Buscar las respuestas del usuario en la matrizRespuestas
+            const respuestasUsuario = matrizRespuestas.find(
+                respuesta => respuesta.nombreUsuario === usuarioSeleccionado
+            );
+
+            if (!respuestasUsuario) {
+                alert("No hay datos de encuestas para el usuario seleccionado.");
+                return;
+            }
+
+            // Configurar los datos para las gráficas
+            const datosEncuesta1 = [
+                respuestasUsuario.encuesta1.serviceRating,
+                respuestasUsuario.encuesta1.satisfaction
+            ];
+            const datosEncuesta2 = [
+                respuestasUsuario.encuesta2.serviceRating2,
+                respuestasUsuario.encuesta2.satisfaction2
+            ];
+            const datosEncuesta3 = [
+                respuestasUsuario.encuesta3.serviceRating3,
+                respuestasUsuario.encuesta3.satisfaction3
+            ];
+
+            // Crear gráfica para Encuesta 1
+            new Chart(document.getElementById('graficaEncuesta1').getContext('2d'), {
+                type: 'pie',
+                data: {
+                    labels: ['Calificación de Servicio', 'Satisfacción'],
+                    datasets: [{
+                        data: datosEncuesta1,
+                        backgroundColor: ['#FF6384', '#36A2EB']
+                    }]
+                },
+                options: { responsive: true }
+            });
+
+            // Crear gráfica para Encuesta 2
+            new Chart(document.getElementById('graficaEncuesta2').getContext('2d'), {
+                type: 'pie',
+                data: {
+                    labels: ['Satisfacción Atención', 'Calidad-precio'],
+                    datasets: [{
+                        data: datosEncuesta2,
+                        backgroundColor: ['#FFCE56', '#4BC0C0']
+                    }]
+                },
+                options: { responsive: true }
+            });
+
+            // Crear gráfica para Encuesta 3
+            new Chart(document.getElementById('graficaEncuesta3').getContext('2d'), {
+                type: 'pie',
+                data: {
+                    labels: ['Satisfacción Calidad', 'Satisfacción General'],
+                    datasets: [{
+                        data: datosEncuesta3,
+                        backgroundColor: ['#9966FF', '#FF9F40']
+                    }]
+                },
+                options: { responsive: true }
+            });
         }
-
-
         // Llamar a la función para cargar usuarios al iniciar la página
         obtenerUsuarios();
     </script>
