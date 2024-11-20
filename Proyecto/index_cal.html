@@ -13,8 +13,8 @@
     <div class="conteiner">
         <h1> Gastos Mensuales</h1>
         <label for="presupuesto">Presupuesto:</label>
-        <input type="text" id="presu">
-        <button id="ingreso">IIngresar</button>
+        <input type="text" id="presu" placeholder="000.00">
+        <button onclick="presupuesto()" >Ingresar</button>
 
     <table id="estruc">
         <td>
@@ -30,7 +30,8 @@
                     </thead>
                     <tbody id="nom">
                     </tbody>
-                </table>
+                </table>    <br>
+                <button onclick="sal()">Salir</button>
             </div>
         </td>
 
@@ -88,7 +89,7 @@
                             <td>Total Neto</td>
                             <td>----</td>
                             <td>----</td>
-                            <td id="toaln"></td>
+                            <td><p id="toaln"></p></td>
                         </tr>
                     </tbody>
                 </table>
@@ -101,11 +102,11 @@
         <td>
             <form>
                 <p>Nombre del Producto: </p>
-                <input type="text" id="produc"> <br>
+                <input type="text" id="produc" placeholder="PRODUCTO"> <br>
                 <p>Precio: </p>
-                <input type="number" value="0.00" id="precio"> <br>
+                <input type="number" placeholder="0.00" id="precio"> <br>
                 <p>Cantidad: </p>
-                <input type="number" value="0" id="cantidad"> <br>
+                <input type="number" placeholder="0" id="cantidad"> <br>
                 <button onclick="agregar()" type="submit">Agregar</button>
             </form>
         </td>
