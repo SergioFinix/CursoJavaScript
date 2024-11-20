@@ -1,0 +1,59 @@
+/* Estilo base para todas las tarjetas */
+.profile-card {
+  width: 300px;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.profile-card:hover {
+  transform: scale(1.05);
+}
+
+/* Diseño 1: Minimalista */
+.design1 {
+  background-color: #f9f9f9;
+  color: #333;
+  border: 2px solid #ccc;
+}
+
+.design1 h2 {
+  /* font-family: Arial, sans-serif; */
+  /* font-size: 24px; */
+  margin-bottom: 10px;
+}
+
+.design1 p {
+  /* font-size: 14px; */
+  line-height: 1.5;
+}
+
+/* Diseño 2: Vibrante */
+.design2 {
+  background: linear-gradient(45deg, #ff6f61, #ffcc33);
+  color: #fff;
+  border: none;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.design2 h2 {
+  /* font-family: "Courier New", monospace; */
+  /* font-size: 26px; */
+  margin-bottom: 15px;
+}
+
+.design2 p {
+  /* font-size: 16px; */
+  line-height: 1.6;
+}
+
+.design2 a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.design2 a:hover {
+  color: #ffcc33;
+}

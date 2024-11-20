@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Perfiles</title>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <!-- Lista de usuarios -->
+      <div class="col-md-3">
+        <h4>Lista de Usuarios</h4>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+            </tr>
+          </thead>
+          <tbody class="user-list"></tbody>
+        </table>
+      </div>
+
+      <!-- Contenedor de tarjetas de perfil -->
+      <div class="col-md-6">
+        <h4>Tarjeta de Perfil</h4>
+        <div id="card-container"></div>
+      </div>
+
+      <!-- Panel de personalización -->
+      <div class="col-md-3">
+        <h4>Personalización</h4>
+        <form id="customization-panel">
+          <label for="fontSize">Tamaño de fuente:</label>
+          <!-- Validación del formulario -->
+          <input type="number" id="fontSize" class="form-control mb-2" min="10" max="30" value="16" required>
+          
+          <label for="fontFamily">Tipo de fuente:</label>
+          <select id="fontFamily" class="form-control mb-2" required>
+            <option value="">Selecciona...</option>
+            <option value="Arial">Arial</option>
+            <option value="Times New Roman">Times New Roman</option>
+          </select>
+          
+          <label for="designSelect">Diseño de tarjeta:</label>
+          <select id="designSelect" class="form-control mb-2">
+            <option value="">Selecciona...</option>
+            <option value="design1">Diseño 1</option>
+            <option value="design2">Diseño 2</option>
+          </select>
+          
+          <button type="button" id="applyButton" class="btn btn-primary mt-2">Aplicar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Archivos JavaScript -->
+  <script>console.log("Archivo index.html cargado");</script>
+  <script type="module" src="/js/api.js"></script>
+  <script type="module" src="/js/ui.js"></script>
+  <script type="module" src="/js/main.js"></script>
+</body>
+</html>
