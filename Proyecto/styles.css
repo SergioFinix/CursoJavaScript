@@ -10,7 +10,7 @@ body {
   text-align: center;
 }
 
-.containerRow {
+.contenedorFila {
   display: flex;
   width: 100%;
   height: max-content;
@@ -20,7 +20,7 @@ body {
   padding: 20px;
 }
 
-.containerColumn {
+.contenedorColumna {
   display: flex;
   width: 400px;
   height: 100%;
@@ -32,11 +32,11 @@ body {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   transition: transform 0.3s ease;
 }
-.containerColumn:hover {
+.contenedorColumna:hover {
   transform: scale(1.02); /* Pequeña animación al pasar el mouse */
 }
 
-.containerColumn2 {
+.contenedorColumna2 {
   display: flex;
   width: 400px;
   height: 100%;
@@ -46,7 +46,7 @@ body {
   background-color: #ffffff;
 }
 
-.instructions {
+.instrucciones {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -56,7 +56,7 @@ body {
   margin: 15px;
 }
 
-.input {
+.entrada {
   margin: 20px;
   padding: 10px;
   border: 1px solid #4a90e2; /* Azul vibrante */
@@ -64,7 +64,7 @@ body {
   width: 200px;
 }
 
-.button1 {
+.boton1 {
   width: 120px;
   padding: 12px 20px;
   background-color: #4caf50; /* Verde vibrante */
@@ -74,11 +74,11 @@ body {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-.button1:hover {
+.boton1:hover {
   background-color: #43a047; /* Verde más oscuro al pasar el mouse */
 }
 
-.button2 {
+.boton2 {
   width: 120px;
   padding: 12px 20px;
   background-color: #e3f2fd; /* Azul claro */
@@ -91,7 +91,7 @@ body {
   justify-content: center;
 }
 
-.words {
+.palabras {
   margin-top: 40px;
   letter-spacing: 8px;
   font-size: 1em;
@@ -99,7 +99,7 @@ body {
   color: #333;
 }
 
-.message {
+.mensaje {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -112,33 +112,25 @@ body {
   border-radius: 10px;
 }
 
-.icon {
+.icono {
   font-size: 2em;
   color: #4a90e2; /* Azul vibrante */
 }
 
-.attempts {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-  margin: 20px;
-}
-
-#hangmanContainer {
+#contenedorAhorcado {
   width: 200px;
   margin: 20px auto;
   position: relative;
 }
 
 /* Palo */
-#gallows {
+#estructura {
   position: relative;
   width: 200px;
   height: 300px;
 }
 
-.post {
+.poste {
   position: absolute;
   bottom: 0;
   left: 20px;
@@ -147,7 +139,7 @@ body {
   background-color: #333; /* Negro */
 }
 
-.beam {
+.viga {
   position: absolute;
   top: 0;
   left: 20px;
@@ -156,7 +148,7 @@ body {
   background-color: #333;
 }
 
-.rope {
+.cuerda {
   position: absolute;
   top: 10px;
   left: 130px;
@@ -166,12 +158,12 @@ body {
 }
 
 /* Partes del cuerpo */
-.part {
+.parte {
   display: none;
   position: absolute;
 }
 
-.head {
+.cabeza {
   top: 50px;
   left: 115px;
   width: 30px;
@@ -180,7 +172,7 @@ body {
   border-radius: 50%;
 }
 
-.body {
+.cuerpo {
   top: 80px;
   left: 127px;
   width: 5px;
@@ -188,58 +180,58 @@ body {
   background-color: #ff5722;
 }
 
-.left-arm,
-.right-arm {
+.brazo-izquierdo,
+.brazo-derecho {
   top: 100px;
   width: 40px;
   height: 5px;
   background-color: #ff5722;
 }
 
-.left-arm {
+.brazo-izquierdo {
   left: 94px;
   transform: rotate(135deg);
 }
 
-.right-arm {
+.brazo-derecho {
   left: 125px;
   transform: rotate(45deg);
 }
 
-.left-leg,
-.right-leg {
+.pierna-izquierda,
+.pierna-derecha {
   top: 150px;
   width: 40px;
   height: 5px;
   background-color: #ff5722;
 }
 
-.left-leg {
+.pierna-izquierda {
   left: 125px;
   transform: rotate(45deg);
 }
 
-.right-leg {
+.pierna-derecha {
   left: 94px;
   transform: rotate(-45deg);
 }
 
 /* Mostrar cuerpo */
-.show-head .head {
+.mostrar-cabeza .cabeza {
   display: block;
 }
-.show-body .body {
+.mostrar-cuerpo .cuerpo {
   display: block;
 }
-.show-left-arm .left-arm {
+.mostrar-brazo-izquierdo .brazo-izquierdo {
   display: block;
 }
-.show-right-arm .right-arm {
+.mostrar-brazo-derecho .brazo-derecho {
   display: block;
 }
-.show-left-leg .left-leg {
+.mostrar-pierna-izquierda .pierna-izquierda {
   display: block;
 }
-.show-right-leg .right-leg {
+.mostrar-pierna-derecha .pierna-derecha {
   display: block;
 }

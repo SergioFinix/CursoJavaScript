@@ -18,59 +18,59 @@
   </head>
   <body>
     <h1>Juego del Ahorcado</h1>
-    <div class="instructions">
+    <div class="instrucciones">
       <p>
         Adivina la palabra oculta antes de que se te acaben los intentos.
         <br />
         Ingresa una letra y presiona el botón "Adivinar".
       </p>
     </div>
-    <div class="containerRow">
-      <div class="containerColumn">
-        <div class="message">
+    <div class="contenedorFila">
+      <div class="contenedorColumna">
+        <div class="mensaje">
           Intentos restantes:
-          <span id="attemptsLeft"> 6</span>
+          <span id="intentosRestantes">6</span>
         </div>
-        <div id="hangmanContainer">
-          <div id="gallows">
-            <div class="post"></div>
-            <div class="beam"></div>
-            <div class="rope"></div>
-            <div class="part head"></div>
-            <div class="part body"></div>
-            <div class="part left-arm"></div>
-            <div class="part right-arm"></div>
-            <div class="part left-leg"></div>
-            <div class="part right-leg"></div>
+        <div id="contenedorAhorcado">
+          <div id="estructura">
+            <div class="poste"></div>
+            <div class="viga"></div>
+            <div class="cuerda"></div>
+            <div class="parte cabeza"></div>
+            <div class="parte cuerpo"></div>
+            <div class="parte brazo-izquierdo"></div>
+            <div class="parte brazo-derecho"></div>
+            <div class="parte pierna-izquierda"></div>
+            <div class="parte pierna-derecha"></div>
           </div>
         </div>
       </div>
-      <div class="containerColumn">
-        <div id="message" class="message"></div>
-        <div class="containerColumn2">
-          <div id="wordDisplay" class="words">_ _ _ _</div>
+      <div class="contenedorColumna">
+        <div id="mensaje" class="mensaje"></div>
+        <div class="contenedorColumna2">
+          <div id="mostrarPalabra" class="palabras">_ _ _ _</div>
           <input
             type="text"
-            id="guessInput"
+            id="entradaLetra"
             maxlength="1"
-            class="input"
+            class="entrada"
             placeholder="Ingresa una letra"
-            oninput="validateLetterInput(event)"
+            oninput="validarEntradaLetra(event)"
           />
-          <div class="containerRow">
-            <button onclick="startGame()" class="button2">
+          <div class="contenedorFila">
+            <button onclick="iniciarJuego()" class="boton2">
               <img
                 src="https://api.iconify.design/mdi:restart.svg"
                 alt="Reiniciar"
-                class="icon"
+                class="icono"
               />
               Reiniciar
             </button>
-            <button onclick="guessLetter()" class="button1">Adivinar</button>
+            <button onclick="adivinarLetra()" class="boton1">Adivinar</button>
           </div>
         </div>
       </div>
     </div>
-    <script src="hangman.js"></script>
+    <script src="ahorcado.js"></script>
   </body>
 </html>
