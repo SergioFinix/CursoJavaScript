@@ -1,0 +1,111 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1,
+h2 {
+    color: #2c3e50;
+}
+
+.input-container {
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    width: 200px;
+    border: 2px solid #3498db;
+    border-radius: 5px;
+    outline: none;
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #0b5033;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #29b995;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    background-color: #ecf0f1;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+}
+
+
+.styled-table thead tr {
+    background-color: #006356;
+    color: #ffffff;
+    text-align: left;
+}
+
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+}
+
+/* Estilo de las filas */
+.styled-table tbody tr {
+    background-color: #f3f3f3;
+}
+
+
+#usarios_tabla tr:hover{
+    cursor: pointer;
+    background-color: #ddd;
+}
+#tareas_tabla td{
+    text-align: center;
+}
+
+.agregar_container{
+    display: flex;
+    justify-content: space-between;
+    border: #006356 2px solid;
+    border-radius: 5px;
+    width: 100%;
+    margin: 5px 0;
+    padding: 10px;
+
+}
+
+
+select{
+    width: 150px;
+}
+main span{
+    display: block;
+    font-size: 20px;
+    width: 100%;
+    text-align: center;
+}
+.ocultar{
+    display: none
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css">
+    <title>TO DO - LIST</title>
+</head>
+
+<body>
+    <section class="agregar_container ocultar">
+        <h1 id="titulo_form">Nueva Tarea</h1>
+        <select name="" id="usuario_select">
+        </select>
+        <select name="" id="estado_select">
+            <option value="creada">Creada</option>
+            <option value="progreso">En progreso</option>
+            <option value="terminada">Terminada</option>
+            <option value="pausada">Pausado</option>
+        </select>
+        <div>
+            <input type="text" id="nombre_input" placeholder="Titulo" autocomplete="off" autocapitalize="sentences" maxlength="25">
+            <button onclick="guardarActividad()">Guardar</button>
+        </div>
+
+    </section>
+
+    <main>
+        <div style="display: flex;">
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Usuario</th>
+                    </tr>
+                </thead>
+                <tbody id="usarios_tabla">
+
+                </tbody>
+            </table>
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Tareas</th>
+                        <th></th>
+                        <th><button onclick="mostrarBotonAgregar()">Agregar</button></th>
+                    </tr>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Estado</th>
+                        <th>Opciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tareas_tabla">
+
+                </tbody>
+            </table>
+        </div>
+        <span id="seguimiento_movimiento"></span>
+    </main>
+
+    <script src="./main.js"></script>
+</body>
+
+</html>
