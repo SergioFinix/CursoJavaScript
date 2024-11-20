@@ -1,16 +1,9 @@
 var numnombre = null;
 var person = {};
 var estilos = {};
-var colorNombre = "black";
-var colorTitulo = "black";
-var colorTexto = "black";
-var tipoNombre = "font-style: normal;";
-var tipoTitulo = "font-style: normal;";
-var tipoTexto = "font-style: normal;";
 
 async function cargarJSON() {
     try {
-        // Fetch the JSON file
         const response = await fetch('http://jsonplaceholder.typicode.com/users');
         if (!response.ok) {
             throw new Error('Respuesta de Red no valida');
@@ -22,12 +15,12 @@ async function cargarJSON() {
             let newEstilo = {
                 "id": item.id,
                 "numTemplate": 1,
-                "tipoNombre": tipoNombre,
-                "tipoTitulo": tipoTitulo,
-                "tipoTexto": tipoTexto,
-                "colorNombre": colorNombre,
-                "colorTitulo": colorTitulo,
-                "colorTexto": colorTexto,
+                "tipoNombre": "font-style: normal;",
+                "tipoTitulo": "font-style: normal;",
+                "tipoTexto": "font-style: normal;",
+                "colorNombre": "black",
+                "colorTitulo": "black",
+                "colorTexto": "black",
             };
             estilos[item.id] = newEstilo;
             const elemento = document.createElement('li');
@@ -52,10 +45,9 @@ async function cargarJSON() {
 window.onload = cargarJSON;
 document.addEventListener('click', function(event) {
     if (event.target.classList.contains('list-group-item')) {
-        // Loop through the data attributes and add them to the object
         Array.from(event.target.attributes).forEach(attr => {
             if (attr.name.startsWith('data-')) {
-                const key = attr.name.slice(5); // Remove 'data-' prefix
+                const key = attr.name.slice(5);
                 person[key] = attr.value;
             }
             if(attr.name == "data-id"){
