@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promesa: Llamada a API</title>
+  <style>
+    #resultado {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+    .exito {
+      color: green;
+    }
+    .fracaso {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>llamada del API</h1>
+  <input type="text" id="numero" placeholder="Escribe un número" />
+  <button id="llamarApi">Hacer llamada a API</button>
+  <div id="resultado"></div>
+
+  <script>
+    const numberInput = document.getElementById('numero');
+    const boton = document.getElementById('llamarApi');
+    const resultado = document.getElementById('resultado');
+
+    boton.addEventListener('click', () => {
+      const numberValue = parseInt(numberInput.value.trim()); // Convertir el valor de input a número, con .trim() para eliminar espacios
+
+      if (isNaN(numberValue) || numberValue > 10 || numberValue < 1) {
+        alert('Por favor, introduce un número válido entre 1 y 10.');
+        return; // Salir de la función si el número no es válido o es mayor que 10
+      }
+
+      // Si el número es válido, hacemos la llamada a la API
+      hacerLlamadaApi(numberValue)
+        .then((data) => {
+          // Mostrar resultado exitoso si la API devuelve datos
+          mostrarResultado(`Éxito: Usuario encontrado - ${data.name}`, true);
+        })
+        .catch((error) => {
+          // Mostrar mensaje de error si la llamada a la API falla
+          mostrarResultado(`Fracaso: ${error.message}`, false);
+        });
+    });
+
+    function hacerLlamadaApi(userId) {
+      return new Promise((resolve, reject) => {
+        // Usamos el ID introducido por el usuario para hacer la llamada a la API
+        fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
+          .then((response) => {
+            if (response.ok) {
+              return response.json(); // Si la respuesta es exitosa, convertirla a JSON
+            } else {
+              reject(new Error('Usuario no encontrado.'));
+            }
+          })
+          .then((data) => resolve(data)) // Resolver la promesa con los datos obtenidos
+          .catch(() => reject(new Error('No se pudo conectar con la API.'))); // Error en la conexión
+      });
+    }
+
+    function mostrarResultado(mensaje, exito) {
+      // Actualizar el contenido del div con el id "resultado"
+      resultado.textContent = mensaje;
+      resultado.className = exito ? 'exito' : 'fracaso';
+    }
+  </script>
+</body>
+</html>

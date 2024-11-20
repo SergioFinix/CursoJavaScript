@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Palabras con "A"</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .resaltado {
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Buscar Palabras que Empiezan con "A"</h2>
+    <textarea id="texto" rows="5" cols="40" placeholder="Escribe un texto..."></textarea>
+    <button onclick="buscarPalabras()">Buscar</button>
+    <p id="resultado"></p>
+
+    <script>
+        function buscarPalabras() {
+            const texto = document.getElementById('texto').value;
+            const regex = /\bA\w*/gi;
+            const palabras = texto.match(regex);
+            
+            const resultado = document.getElementById('resultado');
+            if (palabras) {
+                resultado.innerHTML = `Palabras encontradas: <span class="resaltado">${palabras.join(', ')}</span>`;
+            } else {
+                resultado.textContent = "No se encontraron palabras que empiecen con 'A'.";
+            }
+        }
+    </script>
+</body>
+</html>

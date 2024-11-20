@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promesa: Cuenta Regresiva</title>
+</head>
+<body>
+  <button id="contador">Iniciar en 5</button>
+
+  <script>
+    const boton = document.getElementById('contador');
+
+    boton.addEventListener('click', () => {
+      cuentaRegresiva(5).then(() => {
+        boton.textContent = '¡Lanzado!';
+      });
+    });
+
+    function cuentaRegresiva(segundos) {
+      return new Promise((resolve) => {
+        const intervalo = setInterval(() => {
+          boton.textContent = `Iniciar en ${segundos}`;
+          segundos--;
+          if (segundos < 0) {
+            clearInterval(intervalo);
+            resolve();
+          }
+        }, 1000);
+      });
+    }
+  </script>
+</body>
+</html>

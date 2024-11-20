@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manipulación de Arreglos</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    }
+
+    h1, h2 {
+        color: #2c3e50;
+    }
+
+    .input-container {
+        margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+        padding: 10px;
+        width: 200px;
+        border: 2px solid #3498db;
+        border-radius: 5px;
+        outline: none;
+    }
+
+    button {
+        padding: 10px 15px;
+        background-color: #3498db;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #2980b9;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    ul li {
+        background-color: #ecf0f1;
+        margin: 5px 0;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    </style>
+</head>
+<body>
+    <h1>Ejemplo de Manipulación de Arreglos</h1>
+    
+    <!-- Formulario para agregar frutas -->
+    <div class="input-container">
+        <input type="text" id="frutaInput" placeholder="Agregar una fruta...">
+        <button id="agregarFruta">Agregar al Final</button>
+        <button id="agregarFrutaInicio">Agregar al Inicio</button>
+    </div>
+
+    <!-- Botones para eliminar frutas -->
+    <div class="input-container">
+        <button id="eliminarFruta">Eliminar del Final</button>
+        <button id="eliminarFrutaInicio">Eliminar del Inicio</button>
+    </div>
+
+    <!-- Lista de frutas -->
+    <h2>Lista de Frutas:</h2>
+    <ul id="frutaLista"></ul>
+
+    
+
+    <script>
+        // Inicializar el arreglo de frutas
+        //let frutas = ['Manzana', 'Naranja', 'Banana',{"numero":"1"}, 10 ,true];
+        let frutas = ['Manzana', 'Naranja', 'Banana'];
+
+        // Acceso a los elementos del DOM
+        const frutaInput = document.getElementById('frutaInput');
+        const frutaLista = document.getElementById('frutaLista');
+        
+
+        // Botones para agregar y eliminar frutas
+        const agregarFrutaBtn = document.getElementById('agregarFruta');
+        const agregarFrutaInicioBtn = document.getElementById('agregarFrutaInicio');
+        const eliminarFrutaBtn = document.getElementById('eliminarFruta');
+        const eliminarFrutaInicioBtn = document.getElementById('eliminarFrutaInicio');
+
+        // Función para mostrar la lista de frutas
+        function mostrarFrutas() {
+            // Limpiar la lista antes de actualizar
+            frutaLista.innerHTML = '';
+            
+            // Recorrer el arreglo y agregar cada fruta al DOM
+            frutas.forEach((fruta, index) => {
+                const li = document.createElement('li');
+                //li.innerText = `Fruta ${index + 1}: ${typeof fruta === "object" ? fruta.numero : fruta}`;
+                li.innerText = `Fruta ${index + 1}: ${fruta}`;
+                frutaLista.appendChild(li);
+            });
+        }
+
+        // Agregar una fruta al final
+        agregarFrutaBtn.addEventListener('click', () => {
+            const nuevaFruta = frutaInput.value.trim();
+            if (nuevaFruta) {
+                frutas.push(nuevaFruta); // Agregar al final
+                mostrarFrutas();
+            }
+            frutaInput.value = ''; // Limpiar el campo de entrada
+        });
+
+        // Agregar una fruta al inicio
+        agregarFrutaInicioBtn.addEventListener('click', () => {
+            const nuevaFruta = frutaInput.value.trim();
+            if (nuevaFruta) {
+                frutas.unshift(nuevaFruta); // Agregar al inicio
+                mostrarFrutas();
+                
+            }
+            frutaInput.value = ''; // Limpiar el campo de entrada
+        });
+
+        // Eliminar una fruta del final
+        eliminarFrutaBtn.addEventListener('click', () => {
+            frutas.pop(); // Eliminar del final
+            mostrarFrutas();
+            
+        });
+
+        // Eliminar una fruta del inicio
+        eliminarFrutaInicioBtn.addEventListener('click', () => {
+            frutas.shift(); // Eliminar del inicio
+            mostrarFrutas();
+            
+        });
+
+        // Mostrar la lista inicial de frutas al cargar la página
+        mostrarFrutas();
+        
+    </script>
+</body>
+</html>

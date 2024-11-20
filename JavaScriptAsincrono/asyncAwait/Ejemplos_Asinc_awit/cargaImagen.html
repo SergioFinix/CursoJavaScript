@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cargar Imagen con async/await</title>
+    <style>
+        img {
+            max-width: 100%;
+            height: auto;
+            display: none;
+        }
+        #loading {
+            font-size: 18px;
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cargar Imagen Asíncrona</h1>
+    <div id="loading">Cargando imagen...</div>
+    <img id="imagen" src="" alt="Imagen cargada" />
+    
+    <script>
+        async function cargarImagen() {
+            const imagen = document.getElementById('imagen');
+            const loadingTexto = document.getElementById('loading');
+
+            try {
+                const respuesta = await fetch('https://picsum.photos/600');
+                const blob = await respuesta.blob();
+                const urlImagen = URL.createObjectURL(blob);
+                console.log(urlImagen);
+                
+                imagen.src = urlImagen;
+                imagen.style.display = 'block';
+                loadingTexto.style.display = 'none';
+            } catch (error) {
+                loadingTexto.textContent = 'Error al cargar la imagen';
+            }
+        }
+
+        cargarImagen();
+    </script>
+</body>
+</html>

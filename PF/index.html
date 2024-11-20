@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto 5</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/javascript/funciones.js"></script>
+    <!-- Libreria de JS para crear graficos dinamicos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div id="aplicacion">
+        <h1>Simulador de Encuestas</h1>
+        <!-- Sección donde se arroja la lista de usuarios -->
+        <div id="seccion-usuarios">
+            <h2>Lista de Usuarios</h2>
+            <ul id="listado-usuarios">
+                <!-- Se debe mostrar las etiquetas (li) con los nombres de los usuarios -->
+            </ul>
+        </div>
+        <!-- Seccion donde se muestran las encuestas -->
+         <div id="seccion-encuesta">
+            <h2>Encuestas</h2>
+            <!-- Copiar y pegar para aumentar las encuestas, solo cambiar el ID de encuesta y del boton para guardar -->
+            <div class="formulario-encuesta" id="encuesta1">
+                <h3>Encuesta 1</h3>
+                <!-- Copiar y pegar para aumentar las preguntas -->
+                <label>Pregunta 1</label>
+                <input type="text">
+                <label>Pregunta 2</label>
+                <input type="text">
+                <label>Pregunta 3</label>
+                <input type="text">
+                <button onclick="subirEncuesta(1)">Enviar</button>
+            </div>
+            <div class="formulario-encuesta" id="encuesta2">
+                <h3>Encuesta 1</h3>
+                <!-- Copiar y pegar para aumentar las preguntas -->
+                <label>Pregunta 1</label>
+                <input type="text">
+                <label>Pregunta 2</label>
+                <input type="text">
+                <label>Pregunta 3</label>
+                <input type="text">
+                <button onclick="subirEncuesta(2)">Enviar</button>
+            </div>
+            <div class="formulario-encuesta" id="encuesta3">
+                <h3>Encuesta 1</h3>
+                <!-- Copiar y pegar para aumentar las preguntas -->
+                <label>Pregunta 1</label>
+                <input type="text">
+                <label>Pregunta 2</label>
+                <input type="text">
+                <label>Pregunta 3</label>
+                <input type="text">
+                <button onclick="subirEncuesta(2)">Enviar</button>
+            </div>
+         </div>
+         <!-- Seccion de los graficos -->
+         <div id="seccion-resultados">
+            <h2>Resultados</h2>
+            <select id="seleccionar-usuarios">
+                <option value="">Selecciona un usuario</option>
+            </select>
+            <button onclick="mostarResultados()">Ver Votaciones</button>
+            <canvas id="graficos-resultados" width="400" height="200"></canvas>
+         </div>
+    </div>
+</body>
+</html>

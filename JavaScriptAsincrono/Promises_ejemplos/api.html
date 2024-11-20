@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promesa: Llamada a API</title>
+  <style>
+    #resultado {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+    .exito {
+      color: green;
+    }
+    .fracaso {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>Ejemplo de llamada a una API</h1>
+  <button id="llamarApi">Hacer llamada a API</button>
+  <div id="resultado"></div>
+
+  <script>
+    const boton = document.getElementById('llamarApi');
+    const resultado = document.getElementById('resultado');
+
+    boton.addEventListener('click', () => {
+      hacerLlamadaApi()
+        .then((data) => {
+          mostrarResultado(`Éxito: Usuario encontrado - ${data.name}`, true);
+        })
+        .catch((error) => {
+          mostrarResultado(`Fracaso: ${error.message}`, false);
+        });
+    });
+
+    function hacerLlamadaApi() {
+      return new Promise((resolve, reject) => {
+        // Llamada a una API simulada (puedes cambiar la URL)
+        fetch('https://jsonplaceholder.typicode.com/users/1')
+          .then((response) => {
+            if (response.ok) {
+              return response.json(); // Si la respuesta es exitosa, convertimos a JSON
+            } else {
+              reject(new Error('Error al obtener el usuario.')); // Si hay error, rechazamos
+            }
+          })
+          .then((data) => resolve(data)) // Resolvemos la promesa con los datos obtenidos
+          .catch(() => reject(new Error('No se pudo conectar con la API.'))); // Error de red o similar
+      });
+    }
+
+    function mostrarResultado(mensaje, exito) {
+      resultado.textContent = mensaje;
+      resultado.className = exito ? 'exito' : 'fracaso';
+    }
+  </script>
+</body>
+</html>
