@@ -5,8 +5,8 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
-  background-color: #fff;
-  font-family: Arial, sans-serif;
+  background-color: #eef2f3; /* Fondo claro */
+  font-family: "Roboto", sans-serif;
   text-align: center;
 }
 
@@ -26,13 +26,14 @@ body {
   height: 100%;
   align-items: center;
   flex-direction: column;
-  background-color: #f0f0f0;
-  border-radius: 20px;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: box-shadow 0.3s ease;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  background-color: #ffffff; /* Blanco puro */
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+.containerColumn:hover {
+  transform: scale(1.02); /* Pequeña animación al pasar el mouse */
 }
 
 .containerColumn2 {
@@ -42,7 +43,7 @@ body {
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
-  background-color: #f0f0f0;
+  background-color: #ffffff;
 }
 
 .instructions {
@@ -51,45 +52,39 @@ body {
   align-items: center;
   flex-direction: column;
   font-size: 1em;
-  color: #333;
+  color: #4a4a4a;
   margin: 15px;
 }
 
 .input {
   margin: 20px;
   padding: 10px;
-  border: 1px solid #333;
+  border: 1px solid #4a90e2; /* Azul vibrante */
   border-radius: 5px;
   width: 200px;
 }
 
 .button1 {
-  width: 100px;
-  padding: 10px 20px;
-  background-color: #96c93d;
-  color: #fff;
+  width: 120px;
+  padding: 12px 20px;
+  background-color: #4caf50; /* Verde vibrante */
+  color: white;
   border: none;
-  border: 1px solid #333;
-  border-radius: 15px;
+  border-radius: 25px;
   cursor: pointer;
-  transition: background-color 0.3s ease 0.2s;
-  &:hover {
-    background-color: #96c93d;
-    transition-delay: 0s;
-  }
-  &:not(:hover) {
-    background-color: #333;
-    transition-delay: 0.2s;
-  }
+  transition: background-color 0.3s ease;
+}
+.button1:hover {
+  background-color: #43a047; /* Verde más oscuro al pasar el mouse */
 }
 
 .button2 {
-  width: 100px;
-  padding: 10px 20px;
-  background-color: #f0f0f0;
-  color: #333;
-  border: 1px solid #333;
-  border-radius: 15px;
+  width: 120px;
+  padding: 12px 20px;
+  background-color: #e3f2fd; /* Azul claro */
+  color: #4a90e2; /* Azul vibrante */
+  border: 2px solid #4a90e2;
+  border-radius: 25px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -98,8 +93,10 @@ body {
 
 .words {
   margin-top: 40px;
-  letter-spacing: 10px;
-  font: 1em sans-serif;
+  letter-spacing: 8px;
+  font-size: 1em;
+  font-family: "Roboto Mono", monospace;
+  color: #333;
 }
 
 .message {
@@ -108,16 +105,16 @@ body {
   justify-content: center;
   width: 100%;
   height: 80px;
-  min-height: 80px;
   margin: 20px;
   font-size: 1.5em;
-  color: #96c93d;
-  background-color: #333;
+  color: #ffffff;
+  background-color: #4caf50; /* Verde vibrante */
+  border-radius: 10px;
 }
 
 .icon {
   font-size: 2em;
-  color: #333;
+  color: #4a90e2; /* Azul vibrante */
 }
 
 .attempts {
@@ -147,7 +144,7 @@ body {
   left: 20px;
   width: 10px;
   height: 300px;
-  background-color: #333;
+  background-color: #333; /* Negro */
 }
 
 .beam {
@@ -165,7 +162,7 @@ body {
   left: 130px;
   width: 2px;
   height: 40px;
-  background-color: #666;
+  background-color: #795548; /* Marrón */
 }
 
 /* Partes del cuerpo */
@@ -179,11 +176,8 @@ body {
   left: 115px;
   width: 30px;
   height: 30px;
-  background-color: #333;
+  background-color: #ff5722; /* Naranja */
   border-radius: 50%;
-  /* background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUoxf6tPol7OR0CusE1Wf0j2tfZlcKOwiruQ&s");
-  background-size: cover;
-  background-position: center; */
 }
 
 .body {
@@ -191,7 +185,7 @@ body {
   left: 127px;
   width: 5px;
   height: 60px;
-  background-color: #333;
+  background-color: #ff5722;
 }
 
 .left-arm,
@@ -199,7 +193,7 @@ body {
   top: 100px;
   width: 40px;
   height: 5px;
-  background-color: #333;
+  background-color: #ff5722;
 }
 
 .left-arm {
@@ -217,7 +211,7 @@ body {
   top: 150px;
   width: 40px;
   height: 5px;
-  background-color: #333;
+  background-color: #ff5722;
 }
 
 .left-leg {

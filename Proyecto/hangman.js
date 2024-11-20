@@ -4,6 +4,7 @@ let guessedLetters = [];
 let attemptsLeft = 6;
 let hiddenWord = [];
 
+// Inicializa variables para comnezar el juego
 async function startGame() {
   attemptsLeft = 6;
   guessedLetters = [];
@@ -18,27 +19,17 @@ async function startGame() {
   resetHangman();
 }
 
-
 // Fetch a API de palabra random en ingles
 function getWord() {
   return new Promise(async (resolve) => {
     const response = await fetch('https://random-word-api.herokuapp.com/word');
     const data = await response.json();
-    console.log('data', data);
+    // console.log('data', data);
     resolve(data[0]);
   });
 }
 
-// function fetchWord() {
-//   return new Promise((resolve) => {
-//     setTimeout(() => {
-//       const words = ["javascript"];
-//       const randomWord = words[Math.floor(Math.random() * words.length)];
-//       resolve(randomWord);
-//     }, 500);
-//   });
-// }
-
+// Valida las que el caracter sea una letra o un numero de lo contrario limpia el nput
 function validateLetterInput(event) {
   const input = event.target;
   const letter = input.value;
@@ -49,6 +40,7 @@ function validateLetterInput(event) {
   }
 }
 
+// Valida la letra que ingresa el usuario, que no se repita y no este vacia
 function guessLetter() {
   const guessInput = document.getElementById("guessInput");
   const letter = guessInput.value.toLowerCase();
@@ -58,8 +50,10 @@ function guessLetter() {
     return;
   }
 
+  // Mete en un arreglo la palabra
   guessedLetters.push(letter);
 
+  // Verifica si ya existe la letra o es incorrecta
   if (wordToGuess.includes(letter)) {
     updateHiddenWord(letter);
     document.getElementById("message").textContent = "¡Bien hecho!";
@@ -72,7 +66,7 @@ function guessLetter() {
   checkGameStatus();
 }
 
-
+// Actualiza la palabra del ahorcado, cambia el guion por la letra adivinada
 function updateHiddenWord(letter) {
   for (let i = 0; i < wordToGuess.length; i++) {
     if (wordToGuess[i] === letter) {
@@ -80,11 +74,15 @@ function updateHiddenWord(letter) {
     }
   }
 }
+
+// Actualiza la el doom, intentos restantes, y letras acertadas
 function updateDisplay() {
   document.getElementById("wordDisplay").textContent = hiddenWord.join(" ");
   document.getElementById("attemptsLeft").textContent = attemptsLeft;
   document.getElementById("guessInput").value = "";
 }
+
+// Comprueba si el juego ha terminado, se gano o se perdió
 function checkGameStatus() {
   if (hiddenWord.join("") === wordToGuess) {
     //document.getElementById("message").textContent = "¡Ganaste! La palabra era: " + wordToGuess;
@@ -162,21 +160,28 @@ function checkGameStatus() {
     disableInput();
   }
 }
+
+// Deshabilita el input
 function disableInput() {
   document.getElementById("guessInput").disabled = true;
 }
+
+// Reinicia las clases del muñeco de ahorcado
 function resetHangman() {
   const hangmanContainer = document.getElementById("gallows");
   hangmanContainer.className = "";
 }
+
+// Añade el cuerpo del muñeco en base a los intentos (estilos css en orden)
 function updateHangman() {
   const hangmanContainer = document.getElementById("gallows");
   const classes = ["show-head", "show-body", "show-left-arm", "show-right-arm", "show-left-leg", "show-right-leg"];
   const index = 6 - attemptsLeft;
-  console.log(index);
+  // console.log(index);
   if (index >= 0 && index < (classes.length + 1)) {
     hangmanContainer.classList.add(classes[index - 1]);
   }
 }
 
+// Inicializa el juego
 startGame();
