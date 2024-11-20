@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encuestas Dinámicas Mejoradas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;   /*muestra al anchura del element*/
+            background-color: #ffffff; /*muestra el color del fondo*/
+            padding: 20px; /*muestra el area del contenido */
+            border-radius: 10px; /* esta propiedad permite el redondeo de las cajas en este caso el contenedor*/
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  /*manda una sombra es un estilo*/
+        }
+        h2, h3 {  /* estilos en los encabezados*/
+            color: #007bff;
+        }
+        .form-label {  /*muestra el estilo de una etiqueta*/
+            font-weight: bold;
+        }
+        .btn-primary {  /*estilos de botones*/
+            background-color: #007bff;
+            border: none;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border: none;
+        }
+        .table thead {    /*estilo de la tabla*/
+            background-color: #007bff;
+            color: white;
+        }
+        #resultsChart {  /*estilo de la tabla de resultados*/
+            margin-top: 20px;
+        }
+        #apiDataTable {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="text-center">Encuestas Dinámicas seleccionando una api</h2>
+    <p class="text-center">Selecciona un usuario de la lista y responde las encuestas para ver los resultados</p>
+
+    <div class="mb-4">
+        <label for="userSelect" class="form-label">Selecciona un usuario</label>
+        <select id="userSelect" class="form-select">
+            <option value="">Seleccione un usuario</option>
+        </select>
+    </div>
+
+    <!-- Pestañas de Encuestas y Resultados -->
+    <ul class="nav nav-tabs" id="mainTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="tab-encuestas" data-bs-toggle="tab" data-bs-target="#encuestas" type="button" role="tab" aria-controls="encuestas" aria-selected="true">Encuestas</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="tab-resultados" data-bs-toggle="tab" data-bs-target="#resultados" type="button" role="tab" aria-controls="resultados" aria-selected="false">Resultados</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="tab-respuestas" data-bs-toggle="tab" data-bs-target="#respuestas" type="button" role="tab" aria-controls="respuestas" aria-selected="false">Respuestas de Usuarios</button>
+        </li>
+    </ul>
+
+    <div class="tab-content p-3" id="mainTabContent">
+        <!-- Pestaña Encuestas mediante un tab qu permite mandar en el formulario las pestañas -->
+        <div class="tab-pane fade show active" id="encuestas" role="tabpanel" aria-labelledby="tab-encuestas">
+            <!-- Encuestas mandadas en el formulario  -->
+            <ul class="nav nav-tabs" id="surveyTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="tab-politica" data-bs-toggle="tab" data-bs-target="#encuesta-politica" type="button" role="tab" aria-controls="encuesta-politica" aria-selected="true">Partido Político</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="tab-visita" data-bs-toggle="tab" data-bs-target="#encuesta-visita" type="button" role="tab" aria-controls="encuesta-visita" aria-selected="false">Lugar de Visita</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="tab-trabajo" data-bs-toggle="tab" data-bs-target="#encuesta-trabajo" type="button" role="tab" aria-controls="encuesta-trabajo" aria-selected="false">Mejor Trabajo</button>
+                </li>
+            </ul>
+
+            <!-- Contenido de Encuestas -->
+            <div class="tab-content p-3" id="surveyTabContent">
+                <!-- 1° Encuesta Partido Político  -->
+                <div class="tab-pane fade show active" id="encuesta-politica" role="tabpanel" aria-labelledby="tab-politica">
+                    <label class="form-label mt-3">¿Cuál partido político prefieres?</label>
+                    <select class="form-select politics-select">
+                        <option value="" disabled selected hidden>Seleccione una respuesta</option>
+                        <option value="PRI">PRI</option>
+                        <option value="PRD">PRD</option>
+                        <option value="PAN">PAN</option>
+                        <option value="MORENA">MORENA</option>
+                        <option value="VERDE">VERDE</option>
+                    </select>
+
+                    <label class="form-label mt-3">¿Por qué selecciono este partido político?</label>
+                    <select class="form-select politics-select">
+                        <option value="" disabled selected hidden>Seleccione una respuesta</option>
+                        <option value="PRI">Porque es el mejor</option>
+                        <option value="PRD">Porque me lo dijo mi familia</option>
+                        <option value="PAN">Porque no me quedo de otra</option>
+                        <option value="MORENA">Porque apenas va ingresando a la política</option>
+                        <option value="VERDE">Por otro motivo</option>
+                    </select>
+
+                    <label class="form-label mt-3">¿Qué prometió este partido político?</label>
+                    <select class="form-select politics-select">
+                        <option value="" disabled selected hidden>Seleccione una respuesta</option>
+                        <option value="PRI">Arreglar las calles</option>
+                        <option value="PRD">Abrir fuentes de trabajo</option>
+                        <option value="PAN">Repartir cada mes despensas</option>
+                        <option value="MORENA">Mejorar el servicio de atención a la salud</option>
+                        <option value="VERDE">Por otro motivo</option>
+                    </select>
+
+                    <label class="form-label mt-3">¿Cuál es su opinión sobre la gestión del gobierno actual?</label>
+                    <select class="form-select politics-select">
+                        <option value="" disabled selected hidden>Seleccione una respuesta</option>
+                        <option value="PRI">La gestión es buena</option>
+                        <option value="PRD">La gestión es mala</option>
+                        <option value="PAN">La gestión es irrelevante</option>
+                        <option value="MORENA">La gestión no es problema</option>
+                        <option value="VERDE">Por otro motivo</option>
+                    </select>
+
+                    <label class="form-label mt-3">¿Cree que las políticas implementadas están beneficiando a la población en general?</label>
+                    <select class="form-select politics-select">
+                        <option value="" disabled selected hidden>Seleccione una respuesta</option>
+                        <option value="PRI">Sí</option>
+                        <option value="PRD">No</option>
+                        <option value="PAN">Probablemente</option>
+                        <option value="MORENA">Me es indiferente</option>
+                        <option value="VERDE">Sin opinar</option>
+                    </select>
+
+                    <label class="form-label mt-3">¿Cree que se respetan los derechos humanos en su país?</label>
+                    <select class="form-select politics-select">
+                        <option value="" disabled selected hidden>Seleccione una respuesta</option>
+                        <option value="PRI">Sí</option>
+                        <option value="PRD">No</option>
+                        <option value="PAN">Probablemente</option>
+                        <option value="MORENA">Me es indiferente</option>
+                        <option value="VERDE">Sin opinar</option>
+                    </select>
+                </div>
+
+                <!-- "2° Encuesta Lugar de Visita -->
+                <div class="tab-pane fade" id="encuesta-visita" role="tabpanel" aria-labelledby="tab-visita">
+                    <label class="form-label mt-3">¿Qué lugar prefieres para visitar?</label>
+                    <select class="form-select places-select">
+                        <option value="" disabled selected hidden>Selecione una respuesta</option>
+                        <option value="Cancún">Cancún</option>
+                        <option value="Acapulco">Acapulco</option>
+                        <option value="España">España</option>
+                        <option value="Francia">Francia</option>
+                        <option value="China">China</option>
+                    </select>
+
+                    <label class="form-label mt-3">¿Recomiendas este lugar para visitar?</label>
+                    <select class="form-select places-select">
+                        <option value="" disabled selected hidden>Selecione una respuesta</option>
+                        <option value="Cancún">Sí</option>
+                        <option value="Acapulco">No</option>
+                        <option value="España">A lo mejor</option>
+                        <option value="Francia">Quién sabe</option>
+                    </select>
+
+                    <label class="form-label mt-3">¿Qué te gusta del lugar?</label>
+                    <select class="form-select places-select">
+                        <option value="" disabled selected hidden>Seleccione una respuesta</option>
+                        <option value="Cancún">Su Flora</option>
+                        <option value="Acapulco">Su Fauna</option>
+                        <option value="España">Su Comida</option>
+                        <option value="Francia">Su Cultura</option>
+                        <option value="China">Su Tecnología</option>
+                    </select>
+
+                    <label class="form-label mt-3">¿Este lugar tiene mucha fuente de trabajo?</label>
+                    <select class="form-select places-select">
+                        <option value="" disabled selected hidden>Seleccione una respuesta</option>
+                        <option value="Cancún">Sí</option>
+                        <option value="Acapulco">No</option>
+                        <option value="España">Quién sabe</option>
+                        <option value="Francia">No lo sé</option>
+                    </select>
+                </div>
+
+                <!-- 3° Encuesta Mejor Trabajo -->
+                <div class="tab-pane fade" id="encuesta-trabajo" role="tabpanel" aria-labelledby="tab-trabajo">
+                    <label class="form-label mt-3">¿Cuál es el mejor trabajo pagado?</label>
+                    <select class="form-select jobs-select">
+                        <option value="" disabled selected hidden>Seleccione una respuesta</option>
+                        <option value="Albañil">Albañil</option>
+                        <option value="Carpintero">Carpintero</option>
+                        <option value="Mecánico">Mecánico</option>
+                        <option value="Pintor">Pintor</option>
+                        <option value="Hojalatero">Hojalatero</option>
+                    </select>
+
+                    <label class="form-label mt-3">¿Crees que se pueda ganar más por fuera que de forma local?</label>
+                    <select class="form-select jobs-select">
+                        <option value="" disabled selected hidden>Selecione una respuesta</option>
+                        <option value="Albañil">Sí</option>
+                        <option value="Carpintero">No</option>
+                        <option value="Mecánico">A lo mejor</option>
+                    </select>
+
+                    <label class="form-label mt-3">¿Necesitas estudiar para tener un trabajo de los anteriores?</label>
+                    <select class="form-select jobs-select">
+                        <option value="" disabled selected hidden>Selecione una respuesta</option>
+                        <option value="Albañil">Sí</option>
+                        <option value="Carpintero">Sí</option>
+                        <option value="Mecánico">Sí</option>
+                    </select>
+
+                    <label class="form-label mt-3">¿Cuánto te gustaría ganar?</label>
+                    <select class="form-select jobs-select">
+                        <option value="" disabled selected hidden>Selecione una respuesta</option>
+                        <option value="Albañil">3000-6000</option>
+                        <option value="Carpintero">6000-9000</option>
+                        <option value="Mecánico">Más de 10,000</option>
+                    </select>
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary w-100 mt-4" onclick="submitSurvey()">Guardar Respuestas</button>
+        </div>
+
+        <!-- Pestaña Resultados de Encuestas tambien por medio de un tab -->
+        <div class="tab-pane fade" id="resultados" role="tabpanel" aria-labelledby="tab-resultados">
+            <canvas id="resultsChart" width="400" height="200"></canvas>
+        </div>
+
+        <!-- Pestaña Respuestas de Usuarios y un boton que limpia la tabla de los resultados -->
+<div class="tab-pane fade" id="respuestas" role="tabpanel" aria-labelledby="tab-respuestas">
+    <button type="button" class="btn btn-danger w-100 mt-4" onclick="clearResponses()">Limpiar Tabla</button>
+    <div id="userResponsesTable" class="table-responsive mt-4">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Usuario</th>
+                    <th>Política Preferida</th>
+                    <th>Lugar de Visita</th>
+                    <th>Trabajo Mejor Pagado</th>
+                </tr>
+            </thead>
+            <tbody id="responsesDataTable">
+                <!-- Aquí se llenan las filas de la tabla -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> <!--link de bootstrap-->
+<script>
+    const apiUrl = 'https://jsonplaceholder.typicode.com/users';  /*link de la api a llamar de los 10 usuarios*/
+    let users = [];
+
+    async function loadUsers() {
+        const response = await fetch(apiUrl);
+        users = await response.json();
+        const userSelect = document.getElementById('userSelect');
+        users.forEach(user => {
+            const option = document.createElement('option');
+            option.value = user.id;
+            option.textContent = user.name;
+            userSelect.appendChild(option);
+        });
+    }
+
+    let politicsResponses = [];
+    let placesResponses = [];
+    let jobsResponses = [];
+
+    function submitSurvey() {
+        const selectedUserId = document.getElementById('userSelect').value;
+        const selectedUser = users.find(user => user.id == selectedUserId);
+        
+        const selectedPolitics = document.querySelector('.politics-select').value;  //declaracion de las constantes de politicas, lugar y trabajo
+        const selectedPlace = document.querySelector('.places-select').value;
+        const selectedJob = document.querySelector('.jobs-select').value;
+
+        // condicion para validar que todas las preguntas tengan respuestas seleccionadas y mandar mjs de alerta
+        if (!selectedPolitics || !selectedPlace || !selectedJob) {
+            alert('Por favor, responde todas las preguntas de cada encuesta.');
+            return;
+        }
+
+        if (selectedUser) {
+            // Añadir respuestas únicas a los arrays correspondientes si no se repiten
+            if (!politicsResponses.includes(selectedPolitics) && politicsResponses.length < 3) {
+                politicsResponses.push(selectedPolitics);
+            }
+            if (!placesResponses.includes(selectedPlace) && placesResponses.length < 3) {
+                placesResponses.push(selectedPlace);
+            }
+            if (!jobsResponses.includes(selectedJob) && jobsResponses.length < 3) {
+                jobsResponses.push(selectedJob);
+            }
+
+            // Agregar solo las primeras 3 respuestas únicas a la tabla primero el usuario, nombre despues politica,lugares y trabajo
+            const responsesDataTable = document.getElementById('responsesDataTable');
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${selectedUser.name}</td> 
+                <td>${selectedPolitics}</td>
+                <td>${selectedPlace}</td>
+                <td>${selectedJob}</td>
+            `;
+            responsesDataTable.appendChild(row);
+
+            // Actualizar gráficas con las respuestas actuales 
+            updateChart(selectedUser.name, selectedPolitics, selectedPlace, selectedJob);
+        }
+    }
+            // en esta parte se limpia la tabla de respuestas 
+    function clearResponses() {
+    const responsesDataTable = document.getElementById('responsesDataTable');
+    responsesDataTable.innerHTML = '';  // Esto elimina todas las filas dentro del  cuerpo tbody
+}
+    function updateChart(userName, politics, place, job) {
+        const ctx = document.getElementById('resultsChart').getContext('2d');
+        if (!window.myChart) {
+            window.myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [userName],
+                    datasets: [
+                        {
+                            label: 'Partido Político',
+                            data: [1],
+                            backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                        },
+                        {
+                            label: 'Lugar de Visita',
+                            data: [1],
+                            backgroundColor: 'rgba(255, 206, 86, 0.5)',
+                        },
+                        {
+                            label: 'Trabajo',
+                            data: [1],
+                            backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                        }
+                    ]
+                },
+
+                
+                options: {
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Usuarios'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Votos de Usuarios'
+                            },
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        } else {
+            window.myChart.data.labels.push(userName);
+            window.myChart.data.datasets[0].data.push(1);
+            window.myChart.data.datasets[1].data.push(1);
+            window.myChart.data.datasets[2].data.push(1);
+            window.myChart.update();
+        }
+    }
+
+    loadUsers();
+</script>
+</body>
+</html>
