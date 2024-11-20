@@ -1,19 +1,12 @@
-var numtemplate = 1;
+var numnombre = null;
 var person = {};
+var estilos = {};
 var colorNombre = "black";
 var colorTitulo = "black";
 var colorTexto = "black";
 var tipoNombre = "font-style: normal;";
 var tipoTitulo = "font-style: normal;";
 var tipoTexto = "font-style: normal;";
-var estilo = {
-    "tipoNombre": tipoNombre,
-    "tipoTitulo": tipoTitulo,
-    "tipoTexto": tipoTexto,
-    "colorNombre": colorNombre,
-    "colorTitulo": colorTitulo,
-    "colorTexto": colorTexto,
-}
 
 async function cargarJSON() {
     try {
@@ -26,7 +19,19 @@ async function cargarJSON() {
         const miselect = document.getElementById('ulNombres');
 
         data.forEach(item => {
+            let newEstilo = {
+                "id": item.id,
+                "numTemplate": 1,
+                "tipoNombre": tipoNombre,
+                "tipoTitulo": tipoTitulo,
+                "tipoTexto": tipoTexto,
+                "colorNombre": colorNombre,
+                "colorTitulo": colorTitulo,
+                "colorTexto": colorTexto,
+            };
+            estilos[item.id] = newEstilo;
             const elemento = document.createElement('li');
+            elemento.setAttribute('data-id', item.id);
             elemento.setAttribute('data-name', item.name);
             elemento.setAttribute('data-username', item.username);
             elemento.setAttribute('data-email', item.email);
@@ -38,6 +43,7 @@ async function cargarJSON() {
             elemento.textContent = item.name;
             miselect.appendChild(elemento);
         });
+        console.log(estilos);
     } catch (error) {
         console.error('Error: ', error);
     }
@@ -46,164 +52,155 @@ async function cargarJSON() {
 window.onload = cargarJSON;
 document.addEventListener('click', function(event) {
     if (event.target.classList.contains('list-group-item')) {
-
         // Loop through the data attributes and add them to the object
         Array.from(event.target.attributes).forEach(attr => {
             if (attr.name.startsWith('data-')) {
                 const key = attr.name.slice(5); // Remove 'data-' prefix
                 person[key] = attr.value;
             }
+            if(attr.name == "data-id"){
+                numnombre = parseInt(attr.value);
+            }
         });
-
         cargarTarjeta();
     }
 });
 
 function tipoTarjeta(numtarjeta){
-    numtemplate = numtarjeta;
+    estilos[numnombre].numTemplate = numtarjeta;
     cargarTarjeta();
 }
 
 function eTipoNombre(tipo){
-    estilo.tipoNombre = tipo;
-    console.log(estilo);
+    estilos[numnombre].tipoNombre = tipo;
     cargarTarjeta();
 }
 
 function eTipoTitulo(tipo){
-    estilo.tipoTitulo = tipo;
+    estilos[numnombre].tipoTitulo = tipo;
     cargarTarjeta();
 }
 
 function eTipoTexto(tipo){
-    estilo.tipoTexto = tipo;
+    estilos[numnombre].tipoTexto = tipo;
     cargarTarjeta();
 }
 
 function eColorNombre(color){
-    estilo.colorNombre = color;
+    estilos[numnombre].colorNombre = color;
     cargarTarjeta();
 }
 
 function eColorTitulo(color){
-    estilo.colorTitulo = color;
+    estilos[numnombre].colorTitulo = color;
     cargarTarjeta();
 }
 
 function eColorTexto(color){
-    estilo.colorTexto = color;
+    estilos[numnombre].colorTexto = color;
     cargarTarjeta();
 }
 
 function cargarTarjeta(){
     let template = "";
-    if(numtemplate == 1){
+    if(estilos[numnombre].numTemplate == 1){
         template = `<div class="card">
             <div class="card-header">
-                <p class="text-center mt-3">
-                    <img width="80" src="icons/p1.png">
-                </p>
-                <p class="text-center" style="${estilo.tipoNombre}; color: ${estilo.colorNombre}">${person.name}</p>
+                <p class="text-center" style="${estilos[numnombre].tipoNombre}; color: ${estilos[numnombre].colorNombre}">${person.name}</p>
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-6">
-                        <span style="${estilo.tipoTitulo}; color: ${estilo.colorTitulo}">Correo electrónico:</span><br><span style="${estilo.tipoTexto}; color: ${estilo.colorTexto}">${person.email}</span>
+                        <span style="${estilos[numnombre].tipoTitulo}; color: ${estilos[numnombre].colorTitulo}">Correo electrónico:</span><br><span style="${estilos[numnombre].tipoTexto}; color: ${estilos[numnombre].colorTexto}">${person.email}</span>
                     </div>
                     <div class="col-6">
-                        <span style="${estilo.tipoTitulo}; color: ${estilo.colorTitulo}">Número telefónico:</span><br><span style="${estilo.tipoTexto}; color: ${estilo.colorTexto}">${person.phone}</span>
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-6">
-                        <span style="${estilo.tipoTitulo}; color: ${estilo.colorTitulo}">Nombre de usuario:</span><br><span style="${estilo.tipoTexto}; color: ${estilo.colorTexto}">${person.username}</span>
-                    </div>
-                    <div class="col-6">
-                        <span style="${estilo.tipoTitulo}; color: ${estilo.colorTitulo}">Sitio Web:</span><br><span style="${estilo.tipoTexto}; color: ${estilo.colorTexto}">${person.website}</span>
+                        <span style="${estilos[numnombre].tipoTitulo}; color: ${estilos[numnombre].colorTitulo}">Número telefónico:</span><br><span style="${estilos[numnombre].tipoTexto}; color: ${estilos[numnombre].colorTexto}">${person.phone}</span>
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-6">
-                        <span style="${estilo.tipoTitulo}; color: ${estilo.colorTitulo}">Dirección:</span><br><span style="${estilo.tipoTexto}; color: ${estilo.colorTexto}">${person.address}</span>
+                        <span style="${estilos[numnombre].tipoTitulo}; color: ${estilos[numnombre].colorTitulo}">Nombre de usuario:</span><br><span style="${estilos[numnombre].tipoTexto}; color: ${estilos[numnombre].colorTexto}">${person.username}</span>
                     </div>
                     <div class="col-6">
-                        <span style="${estilo.tipoTitulo}; color: ${estilo.colorTitulo}">Compañía:</span><br><span style="${estilo.tipoTexto}; color: ${estilo.colorTexto}">${person.company}</span>
+                        <span style="${estilos[numnombre].tipoTitulo}; color: ${estilos[numnombre].colorTitulo}">Sitio Web:</span><br><span style="${estilos[numnombre].tipoTexto}; color: ${estilos[numnombre].colorTexto}">${person.website}</span>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-6">
+                        <span style="${estilos[numnombre].tipoTitulo}; color: ${estilos[numnombre].colorTitulo}">Dirección:</span><br><span style="${estilos[numnombre].tipoTexto}; color: ${estilos[numnombre].colorTexto}">${person.address}</span>
+                    </div>
+                    <div class="col-6">
+                        <span style="${estilos[numnombre].tipoTitulo}; color: ${estilos[numnombre].colorTitulo}">Compañía:</span><br><span style="${estilos[numnombre].tipoTexto}; color: ${estilos[numnombre].colorTexto}">${person.company}</span>
                     </div>
                 </div>
             </div>                  
         </div>`;
-    }else if(numtemplate == 2){
+    }else if(estilos[numnombre].numTemplate == 2){
         template = `<div class="card">
             <div class="row g-0">
                 <div class="col-md-4 my-auto">
-                    <p class="text-center mt-3">
-                        <img width="80" src="icons/p1.png">
-                    </p>
-                    <p class="text-center px-5" style="${estilo.tipoNombre}; color: ${estilo.colorNombre}">${person.name}</p>
+                    <p class="text-center px-5" style="${estilos[numnombre].tipoNombre}; color: ${estilos[numnombre].colorNombre}">${person.name}</p>
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-6">
-                                <span style="${estilo.tipoTitulo}; color: ${estilo.colorTitulo}">Correo electrónico:</span><br><span style="${estilo.tipoTexto}; color: ${estilo.colorTexto}">${person.email}</span>
+                                <span style="${estilos[numnombre].tipoTitulo}; color: ${estilos[numnombre].colorTitulo}">Correo electrónico:</span><br><span style="${estilos[numnombre].tipoTexto}; color: ${estilos[numnombre].colorTexto}">${person.email}</span>
                             </div>
                             <div class="col-6">
-                                <span style="${estilo.tipoTitulo}; color: ${estilo.colorTitulo}">Número telefónico:</span><br><span style="${estilo.tipoTexto}; color: ${estilo.colorTexto}">${person.phone}</span>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-6">
-                                <span style="${estilo.tipoTitulo}; color: ${estilo.colorTitulo}">Nombre de usuario:</span><br><span style="${estilo.tipoTexto}; color: ${estilo.colorTexto}">${person.username}</span>
-                            </div>
-                            <div class="col-6">
-                                <span style="${estilo.tipoTitulo}; color: ${estilo.colorTitulo}">Sitio Web:</span><br><span style="${estilo.tipoTexto}; color: ${estilo.colorTexto}">${person.website}</span>
+                                <span style="${estilos[numnombre].tipoTitulo}; color: ${estilos[numnombre].colorTitulo}">Número telefónico:</span><br><span style="${estilos[numnombre].tipoTexto}; color: ${estilos[numnombre].colorTexto}">${person.phone}</span>
                             </div>
                         </div>
                         <div class="row mt-3">
                             <div class="col-6">
-                                <span style="${estilo.tipoTitulo}; color: ${estilo.colorTitulo}">Dirección:</span><br><span style="${estilo.tipoTexto}; color: ${estilo.colorTexto}">${person.address}</span>
+                                <span style="${estilos[numnombre].tipoTitulo}; color: ${estilos[numnombre].colorTitulo}">Nombre de usuario:</span><br><span style="${estilos[numnombre].tipoTexto}; color: ${estilos[numnombre].colorTexto}">${person.username}</span>
                             </div>
                             <div class="col-6">
-                                <span style="${estilo.tipoTitulo}; color: ${estilo.colorTitulo}">Compañía:</span><br><span style="${estilo.tipoTexto}; color: ${estilo.colorTexto}">${person.company}</span>
+                                <span style="${estilos[numnombre].tipoTitulo}; color: ${estilos[numnombre].colorTitulo}">Sitio Web:</span><br><span style="${estilos[numnombre].tipoTexto}; color: ${estilos[numnombre].colorTexto}">${person.website}</span>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-6">
+                                <span style="${estilos[numnombre].tipoTitulo}; color: ${estilos[numnombre].colorTitulo}">Dirección:</span><br><span style="${estilos[numnombre].tipoTexto}; color: ${estilos[numnombre].colorTexto}">${person.address}</span>
+                            </div>
+                            <div class="col-6">
+                                <span style="${estilos[numnombre].tipoTitulo}; color: ${estilos[numnombre].colorTitulo}">Compañía:</span><br><span style="${estilos[numnombre].tipoTexto}; color: ${estilos[numnombre].colorTexto}">${person.company}</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>`;
-    } if(numtemplate == 3){
+    } if(estilos[numnombre].numTemplate == 3){
         template = `<div class="card">
             <div class="card-body">
                 <div class="row">
                     <div class="col-6">
-                        <span style="${estilo.tipoTitulo}; color: ${estilo.colorTitulo}">Correo electrónico:</span><br><span>${person.email}</span>
+                        <span style="${estilos[numnombre].tipoTitulo}; color: ${estilos[numnombre].colorTitulo}">Correo electrónico:</span><br><span style="${estilos[numnombre].tipoTexto}; color: ${estilos[numnombre].colorTexto}">${person.email}</span>
                     </div>
                     <div class="col-6">
-                        <span style="${estilo.tipoTitulo}; color: ${estilo.colorTitulo}">Número telefónico:</span><br><span>${person.phone}</span>
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-6">
-                        <span style="${estilo.tipoTitulo}; color: ${estilo.colorTitulo}">Nombre de usuario:</span><br><span>${person.username}</span>
-                    </div>
-                    <div class="col-6">
-                        <span style="${estilo.tipoTitulo}; color: ${estilo.colorTitulo}">Sitio Web:</span><br><span>${person.website}</span>
+                        <span style="${estilos[numnombre].tipoTitulo}; color: ${estilos[numnombre].colorTitulo}">Número telefónico:</span><br><span style="${estilos[numnombre].tipoTexto}; color: ${estilos[numnombre].colorTexto}">${person.phone}</span>
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-6">
-                        <span style="${estilo.tipoTitulo}; color: ${estilo.colorTitulo}">Dirección:</span><br><span>${person.address}</span>
+                        <span style="${estilos[numnombre].tipoTitulo}; color: ${estilos[numnombre].colorTitulo}">Nombre de usuario:</span><br><span style="${estilos[numnombre].tipoTexto}; color: ${estilos[numnombre].colorTexto}">${person.username}</span>
                     </div>
                     <div class="col-6">
-                        <span style="${estilo.tipoTitulo}; color: ${estilo.colorTitulo}">Compañía:</span><br><span>${person.company}</span>
+                        <span style="${estilos[numnombre].tipoTitulo}; color: ${estilos[numnombre].colorTitulo}">Sitio Web:</span><br><span style="${estilos[numnombre].tipoTexto}; color: ${estilos[numnombre].colorTexto}">${person.website}</span>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-6">
+                        <span style="${estilos[numnombre].tipoTitulo}; color: ${estilos[numnombre].colorTitulo}">Dirección:</span><br><span style="${estilos[numnombre].tipoTexto}; color: ${estilos[numnombre].colorTexto}">${person.address}</span>
+                    </div>
+                    <div class="col-6">
+                        <span style="${estilos[numnombre].tipoTitulo}; color: ${estilos[numnombre].colorTitulo}">Compañía:</span><br><span style="${estilos[numnombre].tipoTexto}; color: ${estilos[numnombre].colorTexto}">${person.company}</span>
                     </div>
                 </div>
             </div>    
             <div class="card-footer">
-                <p class="text-center mt-3">
-                    <img width="80" src="icons/p1.png">
-                </p>
-                <p class="text-center" style="${estilo.tipoNombre}; color: ${estilo.colorNombre}">${person.name}</p>
+                <p class="text-center" style="${estilos[numnombre].tipoNombre}; color: ${estilos[numnombre].colorNombre}">${person.name}</p>
             </div>              
         </div>`;
     }
