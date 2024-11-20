@@ -1,0 +1,176 @@
+
+  body {
+font-family: Arial, sans-serif;
+display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            margin: 20px;
+            gap: 30px;
+        }
+
+        #contenedor {
+            display: flex;
+            gap: 30px;
+        }
+
+        /* Estilo de la lista de usuarios */
+        #usuarios {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            width: 250px;
+        }
+
+        .usuario {
+            padding: 15px;
+            margin: 10px 0;
+            background-color: #e9b8e9;
+            border: 1px solid #dddddd;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .usuario:hover {
+            background-color: #ececec;
+        }
+
+        /* Estilo de la tarjeta de usuario (Tema por defecto) */
+        .business-card0 {
+            flex-grow: 1;
+            padding: 20px;
+            border: 3px solid #df18b4;
+            border-radius: 50px;
+            background-color: #f3d6ed;
+            width: 500px;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+            font-size: 18px;
+        }
+
+        /* Estilo para el Tema 1 */
+        .business-card1 {
+            flex-grow: 1;
+            padding: 20px;
+            border: 3px solid #0616f1;
+            border-radius: 20px;
+            background-color: #c9d8f5;
+            width: 500px;
+            height: 300px;
+            display: flex;
+            align-items:normal;
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            font-size: 15px;
+            color: #2c00f1;
+        }
+
+        /* Estilo para el Tema 2 */
+        .business-card2 {
+            flex-grow: 1;
+            padding: 20px;
+            border: 5px solid #570404fa;
+            border-radius: 0px;
+            background-color: #eef0e6;
+            width: 500px;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Georgia', serif;
+            font-size: 12px;
+        }
+
+       .business-card2 .profile-picture img {
+            width: 100px;
+            height: 100px;
+            border-radius: 0; /* Imagen cuadrada */
+            border: 3px solid #640303; /* Borde de la imagen */
+        }
+
+        /* Imagen cuadrada y alineada a la izquierda en Tema 1 */
+        .business-card1 .profile-picture {
+            margin-right: 20px; /* Espacio entre la imagen y el contenido */
+            display: flex;
+            justify-content: left;
+            align-items: center;
+        }
+
+        .business-card1 .profile-picture img {
+            width: 150px;
+            height: 150px;
+            border-radius: 0; /* Imagen cuadrada */ 
+            border: 3px solid #0616f1                   
+        }
+        /* Línea rosa solo en el tema por defecto */
+        .business-card0 .card-info h1 {
+            margin: 10px 0;
+            font-size: 24px;
+            width: 500px;
+            border-bottom: 2px solid #df18b4;
+            padding-bottom: 10px;
+        }
+        .business-card1 .card-info {
+           text-align: left; /* Alinea el texto a la izquierda tema1*/
+           margin: 20px;
+        }
+        .profile-picture {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-picture img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;           
+        }
+
+        .card-info {
+            text-align: center;
+        }
+
+        .card-info h1 {
+            margin: 10px 0;
+            font-size: 24px;
+            width: 500px;
+            border-bottom: none; /* Sin borde por defecto */            
+        }
+
+        .card-info h2 {
+            font-size: 18px;
+            color: #555;
+        }
+
+        .card-info h {
+            font-size: 30px;
+            font-family::Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            
+        }
+
+        .card-info p {
+            margin: 5px 0;
+                        
+
+        }
+
+        /* Estilo del botón */
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #afacaf;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+
+        button:hover {
+            background-color: #e5a7eb;
+        }
+  

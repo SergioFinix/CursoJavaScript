@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto 2 Final</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div>
+        <h1 style="color: rgb(230, 59, 178);"> P r o y e c t o  2 </h1>
+        <br>
+        <h2>Lista de usuarios</h2>
+        <div id="contenedor">
+            <ul id="usuarios"></ul>
+            <div id="tarjeta" class="business-card0">
+                <div class="profile-picture">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/8/81/Sin_Foto.png" alt="Foto de Perfil">
+                </div>
+                <div class="card-info">
+                    <h1 class="card-info">Nombre Completo</h1>
+                    <h2>@username</h2>
+                    <p><strong>Compañía:</strong> Nombre de la Empresa</p>
+                    <p><strong>Email:</strong> nombre@ejemplo.com</p>
+                    <p><strong>Teléfono:</strong> (123) 456-7890</p>
+                    <p><strong>Dirección:</strong> Calle Ejemplo 123</p>
+                    <p><strong>Website:</strong> <a href="http://www.miwebsite.com" target="_blank">www.miwebsite.com</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <br><br><br><br><br><br><br><br>
+        <h3>Selecciona un diseño diferente:</h3>
+        <button id="default">Default</button>
+        <button id="tema1">Tema1</button>
+        <button id="tema2">Tema2</button>
+        <br><br><br><br>
+        <p>Tipo de letra:</p>
+        <button id="verdana">Verdana</button>
+        <button id="lucida">Lucida</button>
+        <br><br>
+        <p>Tamaño de letra:</p>
+        <button id="size10">10px</button>
+        <button id="size20">14px</button>        
+        <br><br>
+        <p>Elimina cambios:</p>
+        <button id="restaurar">Restaurar</button>
+        <br><br>
+        <p>Guarda cambios:</p>
+        <button id="Guarda">Guarda</button>
+    </div>
+    <div>
+        <h3>Perfiles Guardados:</h3>
+        <ul id="perfilesGuardados"></ul>
+    </div>
+
+    <script>
+        let currentTheme = 'business-card0'; // Tema por defecto
+        let currentFontFamily = ''; // Familia de fuente seleccionada
+        let currentFontSize = ''; // Tamaño de fuente seleccionado
+        let savedProfiles = []; // Array para guardar perfiles
+        let usuarioActual = null; // Usuario actualmente mostrado
+    
+               async function cargarUsuarios() {
+            try {
+                const respuesta = await fetch('https://jsonplaceholder.typicode.com/users');
+                const usuarios = await respuesta.json();
+                const contenedorUsuarios = document.getElementById('usuarios');
+                contenedorUsuarios.innerHTML = '';
+                usuarios.forEach(usuario => {
+                    const li = document.createElement('li');
+                    li.classList.add('usuario');
+                    li.textContent = usuario.name;
+                    li.addEventListener('click', () => mostrarTarjeta(usuario));
+                    contenedorUsuarios.appendChild(li);
+                });
+            } catch (error) {
+                console.error('Error al cargar los usuarios:', error);
+            }
+        }    
+        
+        function mostrarTarjeta(usuario) {
+            const tarjeta = document.getElementById('tarjeta');
+            tarjeta.innerHTML = `
+                <div class="profile-picture">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/8/81/Sin_Foto.png" alt="Foto de Perfil">
+                </div>
+                <div class="card-info">
+                    <h1>${usuario.name}</h1>
+                    <h2>@${usuario.username}</h2>
+                    <p><strong>Compañía:</strong> ${usuario.company.name}</p>
+                    <p><strong>Email:</strong> ${usuario.email}</p>
+                    <p><strong>Teléfono:</strong> ${usuario.phone}</p>
+                    <p><strong>Dirección:</strong> ${usuario.address.street}, ${usuario.address.city}</p>
+                    <p><strong>Website:</strong> <a href="http://${usuario.website}" target="_blank">${usuario.website}</a></p>
+                </div>
+            `;
+            tarjeta.className = currentTheme;
+               
+            usuarioActual = usuario;
+        }
+    
+               document.getElementById('tema1').addEventListener('click', () => {
+            currentTheme = 'business-card1';
+            document.getElementById('tarjeta').className = currentTheme;
+        });
+    
+        document.getElementById('tema2').addEventListener('click', () => {
+            currentTheme = 'business-card2';
+            document.getElementById('tarjeta').className = currentTheme;
+        });
+    
+        document.getElementById('default').addEventListener('click', () => {
+            currentTheme = 'business-card0';
+            document.getElementById('tarjeta').className = currentTheme;
+        });
+            
+        document.getElementById('verdana').addEventListener('click', () => {
+            document.getElementById('tarjeta').style.fontFamily = 'Verdana, sans-serif';
+            currentFontFamily = 'Verdana, sans-serif';
+        });
+    
+        document.getElementById('lucida').addEventListener('click', () => {
+            document.getElementById('tarjeta').style.fontFamily = "'Lucida Sans', sans-serif";
+            currentFontFamily = "'Lucida Sans', sans-serif";
+        });
+            
+        document.getElementById('size10').addEventListener('click', () => {
+            document.getElementById('tarjeta').style.fontSize = '10px';
+            currentFontSize = '10px';
+        });    
+        document.getElementById('size20').addEventListener('click', () => {
+            document.getElementById('tarjeta').style.fontSize = '14px';
+            currentFontSize = '14px';
+        });    
+        
+        document.getElementById('restaurar').addEventListener('click', () => {
+            const tarjeta = document.getElementById('tarjeta');
+            tarjeta.removeAttribute('style');
+            tarjeta.className = 'business-card0';
+            currentTheme = 'business-card0';
+            currentFontFamily = '';
+            currentFontSize = '';
+        });
+    
+        
+        document.getElementById('Guarda').addEventListener('click', () => {
+    if (usuarioActual) {
+        const perfilGuardado = {
+            usuario: usuarioActual.name,
+            tema: currentTheme,
+            tipoLetra: currentFontFamily || 'Default',
+            tamanoLetra: currentFontSize || 'Default',
+        };
+        savedProfiles.push(perfilGuardado);
+        console.log('Perfiles guardados:', savedProfiles);
+        alert(`¡Configuración guardada para ${usuarioActual.name}!`);
+        actualizarListaPerfiles();
+    } else {
+        alert('Por favor, selecciona un usuario antes de guardar.');
+    }
+});
+
+    function actualizarListaPerfiles() {
+            const lista = document.getElementById('perfilesGuardados');
+            lista.innerHTML = ''; // Limpia la lista antes de agregar los nuevos perfiles
+            savedProfiles.forEach((perfil, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <strong>${perfil.usuario}</strong><br>
+                    Tema: ${perfil.tema}<br>
+                    Tipo de Letra: ${perfil.tipoLetra}<br>
+                    Tamaño de Letra: ${perfil.tamanoLetra}
+                `;
+                lista.appendChild(li);
+    });
+    }        
+        cargarUsuarios();
+    </script>    
+</body>
+</html>
