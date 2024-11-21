@@ -1,5 +1,6 @@
 //consulta a la api para extraer los nombres de las personas
 personas();
+let personanumero=0;
 
 function personas(){
     let url = 'https://jsonplaceholder.typicode.com/users'
@@ -22,7 +23,6 @@ function personas(){
         }
         document.getElementById("nom").innerHTML = tabla
     }
-
 }
 
 function presupuesto(){
@@ -46,11 +46,17 @@ function sal(){
     
     let tabla2="";
     tabla2+=`<tr> <td>  </td>       <td>  </td>       <td>  </td><td>  </td> </tr>`
-    document.getElementById("mes2").innerHTML = ""
+    document.getElementById("mes2").innerHTML = "";
+    
+    document.getElementById('per1').style.display = 'none';
+    document.getElementById('per2').style.display = 'none';
+    document.getElementById('per3').style.display = 'none';
+    document.getElementById('vis').style.display = 'table';
 }
 
 //Muestra para mostrar la tabla de productos y agregar mas de la Primera Persona
 function cal1(){
+    personanumero=1;
     console.log("llega aqui")
     let calculo1 =30+20+45+26;
     let tabla1="";
@@ -64,7 +70,6 @@ function cal1(){
     document.getElementById("mes1").innerHTML = tabla1
 
     console.log("mes numero 2")
-    console.log("tama: " + productoscom1p1[2][2])
     let calculo2 =45+20+35+40;
     let tabla2="";
     console.log("calculo "+calculo2)
@@ -75,10 +80,17 @@ function cal1(){
     tabla2+=`<tr> <td> HUEVO </td>       <td> 40 </td>       <td> 1 </td><td> 40 </td> </tr>`
 
     document.getElementById("mes2").innerHTML = tabla2
+
+    
+    document.getElementById('per1').style.display = 'table';
+    document.getElementById('per2').style.display = 'none';
+    document.getElementById('per3').style.display = 'none';
+    document.getElementById('vis').style.display = 'none';
 }
 
 //Muestra para mostrar la tabla de productos y agregar mas de la Segunda Persona
 function cal2(){
+    personanumero=2;
     console.log("llega aqui")
     let calculo1 =20+50+45+30;
     let tabla1="";
@@ -92,7 +104,6 @@ function cal2(){
     document.getElementById("mes1").innerHTML = tabla1
 
     console.log("mes numero 2")
-    console.log("tama: " + productoscom1p1[2][2])
     let calculo2 =45+20+35+40;
     let tabla2="";
     console.log("calculo "+calculo2)
@@ -103,9 +114,15 @@ function cal2(){
     tabla2+=`<tr> <td> HUEVO </td>       <td> 40 </td>       <td> 1 </td><td> 40 </td> </tr>`
 
     document.getElementById("mes2").innerHTML = tabla2
+    
+    document.getElementById('per1').style.display = 'none';
+    document.getElementById('per2').style.display = 'table';
+    document.getElementById('per3').style.display = 'none';
+    document.getElementById('vis').style.display = 'none';
 }
 
 function cal3(){
+    personanumero=3;
     console.log("llega aqui")
     let calculo1 =30+20+45+26;
     let tabla1="";
@@ -129,6 +146,11 @@ function cal3(){
     tabla2+=`<tr> <td> HUEVO </td>       <td> 40 </td>       <td> 1 </td><td> 40 </td> </tr>`
 
     document.getElementById("mes2").innerHTML = tabla2
+    
+    document.getElementById('per1').style.display = 'none';
+    document.getElementById('per2').style.display = 'none';
+    document.getElementById('per3').style.display = 'table';
+    document.getElementById('vis').style.display = 'none';
 }
 
 //agregar elementos a la 3er tablase agrego un array para almacenar los datos
@@ -170,13 +192,37 @@ let productoscom2p3=[
     ["LECHE", 23, 2, 26]];
 let productoscom3p3=[];
 
-let totalneto=0;
+let totalneto1=0;
+let totalneto2=0;
+let totalneto3=0;
 
     function agregar(){
+        event.preventDefault();
+        let con = personanumero;
 
-        let presupuesto = document.getElementById('presu').value;
-        let presu = totalneto;
+        if(con==1){ingreper1();}
+        if(con==2){ingreper2();}
+        if(con==3){ingreper3();}
+        
+    }
 
+    //funcion para imprimir el producto mas compreado
+    function procom(){
+        let procomprado = document.getElementById("masComprado")
+
+        let repite=0;
+        let tamanio=productoscom3p1.length;
+        
+        for(let x=0; x<tamanio; x++){
+
+            repite++;
+        }
+
+          
+    }
+
+    function ingreper1()
+    {
         let nom = document.getElementById("produc").value;
         let nombre = nom.toUpperCase();
         let pre = document.getElementById("precio").value;
@@ -184,17 +230,17 @@ let totalneto=0;
         let total = pre*canti;
 
         if((nom!="")&&(pre!="")&&(canti!="")){
-            if((presupuesto>=presu)){
+            //if((presupuesto>=presu)){
 
                 let tama;
 
-            const tabla = document.getElementById("mes3").getElementsByTagName("tbody")[0];
+            const tabla = document.getElementById("per1").getElementsByTagName("tbody")[0];
             
-            event.preventDefault();
+            
             tama=  `[${nombre},${pre},${canti},${total}]`;
-            totalneto+=total;
+            totalneto1+=total;
             productoscom3p1.push(tama);
-            document.getElementById("toaln").innerHTML = totalneto;
+            document.getElementById("toaln1").innerHTML = totalneto1;
 
             console.log(nom);
             console.log(nombre);
@@ -221,27 +267,128 @@ let totalneto=0;
             console.log(productoscom3p1)
             console.log("tama: " + productoscom3p1.length)
 
+            window.alert("Producto Ingresado Correctamente")
 
-            }
-            else{
-                window.alert("El Total Es Mayor Al Presupuesto")
-            }}
 
-            else{window.alert("Hay un dato vacio en los datos de los productos a ingresar")}
+           // }
+           // else{
+          //      window.alert("El Total Es Mayor Al Presupuesto")
+           // }
+           } else{window.alert("Hay un dato vacio en los datos de los productos a ingresar")}
+    }
+
+
+    function ingreper2()
+    {
+        let nom = document.getElementById("produc").value;
+        let nombre = nom.toUpperCase();
+        let pre = document.getElementById("precio").value;
+        let canti = document.getElementById("cantidad").value;
+        let total = pre*canti;
+
+        if((nom!="")&&(pre!="")&&(canti!="")){
+            //if((presupuesto>=presu)){
+
+                let tama;
+
+            const tabla = document.getElementById("per2").getElementsByTagName("tbody")[0];
+            
+            
+            tama=  `[${nombre},${pre},${canti},${total}]`;
+            totalneto2+=total;
+            productoscom3p1.push(tama);
+            document.getElementById("toaln2").innerHTML = totalneto2;
+
+            console.log(nom);
+            console.log(nombre);
+            console.log(pre);
+            console.log(canti);
+                
+            let filanu = document.createElement("tr");
+            let productoing = document.createElement("td");
+            let precioing = document.createElement("td");
+            let cantidading = document.createElement("td");
+            let totaling = document.createElement("td");
+
+            productoing.textContent = `${nombre}`;
+            precioing.textContent = `${pre}`;
+            cantidading.textContent = `${canti}`;
+            totaling.textContent = `${total}`;
+
+            filanu.appendChild(productoing);
+            filanu.appendChild(precioing);
+            filanu.appendChild(cantidading);
+            filanu.appendChild(totaling);
+
+            tabla.appendChild(filanu);
+            console.log(productoscom3p2)
+            console.log("tama: " + productoscom3p2.length)
+
+            window.alert("Producto Ingresado Correctamente")
+
+
+           // }
+           // else{
+          //      window.alert("El Total Es Mayor Al Presupuesto")
+           // }
+           } else{window.alert("Hay un dato vacio en los datos de los productos a ingresar")}
         
     }
 
-    //funcion para imprimir el producto mas compreado
-    function procom(){
-        let procomprado = document.getElementById("masComprado")
 
-        let repite=0;
-        let tamanio=productoscom3p1.length;
+    function ingreper3()
+    {
+        let nom = document.getElementById("produc").value;
+        let nombre = nom.toUpperCase();
+        let pre = document.getElementById("precio").value;
+        let canti = document.getElementById("cantidad").value;
+        let total = pre*canti;
+
+        if((nom!="")&&(pre!="")&&(canti!="")){
+            //if((presupuesto>=presu)){
+
+                let tama;
+
+            const tabla = document.getElementById("per3").getElementsByTagName("tbody")[0];
+            
+            
+            tama=  `[${nombre},${pre},${canti},${total}]`;
+            totalneto3+=total;
+            productoscom3p1.push(tama);
+            document.getElementById("toaln3").innerHTML = totalneto3;
+
+            console.log(nom);
+            console.log(nombre);
+            console.log(pre);
+            console.log(canti);
+                
+            let filanu = document.createElement("tr");
+            let productoing = document.createElement("td");
+            let precioing = document.createElement("td");
+            let cantidading = document.createElement("td");
+            let totaling = document.createElement("td");
+
+            productoing.textContent = `${nombre}`;
+            precioing.textContent = `${pre}`;
+            cantidading.textContent = `${canti}`;
+            totaling.textContent = `${total}`;
+
+            filanu.appendChild(productoing);
+            filanu.appendChild(precioing);
+            filanu.appendChild(cantidading);
+            filanu.appendChild(totaling);
+
+            tabla.appendChild(filanu);
+            console.log(productoscom3p3)
+            console.log("tama: " + productoscom3p3.length)
+
+            window.alert("Producto Ingresado Correctamente")
+
+
+           // }
+           // else{
+          //      window.alert("El Total Es Mayor Al Presupuesto")
+           // }
+           } else{window.alert("Hay un dato vacio en los datos de los productos a ingresar")}
         
-        for(let x=0; x<tamanio; x++){
-
-            repite++;
-        }
-
-          
     }
