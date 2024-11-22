@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validación de CURP y Eventos de JavaScript</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            display: flex;
+            width: 80%;
+        }
+        /* Estilos para la sección de log */
+        .log-section {
+            width: 30%;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-right: 1px solid #ccc;
+            height: 300px;
+            overflow-y: auto;
+        }
+        .log-section h3 {
+            text-align: left;
+        }
+        .log-section .log {
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #ccc;
+            height: 100%;
+        }
+        .log-section p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        /* Estilos para la sección del formulario */
+        .form-section {
+            width: 70%;
+            padding: 20px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="button"], select {
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+        .success {
+            color: green;
+            font-size: 14px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .hover-box {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Sección del log -->
+        <div class="log-section">
+            <h3>Registro de eventos</h3>
+            <div id="log" class="log"></div>
+        </div>
+
+        <div>
+            
+        </div>
+        
+        <!-- Sección del formulario y eventos -->
+        <div class="form-section">
+            <h2>Validación de CURP</h2>
+
+            <form id="curpForm">
+                <div class="form-group">
+                    <label for="curp">Introduce tu CURP:</label>
+                    <input type="text" id="curp" placeholder="Escribe tu CURP" maxlength="18">
+                    <span id="curpError" class="error"></span>
+                </div>
+                <button type="submit">Validar CURP</button>
+                <div id="curpResult"></div>
+            </form>
+
+            <!-- Componente select -->
+            <div class="form-group">
+                <label for="options">Selecciona una opción:</label>
+                <select id="options">
+                    <option value="">--Seleccionar--</option>
+                    <option value="opcion1">Opción 1</option>
+                    <option value="opcion2">Opción 2</option>
+                    <option value="opcion3">Opción 3</option>
+                </select>
+            </div>
+
+            <!-- Caja para eventos del mouse -->
+            <div class="hover-box" id="hoverBox">
+                Pasa el mouse por aquí o haz clic.
+            </div>
+
+            <!-- Campo para eventos de teclado -->
+            <div class="form-group">
+                <label for="teclado">Presiona alguna tecla:</label>
+                <input type="text" id="teclado" placeholder="Escribe algo">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Expresión regular para validar la CURP
+        const curpRegex = /^[A-Z]{4}\d{6}[HM]{1}[A-Z]{5}[A-Z0-9]{2}$/;
+
+        // Obtener los elementos del DOM
+        const curpInput = document.getElementById('curp');
+        const curpError = document.getElementById('curpError');
+        const curpForm = document.getElementById('curpForm');
+        const curpResult = document.getElementById('curpResult');
+        const logDiv = document.getElementById('log');
+        const hoverBox = document.getElementById('hoverBox');
+        const tecladoInput = document.getElementById('teclado');
+        const selectElement = document.getElementById('options');
+
+        // Función para registrar mensajes en el log
+        function logMessage(message) {
+            const newLog = document.createElement('p');
+            newLog.textContent = message;
+            logDiv.appendChild(newLog);
+            logDiv.scrollTop = logDiv.scrollHeight; // Desplazar hacia el final del log
+        }
+
+        // Función para validar la CURP
+        function validarCURP(curp) {
+            return curpRegex.test(curp);
+        }
+
+        // Validar en tiempo real mientras el usuario escribe
+        curpInput.addEventListener('input', () => {
+            const curpValue = curpInput.value.toUpperCase();
+            if (curpValue.length === 18) {
+                if (validarCURP(curpValue)) {
+                    curpError.textContent = '';
+                    logMessage('CURP válida ingresada');
+                } else {
+                    curpError.textContent = 'CURP no válida';
+                    logMessage('CURP no válida');
+                }
+            } else {
+                curpError.textContent = 'La CURP debe tener 18 caracteres';
+            }
+        });
+
+        // Validar al enviar el formulario
+        curpForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const curpValue = curpInput.value.toUpperCase();
+
+            if (validarCURP(curpValue)) {
+                curpError.textContent = '';
+                curpResult.textContent = 'CURP válida';
+                curpResult.className = 'success';
+                logMessage('Formulario enviado con CURP válida');
+            } else {
+                curpError.textContent = 'CURP no válida';
+                curpResult.textContent = 'Por favor, introduce una CURP válida';
+                curpResult.className = 'error';
+                logMessage('Formulario enviado con CURP no válida');
+            }
+        });
+
+        // Eventos del select
+        selectElement.addEventListener('change', () => {
+            logMessage('Opción seleccionada:'+selectElement.value);
+        });
+
+        selectElement.addEventListener('focus', () => {
+            logMessage('El campo de selección está en foco');
+        });
+
+        selectElement.addEventListener('blur', () => {
+            logMessage('El campo perdio el foco');
+        });
+
+        // Eventos del mouse
+        hoverBox.addEventListener('click', () => {
+            logMessage('Click en el área');
+        });
+
+        hoverBox.addEventListener('dblclick', () => {
+            logMessage('Doble clic en el área');
+        });
+
+        hoverBox.addEventListener('mouseover', () => {
+            logMessage('Mouse sobre el área');
+        });
+
+        hoverBox.addEventListener('mouseout', () => {
+            logMessage('Mouse salió del área');
+        });
+
+        hoverBox.addEventListener('mousemove', () => {
+            logMessage('Mouse moviéndose dentro del área');
+        });
+
+        // Eventos del teclado
+        tecladoInput.addEventListener('keydown', (event) => {
+            logMessage('Tecla presionada '+event.key);
+        });
+
+        tecladoInput.addEventListener('keyup', (event) => {
+            logMessage('Tecla liberada '+event.key);
+        });
+
+    </script>
+</body>
+</html>
+
+<!--
+Ejemplos de expreciones regulares 
+
+//---------Solo números 
+
+/^\d{1,20}$/
+
+Esto significa:
+
+1.- ^ al inicio: El comienzo de la cadena.
+2.- \d: Cualquier dígito (equivalente a [0-9]).
+3.- {1,20}: Entre 1 y 20 dígitos.
+4.- $ al final: El final de la cadena.
+
+//---------Solo Letras
+
+/^[A-Za-z]{1,20}$/
+
+1.- ^ al inicio: El comienzo de la cadena.
+2.- [A-Za-z]: Cualquier letra mayúscula (A-Z) o minúscula (a-z).
+3.- {1,20}: Entre 1 y 20 letras.
+4.- $ al final: El final de la cadena.
+
+
+-->

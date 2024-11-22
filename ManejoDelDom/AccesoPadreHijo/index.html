@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accediendo a elementos de un Padre/Hijo de un elemento de DOM</title>
+</head>
+<body>
+    
+    <div id="contenedor">
+        <p>Implementación del uso del metodo parentNode Ejemplo 1</p>
+        <p id="parrafo">Este es un párrafo.</p>
+        <button onclick="getNodoPadre()">Nodo Padre</button>
+    </div>
+
+    <div class="contenedor-lista">
+        <p>Implementación del uso del metodo parentNode Ejemplo 2</p>
+        <ul>
+          <li class="elemento">Elemento 1</li>
+          <li class="elemento">Elemento 2</li>
+          <li class="elemento">Elemento 3</li>
+        </ul>
+        <button onclick="cambiarColorParrafo()">Identificar el padre</button>
+    </div>
+
+    <!--childNodes: Devuelve una lista de todos los nodos hijos, incluyendo texto y comentarios
+        El método childNodes devuelve una lista de nodos hijos de un elemento, incluyendo nodos de texto, 
+        comentarios y otros tipos de nodos. Esto significa que no solo devuelve elementos HTML.-->
+
+    <div id="contenedorHijos">
+        <p>Ejemplo de childNodes</p>
+        <p>Elemento 1</p>
+        <!-- Este es un comentario -->
+        <p>Elemento 2</p>
+        <button onclick="getElementosHijo()">Obtiene elementos Hijos</button>
+    </div>
+
+    <!--
+    children: Devuelve solo los elementos hijos (excluye texto y comentarios)
+    El método children es similar a childNodes, pero solo devuelve elementos HTML hijos, 
+    excluyendo nodos de texto y comentarios.
+    -->
+
+    <div id="contenedorHijosSinComents">
+        <p>Ejemplo de children</p>
+        <p>Elemento 1</p>
+        <!-- Este es un comentario -->
+        <p>Elemento 2</p>
+        <button onclick="getElementosHijoSinComents()">Obtiene elementos Hijos sin comentarios</button>
+    </div>
+
+    <!--
+    El método firstElementChild devuelve el primer elemento hijo de un contenedor, 
+    y lastElementChild devuelve el último elemento hijo
+    -->
+    <div><p>Primer y ultimo elemento</p> <button onclick="getPrimeroUltimo()">Obtene el primer y ultimo elemnto</button>
+    <div id="contenedorPrimeroUltimo">
+        <p>Primer elemento</p>
+        <p>Último elemento</p>
+    </div>
+    </div>
+
+    <!--
+    El método nextElementSibling devuelve el siguiente hermano del elemento, y previousElementSibling devuelve el 
+    anterior hermano. Solo considera elementos, ignorando nodos de texto y comentarios.
+    -->
+    <div>
+        <ul>
+            <li id="item1">Elemento 1</li>
+            <li>Elemento 2</li>
+            <li>Elemento 3</li>
+            <button onclick="anteriorSiguieteElemnt()">Anterior y siguiente Elmento</button>
+        </ul>
+    </div>
+    <script>
+        function getNodoPadre(){
+            const parrafo = document.getElementById("parrafo");
+            const padre = parrafo.parentNode;
+            console.log(padre); // Muestra el <div id="contenedor">
+            padre.style.backgroundColor = "Blue";
+        }
+
+        function cambiarColorParrafo(){
+           // Seleccionamos el segundo elemento de la lista
+            const segundoElemento = document.querySelectorAll(".elemento")[2];
+
+            // Obtenemos su nodo padre (el <ul>)
+            const padre = segundoElemento.parentNode;
+
+            console.log(padre); // Mostrará el <ul> que contiene los <li>
+
+            // Cambiamos el estilo del nodo padre
+            padre.style.backgroundColor = "lightcoral";
+        }
+
+        function getElementosHijo(){
+            const contenedor = document.getElementById("contenedorHijos");
+            const hijos = contenedor.childNodes;
+            console.log(hijos);
+        }
+
+        function getElementosHijoSinComents(){
+            const contenedor = document.getElementById("contenedorHijosSinComents");
+            const hijosElementos = contenedor.children;
+            console.log(hijosElementos);
+        }
+
+        function getPrimeroUltimo(){
+            const contenedor = document.getElementById("contenedorPrimeroUltimo");
+            const primerHijo = contenedor.firstElementChild;
+            const ultimoHijo = contenedor.lastElementChild;
+            
+            console.log(primerHijo); // Muestra el primer <p>
+            console.log(ultimoHijo); // Muestra el último <p>
+        }
+
+        function anteriorSiguieteElemnt(){
+            const item1 = document.getElementById("item1");
+            const siguienteHermano = item1.nextElementSibling;
+            const anteriorHermano = siguienteHermano.previousElementSibling;
+            
+            console.log(siguienteHermano); // Muestra <li>Elemento 2</li>
+            console.log(anteriorHermano);  // Muestra de nuevo <li id="item1">Elemento 1</li>
+        }
+        
+    </script>
+</body>
+</html>

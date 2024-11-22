@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manejo del DOM</title>
+</head>
+<body>
+    <div>
+        <h1 id="titulo">Interactuando con DOM</h1>
+        <button onclick="cambiarTitulo()">Cambiar Título</button>
+    </div>
+
+    <div>
+        <p id="parrafo">Este es un párrafo.</p>
+        <button onclick="cambiarEstilo()">Cambiar Estilo</button>
+    </div>
+
+    <div>
+        <p id="para1">Este es mi primer parágrafo.</p>
+        <button onclick="valorParrafo()">Valor de un texto</button>
+    </div>
+
+    <div>
+        <h1 class="componente">Opciónes ejemplo</h1>
+            <ul class="list">
+                <li>Opcion 1</li>
+                <li>Opcion 2</li>
+                <li>Opcion 3</li>
+                <li>Opcion 4</li>
+            </ul>
+        <button onclick="getListadoOpcionesbyClass()">Obtener listado</button>
+        <button onclick="getValuebyClass()">Obtener valor</button>
+    </div>
+
+    <div>
+        <ul id="lista">
+            <li>Elemento 1</li>
+            <li>Elemento 2</li>
+        </ul>
+        <button onclick="agregarElemento()">Agregar Elemento</button>
+    </div>
+
+    <div>
+        <p id="delete">Texto para eliminar </p>
+        <button onclick="eliminarElemento()">Eliminar Elemento</button>
+    </div>
+    
+    <script>
+        function cambiarTitulo() {
+            const titulo = document.getElementById('titulo');
+            titulo.innerHTML = '¡Nuevo Título!';
+        }
+    
+        function cambiarEstilo() {
+            const parrafo = document.getElementById('parrafo');
+            parrafo.style.color = 'blue'; // Cambia el color del texto
+            parrafo.style.fontSize = '20px'; // Cambia el tamaño de la fuente
+        }
+
+        function valorParrafo(){
+            const paragraph1 = document.getElementById('para1');
+            console.log(paragraph1.textContent);
+        }
+
+        function getValuebyClass(){
+            const h1Element = document.querySelector(".componente");
+            console.log(h1Element.textContent);
+        }
+
+        function getListadoOpcionesbyClass(){
+            const listElement = document.querySelector(".list");
+            console.log(listElement.textContent);
+        }
+
+        function agregarElemento(){
+            const lista = document.getElementById('lista');
+            const nuevoElemento = document.createElement('li');
+            nuevoElemento.textContent = 'Nuevo Elemento';
+            lista.appendChild(nuevoElemento); // Agrega el nuevo elemento a la lista
+        }
+
+        function eliminarElemento() {
+            const elemento = document.getElementById('delete');
+            elemento.remove(); // Elimina el elemento seleccionado
+        }
+    </script>
+</body>
+</html>
