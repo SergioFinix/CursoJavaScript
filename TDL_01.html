@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lista_tarea</title>
+
+    <style>
+
+        .cajasimple {
+                  background-color: rgb(245 130 130);
+                  outline: 2px solid darkred;
+        }
+
+
+        .boxDecorada {
+                  background-color: yellowgreen; //hwb(270deg 63% 13%)
+                  outline: 4px dashed #6e1478;
+                  color: hsl(0deg 100% 100%);
+                  text-decoration: underline;
+                  text-decoration-style: wavy;
+                  text-decoration-color: #8f8;
+                  text-decoration: underline wavy #8f8;
+                  text-shadow: 2px 2px 3px black;
+        }
+        .marco {
+                  height: 310px;
+                  padding: 10px;
+                  display: flex;
+                  gap: 10px;
+                  text-align: center;
+                  font:
+                    28px "Marker Felt",
+                    "Zapfino",
+                    cursive;
+                  border: 6px solid mediumturquoise;
+        }
+
+        body{
+            font-family: arial, san-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        li{
+            margin: 10px 0;
+        }
+
+        ul{
+            list-style-type: none;
+            padding: 20;
+        }
+        table {
+            width: 50%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 3px solid black;
+        }
+        th, td {
+            padding: 1px;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <!--agragndo encabezados de columna-->
+    <table id="usuarios-table">
+        <thead>
+            <tr>
+                <th>ID_user</th>
+                <th width:500px> Nombre </th>
+                <th>stat_</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    
+<div class="boxDecorada">   
+    <p>Lista de Tareas</p>
+</div>
+
+        <div class="cajasimple"> 
+            <input type="text" id="nuevatarea" placeholder="ingresa la tarea" size="25">
+            <button onclick = "agregartarea()"> agrega tarea</button>
+        </div>
+
+        <div>
+            <!--<label for="options">Selecciona una opción:</label>-->
+            <select id="options">
+                <option value="">--Status--</option>
+                <option value="opcion1">Creada</option>
+                <option value="opcion2">En progreso</option>
+                <option value="opcion3">Terminada</option>
+                <option value="opcion4">Cancelada</option>
+            </select>
+        </div>
+
+
+
+        <ul>
+        <ul id ="listatareas"></ul>
+        </ul>
+
+
+
+    <script>
+
+//document.getElementById('listatareas').addEventListener('dblclick', presion2);
+
+        function agregartarea(){
+
+            let nuevatareatexto = document.getElementById("nuevatarea").value;
+            let longTXT = nuevatareatexto.lenght;
+            //let miopciontxt = document.getElementsById("options").value
+            
+            if(nuevatareatexto==="" || longTXT <= 25){
+                alert("debe ingresar una tarea y no maximo de 25 char-s");
+                return;
+            }
+            
+            //elemento en la lista
+            let nuevatarea = document.createElement("li");
+            nuevatarea.textContent = nuevatareatexto + " ";
+
+            //boton eliminar
+            let botoneliminar = document.createElement("button");
+            botoneliminar.textContent="eliminar";
+            botoneliminar.onclick = function() { nuevatarea.remove(); }
+                        
+            //botn -> a la lista de la tarea
+            nuevatarea.appendChild(botoneliminar);
+
+            //tarea-> la lista
+            document.getElementById("listatareas").appendChild(nuevatarea);
+
+            //limpiar el txt de la tarea
+            document.getElementById("nuevatarea").value = "";
+    
+        }
+
+        //let fila = document.getElementById();
+
+
+        //usuarios
+        async function cargarUsuarios() {
+            try {
+                const respuesta = await fetch('https://jsonplaceholder.typicode.com/users');
+                const usuarios = await respuesta.json();
+                console.log(usuarios);
+                const tabla = document.querySelector("#usuarios-table tbody");
+                
+                usuarios.forEach(usuario => {
+                    const fila = document.createElement('tr');
+                    fila.innerHTML = `<td>${usuario.id}</td><td id="idFila">${usuario.name}</td><td></td>`;
+                    tabla.appendChild(fila);
+                });
+            } catch (error) {
+                console.error('Error al cargar los usuarios:', error);
+            }
+        }
+
+        cargarUsuarios();
+    
+    </script>
+
+
+</body>
+</html>
